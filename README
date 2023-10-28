@@ -7,4 +7,9 @@ For the work repartition, i thought about working on parsing, variables, pipes a
 
 
 Currently working
-1. simple command execution (ls, cat, grep)
+1. simple command execution (ls, cat, grep) - as long as command is given exact; no detail parsing needed
+2. echo - simple; without option and detail parsing 
+3. env
+4. pwd
+
+
