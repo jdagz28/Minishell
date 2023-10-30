@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: tbarbe <marvin@42.fr>                      +#+  +:+       +#+         #
+#    By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/10/07 15:33:53 by tbarbe            #+#    #+#              #
-#    Updated: 2023/03/03 16:29:53 by tbarbe           ###   ########.fr        #
+#    Updated: 2023/10/30 21:56:27 by jdagoy           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,7 +31,7 @@ SRCS_	=	$(addprefix src/, $(SRCS))
 
 LIBFT	=	./libft/libft.a
 
-CC		=	gcc
+CC		=	cc
 
 RM		=	rm -f
 
