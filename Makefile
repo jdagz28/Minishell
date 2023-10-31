@@ -6,43 +6,67 @@
 #    By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/10/07 15:33:53 by tbarbe            #+#    #+#              #
-#    Updated: 2023/10/30 21:56:27 by jdagoy           ###   ########.fr        #
+#    Updated: 2023/10/31 22:59:39 by jdagoy           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 .SILENT:
 
-NAME	=	minishell
+NAME				= minishell
 
-SRCS	=	minishell.c \
-			shell.c \
-			strtab_utils.c \
-			strmatrix_utils.c \
-			pipes.c \
-			commands.c \
-			env.c \
-			user.c \
-			pwd.c \
-			utils.c
+OS					= $(shell uname -s)
+USERNAME			= $(shell whoami)
 
-INCLUDE	=	./include
+ifeq ($(OS),Linux)
+	FSANITIZE		= -fsanitize=leak -fsanitize=address
+	MAC_INCLUDES	=
+	MAC_LIBS		=
+else
+	FSANITIZE		= -fsanitize=address
+	MAC_INCLUDES	= -I /Users/$(USERNAME)/Applications/homebrew/opt/readline/include
+	MAC_LIBS		= -L /Users/$(USERNAME)/Applications/homebrew/opt/readline/lib
+endif
 
-SRCS_	=	$(addprefix src/, $(SRCS))
+CC					= cc
+CFLAGS				= -Wall -Wextra -Werror $(FSANITIZE)
+RM					= rm -rf
+
+SRCS_DIRECTORY		= ./srcs/
+OBJS_DIRECTORY		= ./objects/
+INCLUDES			= ./include/
+
+LIBRARIES			= -lreadline 
 
 LIBFT	=	./libft/libft.a
+# SRCS		=	minishell.c \
+# 				shell.c \
+# 				strtab_utils.c \
+# 				strmatrix_utils.c \
+# 				pipes.c \
+# 				commands.c \
+# 				env.c \
+# 				user.c \
+# 				pwd.c \
+# 				utils.c
 
-CC		=	cc
 
-RM		=	rm -f
 
-CFLAGS	=	-Wall -Wextra -Werror -lreadline
+SRCS_	=	$(addprefix srcs/, $(SRCS))
+
+OBJS_LIST	=
+OBJECTS     =
+
+
 
 all:		${NAME}
+$(OBJS_DIRECTORY)
+	mkdir -p $(OBJECTS_DIRECTORY)
+
 
 ${NAME}:	
 			$(MAKE) -C ./libft
 			echo "libft done"
-			${CC} ${SRCS_} ${LIBFT} ${PRINTF} -I ${INCLUDE} -o ${NAME} ${CFLAGS}
+			${CC} ${SRCS_} ${LIBFT} ${PRINTF} -I ${INCLUDES} -o ${NAME} ${CFLAGS}
 			echo "minishell done"
 			echo "use 'make only' to only compile the minishell"
 
