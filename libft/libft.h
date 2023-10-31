@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tbarbe <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/07 15:34:35 by tbarbe            #+#    #+#             */
-/*   Updated: 2023/10/09 12:31:03 by tbarbe           ###   ########.fr       */
+/*   Updated: 2023/10/31 01:14:04 by jdagoy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,5 +94,6 @@ int		ft_intlst_issorted(t_list **lst, int size, int dir);
 int		ft_intlst_getmin(t_list *lst, int size);
 int		ft_intlist_getvalue(void *addr);
 char	*get_next_line(int fd);
+int		ft_isspace(char c);
 
 #endif
