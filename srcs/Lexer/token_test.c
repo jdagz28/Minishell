@@ -6,7 +6,7 @@
 /*   By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/31 22:21:46 by jdagoy            #+#    #+#             */
-/*   Updated: 2023/11/01 22:31:08 by jdagoy           ###   ########.fr       */
+/*   Updated: 2023/11/01 22:44:30 by jdagoy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ int main(int argc, char **argv)
 {
 	char	*input;
 	t_token	tokens;
-	int		i;
+	int		 i;
 
 	while (1)
 	{

@@ -6,7 +6,7 @@
 /*   By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/30 23:09:27 by jdagoy            #+#    #+#             */
-/*   Updated: 2023/11/01 22:27:17 by jdagoy           ###   ########.fr       */
+/*   Updated: 2023/11/01 22:44:29 by jdagoy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,7 +128,7 @@ bool	is_operator(char *line)
 bool	is_redirect(char *line)
 {
 	static char *const	redirect[] = {"<" ">" "<<" ">>", "NULL"};
-	size_t				i;
+	int					i;
 
 	i = 0;
 	while (redirect[i] != NULL)
@@ -194,6 +194,35 @@ t_token	*operator_token(char **remaining, char *line)
 				tk_error_manager("ft_strdup failed"); 
 			*remaining = line + ft_strlen(operator);
 			return (create_token(operator, TK_OPERATOR));	
+		}
+		i++;
+	}
+	tk_error_manager("Unrecognized operator");
+}
+
+/**
+ * * redirect_token
+ * extract and tag redirect token from the input line, if present
+ * @param remaining - pointer to the remaining part of the input line 
+ * after extracting the redirect
+ * @param line - current line
+*/
+t_token	*redirect_token(char **remaining, char *line)
+{
+	static char *const	redirects[] = {"<" ">" "<<" ">>", "NULL"};
+	int					i;
+	char				*redirect;
+
+	i = 0;
+	while(redirects[i] != "NULL")
+	{
+		if (startswith(line, redirects[i]))
+		{
+			redirect = ft_strdup(redirects[i]);
+			if (redirect == NULL)
+				tk_error_manager("ft_strdup failed"); 
+			*remaining = line + ft_strlen(redirect);
+			return (create_token(redirect, TK_REDIRECT));	
 		}
 		i++;
 	}
