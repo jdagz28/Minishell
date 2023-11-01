@@ -60,6 +60,7 @@ typedef struct s_shell
 int strtab_len(char **tab);
 char **strtab_cpy(char **tab);
 void strtab_free(char **tab);
+void strtab_freeend(char **tab, int start);
 char *strtab_beginwith(char **tab, char *str);
 void strtab_print(char **cmd, char ces);
 /* strmatrix_utils */
@@ -72,7 +73,7 @@ int shell_init(t_shell *shell, char *cmds, char **env);
 void shell_clear(t_shell *shell);
 int shell_prompt(t_shell *shell);
 int shell_exec_all(t_shell *shell);
-int shell_exec(char **tab, t_cmd *cmd, int id, char **env);
+void shell_exec(t_cmd *cmd, int id, char **env);
 /* env */
 char *env_get(char *start, char end, char **env);
 char *env_getpath(char *str, char **env);
@@ -93,6 +94,9 @@ void command_exec(char **cmd, char **env);
 int (*pipes_init(int len))[2];
 void pipes_close(int (*pipes)[2], int len);
 void pipes_dup(int (*pipes)[2], int id, int len);
+/* files redirections */
+int open_file_dup2(char *path, char mode);
+char **files_redirect(char **tab);
 /* utils */
 void print_error(char *str1, char *str2);
 void clean_exit(t_shell *data, int err);

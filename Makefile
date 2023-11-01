@@ -23,7 +23,8 @@ SRCS	=	minishell.c \
 			env.c \
 			user.c \
 			pwd.c \
-			utils.c
+			utils.c \
+			files.c
 
 INCLUDE	=	./include
 

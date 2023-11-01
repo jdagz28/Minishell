@@ -11,6 +11,12 @@
 /* ************************************************************************** */
 #include "../include/minishell.h"
 
+void pipe_close(int pipe[2])
+{
+    close(pipe[0]);
+    close(pipe[1]);
+}
+
 void pipes_close(int (*pipes)[2], int len)
 {
     int i;
@@ -55,7 +61,7 @@ void pipes_dup(int (*pipes)[2], int id, int len)
         // ft_printf("process : %d dup STDIN to pipe %d\n", id, id - 1);
         dup2(pipes[id - 1][0], STDIN_FILENO);
     }
-    if (len > id + 1)
+    if (id + 1 < len)
     {
         // ft_printf("process : %d dup STDOUT to pipe %d\n", id, id);
         dup2(pipes[id][1], STDOUT_FILENO);

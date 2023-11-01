@@ -65,7 +65,7 @@ int shell_prompt(t_shell *shell)
     if (!err)
         err = command_init(&shell->cmd, line);
     if (!err)
-        shell->err = shell_exec_all(shell);
+        err = shell_exec_all(shell);
     command_clear(&shell->cmd);
     free(line);
     return (err);
@@ -81,6 +81,7 @@ int shell_exec_all(t_shell *shell)
     cmd = &shell->cmd;
     if (!cmd->cmd)
         return (EXIT_FAILURE);
+    pid = 0;
     i = 0;
     while (i < cmd->len)
     {
@@ -90,24 +91,25 @@ int shell_exec_all(t_shell *shell)
         if (pid < 0)
             return (EXIT_FAILURE);
         if (pid == 0)
-            shell_exec(cmd->cmd[i], cmd, i, shell->env);
-        // ft_printf("process %d wait\n", i);
-        wait(NULL);
-        // ft_printf("process %d done waiting\n", i);
+            shell_exec(cmd, i, shell->env);
         i++;
     }
     pipes_close(cmd->pipes, cmd->len - 1);
+    waitpid(pid, &status, 0);
     return (WEXITSTATUS(status));
 }
 
-int shell_exec(char **tab, t_cmd *cmd, int id, char **env)
+void shell_exec(t_cmd *cmd, int id, char **env)
 {
-    // ft_printf("exec cmd %d\n", id);
-    if (cmd)
-    {
-        pipes_dup(cmd->pipes, id, cmd->len);
-        pipes_close(cmd->pipes, cmd->len - 1);
-        command_exec(tab, env);
-    }
-    return (EXIT_SUCCESS);
+    char **tab;
+
+    if (!cmd)
+        exit(EXIT_FAILURE);
+
+    pipes_dup(cmd->pipes, id, cmd->len);
+    pipes_close(cmd->pipes, cmd->len - 1);
+    if (id > 0)
+        wait(NULL);
+    tab = files_redirect(cmd->cmd[id]);
+    command_exec(tab, env);
 }

@@ -76,8 +76,8 @@ static void default_exec(char **cmd, char **env)
     }
     free(cmd[0]);
     cmd[0] = bin;
-    // ft_printf("execve : %s\n", cmd[0]);
     execve(cmd[0], cmd, env);
+    exit(127);
 }
 
 void command_exec(char **cmd, char **env)
