@@ -6,7 +6,7 @@
 /*   By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/30 23:09:27 by jdagoy            #+#    #+#             */
-/*   Updated: 2023/11/01 13:29:30 by jdagoy           ###   ########.fr       */
+/*   Updated: 2023/11/01 22:27:17 by jdagoy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,25 +32,25 @@ t_token	*tokenizer(char *input)
 
 	line = ft_strdup(input);
 	if (line == NULL)
-		return (NULL); //!Handle error - malloc failed
+		tk_error_manager("ft_strdup failed"); 
 	head.next = NULL;
 	current = &head;
 	while (*line)
 	{
 		//TODO
 		//1. Check for whitespaces and consume whitespaces;
-		//2. Check if operator - "||", "&", "&&", ";", ";;", "(", ")", "|", "\n"
-		//3. Check if redirect - "<" ">" "<<" ">>"
+		//2. Check if operator 
+		//3. Check if redirect 
 		//4. Check if word 
 		//5. If not among the types - handle unknown token
 		if (check_whitespace(&line, line))
 			continue ;
 		else if (is_operator(line))
-			current->next = operator_type(&line, line);
+			current->next = operator_token(&line, line);
 		else if (is_redirect(line))
-			current->next = redirect_type(&line, line);
+			current->next = redirect_token(&line, line);
 		else if (is_word(line))
-			current->next = word_type(&line, line);
+			current->next = word_token(&line, line);
 		else
 			printf("Unexpected Token\n");
 		current = current->next;
@@ -98,14 +98,14 @@ bool	startswith(char *line, char *prefix)
 
 /**
  * * is_operator
- * check if line is either one of the ff
- * "||", "&", "&&", ";", ";;", "(", ")", "|", "\n"
+ * check if line has a control operator and is either one of the ff
+ *  "||", "&&", "&", ";", ";;", ";&", ";;&", "|", "|&", "(", ")", "\n"
  * @param line	- current line
  */
 bool	is_operator(char *line)
 {
 	static char *const	operators[] = \
-	{"||", "&", "&&", ";", ";;", "(", ")", "|", "\n", "NULL"};
+	{"||", "&&", ";", "|", "(", ")", "\n", "NULL"};
 	int					i;
 
 	i = 0;
@@ -138,4 +138,83 @@ bool	is_redirect(char *line)
 		i++;
 	}
 	return (false);
+}
+
+/**
+ * *is_metacharacter
+ * check if current character in line is a metachracter
+ * ‘|’, ‘&’, ‘;’, ‘(’, ‘)’, ‘<’, or ‘>’. 
+ * @param c - current char
+*/
+bool	is_metacharacter(char c)
+{
+	return (c && ft_strchr("|;()<>\n", c));
+}
+
+/**
+ * * is_word
+ * check if it just word without metacharacters and whitespaces
+ * @param line -current line
+*/
+bool	is_word(char *line)
+{
+	int	i;
+
+	i = 0;
+	while(line[i] != '\0')
+	{
+		if (is_metacharacter(line[i]) || ft_isspace(line[i]))
+			return (false);
+		i++;
+	}
+	return (true);
+}
+
+/**
+ * * operator_token
+ * extract and tag the operator token from the input line, if present
+ * @param remaining - pointer to the remaining part of the input line 
+ * after extracting the operator
+ * @param line - current line
+*/
+t_token	*operator_token(char **remaining, char *line)
+{
+	static char *const	operators[] = \
+	{"||", "&&", ";", "|", "(", ")", "\n", "NULL"};
+	int					i;
+	char				*operator;
+
+	i = 0;
+	while(operators[i] != "NULL")
+	{
+		if (startswith(line, operators[i]))
+		{
+			operator = ft_strdup(operators[i]);
+			if (operator == NULL)
+				tk_error_manager("ft_strdup failed"); 
+			*remaining = line + ft_strlen(operator);
+			return (create_token(operator, TK_OPERATOR));	
+		}
+		i++;
+	}
+	tk_error_manager("Unrecognized operator");
+}
+
+t_token	*create_token(char *word, t_tk_kind kind)
+{
+	t_token	*token;
+
+	token = ft_calloc(1, sizeof(token));
+	if (token == NULL)
+		tk_error_manager("Calloc failed");
+	token->word = word;
+	token->kind = kind;
+	return (token);
+}
+
+void	tk_error_manager(char *error_msg)
+{
+	ft_putstr_fd("Error: ", STDERR_FILENO);
+	ft_putstr_fd(error_msg, STDERR_FILENO);
+	ft_putstr_fd("\n", STDERR_FILENO);
 }
