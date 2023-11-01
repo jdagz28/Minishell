@@ -6,7 +6,7 @@
 /*   By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/30 23:09:27 by jdagoy            #+#    #+#             */
-/*   Updated: 2023/10/31 22:21:37 by jdagoy           ###   ########.fr       */
+/*   Updated: 2023/11/01 13:29:30 by jdagoy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,19 @@ bool 	check_whitespace(char **next_inline, char *line)
 	return (false);
 }
 
+/**
+ *  *check_prefix
+ *  helper function for is_operator and is_redirect
+ * @param line
+ * @param prefix - current operator being check against
+*/
+bool	startswith(char *line, char *prefix)
+{
+	if (ft_strncmp(line, prefix, ft_strlen(prefix)) == 0)
+		return (true);
+	return (false);
+}
+
 
 /**
  * * is_operator
@@ -91,6 +104,18 @@ bool 	check_whitespace(char **next_inline, char *line)
  */
 bool	is_operator(char *line)
 {
+	static char *const	operators[] = \
+	{"||", "&", "&&", ";", ";;", "(", ")", "|", "\n", "NULL"};
+	int					i;
+
+	i = 0;
+	while (operators[i] != NULL)
+	{
+		if (check_prefix(line, operators[i]))
+			return (true);
+		i++;
+	}
+	return (false)
 	
 }
 
@@ -100,3 +125,17 @@ bool	is_operator(char *line)
  * "<" ">" "<<" ">>"
  * @param line	- current line
  */
+bool	is_redirect(char *line)
+{
+	static char *const	redirect[] = {"<" ">" "<<" ">>", "NULL"};
+	size_t				i;
+
+	i = 0;
+	while (redirect[i] != NULL)
+	{
+		if (check_prefix(line, redirect[i]))
+			return (true);
+		i++;
+	}
+	return (false);
+}
