@@ -6,7 +6,7 @@
 /*   By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/30 23:09:27 by jdagoy            #+#    #+#             */
-/*   Updated: 2023/11/01 22:44:29 by jdagoy           ###   ########.fr       */
+/*   Updated: 2023/11/02 21:01:48 by jdagoy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -228,6 +228,37 @@ t_token	*redirect_token(char **remaining, char *line)
 	}
 	tk_error_manager("Unrecognized operator");
 }
+
+t_token	*word_token(char **remaining, char *line)
+{
+	char	*start;
+	char	*returnword;
+	bool	quote_flag;
+	int		i;
+
+	start = line;
+	quote_flag = false;
+	i = 0;
+	while (line[i] != '\0' && !is_metacharacter(line[i]) && !ft_isspace(line[i]))
+	{
+		if (line[i] == '\\')
+			i += 2;
+		else if (line[i] == '\'' || line[i] == '\"')
+		{
+			check_missingquotes(&line, &quote_flag, line[i]);
+			if (quote_flag)
+				break ;
+		}
+		else
+			i++;
+	}
+	returnword = ft_strndup(start, line - start);
+	if (returnword == NULL)
+		tk_error_manager("ft_strndup failed");
+	*remaining = line;
+	return (create_token(returnword, TK_WORD));	
+}
+
 
 t_token	*create_token(char *word, t_tk_kind kind)
 {
