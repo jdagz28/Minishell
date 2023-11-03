@@ -6,7 +6,7 @@
 /*   By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/31 22:21:46 by jdagoy            #+#    #+#             */
-/*   Updated: 2023/11/03 23:41:10 by jdagoy           ###   ########.fr       */
+/*   Updated: 2023/11/04 00:24:36 by jdagoy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,9 +87,10 @@ int main(void)
 
 	for (int i = 0; error_tests[i] != NULL; i++)
 	{
+		printf("%s\n", (char *)error_tests[i]);
 		for (int j = 0; error_tests[i][j] != NULL; j++)
 		{
-			printf("Invalid Operators\n");
+			printf("Input: %s", (char *)error_tests[i][j]);
 			tokens = tokenizer((char *)error_tests[i][j]);
 			free(tokens);
 		}

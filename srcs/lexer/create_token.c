@@ -6,7 +6,7 @@
 /*   By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/02 21:12:54 by jdagoy            #+#    #+#             */
-/*   Updated: 2023/11/03 12:33:08 by jdagoy           ###   ########.fr       */
+/*   Updated: 2023/11/04 00:12:36 by jdagoy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,14 +23,14 @@
 t_token	*operator_token(char **remaining, char *line)
 {
 	static char *const	operators[] = \
-	{"||", "&&", ";", "|", "(", ")", "\n", "NULL"};
+	{"||", "&&", ";", "|", "(", ")", "\n", NULL};
 	int					i;
 	char				*operator;
 
 	i = 0;
-	while (operators[i] != "NULL")
+	while (operators[i] != NULL)
 	{
-		if (startswith(line, operators[i]))
+		if (check_prefix(line, operators[i]))
 		{
 			operator = ft_strdup(operators[i]);
 			if (operator == NULL)
@@ -41,6 +41,7 @@ t_token	*operator_token(char **remaining, char *line)
 		i++;
 	}
 	tk_error_manager("Unrecognized operator");
+	return (NULL);
 }
 
 /**
@@ -52,14 +53,14 @@ t_token	*operator_token(char **remaining, char *line)
 */
 t_token	*redirect_token(char **remaining, char *line)
 {
-	static char *const	redirects[] = {"<" ">" "<<" ">>", "NULL"};
+	static char *const	redirects[] = {"<" ">" "<<" ">>", NULL};
 	int					i;
 	char				*redirect;
 
 	i = 0;
-	while (redirects[i] != "NULL")
+	while (redirects[i] != NULL)
 	{
-		if (startswith(line, redirects[i]))
+		if (check_prefix(line, redirects[i]))
 		{
 			redirect = ft_strdup(redirects[i]);
 			if (redirect == NULL)
@@ -70,6 +71,7 @@ t_token	*redirect_token(char **remaining, char *line)
 		i++;
 	}
 	tk_error_manager("Unrecognized operator");
+	return (NULL);
 }
 
 t_token	*word_token(char **remaining, char *line)

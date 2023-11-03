@@ -6,7 +6,7 @@
 /*   By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/02 21:11:29 by jdagoy            #+#    #+#             */
-/*   Updated: 2023/11/03 12:29:56 by jdagoy           ###   ########.fr       */
+/*   Updated: 2023/11/04 00:22:31 by jdagoy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@
 bool	is_operator(char *line)
 {
 	static char *const	operators[] = \
-	{"||", "&&", ";", "|", "(", ")", "\n", "NULL"};
+	{"||", "&&", ";", "|", "(", ")", "\n", NULL};
 	int					i;
 
 	i = 0;
@@ -43,7 +43,7 @@ bool	is_operator(char *line)
  */
 bool	is_redirect(char *line)
 {
-	static char *const	redirect[] = {"<", ">", "<<", ">>", "NULL"};
+	static char *const	redirect[] = {"<", ">", "<<", ">>", NULL};
 	int					i;
 
 	i = 0;

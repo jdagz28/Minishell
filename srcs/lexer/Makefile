@@ -6,7 +6,7 @@
 #    By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/10/07 15:33:53 by tbarbe            #+#    #+#              #
-#    Updated: 2023/11/04 00:00:11 by jdagoy           ###   ########.fr        #
+#    Updated: 2023/11/04 00:26:33 by jdagoy           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,7 +26,7 @@ else
 endif
 
 CC					= cc
-CFLAGS				= -Wall -Wextra -Werror $(FSANITIZE)
+CFLAGS				= -Wall -Wextra -Werror -g $(FSANITIZE)
 RM					= rm -rf
 
 LIBFT_DIRECTORY		= ../../libft/
@@ -36,7 +36,7 @@ OBJECTS_DIRECTORY	= ./objects/
 INCLUDE_DIRECTORY	= ../../include/
 SOURCES_DIRECTORY	= ./
 
-LIBRARIES			= -lreadline $(MAC_LIBS)
+LIBRARIES			= -lreadline -L$(LIBFT_DIRECTORY) -lft $(MAC_LIBS)
 INCLUDES			= -I$(INCLUDE_DIRECTORY) $(MAC_INCLUDES)
 
 HEADER_LIST			= minishell.h\

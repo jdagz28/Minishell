@@ -6,13 +6,23 @@
 /*   By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/30 23:09:27 by jdagoy            #+#    #+#             */
-/*   Updated: 2023/11/03 12:34:38 by jdagoy           ###   ########.fr       */
+/*   Updated: 2023/11/04 00:35:05 by jdagoy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 #include "lexer_parsing.h"
 
+
+static void	tokenizer_error(char *error_msg, char **remaining, char *current)
+{
+	ft_putstr_fd("Error: ", STDERR_FILENO);
+	ft_putstr_fd(error_msg, STDERR_FILENO);
+	ft_putstr_fd("\n", STDERR_FILENO);
+	while (*current)
+		current++;
+	*remaining = current;
+}
 /**
  * * Tokenizer
  * Tokenize input from readline, check each character for token type
@@ -20,31 +30,30 @@
  * @param input
  */
 
-t_token	*tokenizer(char *input)
+t_token	*tokenizer(char *line)
 {
-	char	*line;
 	t_token	head;
 	t_token	*current;
 
-	line = ft_strdup(input);
-	if (line == NULL)
-		tk_error_manager("ft_strdup failed");
 	head.next = NULL;
 	current = &head;
 	while (*line)
 	{
 		if (check_whitespace(&line, line))
 			continue ;
-		else if (is_operator(line))
-			current->next = operator_token(&line, line);
-		else if (is_redirect(line))
-			current->next = redirect_token(&line, line);
-		else if (is_word(line))
-			current->next = word_token(&line, line);
+		else if (is_operator(line) || is_redirect(line) || is_word(line))
+		{	
+			if (is_operator(line))
+				current->next = operator_token(&line, line);
+			else if (is_redirect(line))
+				current->next = redirect_token(&line, line);
+			else if (is_word(line))
+				current->next = word_token(&line, line);
+			current = current->next;
+		}
 		else
-			printf("Unexpected Token\n");
-		current = current->next;
+			tokenizer_error("Unexpected Token", &line, line);
 	}
-	current->next = new_token(NULL, TK_EOF);
+	current->next = create_token(NULL, TK_EOF);
 	return (head.next);
 }

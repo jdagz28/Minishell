@@ -6,7 +6,7 @@
 /*   By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/03 23:44:50 by jdagoy            #+#    #+#             */
-/*   Updated: 2023/11/04 00:04:06 by jdagoy           ###   ########.fr       */
+/*   Updated: 2023/11/04 00:06:21 by jdagoy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,11 @@ static void skip_quoted(char **str)
 		(*str)++;
 }
 
-bool	check_word_inquote(char *str)
+bool	check_word_inquote(char **word)
 {
+	char	*str;
+
+	str = *word;
 	while (*str != '\0')
 	{
 		while (*str != '\'' && *str != '\"')
