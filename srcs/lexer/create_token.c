@@ -6,7 +6,7 @@
 /*   By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/02 21:12:54 by jdagoy            #+#    #+#             */
-/*   Updated: 2023/11/04 00:12:36 by jdagoy           ###   ########.fr       */
+/*   Updated: 2023/11/04 00:43:56 by jdagoy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,7 +107,7 @@ t_token	*create_token(char *word, t_tk_kind kind)
 {
 	t_token	*token;
 
-	token = ft_calloc(1, sizeof(token));
+	token = ft_calloc(1, sizeof(*token));
 	if (token == NULL)
 		tk_error_manager("Calloc failed");
 	token->word = word;
