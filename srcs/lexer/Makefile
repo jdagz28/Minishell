@@ -6,7 +6,7 @@
 #    By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/10/07 15:33:53 by tbarbe            #+#    #+#              #
-#    Updated: 2023/11/03 13:08:29 by jdagoy           ###   ########.fr        #
+#    Updated: 2023/11/04 00:00:11 by jdagoy           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,7 +32,7 @@ RM					= rm -rf
 LIBFT_DIRECTORY		= ../../libft/
 LIBFT				= $(LIBFT_DIRECTORY)libft.a
 
-OBJS_DIRECTORY		= ./objects/
+OBJECTS_DIRECTORY	= ./objects/
 INCLUDE_DIRECTORY	= ../../include/
 SOURCES_DIRECTORY	= ./
 
@@ -45,23 +45,22 @@ HEADER_LIST			= minishell.h\
 HEADER_FILES		= $(addprefix $(INCLUDE_DIRECTORY), $(HEADER_LIST))
 
 SRCS_LIST			= token_test.c\
-						check_opred_tokens.c\
-						check_token.c\
-						check_word_tokens.c\
-						create_token.c\
-						tokenizer_utils.c\
-						tokenizer.c
-
+                        check_opred_tokens.c\
+                        check_token.c\
+						check_word_inquote.c\
+                        check_word_tokens.c\
+                        create_token.c\
+                        tokenizer_utils.c\
+                        tokenizer.c
 
 OBJECTS_LIST		= $(patsubst %.c, %.o, $(SRCS_LIST))
-OBJECTS				= $(addprefix $(OBJS_DIRECTORY), $(OBJECTS_LIST))
-
+OBJECTS				= $(addprefix $(OBJECTS_DIRECTORY), $(OBJECTS_LIST))
 
 all: $(NAME)
 $(OBJECTS_DIRECTORY):
 	mkdir -p $(OBJECTS_DIRECTORY)
 
-$(OBJECTS_DIRECTORY)%.o: $(SOURCES_DIRECTORY)%.c $(HEADER_FILES)
+$(OBJECTS_DIRECTORY)%.o: $(SOURCES_DIRECTORY)/%.c $(HEADER_FILES)
 	$(CC) $(CFLAGS) -c $(INCLUDES) $< -o $@
 
 $(LIBFT):

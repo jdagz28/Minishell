@@ -6,7 +6,7 @@
 /*   By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/03 00:33:45 by jdagoy            #+#    #+#             */
-/*   Updated: 2023/11/03 12:05:24 by jdagoy           ###   ########.fr       */
+/*   Updated: 2023/11/03 23:53:54 by jdagoy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ static bool	check_word(char **str)
 	word = *str;
 	if (ft_strchr(*str, '\'') || ft_strchr(*str, '\"'))
 		if (check_quotes(*str))
-			return (check_word_inquote(str, *str));
+			return (check_word_inquote(str));
 	while (*word != '\0')
 	{
 		if (*word == '\\')

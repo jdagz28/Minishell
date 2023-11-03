@@ -6,14 +6,14 @@
 /*   By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/02 21:15:07 by jdagoy            #+#    #+#             */
-/*   Updated: 2023/11/03 12:09:18 by jdagoy           ###   ########.fr       */
+/*   Updated: 2023/11/03 23:41:29 by jdagoy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 #include "lexer_parsing.h"
 
-static bool	check_pperatorsyntax_cont(t_token *token)
+static bool	check_operatorsyntax_cont(t_token *token)
 {
 	if (ft_strncmp(token->word, "(", 1) == 0)
 	{
@@ -52,7 +52,7 @@ static bool	check_operatorsyntax(t_token *token)
 			return (false);
 		}
 	}
-	return (check_opertatorsyntax_cont(token));
+	return (check_operatorsyntax_cont(token));
 }
 
 /**

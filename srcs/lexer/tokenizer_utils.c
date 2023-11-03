@@ -6,7 +6,7 @@
 /*   By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/03 12:34:48 by jdagoy            #+#    #+#             */
-/*   Updated: 2023/11/03 12:39:28 by jdagoy           ###   ########.fr       */
+/*   Updated: 2023/11/03 23:42:25 by jdagoy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ bool	check_whitespace(char **next_inline, char *line)
  * @param line
  * @param prefix - current operator being check against
 */
-bool	startswith(char *line, char *prefix)
+bool	check_prefix(char *line, char *prefix)
 {
 	if (ft_strncmp(line, prefix, ft_strlen(prefix)) == 0)
 		return (true);
