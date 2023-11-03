@@ -6,28 +6,14 @@
 /*   By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/03 00:33:45 by jdagoy            #+#    #+#             */
-/*   Updated: 2023/11/03 05:56:15 by jdagoy           ###   ########.fr       */
+/*   Updated: 2023/11/03 12:05:24 by jdagoy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 #include "lexer_parsing.h"
 
-bool not_escaped(const char *args)
-{
-    size_t position = 0;
-    while (args[position] != '\0')
-    {
-        if ((args[position] == '\'' || args[position] == '\"') && (position == 0 || args[position - 1] != '\\'))
-        {
-            return true;
-        }
-        position++;
-    }
-    return false;
-}
-
-bool	check_quotes(char *str)
+static bool	check_quotes(char *str)
 {
 	int	position;
 
@@ -46,7 +32,7 @@ bool	check_quotes(char *str)
 	return (false);
 }
 
-bool	check_word(char **str)
+static bool	check_word(char **str)
 {
 	char	*word;
 
@@ -70,10 +56,9 @@ bool	check_word(char **str)
 	return (true);
 }
 
-
-bool	check_backslashescape(char *str)
+static bool	check_backslashescape(char *str)
 {
-	if (str[0] == '\\' && (str[1] == '\"' || str[1] == '\'' 
+	if (str[0] == '\\' && (str[1] == '\"' || str[1] == '\'' \
 		|| str[1] == '\\') && str[2] == '\0')
 		return (true);
 	return (false);

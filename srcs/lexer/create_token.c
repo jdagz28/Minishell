@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   create_token_type.c                                :+:      :+:    :+:   */
+/*   create_token.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/02 21:12:54 by jdagoy            #+#    #+#             */
-/*   Updated: 2023/11/02 22:40:29 by jdagoy           ###   ########.fr       */
+/*   Updated: 2023/11/03 12:33:08 by jdagoy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,15 +28,15 @@ t_token	*operator_token(char **remaining, char *line)
 	char				*operator;
 
 	i = 0;
-	while(operators[i] != "NULL")
+	while (operators[i] != "NULL")
 	{
 		if (startswith(line, operators[i]))
 		{
 			operator = ft_strdup(operators[i]);
 			if (operator == NULL)
-				tk_error_manager("ft_strdup failed"); 
+				tk_error_manager("ft_strdup failed");
 			*remaining = line + ft_strlen(operator);
-			return (create_token(operator, TK_OPERATOR));	
+			return (create_token(operator, TK_OPERATOR));
 		}
 		i++;
 	}
@@ -57,15 +57,15 @@ t_token	*redirect_token(char **remaining, char *line)
 	char				*redirect;
 
 	i = 0;
-	while(redirects[i] != "NULL")
+	while (redirects[i] != "NULL")
 	{
 		if (startswith(line, redirects[i]))
 		{
 			redirect = ft_strdup(redirects[i]);
 			if (redirect == NULL)
-				tk_error_manager("ft_strdup failed"); 
+				tk_error_manager("ft_strdup failed");
 			*remaining = line + ft_strlen(redirect);
-			return (create_token(redirect, TK_REDIRECT));	
+			return (create_token(redirect, TK_REDIRECT));
 		}
 		i++;
 	}
@@ -81,8 +81,9 @@ t_token	*word_token(char **remaining, char *line)
 
 	start = line;
 	quote_flag = false;
-	i = 0;
-	while (line[i] != '\0' && !is_metacharacter(line[i]) && !ft_isspace(line[i]))
+	i = -1;
+	while (line[++i] != '\0' && !is_metacharacter(line[i]) \
+			&& !ft_isspace(line[i]))
 	{
 		if (line[i] == '\\')
 			i += 2;
@@ -92,14 +93,12 @@ t_token	*word_token(char **remaining, char *line)
 			if (quote_flag)
 				break ;
 		}
-		else
-			i++;
 	}
 	returnword = ft_strndup(start, line - start);
 	if (returnword == NULL)
 		tk_error_manager("ft_strndup failed");
 	*remaining = line;
-	return (create_token(returnword, TK_WORD));	
+	return (create_token(returnword, TK_WORD));
 }
 
 t_token	*create_token(char *word, t_tk_kind kind)
