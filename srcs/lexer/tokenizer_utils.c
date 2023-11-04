@@ -6,7 +6,7 @@
 /*   By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/03 12:34:48 by jdagoy            #+#    #+#             */
-/*   Updated: 2023/11/04 00:16:08 by jdagoy           ###   ########.fr       */
+/*   Updated: 2023/11/04 23:48:00 by jdagoy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,16 +21,14 @@
  */
 bool	check_whitespace(char **next_inline, char *line)
 {
-	int	i;
-
-	i = 0;
-	if (ft_isspace(line[i]))
+	if (ft_isspace(*line))
 	{
-		while (line[i] && ft_isspace(line[i]))
-			i++;
+		while (*line && ft_isspace(*line))
+			line++;
 		*next_inline = line;
 		return (true);	
 	}
+	*next_inline = line;
 	return (false);
 }
 
@@ -52,6 +50,7 @@ void	tk_error_manager(char *error_msg)
 	ft_putstr_fd("Error: ", STDERR_FILENO);
 	ft_putstr_fd(error_msg, STDERR_FILENO);
 	ft_putstr_fd("\n", STDERR_FILENO);
+	exit(EXIT_FAILURE);
 }
 
 void	check_missingquotes(char **line, bool *flag, char quote_type)

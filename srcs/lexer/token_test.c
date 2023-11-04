@@ -6,7 +6,7 @@
 /*   By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/31 22:21:46 by jdagoy            #+#    #+#             */
-/*   Updated: 2023/11/04 01:59:29 by jdagoy           ###   ########.fr       */
+/*   Updated: 2023/11/04 23:42:21 by jdagoy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,9 +32,19 @@ const char *token_kind_strings[] = {
     "TK_EOF"
 };
 
+const char *valid[] = {
+	"command",
+	"command arg1 arg2",
+	"command 1 | command 2"
+	"< infile command | command > outfile",
+	"command << heredoc | command > outfile",
+	"command ; command",
+	"command && command; command"
+};
+
 const char *error_invalid[] = {
-	"cat %",
-	"cat !",
+	"cat < >",
+	"cat ! >>>>",
 	"cat > @",
 	"cat # > a",
 	NULL
@@ -97,10 +107,10 @@ int main(void)
 			if (check_tokens(tokens) == false || check_wordtokens(tokens) == false)
 			{
 				free_token(tokens);
+				break ;
 			}
-			while (tokens != NULL && tokens->kind != TK_EOF)
+			while (tokens != NULL)
 			{
-				printf("Token %d\n", j);
 				printf("Token: \t%s\n", tokens->word);
 				printf("Kind: \t%s", token_kind_strings[tokens->kind]);
 				tokens = tokens->next;
@@ -115,7 +125,6 @@ int main(void)
 	{
 		i = 0;
 		line = readline("Token_tester > ");
-		// printf("%s\n", line);
 		tokens = tokenizer(line);
 		while (tokens != NULL && tokens->kind != TK_EOF)
 		{
@@ -130,22 +139,21 @@ int main(void)
 	return (0);
 }
 
-void	free_token(t_token *head)
+void free_token(t_token *head)
 {
-	t_token	*itr;
-	t_token	*next;
+    t_token *itr;
+    t_token *next;
 
-	if (head == NULL)
-		return ;
-	itr = head;
-	next = itr->next;
-	while (next != NULL)
-	{
-		free(itr->word);
-		free(itr);
-		itr = next;
-		next = itr->next;
-	}
-	free(itr->word);
-	free(itr);
+    if (head == NULL)
+        return;
+
+    itr = head;
+    while (itr != NULL)
+    {
+        next = itr->next;
+        free(itr->word);
+        free(itr);
+        itr = next;
+    }
 }
+

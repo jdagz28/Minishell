@@ -6,7 +6,7 @@
 /*   By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/02 21:12:54 by jdagoy            #+#    #+#             */
-/*   Updated: 2023/11/04 00:43:56 by jdagoy           ###   ########.fr       */
+/*   Updated: 2023/11/04 23:45:38 by jdagoy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ t_token	*operator_token(char **remaining, char *line)
 		i++;
 	}
 	tk_error_manager("Unrecognized operator");
-	return (NULL);
+	return (create_token("error", TK_ERROR));
 }
 
 /**
@@ -53,7 +53,7 @@ t_token	*operator_token(char **remaining, char *line)
 */
 t_token	*redirect_token(char **remaining, char *line)
 {
-	static char *const	redirects[] = {"<" ">" "<<" ">>", NULL};
+	static char *const	redirects[] = {"<" ">" "<<", ">>", NULL};
 	int					i;
 	char				*redirect;
 
@@ -71,7 +71,7 @@ t_token	*redirect_token(char **remaining, char *line)
 		i++;
 	}
 	tk_error_manager("Unrecognized operator");
-	return (NULL);
+	return (create_token("error", TK_ERROR));
 }
 
 t_token	*word_token(char **remaining, char *line)
@@ -79,22 +79,21 @@ t_token	*word_token(char **remaining, char *line)
 	char	*start;
 	char	*returnword;
 	bool	quote_flag;
-	int		i;
 
 	start = line;
 	quote_flag = false;
-	i = -1;
-	while (line[++i] != '\0' && !is_metacharacter(line[i]) \
-			&& !ft_isspace(line[i]))
+	while (*line != '\0' && !is_metacharacter(*line) && !ft_isspace(*line))
 	{
-		if (line[i] == '\\')
-			i += 2;
-		else if (line[i] == '\'' || line[i] == '\"')
+		if (*line == '\\')
+			line = line + 2;
+		else if (*line == '\'' || *line == '\"')
 		{
-			check_missingquotes(&line, &quote_flag, line[i]);
+			check_missingquotes(&line, &quote_flag, *line);
 			if (quote_flag)
 				break ;
 		}
+		else
+			line++;
 	}
 	returnword = ft_strndup(start, line - start);
 	if (returnword == NULL)

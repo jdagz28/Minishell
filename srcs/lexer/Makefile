@@ -6,7 +6,7 @@
 #    By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/10/07 15:33:53 by tbarbe            #+#    #+#              #
-#    Updated: 2023/11/04 00:26:33 by jdagoy           ###   ########.fr        #
+#    Updated: 2023/11/04 23:23:19 by jdagoy           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,6 +23,10 @@ else
 	FSANITIZE		= -fsanitize=address
 	MAC_INCLUDES	= -I /Users/$(USERNAME)/Applications/homebrew/opt/readline/include
 	MAC_LIBS		= -L /Users/$(USERNAME)/Applications/homebrew/opt/readline/lib
+endif
+
+ifdef fsanitizeoff
+	FSANITIZE		=
 endif
 
 CC					= cc
