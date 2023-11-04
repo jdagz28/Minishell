@@ -6,7 +6,7 @@
 /*   By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/31 22:21:46 by jdagoy            #+#    #+#             */
-/*   Updated: 2023/11/04 23:42:21 by jdagoy           ###   ########.fr       */
+/*   Updated: 2023/11/05 00:32:29 by jdagoy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,110 +32,49 @@ const char *token_kind_strings[] = {
     "TK_EOF"
 };
 
-const char *valid[] = {
-	"command",
-	"command arg1 arg2",
-	"command 1 | command 2"
-	"< infile command | command > outfile",
-	"command << heredoc | command > outfile",
-	"command ; command",
-	"command && command; command"
-};
-
-const char *error_invalid[] = {
-	"cat < >",
-	"cat ! >>>>",
-	"cat > @",
-	"cat # > a",
-	NULL
-};
-
-const char *error_redirect[] = {
-	"cat >",
-	"cat>",
-	"cat <",
-	"cat<",
-	"cat <<<",
-	"cat<<<",
-	"cat >>>",
-	"cat>>>",
-	"cat > &&",
-	"cat > ||",
-	"cat > ;",
-	NULL
-};
-
-const char *error_operator[] = {
-	"cat ||",
-	"cat &&",
-	"cat ;",
-	"cat |",
-	"cat && >",
-	"cat | ||",
-	"cat ||||",
-	"cat | ;",
-	// "( || )",
-	"cat || &&",
-	"cat || |",
-	"cat && ;",
-	NULL
-};
-
-const char *error_word[] = {
-	"echo \"hello\"world\"",
-	"echo \"hello\\\"",
-	"echo \\x"
-};
-
 void	free_token(t_token *head);
 
-int main(void)
+int main(int argc, char **argv)
 {
 	t_token		*tokens;
-	int			i;
-	char		*line;
-	const char		**error_tests[] = {error_invalid, error_redirect, error_operator, error_operator, NULL};
-	const char		*tests[] = {"error_invalid", "error_redirect", "error_operator", "error_operator"};
+	// int			i;
+	// char		*line;
 
-	for (int i = 0; error_tests[i] != NULL; i++)
-	{
-		printf("%s\n", tests[i]);
-		for (int j = 0; error_tests[i][j] != NULL; j++)
-		{
-			printf("Input: %s\n", (char *)error_tests[i][j]);
-			tokens = tokenizer((char *)error_tests[i][j]);
-			if (check_tokens(tokens) == false || check_wordtokens(tokens) == false)
-			{
-				free_token(tokens);
-				break ;
-			}
-			while (tokens != NULL)
-			{
-				printf("Token: \t%s\n", tokens->word);
-				printf("Kind: \t%s", token_kind_strings[tokens->kind]);
-				tokens = tokens->next;
-			}
-			free_token(tokens);
-			printf("\n");
-		}
-		printf("====================\n\n");
+	if (argc != 2)
+	{	
+		printf("Usage: %s script\n", argv[0]);
+		return (1);
 	}
-
-	while (1)
+	printf("Input: %s\n", argv[1]);
+	tokens = tokenizer(argv[1]);
+	if (check_tokens(tokens) == false || check_wordtokens(tokens) == false)
+		free_token(tokens);
+	else
 	{
-		i = 0;
-		line = readline("Token_tester > ");
-		tokens = tokenizer(line);
-		while (tokens != NULL && tokens->kind != TK_EOF)
+		while (tokens != NULL)
 		{
-			printf("Token %d\n", i);
 			printf("Token: \t%s\n", tokens->word);
 			printf("Kind: \t%s", token_kind_strings[tokens->kind]);
 			tokens = tokens->next;
 		}
 		free_token(tokens);
-		free(line);
+		printf("\n");
 	}
+	// while (1)
+	// {
+	// 	i = 0;
+	// 	line = readline("Token_tester > ");
+	// 	tokens = tokenizer(line);
+	// 	while (tokens != NULL && tokens->kind != TK_EOF)
+	// 	{
+	// 		printf("Token %d\n", i);
+	// 		printf("Token: \t%s\n", tokens->word);
+	// 		printf("Kind: \t%s", token_kind_strings[tokens->kind]);
+	// 		tokens = tokens->next;
+	// 	}
+	// 	free_token(tokens);
+	// 	free(line);
+	// }
 	return (0);
 }
 

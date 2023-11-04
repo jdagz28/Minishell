@@ -6,7 +6,7 @@
 /*   By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/02 21:12:54 by jdagoy            #+#    #+#             */
-/*   Updated: 2023/11/04 23:45:38 by jdagoy           ###   ########.fr       */
+/*   Updated: 2023/11/05 00:11:17 by jdagoy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ t_token	*operator_token(char **remaining, char *line)
 		i++;
 	}
 	tk_error_manager("Unrecognized operator");
-	return (create_token("error", TK_ERROR));
+	return (NULL);
 }
 
 /**
@@ -71,7 +71,7 @@ t_token	*redirect_token(char **remaining, char *line)
 		i++;
 	}
 	tk_error_manager("Unrecognized operator");
-	return (create_token("error", TK_ERROR));
+	return (NULL);
 }
 
 t_token	*word_token(char **remaining, char *line)

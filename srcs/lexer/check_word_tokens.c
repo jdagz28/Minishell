@@ -6,7 +6,7 @@
 /*   By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/03 00:33:45 by jdagoy            #+#    #+#             */
-/*   Updated: 2023/11/03 23:53:54 by jdagoy           ###   ########.fr       */
+/*   Updated: 2023/11/05 00:40:37 by jdagoy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ static bool	check_word(char **str)
 			word++;
 			if (*word == '\0')
 			{
-				tk_error_manager("Invalid syntax: newline after escape char");
+				ft_putstr_fd("Invalid syntax: newline after escape char", STDERR_FILENO);
 				return (false);
 			}
 		}
