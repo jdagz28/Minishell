@@ -6,7 +6,7 @@
 /*   By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/02 21:12:54 by jdagoy            #+#    #+#             */
-/*   Updated: 2023/11/07 13:06:52 by jdagoy           ###   ########.fr       */
+/*   Updated: 2023/11/07 15:41:51 by jdagoy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,6 +129,10 @@ t_token *create_operator_token(char *operator)
 		return (create_token(operator, TK_SEMICOLON));
 	else if (operator == "|")
 		return (create_token(operator, TK_PIPE));
+	else if (operator == "(")
+		return (create_token(operator, TK_OP_PAREN));
+	else if (operator == ")")
+		return (create_token(operator, TK_CL_PAREN));
 	else
 		return (create_token(operator, TK_SEMICOLON));
 }
