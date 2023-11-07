@@ -6,7 +6,7 @@
 /*   By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/02 21:12:54 by jdagoy            #+#    #+#             */
-/*   Updated: 2023/11/05 00:11:17 by jdagoy           ###   ########.fr       */
+/*   Updated: 2023/11/07 13:06:52 by jdagoy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,12 @@ t_token	*operator_token(char **remaining, char *line)
 	{"||", "&&", ";", "|", "(", ")", "\n", NULL};
 	int					i;
 	char				*operator;
+	t_token				*token;
 
 	i = 0;
+	token = ft_calloc(1, sizeof(*token));
+	if (token == NULL)
+		tk_error_manager("Calloc failed");
 	while (operators[i] != NULL)
 	{
 		if (check_prefix(line, operators[i]))
@@ -36,7 +40,8 @@ t_token	*operator_token(char **remaining, char *line)
 			if (operator == NULL)
 				tk_error_manager("ft_strdup failed");
 			*remaining = line + ft_strlen(operator);
-			return (create_token(operator, TK_OPERATOR));
+			token = create_operator_token(operator);
+			return (token)
 		}
 		i++;
 	}
@@ -112,4 +117,18 @@ t_token	*create_token(char *word, t_tk_kind kind)
 	token->word = word;
 	token->kind = kind;
 	return (token);
+}
+
+t_token *create_operator_token(char *operator)
+{
+	if (operator == "||")
+		return (create_token(operator, TK_OR));
+	else if (operator == "&&")
+		return (create_token(operator, TK_AND));
+	else if (operator == ";")
+		return (create_token(operator, TK_SEMICOLON));
+	else if (operator == "|")
+		return (create_token(operator, TK_PIPE));
+	else
+		return (create_token(operator, TK_SEMICOLON));
 }
