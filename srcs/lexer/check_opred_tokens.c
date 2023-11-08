@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_opred_tokens.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+        */
+/*   By: jdagoy <jdagoy@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/02 21:15:07 by jdagoy            #+#    #+#             */
-/*   Updated: 2023/11/04 01:49:39 by jdagoy           ###   ########.fr       */
+/*   Updated: 2023/11/08 09:48:41 by jdagoy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ static bool	check_operatorsyntax_cont(t_token *token)
 {
 	if (ft_strncmp(token->word, "(", 1) == 0)
 	{
-		if (token->next->word != TK_OPERATOR \
+		if (token->next->kind != TK_OPERATOR \
 			|| ft_strncmp(token->next->word, ")", 1) != 0)
 		{
 			tk_error_manager("Invalid syntax: operator or closing parnthesis");

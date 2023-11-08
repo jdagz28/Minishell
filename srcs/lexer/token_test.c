@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   token_test.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+        */
+/*   By: jdagoy <jdagoy@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/31 22:21:46 by jdagoy            #+#    #+#             */
-/*   Updated: 2023/11/05 00:32:29 by jdagoy           ###   ########.fr       */
+/*   Updated: 2023/11/08 10:04:50 by jdagoy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,8 +90,8 @@ void free_token(t_token *head)
     while (itr != NULL)
     {
         next = itr->next;
-        free(itr->word);
-        free(itr);
+        if (itr)
+			free(itr);
         itr = next;
     }
 }

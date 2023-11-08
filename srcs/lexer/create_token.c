@@ -3,15 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   create_token.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+        */
+/*   By: jdagoy <jdagoy@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/02 21:12:54 by jdagoy            #+#    #+#             */
-/*   Updated: 2023/11/07 15:41:51 by jdagoy           ###   ########.fr       */
+/*   Updated: 2023/11/08 10:03:06 by jdagoy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 #include "lexer_parsing.h"
+
+t_token *create_operator_token(char *operator);
 
 /**
  * * operator_token
@@ -41,7 +43,10 @@ t_token	*operator_token(char **remaining, char *line)
 				tk_error_manager("ft_strdup failed");
 			*remaining = line + ft_strlen(operator);
 			token = create_operator_token(operator);
-			return (token)
+			free(operator);
+			if (token == NULL)
+				tk_error_manager("token creation failed");
+			return (token);
 		}
 		i++;
 	}
@@ -121,17 +126,17 @@ t_token	*create_token(char *word, t_tk_kind kind)
 
 t_token *create_operator_token(char *operator)
 {
-	if (operator == "||")
+	if (ft_strncmp(operator, "||", ft_strlen("||")) == 0)
 		return (create_token(operator, TK_OR));
-	else if (operator == "&&")
+	else if (ft_strncmp(operator, "&&", ft_strlen("&&")) == 0)
 		return (create_token(operator, TK_AND));
-	else if (operator == ";")
+	else if (ft_strncmp(operator, ";", ft_strlen(";")) == 0)
 		return (create_token(operator, TK_SEMICOLON));
-	else if (operator == "|")
+	else if (ft_strncmp(operator, "|", ft_strlen("|")) == 0)
 		return (create_token(operator, TK_PIPE));
-	else if (operator == "(")
+	else if (ft_strncmp(operator, "(", ft_strlen("(")) == 0)
 		return (create_token(operator, TK_OP_PAREN));
-	else if (operator == ")")
+	else if (ft_strncmp(operator, ")", ft_strlen(")")) == 0)
 		return (create_token(operator, TK_CL_PAREN));
 	else
 		return (create_token(operator, TK_SEMICOLON));
