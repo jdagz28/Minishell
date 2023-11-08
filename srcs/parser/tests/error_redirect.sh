@@ -2,19 +2,19 @@
 
 echo "Testing error redirects"
 echo
-../tokenizer "cat < >"
+../parser "cat < >"
 echo
-../tokenizer "cat ! >>>>"
+../parser "cat ! >>>>"
 echo
-../tokenizer "cat > @"
+../parser "cat > @"
 echo
-../tokenizer "cat # > a"
+../parser "cat # > a"
 echo
-../tokenizer "cat > ||"
+../parser "cat > ||"
 echo
-../tokenizer "cat > &&"
+../parser "cat > &&"
 echo
-../tokenizer "cat<<<"
+../parser "cat<<<"
 echo
-../tokenizer "cat>>>"
+../parser "cat>>>"
 

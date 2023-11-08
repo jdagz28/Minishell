@@ -2,8 +2,8 @@
 
 echo "Error word tests"
 echo
-../tokenizer 'echo "hello"world"'
+../parser 'echo "hello"world"'
 echo
-../tokenizer 'echo "hello\\\"'
+../parser 'echo "hello\\\"'
 echo
-../tokenizer 'echo \\x'
+../parser 'echo \\x'

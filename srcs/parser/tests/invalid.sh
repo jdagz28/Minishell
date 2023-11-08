@@ -2,10 +2,10 @@
 
 echo "Testing invalid input"
 echo
-../tokenizer "cat < >"
+../parser "cat < >"
 echo
-../tokenizer "cat ! >>>>"
+../parser "cat ! >>>>"
 echo
-../tokenizer "cat > @"
+../parser "cat > @"
 echo
-../tokenizer "cat # > a"
+../parser "cat # > a"

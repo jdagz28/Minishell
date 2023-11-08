@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: jdagoy <jdagoy@student.42.fr>              +#+  +:+       +#+         #
+#    By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/10/07 15:33:53 by tbarbe            #+#    #+#              #
-#    Updated: 2023/11/08 10:54:09 by jdagoy           ###   ########.fr        #
+#    Updated: 2023/11/08 12:59:41 by jdagoy           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -38,7 +38,7 @@ LIBFT				= $(LIBFT_DIRECTORY)libft.a
 
 OBJECTS_DIRECTORY	= ./objects/
 INCLUDE_DIRECTORY	= ../../include/
-SOURCES_DIRECTORY	= ./
+PARSER_DIRECTORY	= ./
 LEXER_DIRECTORY		= ../lexer/
 
 LIBRARIES			= -lreadline -L$(LIBFT_DIRECTORY) -lft $(MAC_LIBS)
@@ -49,37 +49,39 @@ HEADER_LIST			= minishell.h\
 
 HEADER_FILES		= $(addprefix $(INCLUDE_DIRECTORY), $(HEADER_LIST))
 
-LEXER_LIST			= check_opred_tokens.c\
+SRCS_LIST			= parsing_test.c
+
+LEXER_SRCS_LIST		= tokenizer.c\
+						check_opred_tokens.c\
                         check_token.c\
 						check_word_inquote.c\
                         check_word_tokens.c\
                         create_token.c\
-                        tokenizer_utils.c\
-                        tokenizer.c
-
-LEXER_LIST			= $(patsubst %.c, %.o, $(LEXER_LIST))
-LEXER_OBJECTS		= $(addprefix $(OBJECTS_DIRECTORY), $(LEXER_LIST))
-
-SRCS_LIST			= parsing_test.c
-                        
-
+                        tokenizer_utils.c
+                 
 OBJECTS_LIST		= $(patsubst %.c, %.o, $(SRCS_LIST))
 OBJECTS				= $(addprefix $(OBJECTS_DIRECTORY), $(OBJECTS_LIST))
+
+LEXER_LIST			= $(patsubst %.c, %.o, $(LEXER_SRCS_LIST))
+LEXER_OBJECTS		= $(addprefix $(OBJECTS_DIRECTORY), $(LEXER_LIST))
 
 all: $(NAME)
 $(OBJECTS_DIRECTORY):
 	mkdir -p $(OBJECTS_DIRECTORY)
 
-$(OBJECTS_DIRECTORY)%.o: $(SOURCES_DIRECTORY)/%.c $(HEADER_FILES)
+$(OBJECTS_DIRECTORY)%.o: $(LEXER_DIRECTORY)/%.c $(HEADER_FILES)
+	$(CC) $(CFLAGS) -c $(INCLUDES) $< -o $@
+
+$(OBJECTS_DIRECTORY)%.o: $(PARSER_DIRECTORY)/%.c $(HEADER_FILES)
 	$(CC) $(CFLAGS) -c $(INCLUDES) $< -o $@
 
 $(LIBFT):
 	@echo "$(NAME): Compiling $(LIBFT)"
 	@$(MAKE) -sC $(LIBFT_DIRECTORY) 
 
-$(NAME): $(LIBFT) $(OBJECTS_DIRECTORY) $(OBJECTS) $(HEADER_FILES)
+$(NAME): $(LIBFT) $(OBJECTS_DIRECTORY) $(LEXER_OBJECTS) $(OBJECTS) $(HEADER_FILES)
 	@echo "$(NAME)..."
-	@$(CC) $(CFLAGS) $(OBJECTS) $(LIBRARIES) $(INCLUDES) -o $(NAME)
+	@$(CC) $(CFLAGS) $(LEXER_OBJECTS) $(OBJECTS) $(LIBRARIES) $(INCLUDES) -o $(NAME)
 
 clean:
 	$(MAKE) -sC $(LIBFT_DIRECTORY) clean

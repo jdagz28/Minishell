@@ -2,16 +2,16 @@
 
 echo "Testing valid argument sequence"
 echo
-../tokenizer "command"
+../parser "command"
 echo
-../tokenizer "command arg1 arg2"
+../parser "command arg1 arg2"
 echo
-../tokenizer "command 1 | command 2"
+../parser "command 1 | command 2"
 echo
-../tokenizer "< infile command | command > outfile"
+../parser "< infile command | command > outfile"
 echo
-../tokenizer "command << heredoc | command > outfile"
+../parser "command << heredoc | command > outfile"
 echo
-../tokenizer "command ; command"
+../parser "command ; command"
 echo
-../tokenizer "command && command; command"
+../parser "command && command; command"

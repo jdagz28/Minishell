@@ -2,24 +2,24 @@
 
 echo "Testing error operators"
 echo
-../tokenizer "cat ||"
+../parser "cat ||"
 echo
-../tokenizer "cat &&"
+../parser "cat &&"
 echo
-../tokenizer "cat ;"
+../parser "cat ;"
 echo
-../tokenizer "cat |"
+../parser "cat |"
 echo
-../tokenizer "cat && >"
+../parser "cat && >"
 echo
-../tokenizer "cat | ||"
+../parser "cat | ||"
 echo
-../tokenizer "cat ||||"
+../parser "cat ||||"
 echo
-../tokenizer "cat | ;"
+../parser "cat | ;"
 echo
-../tokenizer "cat || &&"
+../parser "cat || &&"
 echo
-../tokenizer "cat || |"
+../parser "cat || |"
 echo
-../tokenizer "cat && ;"
+../parser "cat && ;"

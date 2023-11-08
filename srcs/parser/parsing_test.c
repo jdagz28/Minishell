@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_test.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jdagoy <jdagoy@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 13:54:17 by jdagoy            #+#    #+#             */
-/*   Updated: 2023/11/08 10:45:03 by jdagoy           ###   ########.fr       */
+/*   Updated: 2023/11/08 13:44:32 by jdagoy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 const char *token_kind_strings[] = {
     "TK_WORD",
+	"TK_PIPE",
 	"TK_OR",
 	"TK_AND",
 	"TK_SEMICOLON",
@@ -61,6 +62,8 @@ void	free_token(t_token *head)
 	while (itr != NULL)
 	{
 		next = itr->next;
+		if (itr->word != NULL)
+			free(itr->word);
 		if (itr)
 			free(itr);
 		itr = next;
@@ -68,14 +71,18 @@ void	free_token(t_token *head)
 }
 void	print_tokens(t_token *tokens)
 {
-	int	i;
+	int		i;
+	t_token	*current;
 
 	i = 0;
-	while (tokens)
+	current = tokens;
+	while (current != NULL)
 	{
-		printf("Token %d\n", i);
-		printf("Token: \t%s\n", tokens->word);
-		printf("Type: \t%s\n", token_kind_strings[tokens->kind]);
-		tokens = tokens->next;
+		printf("Token %d\n", i++);
+		if (current->word != NULL)
+			printf("Token: \t%s\n", current->word);
+		printf("Type: \t%s\n", token_kind_strings[current->kind]);
+		current = current->next;
 	}
+	free_token(tokens);
 }
