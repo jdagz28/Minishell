@@ -6,7 +6,7 @@
 /*   By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/30 23:09:27 by jdagoy            #+#    #+#             */
-/*   Updated: 2023/11/04 23:38:37 by jdagoy           ###   ########.fr       */
+/*   Updated: 2023/11/08 13:45:33 by jdagoy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,20 +39,16 @@ t_token	*tokenizer(char *line)
 	current = &head;
 	while (*line)
 	{
-		// printf("Current Line: %s\n", line);
 		if (check_whitespace(&line, line))
 			continue ;
 		else if (is_operator(line) || is_redirect(line) || is_word(line))
 		{	
-			// printf("Current Line now in token identifier\n");
 			if (is_operator(line))
 				current->next = operator_token(&line, line);
 			else if (is_redirect(line))
 				current->next = redirect_token(&line, line);
 			else if (is_word(line))
 				current->next = word_token(&line, line);
-			// printf("Current Word: %s\n", current->next->word);
-			// printf("Current Kind: %s\n", token_kind_strings[current->next->kind]);
 			current = current->next;
 		}
 		else

@@ -6,7 +6,7 @@
 /*   By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/30 23:08:42 by jdagoy            #+#    #+#             */
-/*   Updated: 2023/11/07 15:40:49 by jdagoy           ###   ########.fr       */
+/*   Updated: 2023/11/08 12:37:26 by jdagoy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ typedef enum e_node_type
 	OR_NODE,
 	AND_NODE,
 	SEMICOLON_NODE
-}
+}	t_node_type;
 
 typedef struct s_simple_cmd
 {
@@ -55,22 +55,23 @@ typedef struct s_simple_cmd
 	bool	has_quotes;
 }	t_simple_cmd;
 
+typedef struct s_node t_node;
 
 typedef struct s_child
 {
-	struct s_node	*left;
-	struct s_node	*right;
+	t_node	*left;
+	t_node	*right;
 }	t_child;
 
 typedef union u_node_content
 {
-	struct s_simple_cmd simple_cmd;
-	struct s_child		child;
+	t_simple_cmd simple_cmd;
+	t_child		child;
 }	t_node_content;
 
 typedef struct s_node
 {
-	enum e_node_type	type;
+	t_node_type	type;
 	t_node_content		content;
 }	t_node;
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   create_token.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jdagoy <jdagoy@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/02 21:12:54 by jdagoy            #+#    #+#             */
-/*   Updated: 2023/11/08 10:03:06 by jdagoy           ###   ########.fr       */
+/*   Updated: 2023/11/08 13:28:03 by jdagoy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,26 +27,14 @@ t_token	*operator_token(char **remaining, char *line)
 	static char *const	operators[] = \
 	{"||", "&&", ";", "|", "(", ")", "\n", NULL};
 	int					i;
-	char				*operator;
-	t_token				*token;
 
 	i = 0;
-	token = ft_calloc(1, sizeof(*token));
-	if (token == NULL)
-		tk_error_manager("Calloc failed");
 	while (operators[i] != NULL)
 	{
 		if (check_prefix(line, operators[i]))
 		{
-			operator = ft_strdup(operators[i]);
-			if (operator == NULL)
-				tk_error_manager("ft_strdup failed");
-			*remaining = line + ft_strlen(operator);
-			token = create_operator_token(operator);
-			free(operator);
-			if (token == NULL)
-				tk_error_manager("token creation failed");
-			return (token);
+			*remaining = line + ft_strlen(operators[i]);
+			return (create_operator_token(operators[i]));
 		}
 		i++;
 	}
@@ -126,18 +114,21 @@ t_token	*create_token(char *word, t_tk_kind kind)
 
 t_token *create_operator_token(char *operator)
 {
+	t_tk_kind	kind;
+	
 	if (ft_strncmp(operator, "||", ft_strlen("||")) == 0)
-		return (create_token(operator, TK_OR));
+		kind = TK_OR;
 	else if (ft_strncmp(operator, "&&", ft_strlen("&&")) == 0)
-		return (create_token(operator, TK_AND));
+		kind = TK_AND;
 	else if (ft_strncmp(operator, ";", ft_strlen(";")) == 0)
-		return (create_token(operator, TK_SEMICOLON));
+		kind = TK_SEMICOLON;
 	else if (ft_strncmp(operator, "|", ft_strlen("|")) == 0)
-		return (create_token(operator, TK_PIPE));
+		kind = TK_PIPE;
 	else if (ft_strncmp(operator, "(", ft_strlen("(")) == 0)
-		return (create_token(operator, TK_OP_PAREN));
+		kind = TK_OP_PAREN;
 	else if (ft_strncmp(operator, ")", ft_strlen(")")) == 0)
-		return (create_token(operator, TK_CL_PAREN));
+		kind = TK_CL_PAREN;
 	else
-		return (create_token(operator, TK_SEMICOLON));
+		kind = TK_OPERATOR;
+	return (create_token(operator, kind));
 }
