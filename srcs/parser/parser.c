@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+        */
+/*   By: jdagoy <jdagoy@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/01 13:07:35 by jdagoy            #+#    #+#             */
-/*   Updated: 2023/11/07 22:49:12 by jdagoy           ###   ########.fr       */
+/*   Updated: 2023/11/08 10:26:26 by jdagoy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ bool	parse_cmdargs(t_token **tokens, t_node *simple_cmd)
 			exit_shell(); //! strdup error handling
 		consume_token(tokens);
 	}
-	simpple_cmd->content.simple_cmd.argv[i] = NULL;
+	simple_cmd->content.simple_cmd.argv[i] = NULL;
 	return (true);
 }
 
@@ -203,7 +203,7 @@ bool	is_logical_operator(enum e_tk_kind kind)
 bool	build_astparser(t_token **tokens, t_node **ast)
 {
 	bool	ret;
-	
+
 	ret = 0;
 	while (*tokens != NULL)
 	{
