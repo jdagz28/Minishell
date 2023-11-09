@@ -6,7 +6,7 @@
 /*   By: jdagoy <jdagoy@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 00:28:24 by jdagoy            #+#    #+#             */
-/*   Updated: 2023/11/09 12:04:00 by jdagoy           ###   ########.fr       */
+/*   Updated: 2023/11/09 12:38:43 by jdagoy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,8 +91,8 @@ static bool	parse_cmdargs(t_token **tokens, t_node *simple_cmd, \
 			if ((*tokens)->kind != TK_WORD)
 				return (false);
 		}
-		simple_cmd->content.simple_cmd.argv[i++] = ft_strdup((*tokens)->word);
-		if (simple_cmd->content.simple_cmd.argv[i] == NULL)
+		simple_cmd->content.simple_cmd.argv[i] = ft_strdup((*tokens)->word);
+		if (simple_cmd->content.simple_cmd.argv[i++] == NULL)
 			return (false);
 		consume_token(tokens);
 	}
@@ -116,7 +116,7 @@ bool	parse_simple_cmd(t_token **tokens, t_node **ast, bool is_subshell)
 		return (false);
 	else if ((*tokens)->kind == TK_OP_PAREN)
 		return (parse_parenthesis(tokens, ast));
-	if ((*tokens)->kind != TK_WORD || (*tokens)->kind != TK_REDIRECT)
+	if (is_redirect_word((*tokens)->kind) == false)
 		return (false);
 	simple_cmd = (t_node *)ft_calloc(1, sizeof(t_node));
 	if (simple_cmd == NULL)

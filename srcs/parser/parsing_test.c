@@ -6,7 +6,7 @@
 /*   By: jdagoy <jdagoy@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 13:54:17 by jdagoy            #+#    #+#             */
-/*   Updated: 2023/11/09 12:19:28 by jdagoy           ###   ########.fr       */
+/*   Updated: 2023/11/09 12:45:01 by jdagoy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,8 @@ int	main(void)
 	t_node	*ast;
 	char	*line;
 
+	ast = NULL;
+	tokens = NULL;
 	while (1)
 	{
 		line = readline("LexParser_Test> ");
@@ -71,7 +73,7 @@ int	main(void)
 					printf("\nminishell: syntax error near unexpected token '%s'\n", tokens->word);
 			}
 		}
-		clear_ast(&ast);
+		// clear_ast(&ast);
 		free_token(tokens);
 		free(line);
 	}

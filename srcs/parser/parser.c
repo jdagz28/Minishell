@@ -6,7 +6,7 @@
 /*   By: jdagoy <jdagoy@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/01 13:07:35 by jdagoy            #+#    #+#             */
-/*   Updated: 2023/11/09 11:47:16 by jdagoy           ###   ########.fr       */
+/*   Updated: 2023/11/09 12:39:07 by jdagoy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ bool	build_ast(t_token **tokens, t_node **ast, bool is_subshell)
 	bool	ret;
 
 	ret = 0;
-	while (*tokens != NULL)
+	while (*tokens && (*tokens)->kind != TK_EOF)
 	{
 		if (is_logical_operator((*tokens)->kind))
 		{
