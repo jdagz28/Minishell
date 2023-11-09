@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_parenthesis.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jdagoy <jdagoy@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 10:44:50 by jdagoy            #+#    #+#             */
-/*   Updated: 2023/11/09 12:01:55 by jdagoy           ###   ########.fr       */
+/*   Updated: 2023/11/09 15:25:07 by jdagoy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,8 @@
 static t_token	*extract_tokens(t_token *tokens)
 {
 	int		pthesis_count;
-	t_token	*previous;
 
 	pthesis_count = 1;
-	previous = tokens;
 	tokens = tokens->next;
 	while (tokens)
 	{
@@ -35,7 +33,6 @@ static t_token	*extract_tokens(t_token *tokens)
 			if (pthesis_count == 0)
 				return (tokens);
 		}
-		previous = tokens;
 		tokens = tokens->next;
 	}
 	return (NULL);

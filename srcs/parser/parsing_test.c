@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_test.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jdagoy <jdagoy@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 13:54:17 by jdagoy            #+#    #+#             */
-/*   Updated: 2023/11/09 12:45:01 by jdagoy           ###   ########.fr       */
+/*   Updated: 2023/11/09 15:29:37 by jdagoy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,11 @@ int	main(void)
 		line = readline("LexParser_Test> ");
 		tokens = tokenizer(line);
 		print_tokens(tokens);
-		if (tokens)
+		if (check_wordtokens(tokens) == false || check_tokens(tokens) == false)
+		{
+			free_token(tokens);
+			continue ;
+		}
 		{
 			if (build_ast(&tokens, &ast, false) == false)
 			{
@@ -90,10 +94,7 @@ void	free_token(t_token *head)
 	while (itr != NULL)
 	{
 		next = itr->next;
-		if (itr->word != NULL)
-			free(itr->word);
-		if (itr)
-			free(itr);
+		free(itr);
 		itr = next;
 	}
 }
