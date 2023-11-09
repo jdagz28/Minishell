@@ -6,7 +6,7 @@
 /*   By: jdagoy <jdagoy@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/31 22:21:46 by jdagoy            #+#    #+#             */
-/*   Updated: 2023/11/08 10:04:50 by jdagoy           ###   ########.fr       */
+/*   Updated: 2023/11/09 11:53:19 by jdagoy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,21 +60,6 @@ int main(int argc, char **argv)
 		free_token(tokens);
 		printf("\n");
 	}
-	// while (1)
-	// {
-	// 	i = 0;
-	// 	line = readline("Token_tester > ");
-	// 	tokens = tokenizer(line);
-	// 	while (tokens != NULL && tokens->kind != TK_EOF)
-	// 	{
-	// 		printf("Token %d\n", i);
-	// 		printf("Token: \t%s\n", tokens->word);
-	// 		printf("Kind: \t%s", token_kind_strings[tokens->kind]);
-	// 		tokens = tokens->next;
-	// 	}
-	// 	free_token(tokens);
-	// 	free(line);
-	// }
 	return (0);
 }
 
