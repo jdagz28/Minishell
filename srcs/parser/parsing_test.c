@@ -6,7 +6,7 @@
 /*   By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 13:54:17 by jdagoy            #+#    #+#             */
-/*   Updated: 2023/11/09 16:30:59 by jdagoy           ###   ########.fr       */
+/*   Updated: 2023/11/09 21:33:15 by jdagoy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,57 +38,56 @@ void	free_token(t_token *head);
 void	print_tokens(t_token *tokens);
 void	clear_ast(t_node **ast);
 void	print_ast_recursive(t_node* node);
+void 	print_ast_dot(t_node *node, FILE *output);
 
-// int main(int argc, char **argv)
-// {
-// 	t_token		*tokens;
-// 	t_node		*ast;
+void	create_dotfile(t_node *ast, int cmd_index)
+{
+	FILE	*dotFile;
+	char	filename[50];
 
-// 	if (argc != 2)
-// 	{
-// 		printf("Usage: %s script\n", argv[0]);
-// 		return (1);
-// 	}
-// 	printf("Input: %s\n", argv[1]);
-// 	tokens = tokenizer(argv[1]);
-// 	print_tokens(tokens);
-// 	(void)ast;
-// 	if (build_ast(tokens, ast) == false)
-// 	{
-// 		printf("Error: building the abstract syntax tree\n");
-// 		return (1);
-// 	}
-// 	return (0);
-// }
+	snprintf(filename, sizeof(filename), "dotfiles/ast_%.dot", cmd_index);
+	dotFile = fopen("ast.dot", "w");
+	if (dotFile == NULL)
+	{
+		printf("Error: cannot create dot file\n");
+		return ;
+	}
+	fprintf(dotFile, "digraph AST {\n");
+	print_ast_dot(ast, dotFile);
+	fprintf(dotFile, "}\n");
+	fclose(dotFile);
+}
 
 int	main(void)
 {
 	t_token	*tokens;
 	t_node	*ast;
 	char	*line;
+	int		cmd_index;
 
 	ast = NULL;
 	tokens = NULL;
+	cmd_index = 1;
 	while (1)
 	{
 		line = readline("LexParser_Test> ");
 		tokens = tokenizer(line);
 		print_tokens(tokens);
-		if (check_wordtokens(tokens) == false || check_tokens(tokens) == false)
+		if (check_tokens(tokens) == false || check_wordtokens(tokens) == false)
 		{
+			printf("Error: invalid token\n");
 			free_token(tokens);
 			continue ;
 		}
 		if (build_ast(&tokens, &ast, false) == false)
-		{
 			if (tokens)
-				printf("\nminishell: syntax error near unexpected token '%s'\n", tokens->word);
-		}
-		printf("Printing AST\n");
-		print_ast_recursive(ast);
-		// clear_ast(&ast);
+				printf("\nminishell: syntax error near unexpected token '%s'\n", \
+							tokens->word);
+		create_dotfile(ast, cmd_index);
+		clear_ast(&ast);
 		free_token(tokens);
 		free(line);
+		cmd_index++;
 	}
 }
 
@@ -184,3 +183,56 @@ void print_ast_recursive(t_node* node) {
 
     }
 }
+
+void print_ast_dot(t_node *node, FILE *output) {
+    if (node == NULL) {
+        return;
+    }
+
+    fprintf(output, "  node%p [label=\"", (void *)node);
+
+    if (node->type == SIMPLE_CMD) {
+        fprintf(output, "Simple Command: ");
+        for (char **arg = node->content.simple_cmd.argv; *arg != NULL; ++arg) {
+            fprintf(output, "%s ", *arg);
+        }
+    } else {
+        fprintf(output, "Node Type: %s", node_type_strings[node->type]);
+    }
+
+    fprintf(output, "\"];\n");
+
+    if (node->type != SIMPLE_CMD) {
+        if (node->content.child.left) {
+            print_ast_dot(node->content.child.left, output);
+            fprintf(output, "  node%p -> node%p [label=\"Left\"];\n", (void *)node, (void *)(node->content.child.left));
+        }
+        if (node->content.child.right) {
+            print_ast_dot(node->content.child.right, output);
+            fprintf(output, "  node%p -> node%p [label=\"Right\"];\n", (void *)node, (void *)(node->content.child.right));
+        }
+    }
+}
+
+
+// int main(int argc, char **argv)
+// {
+// 	t_token		*tokens;
+// 	t_node		*ast;
+
+// 	if (argc != 2)
+// 	{
+// 		printf("Usage: %s script\n", argv[0]);
+// 		return (1);
+// 	}
+// 	printf("Input: %s\n", argv[1]);
+// 	tokens = tokenizer(argv[1]);
+// 	print_tokens(tokens);
+// 	(void)ast;
+// 	if (build_ast(tokens, ast) == false)
+// 	{
+// 		printf("Error: building the abstract syntax tree\n");
+// 		return (1);
+// 	}
+// 	return (0);
+// }

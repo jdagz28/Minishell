@@ -6,7 +6,7 @@
 /*   By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/03 00:33:45 by jdagoy            #+#    #+#             */
-/*   Updated: 2023/11/09 09:57:28 by jdagoy           ###   ########.fr       */
+/*   Updated: 2023/11/09 21:05:38 by jdagoy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ bool	check_wordtokens(t_token *token)
 	{
 		str = token->word;
 		if (check_backslashescape(str) == false)
-			if (check_word(&str))
+			if (check_word(&str) == false)
 				return (false);
 		token = token->next;
 	}

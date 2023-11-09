@@ -1,0 +1,27 @@
+digraph AST {
+  node0x603000000a00 [label="Node Type: SEMICOLON_NODE"];
+  node0x603000000970 [label="Node Type: SEMICOLON_NODE"];
+  node0x6030000008e0 [label="Node Type: SEMICOLON_NODE"];
+  node0x603000000880 [label="Simple Command: asdsad < asdasd.txt "];
+  node0x6030000008e0 -> node0x603000000880 [label="Left"];
+  node0x603000000910 [label="Simple Command: echo hello "];
+  node0x6030000008e0 -> node0x603000000910 [label="Right"];
+  node0x603000000970 -> node0x6030000008e0 [label="Left"];
+  node0x6030000009a0 [label="Simple Command: ping google.com "];
+  node0x603000000970 -> node0x6030000009a0 [label="Right"];
+  node0x603000000a00 -> node0x603000000970 [label="Left"];
+  node0x603000000b20 [label="Node Type: PIPE_NODE"];
+  node0x603000000ac0 [label="Node Type: PIPE_NODE"];
+  node0x603000000a60 [label="Node Type: PIPE_NODE"];
+  node0x603000000a30 [label="Simple Command: cat "];
+  node0x603000000a60 -> node0x603000000a30 [label="Left"];
+  node0x603000000a90 [label="Simple Command: cat "];
+  node0x603000000a60 -> node0x603000000a90 [label="Right"];
+  node0x603000000ac0 -> node0x603000000a60 [label="Left"];
+  node0x603000000af0 [label="Simple Command: cat "];
+  node0x603000000ac0 -> node0x603000000af0 [label="Right"];
+  node0x603000000b20 -> node0x603000000ac0 [label="Left"];
+  node0x603000000b50 [label="Simple Command: ls -l > output "];
+  node0x603000000b20 -> node0x603000000b50 [label="Right"];
+  node0x603000000a00 -> node0x603000000b20 [label="Right"];
+}
