@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jdagoy <jdagoy@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/01 13:07:35 by jdagoy            #+#    #+#             */
-/*   Updated: 2023/11/09 12:39:07 by jdagoy           ###   ########.fr       */
+/*   Updated: 2023/11/09 16:29:54 by jdagoy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ bool	build_ast(t_token **tokens, t_node **ast, bool is_subshell)
 		}
 		else
 			ret = parse_pipeline(tokens, ast, is_subshell);
+		printf("BUILD AST ret: %d\n", ret);
 		if (ret == false)
 			return (false);
 	}

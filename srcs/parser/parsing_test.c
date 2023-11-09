@@ -6,7 +6,7 @@
 /*   By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 13:54:17 by jdagoy            #+#    #+#             */
-/*   Updated: 2023/11/09 15:29:37 by jdagoy           ###   ########.fr       */
+/*   Updated: 2023/11/09 16:30:59 by jdagoy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,18 @@ const char *token_kind_strings[] = {
 	"TK_EOF"
 };
 
+const char *node_type_strings[] = {
+	"SIMPLE_CMD",
+	"PIPE_NODE",
+	"OR_NODE",
+	"AND_NODE",
+	"SEMICOLON_NODE"
+};
+
 void	free_token(t_token *head);
 void	print_tokens(t_token *tokens);
 void	clear_ast(t_node **ast);
+void	print_ast_recursive(t_node* node);
 
 // int main(int argc, char **argv)
 // {
@@ -70,13 +79,13 @@ int	main(void)
 			free_token(tokens);
 			continue ;
 		}
+		if (build_ast(&tokens, &ast, false) == false)
 		{
-			if (build_ast(&tokens, &ast, false) == false)
-			{
-				if (tokens)
-					printf("\nminishell: syntax error near unexpected token '%s'\n", tokens->word);
-			}
+			if (tokens)
+				printf("\nminishell: syntax error near unexpected token '%s'\n", tokens->word);
 		}
+		printf("Printing AST\n");
+		print_ast_recursive(ast);
 		// clear_ast(&ast);
 		free_token(tokens);
 		free(line);
@@ -153,4 +162,25 @@ void	clear_ast(t_node **ast)
 		clear_ast(&((*ast)->content.child.right));
 		free(ast);
 	}
+}
+
+void print_ast_recursive(t_node* node) {
+    if (node == NULL) {
+        return;
+    }
+
+    if (node->type == SIMPLE_CMD) {
+        printf("Simple Command: ");
+        for (char** arg = node->content.simple_cmd.argv; *arg != NULL; ++arg) {
+            printf("%s ", *arg);
+        }
+        printf("\n");
+    } else {
+        printf("Node Type: %s\n", node_type_strings[node->type]);
+        printf("Left Child:\n");
+        print_ast_recursive(node->content.child.left);
+        printf("Right Child:\n");
+        print_ast_recursive(node->content.child.right);
+
+    }
 }
