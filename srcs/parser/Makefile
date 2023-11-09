@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+         #
+#    By: jdagoy <jdagoy@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/10/07 15:33:53 by tbarbe            #+#    #+#              #
-#    Updated: 2023/11/08 12:59:41 by jdagoy           ###   ########.fr        #
+#    Updated: 2023/11/09 11:57:40 by jdagoy           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -49,7 +49,13 @@ HEADER_LIST			= minishell.h\
 
 HEADER_FILES		= $(addprefix $(INCLUDE_DIRECTORY), $(HEADER_LIST))
 
-SRCS_LIST			= parsing_test.c
+SRCS_LIST			= parsing_test.c\
+						parse_logical.c\
+						parse_parenthesis.c\
+						parse_pipeline.c\
+						parse_simple_cmd.c\
+						parser_utils.c\
+						parser.c
 
 LEXER_SRCS_LIST		= tokenizer.c\
 						check_opred_tokens.c\
