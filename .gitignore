@@ -1,5 +1,6 @@
 /objects
 /libft/objects
+/libft/libft.a
 /minishell
 .vscode
 .editorconfig
