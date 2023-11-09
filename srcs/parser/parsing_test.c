@@ -6,7 +6,7 @@
 /*   By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 13:54:17 by jdagoy            #+#    #+#             */
-/*   Updated: 2023/11/08 13:44:32 by jdagoy           ###   ########.fr       */
+/*   Updated: 2023/11/09 00:30:04 by jdagoy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ int main(int argc, char **argv)
 	tokens = tokenizer(argv[1]);
 	print_tokens(tokens);
 	(void)ast;
-	// if (build_astparser(tokens, ast) == false)
+	// if (build_ast(tokens, ast) == false)
 	// {
 	// 	printf("Error: building the abstract syntax tree\n");
 	// 	return (1);
