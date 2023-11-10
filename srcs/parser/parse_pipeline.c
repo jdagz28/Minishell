@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_pipeline.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jdagoy <jdagoy@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 10:26:10 by jdagoy            #+#    #+#             */
-/*   Updated: 2023/11/09 12:25:00 by jdagoy           ###   ########.fr       */
+/*   Updated: 2023/11/09 21:38:38 by jdagoy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,6 @@ static bool	check_errors_pipeline(t_token *tokens)
 		return (false);
 	return (true);
 }
-
 
 /**
  * * parse_pipeline
