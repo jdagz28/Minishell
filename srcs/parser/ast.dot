@@ -1,0 +1,7 @@
+digraph AST {
+  node0x6030000007f0 [label="Node Type: PIPE_NODE"];
+  node0x603000000790 [label="Simple Command: < out.txt asdsad "];
+  node0x6030000007f0 -> node0x603000000790 [label="Left"];
+  node0x603000000820 [label="Simple Command: commansd > asdsa "];
+  node0x6030000007f0 -> node0x603000000820 [label="Right"];
+}
