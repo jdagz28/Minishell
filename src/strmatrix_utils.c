@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   strtab_utils.c                                     :+:      :+:    :+:   */
+/*   strmatrix_utils.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tbarbe <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -12,53 +12,23 @@
 
 #include "../include/minishell.h"
 
-char *strtab_beginwith(char **tab, char *str)
+int strmatrix_len(char ***matrix)
 {
     int i;
-    int len;
 
-    len = ft_strlen(str);
     i = 0;
-    while (tab[i])
-    {
-        if (ft_strncmp(tab[i], str, len) == 0)
-            return (tab[i] + len);
-        i++;
-    }
-    return (NULL);
-}
-
-void strtab_print(char **tab, char ces)
-{
-    int i;
-
-    if (!tab)
-        return;
-    i = 0;
-    while (tab[i])
-    {
-        ft_printf("%s%c", tab[i], ces);
-        i++;
-    }
-}
-
-int strtab_len(char **tab)
-{
-    int i;
-
-    if (!tab)
+    if (!matrix)
         return (0);
-    i = 0;
-    while (tab[i])
+    while (matrix[i])
         i++;
     return (i);
 }
 
-char **strtab_cpy(char **tab)
+char ***strtab_split(char **tab, char c)
 {
-    char **res;
-    int i;
+    char ***res;
     int len;
+    int i;
 
     len = strtab_len(tab);
     if (len == 0)
@@ -67,12 +37,12 @@ char **strtab_cpy(char **tab)
     if (!res)
         return (NULL);
     i = 0;
-    while (tab[i])
+    while (i < len)
     {
-        res[i] = ft_strdup(tab[i]);
+        res[i] = ft_split(tab[i], c);
         if (!res[i])
         {
-            strtab_free(res);
+            strmatrix_free(res);
             return (NULL);
         }
         i++;
@@ -81,42 +51,33 @@ char **strtab_cpy(char **tab)
     return (res);
 }
 
-void strtab_free(char **tab)
+void strmatrix_free(char ***matrix)
 {
     int i;
-    int len;
 
-    if (!tab)
+    if (!matrix)
         return;
-    len = strtab_len(tab);
     i = 0;
-    while (i < len)
+    while (matrix[i])
     {
-        if (tab[i])
-            free(tab[i]);
+        strtab_free(matrix[i]);
         i++;
     }
-    free(tab);
+    free(matrix);
 }
 
-void strtab_freeend(char **tab, int start)
+void strmatrix_print(char ***matrix, char cesa, char cesb)
 {
     int i;
-    int len;
 
-    if (!tab)
+    if (!matrix)
         return;
-    len = strtab_len(tab);
-    if (start >= len)
-        return;
-    i = start;
-    while (i < len)
+    i = 0;
+    while (matrix[i])
     {
-        if (tab[i])
-        {
-            free(tab[i]);
-            tab[i] = NULL;
-        }
+        strtab_print(matrix[i], cesb);
+        ft_printf("%c", cesa);
         i++;
     }
+    ft_printf("\n");
 }

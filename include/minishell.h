@@ -57,8 +57,6 @@ typedef struct s_shell
     t_cmd cmd;
 } t_shell;
 
-/* str_utils */
-char *ft_strndup(char *str, int len);
 /* strtab_utils */
 int strtab_len(char **tab);
 char **strtab_cpy(char **tab);

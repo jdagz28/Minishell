@@ -16,7 +16,6 @@ NAME	=	minishell
 
 SRCS	=	minishell.c \
 			shell.c \
-			str_utils.c \
 			strtab_utils.c \
 			strmatrix_utils.c \
 			pipes.c \
