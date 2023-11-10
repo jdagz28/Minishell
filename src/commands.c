@@ -79,13 +79,40 @@ static void default_exec(char **cmd, char **env)
     execve(cmd[0], cmd, env);
     exit(127);
 }
+/*
+int command_setvar(char **cmd, t_shell *shell)
+{
+    int i;
+    int res;
+    char *addr;
 
-void command_exec(char **cmd, char **env)
+    i = 0;
+    res = 0;
+    while (cmd[i])
+    {
+        addr = ft_strchr(cmd[i], '=');
+        if (addr)
+        {
+            temp = ft_split(cmd[i], '=');
+            if (!temp)
+                return (EXIT_FAILURE);
+            varlst_set(shell->varlst, temp[0], temp[1]);
+            free(temp);
+            res = 1;
+        }
+        i++;
+    }
+    return (res);
+}
+*/
+void command_exec(char **cmd, t_shell *shell)
 {
     if (strncmp(cmd[0], "toto", 4) == 0)
     {
         ft_printf("woaw trop fort le toto\n");
         exit(EXIT_SUCCESS);
     }
-    default_exec(cmd, env);
+    /*if (command_setvar(cmd, shell))
+        exit(EXIT_SUCCESS);*/
+    default_exec(cmd, shell->env);
 }

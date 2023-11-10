@@ -16,6 +16,7 @@ int shell_init(t_shell *shell, char *cmds, char **env)
 {
     shell->env = strtab_cpy(env);
     shell->err = 0;
+    shell->varlst = NULL;
     if (!shell->env)
         return (EXIT_FAILURE);
     if (user_init(&shell->user, env) || pwd_init(&shell->pwd, env) || command_init(&shell->cmd, cmds))
@@ -91,7 +92,7 @@ int shell_exec_all(t_shell *shell)
         if (pid < 0)
             return (EXIT_FAILURE);
         if (pid == 0)
-            shell_exec(cmd, i, shell->env);
+            shell_exec(cmd, i, shell);
         i++;
     }
     pipes_close(cmd->pipes, cmd->len - 1);
@@ -99,17 +100,16 @@ int shell_exec_all(t_shell *shell)
     return (WEXITSTATUS(status));
 }
 
-void shell_exec(t_cmd *cmd, int id, char **env)
+void shell_exec(t_cmd *cmd, int id, t_shell *shell)
 {
     char **tab;
 
     if (!cmd)
         exit(EXIT_FAILURE);
-
     pipes_dup(cmd->pipes, id, cmd->len);
     pipes_close(cmd->pipes, cmd->len - 1);
     if (id > 0)
         wait(NULL);
     tab = files_redirect(cmd->cmd[id]);
-    command_exec(tab, env);
+    command_exec(tab, shell);
 }
