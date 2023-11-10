@@ -14,7 +14,7 @@
 #include "lexer_parsing.h"
 
 const char *token_kind_strings[] = {
-    "TK_WORD",
+	"TK_WORD",
 	"TK_PIPE",
 	"TK_OR",
 	"TK_AND",
@@ -23,34 +23,32 @@ const char *token_kind_strings[] = {
 	"TK_CLOSE_PARENTHESIS",
 	"TK_OPERATOR",
 	"TK_REDIRECT",
-	"TK_EOF"
-};
+	"TK_EOF"};
 
 const char *node_type_strings[] = {
 	"SIMPLE_CMD",
 	"PIPE_NODE",
 	"OR_NODE",
 	"AND_NODE",
-	"SEMICOLON_NODE"
-};
+	"SEMICOLON_NODE"};
 
-void	free_token(t_token *head);
-void	print_tokens(t_token *tokens);
-void	clear_ast(t_node **ast);
-void	print_ast_recursive(t_node* node);
-void 	print_ast_dot(t_node *node, FILE *output);
+void free_token(t_token *head);
+void print_tokens(t_token *tokens);
+void clear_ast(t_node **ast);
+void print_ast_recursive(t_node *node);
+void print_ast_dot(t_node *node, FILE *output);
 
-void	create_dotfile(t_node *ast, int cmd_index)
+void create_dotfile(t_node *ast, int cmd_index)
 {
-	FILE	*dotFile;
-	char	filename[50];
+	FILE *dotFile;
+	char filename[50];
 
 	snprintf(filename, sizeof(filename), "dotfiles/ast_%.dot", cmd_index);
 	dotFile = fopen("ast.dot", "w");
 	if (dotFile == NULL)
 	{
 		printf("Error: cannot create dot file\n");
-		return ;
+		return;
 	}
 	fprintf(dotFile, "digraph AST {\n");
 	print_ast_dot(ast, dotFile);
@@ -58,12 +56,12 @@ void	create_dotfile(t_node *ast, int cmd_index)
 	fclose(dotFile);
 }
 
-int	main(void)
+int main(void)
 {
-	t_token	*tokens;
-	t_node	*ast;
-	char	*line;
-	int		cmd_index;
+	t_token *tokens;
+	t_node *ast;
+	char *line;
+	int cmd_index;
 
 	ast = NULL;
 	tokens = NULL;
@@ -77,12 +75,12 @@ int	main(void)
 		{
 			printf("Error: invalid token\n");
 			free_token(tokens);
-			continue ;
+			continue;
 		}
 		if (build_ast(&tokens, &ast, false) == false)
 			if (tokens)
-				printf("\nminishell: syntax error near unexpected token '%s'\n", \
-							tokens->word);
+				printf("\nminishell: syntax error near unexpected token '%s'\n",
+					   tokens->word);
 		create_dotfile(ast, cmd_index);
 		clear_ast(&ast);
 		free_token(tokens);
@@ -91,13 +89,13 @@ int	main(void)
 	}
 }
 
-void	free_token(t_token *head)
+void free_token(t_token *head)
 {
-	t_token	*itr;
-	t_token	*next;
+	t_token *itr;
+	t_token *next;
 
 	if (head == NULL)
-		return ;
+		return;
 	itr = head;
 	while (itr != NULL)
 	{
@@ -106,10 +104,10 @@ void	free_token(t_token *head)
 		itr = next;
 	}
 }
-void	print_tokens(t_token *tokens)
+void print_tokens(t_token *tokens)
 {
-	int		i;
-	t_token	*current;
+	int i;
+	t_token *current;
 
 	i = 0;
 	current = tokens;
@@ -124,10 +122,10 @@ void	print_tokens(t_token *tokens)
 	// free_token(tokens);
 }
 
-static void	free_simple_cmd(t_node **simple_cmd)
+static void free_simple_cmd(t_node **simple_cmd)
 {
-	int	i;
-	int	fd;
+	int i;
+	int fd;
 
 	i = 0;
 	if (*simple_cmd != NULL)
@@ -149,10 +147,10 @@ static void	free_simple_cmd(t_node **simple_cmd)
 	}
 }
 
-void	clear_ast(t_node **ast)
+void clear_ast(t_node **ast)
 {
 	if (*ast == NULL)
-		return ;
+		return;
 	if ((*ast)->type == SIMPLE_CMD)
 		free_simple_cmd(ast);
 	else
@@ -163,57 +161,70 @@ void	clear_ast(t_node **ast)
 	}
 }
 
-void print_ast_recursive(t_node* node) {
-    if (node == NULL) {
-        return;
-    }
+void print_ast_recursive(t_node *node)
+{
+	if (node == NULL)
+	{
+		return;
+	}
 
-    if (node->type == SIMPLE_CMD) {
-        printf("Simple Command: ");
-        for (char** arg = node->content.simple_cmd.argv; *arg != NULL; ++arg) {
-            printf("%s ", *arg);
-        }
-        printf("\n");
-    } else {
-        printf("Node Type: %s\n", node_type_strings[node->type]);
-        printf("Left Child:\n");
-        print_ast_recursive(node->content.child.left);
-        printf("Right Child:\n");
-        print_ast_recursive(node->content.child.right);
-
-    }
+	if (node->type == SIMPLE_CMD)
+	{
+		printf("Simple Command: ");
+		for (char **arg = node->content.simple_cmd.argv; *arg != NULL; ++arg)
+		{
+			printf("%s ", *arg);
+		}
+		printf("\n");
+	}
+	else
+	{
+		printf("Node Type: %s\n", node_type_strings[node->type]);
+		printf("Left Child:\n");
+		print_ast_recursive(node->content.child.left);
+		printf("Right Child:\n");
+		print_ast_recursive(node->content.child.right);
+	}
 }
 
-void print_ast_dot(t_node *node, FILE *output) {
-    if (node == NULL) {
-        return;
-    }
+void print_ast_dot(t_node *node, FILE *output)
+{
+	if (node == NULL)
+	{
+		return;
+	}
 
-    fprintf(output, "  node%p [label=\"", (void *)node);
+	fprintf(output, "  node%p [label=\"", (void *)node);
 
-    if (node->type == SIMPLE_CMD) {
-        fprintf(output, "Simple Command: ");
-        for (char **arg = node->content.simple_cmd.argv; *arg != NULL; ++arg) {
-            fprintf(output, "%s ", *arg);
-        }
-    } else {
-        fprintf(output, "Node Type: %s", node_type_strings[node->type]);
-    }
+	if (node->type == SIMPLE_CMD)
+	{
+		fprintf(output, "Simple Command: ");
+		for (char **arg = node->content.simple_cmd.argv; *arg != NULL; ++arg)
+		{
+			fprintf(output, "%s ", *arg);
+		}
+	}
+	else
+	{
+		fprintf(output, "Node Type: %s", node_type_strings[node->type]);
+	}
 
-    fprintf(output, "\"];\n");
+	fprintf(output, "\"];\n");
 
-    if (node->type != SIMPLE_CMD) {
-        if (node->content.child.left) {
-            print_ast_dot(node->content.child.left, output);
-            fprintf(output, "  node%p -> node%p [label=\"Left\"];\n", (void *)node, (void *)(node->content.child.left));
-        }
-        if (node->content.child.right) {
-            print_ast_dot(node->content.child.right, output);
-            fprintf(output, "  node%p -> node%p [label=\"Right\"];\n", (void *)node, (void *)(node->content.child.right));
-        }
-    }
+	if (node->type != SIMPLE_CMD)
+	{
+		if (node->content.child.left)
+		{
+			print_ast_dot(node->content.child.left, output);
+			fprintf(output, "  node%p -> node%p [label=\"Left\"];\n", (void *)node, (void *)(node->content.child.left));
+		}
+		if (node->content.child.right)
+		{
+			print_ast_dot(node->content.child.right, output);
+			fprintf(output, "  node%p -> node%p [label=\"Right\"];\n", (void *)node, (void *)(node->content.child.right));
+		}
+	}
 }
-
 
 // int main(int argc, char **argv)
 // {

@@ -13,6 +13,7 @@
 #ifndef MINISHELL_H
 #define MINISHELL_H
 #include "../libft/libft.h"
+#include "./lexer_parsing.h"
 #include <stdio.h>
 #include <errno.h>
 #include <sys/types.h>
@@ -42,9 +43,10 @@ typedef struct s_user
 
 typedef struct s_cmd
 {
-    char ***cmd;
+    t_simple_cmd *cmds;
+    // char ***cmd;
     int len;
-    int (*pipes)[2];
+    // int (*pipes)[2];
 } t_cmd;
 
 typedef struct s_shell

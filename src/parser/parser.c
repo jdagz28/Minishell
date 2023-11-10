@@ -18,10 +18,10 @@
  * builds the Abstract Syntax Tree (AST) based on a linked list of tokens.
  * depending on the token kind, the corresponding function is called to parse
  * the token and build the appropriate AST node
-*/
-bool	build_ast(t_token **tokens, t_node **ast, bool is_subshell)
+ */
+bool build_ast(t_token **tokens, t_node **ast, bool is_subshell)
 {
-	bool	ret;
+	bool ret;
 
 	ret = false;
 	while (*tokens && (*tokens)->kind != TK_EOF)
