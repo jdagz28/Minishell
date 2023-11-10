@@ -6,7 +6,7 @@
 #    By: jdagoy <jdagoy@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/10/07 15:33:53 by tbarbe            #+#    #+#              #
-#    Updated: 2023/11/09 11:57:40 by jdagoy           ###   ########.fr        #
+#    Updated: 2023/11/10 09:32:57 by jdagoy           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,8 +21,8 @@ ifeq ($(OS),Linux)
 	MAC_LIBS		=
 else
 	FSANITIZE		= -fsanitize=address
-	MAC_INCLUDES	= -I /Users/$(USERNAME)/Applications/homebrew/opt/readline/include
-	MAC_LIBS		= -L /Users/$(USERNAME)/Applications/homebrew/opt/readline/lib
+	MAC_INCLUDES	= -I /Users/$(USERNAME)/.brew/opt/readline/include
+	MAC_LIBS		= -L /Users/$(USERNAME)/.brew/opt/readline/lib
 endif
 
 ifdef fsanitizeoff
@@ -92,7 +92,6 @@ $(NAME): $(LIBFT) $(OBJECTS_DIRECTORY) $(LEXER_OBJECTS) $(OBJECTS) $(HEADER_FILE
 clean:
 	$(MAKE) -sC $(LIBFT_DIRECTORY) clean
 	rm -rf $(OBJECTS_DIRECTORY)
-	rm -rf *.dSYM
 
 fclean: clean
 	$(MAKE) -sC $(LIBFT_DIRECTORY) fclean
