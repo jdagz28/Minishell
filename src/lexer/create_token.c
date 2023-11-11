@@ -6,14 +6,14 @@
 /*   By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/02 21:12:54 by jdagoy            #+#    #+#             */
-/*   Updated: 2023/11/09 20:54:01 by jdagoy           ###   ########.fr       */
+/*   Updated: 2023/11/11 19:09:26 by jdagoy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 #include "lexer_parsing.h"
 
-t_token *create_operator_token(char *operator);
+t_token	*create_operator_token(char *operator);
 
 /**
  * * operator_token
@@ -87,7 +87,7 @@ t_token	*word_token(char **remaining, char *line)
 		else if (*line == '\'' || *line == '\"')
 		{
 			check_missingquotes(&line, &quote_flag, *line);
-			if (quote_flag)
+			if (quote_flag == true)
 				break ;
 		}
 		else
@@ -115,7 +115,7 @@ t_token	*create_token(char *word, t_tk_kind kind)
 t_token *create_operator_token(char *operator)
 {
 	t_tk_kind	kind;
-	
+
 	if (ft_strncmp(operator, "||", ft_strlen("||")) == 0)
 		kind = TK_OR;
 	else if (ft_strncmp(operator, "&&", ft_strlen("&&")) == 0)

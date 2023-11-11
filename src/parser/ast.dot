@@ -1,11 +1,3 @@
 digraph AST {
-  node0x6030000004c0 [label="Node Type: PIPE_NODE"];
-  node0x603000000430 [label="Node Type: PIPE_NODE"];
-  node0x6030000003d0 [label="Simple Command: test 1 "];
-  node0x603000000430 -> node0x6030000003d0 [label="Left"];
-  node0x603000000460 [label="Simple Command: cat -l "];
-  node0x603000000430 -> node0x603000000460 [label="Right"];
-  node0x6030000004c0 -> node0x603000000430 [label="Left"];
-  node0x6030000004f0 [label="Simple Command: ls -l "];
-  node0x6030000004c0 -> node0x6030000004f0 [label="Right"];
+  node0x603000000580 [label="Simple Command: echo "hello" "];
 }

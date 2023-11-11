@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_opred_tokens.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jdagoy <jdagoy@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/02 21:15:07 by jdagoy            #+#    #+#             */
-/*   Updated: 2023/11/08 09:48:41 by jdagoy           ###   ########.fr       */
+/*   Updated: 2023/11/11 20:03:06 by jdagoy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ static bool	check_operatorsyntax_cont(t_token *token)
 		if (token->next->kind != TK_OPERATOR \
 			|| ft_strncmp(token->next->word, ")", 1) != 0)
 		{
-			tk_error_manager("Invalid syntax: operator or closing parnthesis");
+			tk_error("syntax error near unexpected token ", token->next->word);
 			return (false);
 		}
 	}
@@ -31,7 +31,7 @@ static bool	check_operatorsyntax(t_token *token)
 {
 	if (token->next->kind == TK_EOF)
 	{
-		tk_error_manager("Invalid syntax: operator followed by newline");
+		tk_error("syntax error near unexpected token 'newline'", NULL);
 		return (false);
 	}
 	if (ft_strncmp(token->word, "||", 2) == 0 || \
@@ -40,7 +40,7 @@ static bool	check_operatorsyntax(t_token *token)
 		if (token->next->kind != TK_WORD && token->next->kind != TK_OPERATOR \
 		&& ft_strncmp(token->next->word, "(", 1) != 0)
 		{
-			tk_error_manager("Invalid syntax: invalid token next to operator");
+			tk_error("syntax error near unexpected token ", token->word);
 			return (false);
 		}
 	}
@@ -48,7 +48,7 @@ static bool	check_operatorsyntax(t_token *token)
 	{
 		if (token->next->kind != TK_WORD)
 		{
-			tk_error_manager("Invalid syntax: pipe followed by invalid token");
+			tk_error("syntax error near unexpected token ", token->next->word);
 			return (false);
 		}
 	}
@@ -63,24 +63,25 @@ static bool	check_redirectsyntax(t_token *token)
 {
 	if (token->next->kind == TK_EOF)
 	{
-		tk_error_manager("Invalid Syntax: redirect followed by newline");
+		tk_error("syntax error near unexpected token 'newline'", NULL);
 		return (false);
 	}
 	if (token->next->kind == TK_REDIRECT && token->word[0] \
 		!= token->next->word[0])
 	{
-		tk_error_manager("Invalid syntax: redirect followed by invalid token");
+		tk_error("syntax erorr near unexpected token ", token->next->word);
 		return (false);
 	}
 	if (token->kind == TK_REDIRECT && token->next->kind == TK_REDIRECT \
 		&& token->next->next->kind == TK_REDIRECT)
 	{
-		tk_error_manager("Invalid syntax: unrecognized redirection");
+		tk_error("syntax error near unexpected token ", \
+					token->next->next->word);
 		return (false);
 	}
 	if (token->next->kind == TK_OPERATOR)
 	{
-		tk_error_manager("Invalid syntax: redirect followed by operator");
+		tk_error("syntax error near unexpected token ", token->next->word);
 		return (false);
 	}
 	return (true);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer_parsing.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jdagoy <jdagoy@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/30 23:08:42 by jdagoy            #+#    #+#             */
-/*   Updated: 2023/11/10 10:38:32 by jdagoy           ###   ########.fr       */
+/*   Updated: 2023/11/11 20:00:01 by jdagoy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ typedef struct s_node
 } t_node;
 
 // check_word_inquote.c
-bool check_word_inquote(char **word);
+bool	check_word_inquote(char **word, char *tmp_str);
 
 // check_word_tokens.c
 bool check_wordtokens(t_token *token);
@@ -103,7 +103,7 @@ t_token *tokenizer(char *input);
 // tokenizer_utils.c
 bool check_whitespace(char **next_inline, char *line);
 bool check_prefix(char *line, char *prefix);
-void tk_error_manager(char *error_msg);
+void	tk_error(char *error_msg, char *token);
 void check_missingquotes(char **line, bool *flag, char quote_type);
 
 // parse_logical.c
