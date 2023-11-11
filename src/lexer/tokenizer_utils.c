@@ -6,7 +6,7 @@
 /*   By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/03 12:34:48 by jdagoy            #+#    #+#             */
-/*   Updated: 2023/11/11 20:00:07 by jdagoy           ###   ########.fr       */
+/*   Updated: 2023/11/11 21:30:13 by jdagoy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,9 @@ void	tk_error(char *error_msg, char *token)
 	ft_putstr_fd(error_msg, STDERR_FILENO);
 	ft_putstr_fd(token, STDERR_FILENO);
 	ft_putstr_fd("\n", STDERR_FILENO);
-	exit(EXIT_FAILURE);
+	if ((ft_strnstr(error_msg, "Calloc", ft_strlen(error_msg)) != NULL) \
+		|| (ft_strnstr(error_msg, "ft_strndup", ft_strlen(error_msg)) != NULL))
+		exit(EXIT_FAILURE);
 }
 
 void	check_missingquotes(char **line, bool *flag, char quote_type)

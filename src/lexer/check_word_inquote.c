@@ -6,21 +6,21 @@
 /*   By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/03 23:44:50 by jdagoy            #+#    #+#             */
-/*   Updated: 2023/11/11 19:48:53 by jdagoy           ###   ########.fr       */
+/*   Updated: 2023/11/11 21:22:39 by jdagoy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 #include "lexer_parsing.h"
 
-static bool	quote_error(char *s, size_t len)
+bool	word_error(char *s, size_t len)
 {
 	if (s[len - 1] == '\\')
 	{
-		printf("minishell: syntax error near newline '\\n'\n");
+		tk_error("syntax error near newline ' ", "\\n");
 		return (false);
 	}
-	printf("minisshell: syntax error near quote '%s'\n", s);
+	tk_error("syntax error near quote '", s);
 	return (false);
 }
 
@@ -48,7 +48,7 @@ bool	check_word_inquote(char **word, char *tmp_str)
 		while (**word != type && **word != '\0')
 			skip_escape(&(*word));
 		if (**word == '\0')
-			return (quote_error(tmp_str, ft_strlen(tmp_str)));
+			return (word_error(tmp_str, ft_strlen(tmp_str)));
 		(*word)++;
 	}
 	return (true);

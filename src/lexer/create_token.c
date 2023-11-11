@@ -6,7 +6,7 @@
 /*   By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/02 21:12:54 by jdagoy            #+#    #+#             */
-/*   Updated: 2023/11/11 19:09:26 by jdagoy           ###   ########.fr       */
+/*   Updated: 2023/11/11 21:24:42 by jdagoy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ t_token	*operator_token(char **remaining, char *line)
 		}
 		i++;
 	}
-	tk_error_manager("Unrecognized operator");
+	tk_error("Unrecognized operator", NULL);
 	return (NULL);
 }
 
@@ -62,13 +62,13 @@ t_token	*redirect_token(char **remaining, char *line)
 		{
 			redirect = ft_strdup(redirects[i]);
 			if (redirect == NULL)
-				tk_error_manager("ft_strdup failed");
+				tk_error("ft_strdup failed", NULL);
 			*remaining = line + ft_strlen(redirect);
 			return (create_token(redirect, TK_REDIRECT));
 		}
 		i++;
 	}
-	tk_error_manager("Unrecognized operator");
+	tk_error("Unrecognized operator", NULL);
 	return (NULL);
 }
 
@@ -95,7 +95,7 @@ t_token	*word_token(char **remaining, char *line)
 	}
 	returnword = ft_strndup(start, line - start);
 	if (returnword == NULL)
-		tk_error_manager("ft_strndup failed");
+		tk_error("ft_strndup failed", NULL);
 	*remaining = line;
 	return (create_token(returnword, TK_WORD));
 }
@@ -106,7 +106,7 @@ t_token	*create_token(char *word, t_tk_kind kind)
 
 	token = ft_calloc(1, sizeof(*token));
 	if (token == NULL)
-		tk_error_manager("Calloc failed");
+		tk_error("Calloc failed", NULL);
 	token->word = word;
 	token->kind = kind;
 	return (token);
