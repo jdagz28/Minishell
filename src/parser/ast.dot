@@ -1,3 +1,0 @@
-digraph AST {
-  node0x603000000580 [label="Simple Command: echo "hello" "];
-}
