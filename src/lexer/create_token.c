@@ -6,7 +6,7 @@
 /*   By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/02 21:12:54 by jdagoy            #+#    #+#             */
-/*   Updated: 2023/11/11 21:24:42 by jdagoy           ###   ########.fr       */
+/*   Updated: 2023/11/11 22:28:33 by jdagoy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,7 +112,7 @@ t_token	*create_token(char *word, t_tk_kind kind)
 	return (token);
 }
 
-t_token *create_operator_token(char *operator)
+t_token	*create_operator_token(char *operator)
 {
 	t_tk_kind	kind;
 

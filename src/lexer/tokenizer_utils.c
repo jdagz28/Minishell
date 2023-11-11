@@ -6,7 +6,7 @@
 /*   By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/03 12:34:48 by jdagoy            #+#    #+#             */
-/*   Updated: 2023/11/11 21:30:13 by jdagoy           ###   ########.fr       */
+/*   Updated: 2023/11/11 22:29:08 by jdagoy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ bool	check_whitespace(char **next_inline, char *line)
 		while (*line && ft_isspace(*line))
 			line++;
 		*next_inline = line;
-		return (true);	
+		return (true);
 	}
 	*next_inline = line;
 	return (false);
