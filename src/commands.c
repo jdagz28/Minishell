@@ -12,6 +12,7 @@
 
 #include "../include/minishell.h"
 
+/*
 static char ***command_init_cmd(char *str)
 {
     char ***res;
@@ -63,22 +64,7 @@ int command_clear(t_cmd *cmd)
     }
     return (EXIT_SUCCESS);
 }
-
-static void default_exec(char **cmd, char **env)
-{
-    char *bin;
-
-    bin = env_getpath(cmd[0], env);
-    if (!bin)
-    {
-        print_error(cmd[0], "command not found");
-        exit(127);
-    }
-    free(cmd[0]);
-    cmd[0] = bin;
-    execve(cmd[0], cmd, env);
-    exit(127);
-}
+*/
 /*
 int command_setvar(char **cmd, t_shell *shell)
 {
@@ -105,14 +91,3 @@ int command_setvar(char **cmd, t_shell *shell)
     return (res);
 }
 */
-void command_exec(char **cmd, t_shell *shell)
-{
-    if (strncmp(cmd[0], "toto", 4) == 0)
-    {
-        ft_printf("woaw trop fort le toto\n");
-        exit(EXIT_SUCCESS);
-    }
-    /*if (command_setvar(cmd, shell))
-        exit(EXIT_SUCCESS);*/
-    default_exec(cmd, shell->env);
-}

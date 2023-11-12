@@ -49,13 +49,15 @@ HEADER_LIST			= minishell.h\
 
 HEADER_FILES		= $(addprefix $(INCLUDE_DIRECTORY), $(HEADER_LIST))
 
-SRCS_LIST			= parsing_test.c\
+SRCS_LIST			=	parsing.c\
 						parse_logical.c\
 						parse_parenthesis.c\
 						parse_pipeline.c\
 						parse_simple_cmd.c\
 						parser_utils.c\
-						parser.c
+						parser.c \
+						clear.c \
+						debug_print.c
 
 LEXER_SRCS_LIST		= tokenizer.c\
 						check_opred_tokens.c\

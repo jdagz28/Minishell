@@ -19,7 +19,10 @@ int shell_init(t_shell *shell, char *cmds, char **env)
     shell->varlst = NULL;
     if (!shell->env)
         return (EXIT_FAILURE);
-    if (user_init(&shell->user, env) || pwd_init(&shell->pwd, env) || command_init(&shell->cmd, cmds))
+    shell->ast = parse(cmds);
+    if (cmds && !shell->ast)
+        return (EXIT_FAILURE);
+    if (user_init(&shell->user, env) || pwd_init(&shell->pwd, env)) // || command_init(&shell->cmd, cmds))
     {
         shell_clear(shell);
         return (EXIT_FAILURE);
@@ -31,9 +34,11 @@ void shell_clear(t_shell *shell)
 {
     if (shell->env)
         strtab_free(shell->env);
+    if (shell->ast)
+        clear_ast(&shell->ast);
     user_clear(&shell->user);
     pwd_clear(&shell->pwd);
-    command_clear(&shell->cmd);
+    // command_clear(&shell->cmd);
 }
 
 static char *shell_cat(t_shell *shell)
@@ -62,54 +67,49 @@ int shell_prompt(t_shell *shell)
     line = readline(cat);
     // leaks = still reachable : 130, 253 bytes in 191 blocks
     free(cat);
+    if (!line)
+        return (EXIT_SUCCESS);
     err = user_setlastinput(&shell->user, line);
-    if (!err)
-        err = command_init(&shell->cmd, line);
-    if (!err)
-        err = shell_exec_all(shell);
-    command_clear(&shell->cmd);
+    shell->ast = parse(line);
     free(line);
+    if (!shell->ast)
+        return (EXIT_FAILURE);
+    if (!err)
+        //    print_ast_recursive(shell->ast);
+        err = shell_exec(shell);
+    clear_ast(&shell->ast);
     return (err);
 }
 
-int shell_exec_all(t_shell *shell)
+int shell_exec(t_shell *shell)
 {
     int pid;
     int status;
-    int i;
-    t_cmd *cmd;
+    int argv_inc;
+    char ***cmd;
+    t_node *node;
 
-    cmd = &shell->cmd;
-    if (!cmd->cmd)
+    node = shell->ast;
+    if (!node)
         return (EXIT_FAILURE);
-    pid = 0;
-    i = 0;
-    while (i < cmd->len)
+    if (node->type == SIMPLE_CMD)
     {
-        if (ft_strncmp(cmd->cmd[i][0], "exit", 4) == 0)
-            clean_exit(shell, EXIT_SUCCESS);
-        pid = fork();
-        if (pid < 0)
-            return (EXIT_FAILURE);
-        if (pid == 0)
-            shell_exec(cmd, i, shell);
-        i++;
+        argv_inc = var_unset(shell, node);
+        var_inject(shell, node);
+        argv_inc += var_extract(shell, node);
+        // exec_builtin(shell, node);
     }
-    pipes_close(cmd->pipes, cmd->len - 1);
+    else
+        argv_inc = 0;
+    pid = fork();
+    if (pid == -1)
+        return (EXIT_FAILURE);
+    if (pid == 0)
+    {
+        cmd = &node->content.simple_cmd.argv;
+        *cmd = cmd[argv_inc];
+        exec_node(shell, shell->ast);
+    }
     waitpid(pid, &status, 0);
-    return (WEXITSTATUS(status));
-}
-
-void shell_exec(t_cmd *cmd, int id, t_shell *shell)
-{
-    char **tab;
-
-    if (!cmd)
-        exit(EXIT_FAILURE);
-    pipes_dup(cmd->pipes, id, cmd->len);
-    pipes_close(cmd->pipes, cmd->len - 1);
-    if (id > 0)
-        wait(NULL);
-    tab = files_redirect(cmd->cmd[id]);
-    command_exec(tab, shell);
+    return (status);
 }

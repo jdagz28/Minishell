@@ -12,6 +12,14 @@
 
 #include "../include/minishell.h"
 
+int run(t_shell *shell)
+{
+    // signal_unset(SIGINT);
+    while (1)
+        shell->err = shell_prompt(shell);
+    return (EXIT_SUCCESS);
+}
+
 int main(int argc, char **argv, char **env)
 {
     t_shell shell;
@@ -25,12 +33,9 @@ int main(int argc, char **argv, char **env)
     if (shell_init(&shell, cmds, env))
         return (EXIT_FAILURE);
     if (cmds)
-        err = shell_exec_all(&shell);
+        err = shell_exec(&shell);
     else
-    {
-        while (1)
-            shell.err = shell_prompt(&shell);
-    }
+        run(&shell);
     shell_clear(&shell);
     return (err);
 }

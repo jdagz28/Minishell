@@ -13,6 +13,8 @@
 #ifndef LEXER_PARSING_H
 #define LEXER_PARSING_H
 #include <stdbool.h>
+#include <stdio.h>
+#include <sys/types.h>
 
 typedef struct s_token t_token;
 
@@ -127,5 +129,17 @@ void clear_tokens(t_token **tokens);
 
 // parser.c
 bool build_ast(t_token **tokens, t_node **ast, bool is_subshell);
+
+// clear.c
+void free_token(t_token *head);
+void clear_ast(t_node **ast);
+
+// debug_print.c
+void print_tokens(t_token *tokens);
+void print_ast_recursive(t_node *node);
+void print_ast_dot(t_node *node, FILE *output);
+
+// parsing.c
+t_node *parse(char *line);
 
 #endif
