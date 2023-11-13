@@ -6,13 +6,12 @@
 /*   By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/30 23:09:27 by jdagoy            #+#    #+#             */
-/*   Updated: 2023/11/11 22:29:20 by jdagoy           ###   ########.fr       */
+/*   Updated: 2023/11/13 09:34:58 by jdagoy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 #include "lexer_parsing.h"
-
 
 static void	tokenizer_error(char *error_msg, char **remaining, char *current)
 {
