@@ -6,7 +6,7 @@
 /*   By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/14 02:59:10 by jdagoy            #+#    #+#             */
-/*   Updated: 2023/11/14 03:07:54 by jdagoy           ###   ########.fr       */
+/*   Updated: 2023/11/14 11:14:03 by jdagoy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,14 +36,21 @@ int main(void)
 		if (tokens)
 			printf("\nminishell: syntax error near unexpected token '%s'\n", \
 					tokens->word);
-	if (expand_cmds(&ast) == false)
+	printf("Before expansion: ");
+	for (int i = 0; ast->content.simple_cmd.argv[i] != NULL; i++)
+		printf("%s", ast->content.simple_cmd.argv[i]);
+	printf("\n");
+	if (expand_cmds(ast) == false)
 	{
 		printf("Error in expansion\n");
 	}
+	printf("After expansion: ");
+	for (int i = 0; ast->content.simple_cmd.argv[i] != NULL; i++)
+		printf("%s", ast->content.simple_cmd.argv[i]);
+	printf("\n");
 	if (ast != NULL)
 		clear_ast(&ast);
 	free_token(tokens);
-
 }
 
 
@@ -58,6 +65,8 @@ void	free_token(t_token *head)
 	while (itr != NULL)
 	{
 		next = itr->next;
+		if (itr->word)
+			free(itr->word);
 		free(itr);
 		itr = next;
 	}

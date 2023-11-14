@@ -6,7 +6,7 @@
 /*   By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 22:58:02 by jdagoy            #+#    #+#             */
-/*   Updated: 2023/11/14 02:17:51 by jdagoy           ###   ########.fr       */
+/*   Updated: 2023/11/14 11:10:58 by jdagoy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ bool	expand_vars(t_simple_cmd *cmd, int const i)
 		if (cmd->argv[i][j] == '$' && sin_quote == false)
 		{
 			if (next_char(cmd->argv[i][j + 1]) == true)
-				cmd->argv[i] = replace_varvalue(&cmd->argv[i], 0, j++, "$");
+				cmd->argv[i] = replace_varval(&cmd->argv[i], 0, j++, "$");
 			{
 				if (expand_singlevar(cmd, i, &j, dou_quote) == false)
 					return (false);

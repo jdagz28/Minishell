@@ -6,11 +6,11 @@
 #    By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/10/07 15:33:53 by tbarbe            #+#    #+#              #
-#    Updated: 2023/11/14 03:09:05 by jdagoy           ###   ########.fr        #
+#    Updated: 2023/11/14 10:57:08 by jdagoy           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME				= parser
+NAME				= expander
 
 OS					= $(shell uname -s)
 USERNAME			= $(shell whoami)
@@ -67,9 +67,11 @@ EXPAND_SRCS_LIST	= expand_cmds.c\
 						expand_replace_var_value.c\
 						expand_utils.c\
 						expand_var_realloc_argv.c\
+						expand_vars_utils.c\
 						expand_vars.c\
 						remove_quotes.c\
-						expand_test.c
+						expand_test.c\
+						free_array.c
                  
 EXPAND_LIST			= $(patsubst %.c, %.o, $(EXPAND_SRCS_LIST))
 EXPAND_OBJECTS		= $(addprefix $(OBJECTS_DIRECTORY), $(EXPAND_LIST))

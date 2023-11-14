@@ -6,7 +6,7 @@
 /*   By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 20:57:03 by jdagoy            #+#    #+#             */
-/*   Updated: 2023/11/14 03:15:29 by jdagoy           ###   ########.fr       */
+/*   Updated: 2023/11/14 10:56:18 by jdagoy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,11 +46,22 @@ bool	has_space(char *str);
 bool	realloc_argv(t_simple_cmd *cmd, int const i, int *j, \
 							char *var_value);
 
+//expand_var_utils.c
+int		get_len_var_name(char *argv);
+char	*get_var_name(char *argv);
+void	get_var_name_value(char *argv, char **var_name, char **var_value);
+
+
 //expand_vars.c
 bool	expand_vars(t_simple_cmd *cmd, int const i);
 
 //remove_quotes
+char	*reverse_quotes(char *var_value);
 void	change_quote_state(char quote, bool *in_squote, bool *in_dquotes);
 void	remove_quotes_arg(char **argv);
+
+//free_array.c
+void	free_array(char ***array);
+void	print_error(char *str1, char *str2);
 
 #endif

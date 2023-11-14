@@ -6,12 +6,45 @@
 /*   By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/14 01:22:23 by jdagoy            #+#    #+#             */
-/*   Updated: 2023/11/14 02:23:32 by jdagoy           ###   ########.fr       */
+/*   Updated: 2023/11/14 10:53:49 by jdagoy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 #include "expansion.h"
+
+char	*reverse_quotes(char *var_value)
+{
+	char	*str;
+	int		i;
+
+	if (var_value == NULL)
+		return (NULL);
+	i = 0;
+	str = ft_calloc(ft_strlen(var_value) + 1, sizeof(*str));
+	//!if (str == NULL)
+	//! fatal error
+	while (var_value[i] != '\0')
+	{
+		if (var_value[i] == '\'' || var_value[i] == '\"')
+			str[i] = -var_value[i];
+		else
+			str[i] = var_value[i];
+		i++;
+	}
+	str[i] = '\0';
+	return (str);
+}
+
+static void	restore_quotes(char *str)
+{
+	while (*str != '\0')
+	{
+		if (*str < 0)
+			*str *= -1;
+		str++;
+	}
+}
 
 void	change_quote_state(char quote, bool *in_squote, bool *in_dquotes)
 {
