@@ -6,7 +6,7 @@
 /*   By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/11 13:35:49 by jdagoy            #+#    #+#             */
-/*   Updated: 2023/11/14 01:22:14 by jdagoy           ###   ########.fr       */
+/*   Updated: 2023/11/14 03:13:28 by jdagoy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,7 @@
 #include "lexer_parsing.h"
 #include "expansion.h"
 
-
-void	expand_heredoc(t_simple_cmd *cmd)
+static void	expand_quotes(t_simple_cmd *cmd)
 {
 	int		i;
 	bool	quotes;
@@ -24,7 +23,7 @@ void	expand_heredoc(t_simple_cmd *cmd)
 	quotes = false;
 	while (cmd->argv[i] != NULL)
 	{
-		if (ft_strchr(cmd->argv[i], "<<") == 0)
+		if (ft_strncmp(cmd->argv[i], "<<", ft_strlen("<<")) == 0)
 			quotes = (ft_strchr(cmd->argv[i + 1], '\'') != NULL
 					|| ft_strchr(cmd->argv[i + 1], '"') != NULL);
 		cmd->has_quotes = quotes;
@@ -33,7 +32,7 @@ void	expand_heredoc(t_simple_cmd *cmd)
 	}
 }
 
-bool	expand_simplecmd(t_simple_cmd *cmd)
+static bool	expand_simplecmd(t_simple_cmd *cmd)
 {
 	int	i;
 
@@ -41,22 +40,25 @@ bool	expand_simplecmd(t_simple_cmd *cmd)
 	while (cmd->argv[i] != NULL)
 	{
 		if (ft_strchr(cmd->argv[i], '$') != NULL \
-				&& !(i > 0 && ft_strcmp(cmd->argv[i - 1], "<<") == 0))
+			&& !(i > 0 && ft_strncmp(cmd->argv[i - 1], "<<", \
+			ft_strlen("<<")) == 0))
 		{
 			if (expand_vars(cmd, i) == false)
 				return (false);
 		}
 		i++;
 	}
-	expand_heredoc(cmd);
+	expand_quotes(cmd);
 	return (true);
 }
 
 bool	expand_cmds(t_node *ast)
 {
 	if (ast->type == SIMPLE_CMD)
+	{	
 		if (expand_simplecmd(&ast->content.simple_cmd) == false)
 			return (false);
+	}
 	else
 	{
 		if (ast->content.child.left != NULL)

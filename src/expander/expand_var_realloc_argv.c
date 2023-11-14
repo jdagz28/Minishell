@@ -6,7 +6,7 @@
 /*   By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 23:00:34 by jdagoy            #+#    #+#             */
-/*   Updated: 2023/11/13 23:06:54 by jdagoy           ###   ########.fr       */
+/*   Updated: 2023/11/14 03:16:09 by jdagoy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ bool	realloc_argv(t_simple_cmd *cmd, int const i, int *j, char *var_value)
 	utils.index_dollar = *j;
 	new_argv = ft_calloc(utils.len_new_argv + 1, sizeof(*new_argv));
 	if (new_argv == NULL)
-		return (false); //! Calloc error
+		return (false);
 	while (utils.i_new < i)
 		new_argv[utils.i_new++] = ft_strdup(cmd->argv[utils.i_old++]);
 	handle_first_join(cmd->argv[i], new_argv, splitted_var, &utils);

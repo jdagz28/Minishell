@@ -6,7 +6,7 @@
 /*   By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/14 01:22:23 by jdagoy            #+#    #+#             */
-/*   Updated: 2023/11/14 01:37:14 by jdagoy           ###   ########.fr       */
+/*   Updated: 2023/11/14 02:23:32 by jdagoy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ static int	get_len_without_quotes(char *str)
 	return (len);
 }
 
-char	*remove_quotes(char *str)
+static char	*remove_quotes(char *str)
 {
 	bool	in_squotes;
 	bool	in_dquotes;

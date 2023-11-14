@@ -6,7 +6,7 @@
 /*   By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/03 23:44:50 by jdagoy            #+#    #+#             */
-/*   Updated: 2023/11/11 21:22:39 by jdagoy           ###   ########.fr       */
+/*   Updated: 2023/11/14 02:16:42 by jdagoy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,4 +53,3 @@ bool	check_word_inquote(char **word, char *tmp_str)
 	}
 	return (true);
 }
-

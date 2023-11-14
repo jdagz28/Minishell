@@ -6,7 +6,7 @@
 /*   By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 13:54:17 by jdagoy            #+#    #+#             */
-/*   Updated: 2023/11/11 22:18:48 by jdagoy           ###   ########.fr       */
+/*   Updated: 2023/11/14 02:48:30 by jdagoy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ int	main(void)
 			if (tokens)
 				printf("\nminishell: syntax error near unexpected token '%s'\n",
 					   tokens->word);
-		create_dotfile(ast, cmd_index);
+		// create_dotfile(ast, cmd_index);
 		if (ast != NULL)
 			clear_ast(&ast);
 		free_token(tokens);
