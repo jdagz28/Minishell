@@ -6,7 +6,7 @@
 /*   By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 23:36:42 by jdagoy            #+#    #+#             */
-/*   Updated: 2023/11/14 00:10:39 by jdagoy           ###   ########.fr       */
+/*   Updated: 2023/11/14 13:09:47 by jdagoy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,18 +31,15 @@ char	*replace_varval(char **argv, int len_varname, int i, char *var_value)
 	char	*new_arg;
 
 	j = 0;
+	k = 0;
 	new_arg = alloc_new_arg(*argv, len_varname, var_value);
 	while (j < i)
-	{
-		new_arg[j] = (*argv)[j];
-		j++;
-	}
-	k = 0;
+		new_arg[j++] = (*argv)[k++];
 	while (var_value[k])
 		new_arg[j++] = var_value[k++];
-	i = i + len_varname + 1;
-	while ((*argv)[i] != '\0')
-		new_arg[j++] = (*argv)[i++];
+	k = k + len_varname + 1;
+	while ((*argv)[k] != '\0')
+		new_arg[j++] = (*argv)[k++];
 	new_arg[j] = '\0';
 	free(*argv);
 	return (new_arg);

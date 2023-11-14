@@ -6,7 +6,7 @@
 /*   By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/14 10:36:11 by jdagoy            #+#    #+#             */
-/*   Updated: 2023/11/14 11:06:13 by jdagoy           ###   ########.fr       */
+/*   Updated: 2023/11/14 13:47:03 by jdagoy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ char	*get_var_name(char *argv)
 	int		j;
 	char	*var_name;
 
-	i = 0;
+	i = 1;
 	j = 0;
 	var_name = ft_calloc(get_len_var_name(argv + i) + 1, sizeof(*var_name));
 	//! if (var_name == NULL)
@@ -44,6 +44,7 @@ char	*get_var_name(char *argv)
 		++j;
 	}
 	var_name[j] = '\0';
+	// printf("var_name: %s\n",var_name);
 	return (var_name);
 }
 
@@ -52,12 +53,14 @@ void	get_var_name_value(char *argv, char **var_name, char **var_value)
 	if (*(argv + 1) == '?')
 	{
 		*var_name = ft_strdup("?");
-		*var_value = "test"; //!ft_itoa(*get_exit_value());
+		*var_value = ft_strdup("test"); //!ft_itoa(*get_exit_value());
 	}
 	else
 	{
 		*var_name = get_var_name(argv);
 		*var_value = reverse_quotes(getenv(*var_name));
+		// printf("var name: %s\n", *var_name);
+		// printf("var value: %s\n", getenv(*var_name));
 		if (*var_value == NULL)
 			*var_value = "";
 	}

@@ -6,7 +6,7 @@
 /*   By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/14 02:59:10 by jdagoy            #+#    #+#             */
-/*   Updated: 2023/11/14 11:14:03 by jdagoy           ###   ########.fr       */
+/*   Updated: 2023/11/14 13:18:16 by jdagoy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,21 @@
 #include "lexer_parsing.h"
 #include "expansion.h"
 
+const char *token_kind_strings[] = {
+	"TK_WORD",
+	"TK_PIPE",
+	"TK_OR",
+	"TK_AND",
+	"TK_SEMICOLON",
+	"TK_OPEN_PARENTHESIS",
+	"TK_CLOSE_PARENTHESIS",
+	"TK_OPERATOR",
+	"TK_REDIRECT",
+	"TK_EOF"};
+
 void	free_token(t_token *head);
 void	clear_ast(t_node **ast);
+void	print_tokens(t_token *tokens);
 
 int main(void)
 {
@@ -26,12 +39,14 @@ int main(void)
 	setenv("hello", "Hello, world!", 1);
 	
 	line = "echo $hello";
+	printf("var: %s\n", getenv("hello"));
 	tokens = tokenizer(line);
 	if (check_tokens(tokens) == false || check_wordtokens(tokens) == false)
 	{
 		free_token(tokens);
 		// continue ;
 	}
+	print_tokens(tokens);
 	if (build_ast(&tokens, &ast) == false)
 		if (tokens)
 			printf("\nminishell: syntax error near unexpected token '%s'\n", \
@@ -48,8 +63,7 @@ int main(void)
 	for (int i = 0; ast->content.simple_cmd.argv[i] != NULL; i++)
 		printf("%s", ast->content.simple_cmd.argv[i]);
 	printf("\n");
-	if (ast != NULL)
-		clear_ast(&ast);
+	clear_ast(&ast);
 	free_token(tokens);
 }
 
@@ -62,14 +76,16 @@ void	free_token(t_token *head)
 	if (head == NULL)
 		return ;
 	itr = head;
-	while (itr != NULL)
+	next = itr->next;
+	while (next != NULL)
 	{
-		next = itr->next;
-		if (itr->word)
-			free(itr->word);
+		free(itr->word);
 		free(itr);
 		itr = next;
+		next = itr->next;
 	}
+	free(itr->word);
+	free(itr);
 }
 
 
@@ -110,4 +126,22 @@ void	clear_ast(t_node **ast)
 		clear_ast(&((*ast)->content.child.right));
 		free(*ast);
 	}
+}
+
+void	print_tokens(t_token *tokens)
+{
+	int		i;
+	t_token	*current;
+
+	i = 0;
+	current = tokens;
+	while (current != NULL)
+	{
+		printf("Token %d\n", i++);
+		if (current->word != NULL)
+			printf("Token: \t%s\n", current->word);
+		printf("Type: \t%s\n\n", token_kind_strings[current->kind]);
+		current = current->next;
+	}
+	// free_token(tokens);
 }

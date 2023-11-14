@@ -6,7 +6,7 @@
 /*   By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/14 03:16:12 by jdagoy            #+#    #+#             */
-/*   Updated: 2023/11/14 10:58:52 by jdagoy           ###   ########.fr       */
+/*   Updated: 2023/11/14 13:42:48 by jdagoy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	free_array(char ***array)
 	while ((*array)[i] != NULL)
 	{
 		free((*array)[i]);
-		i++;
+		++i;
 	}
 }
 
