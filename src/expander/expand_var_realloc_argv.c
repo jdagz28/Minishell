@@ -6,7 +6,7 @@
 /*   By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 23:00:34 by jdagoy            #+#    #+#             */
-/*   Updated: 2023/11/14 13:46:07 by jdagoy           ###   ########.fr       */
+/*   Updated: 2023/11/15 13:50:13 by jdagoy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,10 +69,11 @@ static void	init_expand_utils(char **argv, char **splitted_var, \
 	utils->i_split = 0;
 }
 
-static void	free_array_realloc(char **argv, char ***splitted_var)
+static void	free_array_realloc(char **argv, char **splitted_var)
 {
 	free_array(&argv);
-	free_array(splitted_var);
+	free_array(&splitted_var);
+	free(splitted_var);
 }
 
 bool	realloc_argv(t_simple_cmd *cmd, int const i, int *j, char *var_value)
@@ -99,7 +100,7 @@ bool	realloc_argv(t_simple_cmd *cmd, int const i, int *j, char *var_value)
 	while (cmd->argv[utils.i_old] != NULL)
 		new_argv[utils.i_new++] = ft_strdup(cmd->argv[utils.i_old++]);
 	new_argv[utils.i_new] = NULL;
-	free_array_realloc(cmd->argv, &splitted_var);
+	free_array_realloc(cmd->argv, splitted_var);
 	cmd->argv = new_argv;
 	return (true);
 }

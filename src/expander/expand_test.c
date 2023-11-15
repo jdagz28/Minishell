@@ -6,7 +6,7 @@
 /*   By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/14 02:59:10 by jdagoy            #+#    #+#             */
-/*   Updated: 2023/11/15 11:42:46 by jdagoy           ###   ########.fr       */
+/*   Updated: 2023/11/15 13:46:11 by jdagoy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,8 +61,10 @@ int main(void)
 	for (int i = 0; ast->content.simple_cmd.argv[i] != NULL; i++)
 		printf("%s ", ast->content.simple_cmd.argv[i]);
 	printf("\n");
-	clear_ast(&ast);
-	free_token(tokens);
+	if (tokens != NULL)
+		free_token(tokens);
+	if (ast != NULL)
+		clear_ast(&ast);
 }
 
 
@@ -95,11 +97,11 @@ static void	free_simple_cmd(t_node **simple_cmd)
 	i = 0;
 	if (*simple_cmd != NULL)
 	{
-		i = 0;
 		while ((*simple_cmd)->content.simple_cmd.argv[i] != NULL)
 		{
 			free((*simple_cmd)->content.simple_cmd.argv[i]);
-			++i;
+			(*simple_cmd)->content.simple_cmd.argv[i] = NULL;
+			i++;
 		}
 		fd = (*simple_cmd)->content.simple_cmd.fd_input;
 		if (fd > 0 && fd != STDIN_FILENO)
@@ -122,7 +124,7 @@ void	clear_ast(t_node **ast)
 	{
 		clear_ast(&((*ast)->content.child.left));
 		clear_ast(&((*ast)->content.child.right));
-		free(*ast);
+		free((void**)*ast);
 	}
 }
 
