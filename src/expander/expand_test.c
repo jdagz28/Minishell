@@ -6,7 +6,7 @@
 /*   By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/14 02:59:10 by jdagoy            #+#    #+#             */
-/*   Updated: 2023/11/14 13:18:16 by jdagoy           ###   ########.fr       */
+/*   Updated: 2023/11/15 11:42:46 by jdagoy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,15 +53,13 @@ int main(void)
 					tokens->word);
 	printf("Before expansion: ");
 	for (int i = 0; ast->content.simple_cmd.argv[i] != NULL; i++)
-		printf("%s", ast->content.simple_cmd.argv[i]);
+		printf("%s ", ast->content.simple_cmd.argv[i]);
 	printf("\n");
 	if (expand_cmds(ast) == false)
-	{
 		printf("Error in expansion\n");
-	}
 	printf("After expansion: ");
 	for (int i = 0; ast->content.simple_cmd.argv[i] != NULL; i++)
-		printf("%s", ast->content.simple_cmd.argv[i]);
+		printf("%s ", ast->content.simple_cmd.argv[i]);
 	printf("\n");
 	clear_ast(&ast);
 	free_token(tokens);
