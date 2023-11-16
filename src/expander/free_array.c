@@ -1,21 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.c                                            :+:      :+:    :+:   */
+/*   free_array.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/07/11 16:43:09 by tbarbe            #+#    #+#             */
-/*   Updated: 2023/11/13 21:08:55 by jdagoy           ###   ########.fr       */
+/*   Created: 2023/11/14 03:16:12 by jdagoy            #+#    #+#             */
+/*   Updated: 2023/11/14 13:42:48 by jdagoy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/minishell.h"
+#include "minishell.h"
 
-void clean_exit(t_shell *data, int err)
+void	free_array(char ***array)
 {
-    shell_clear(data);
-    exit(err);
+	int	i;
+
+	i = 0;
+	while ((*array)[i] != NULL)
+	{
+		free((*array)[i]);
+		++i;
+	}
 }
 
 void print_error(char *str1, char *str2)

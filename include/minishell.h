@@ -43,10 +43,10 @@ typedef struct s_user
 
 typedef struct s_cmd
 {
-    t_simple_cmd *cmds;
-    // char ***cmd;
+    // t_simple_cmd *cmds;
+    char ***cmd;
     int len;
-    // int (*pipes)[2];
+    int (*pipes)[2];
 } t_cmd;
 
 typedef struct s_shell

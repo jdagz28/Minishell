@@ -6,7 +6,7 @@
 /*   By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/03 12:34:48 by jdagoy            #+#    #+#             */
-/*   Updated: 2023/11/04 23:48:00 by jdagoy           ###   ########.fr       */
+/*   Updated: 2023/11/11 22:29:08 by jdagoy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ bool	check_whitespace(char **next_inline, char *line)
 		while (*line && ft_isspace(*line))
 			line++;
 		*next_inline = line;
-		return (true);	
+		return (true);
 	}
 	*next_inline = line;
 	return (false);
@@ -45,27 +45,28 @@ bool	check_prefix(char *line, char *prefix)
 	return (false);
 }
 
-void	tk_error_manager(char *error_msg)
+void	tk_error(char *error_msg, char *token)
 {
-	ft_putstr_fd("Error: ", STDERR_FILENO);
+	ft_putstr_fd("minishell: ", STDERR_FILENO);
 	ft_putstr_fd(error_msg, STDERR_FILENO);
+	ft_putstr_fd(token, STDERR_FILENO);
 	ft_putstr_fd("\n", STDERR_FILENO);
-	exit(EXIT_FAILURE);
+	if ((ft_strnstr(error_msg, "Calloc", ft_strlen(error_msg)) != NULL) \
+		|| (ft_strnstr(error_msg, "ft_strndup", ft_strlen(error_msg)) != NULL))
+		exit(EXIT_FAILURE);
 }
 
 void	check_missingquotes(char **line, bool *flag, char quote_type)
 {
-	int	i;
-
-	i = 1;
-	while ((*line)[i] != quote_type)
+	(*line)++;
+	while (**line != quote_type)
 	{
-		if ((*line)[i] == '\0')
+		if (**line == '\0')
 		{
 			*flag = true;
 			return ;
 		}
-		i++;
+		(*line)++;
 	}
-	*line += i;
+	(*line)++;
 }
