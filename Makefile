@@ -14,23 +14,21 @@
 
 NAME	=	minishell
 
-PARSER_SRCS		=	parsing.c\
-					parse_logical.c\
-					parse_parenthesis.c\
-					parse_pipeline.c\
-					parse_simple_cmd.c\
-					parser_utils.c\
-					parser.c \
-					clear.c \
-					debug_print.c 
+PARSER_SRCS			=	parsing.c\
+						parse_pipeline.c\
+						parse_simple_cmd.c\
+						parser_utils.c\
+						parser.c\
+						clear_ast.c
 
-LEXER_SRCS		=	tokenizer.c\
-					check_opred_tokens.c\
-                    check_token.c\
-					check_word_inquote.c\
-                    check_word_tokens.c\
-                	create_token.c\
-                    tokenizer_utils.c
+LEXER_SRCS		= tokenizer.c\
+						check_opred_tokens.c\
+                        check_token.c\
+						check_word_inquote.c\
+                        check_word_tokens.c\
+                        create_token.c\
+                        tokenizer_utils.c\
+						clear_tokens.c
 
 SRCS	=	minishell.c \
 			shell.c \

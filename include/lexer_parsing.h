@@ -13,10 +13,8 @@
 #ifndef LEXER_PARSING_H
 #define LEXER_PARSING_H
 #include <stdbool.h>
-
-typedef struct s_token t_token;
-typedef struct s_node t_node;
-
+#include <stdio.h>
+#include <sys/types.h>
 extern const char *token_kind_strings[]; //! tester-printing-token-type
 
 typedef enum e_tk_kind
@@ -32,6 +30,9 @@ typedef enum e_tk_kind
 	TK_REDIRECT,
 	TK_EOF
 } t_tk_kind;
+
+typedef struct s_token t_token;
+typedef struct s_node t_node;
 
 typedef struct s_token
 {

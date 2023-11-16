@@ -28,7 +28,7 @@ t_node *parse(char *line)
 		free_token(tokens);
 		return (NULL);
 	}
-	if (build_ast(&tokens, &ast, false) == false)
+	if (build_ast(&tokens, &ast) == false)
 	{
 		if (tokens)
 			printf("\nminishell: syntax error near unexpected token '%s'\n",
