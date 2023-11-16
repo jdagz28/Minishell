@@ -6,7 +6,7 @@
 /*   By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/02 21:12:54 by jdagoy            #+#    #+#             */
-/*   Updated: 2023/11/14 11:44:42 by jdagoy           ###   ########.fr       */
+/*   Updated: 2023/11/15 15:35:25 by jdagoy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,7 +106,10 @@ t_token	*create_token(char *word, t_tk_kind kind)
 
 	token = ft_calloc(1, sizeof(*token));
 	if (token == NULL)
+	{
+		free(word);
 		tk_error("Calloc failed", NULL);
+	}
 	token->word = word;
 	token->kind = kind;
 	return (token);

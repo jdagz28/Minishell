@@ -6,7 +6,7 @@
 #    By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/10/07 15:33:53 by tbarbe            #+#    #+#              #
-#    Updated: 2023/11/14 10:57:08 by jdagoy           ###   ########.fr        #
+#    Updated: 2023/11/15 15:45:24 by jdagoy           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -114,6 +114,6 @@ fclean: clean
 re: fclean all
 
 valgrind:
-	valgrind --leak-check=full --show-leak-kinds=all --leak-check=full --track-origins=yes ./$(NAME) 
+	valgrind --leak-check=full --show-leak-kinds=all --verbose --track-origins=yes ./$(NAME) 
 
 .PHONY: all clean fclean re
