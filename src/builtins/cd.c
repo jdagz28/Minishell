@@ -3,15 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jdagoy <jdagoy@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/29 02:08:41 by jdagoy            #+#    #+#             */
-/*   Updated: 2023/11/16 10:23:33 by jdagoy           ###   ########.fr       */
+/*   Updated: 2023/11/16 15:26:47 by jdagoy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 #include "lexer_parsing.h"
+#include "builtins.h"
 
 static int	update_pwd(char **argv, char **env)
 {
