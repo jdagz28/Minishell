@@ -1,6 +1,11 @@
 /objects
 /libft/objects
 /libft/libft.a
+/src/lexer/objects
+/src/parser/objects
+/src/expander/objects
+/src/expander/expander
+/src/parser/parser
 /minishell
 .vscode
 .editorconfig

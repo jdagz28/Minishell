@@ -6,17 +6,16 @@
 /*   By: jdagoy <jdagoy@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/30 23:08:42 by jdagoy            #+#    #+#             */
-/*   Updated: 2023/11/10 10:38:32 by jdagoy           ###   ########.fr       */
+/*   Updated: 2023/11/16 09:35:12 by jdagoy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LEXER_PARSING_H
 #define LEXER_PARSING_H
 #include <stdbool.h>
-#include <stdio.h>
-#include <sys/types.h>
 
 typedef struct s_token t_token;
+typedef struct s_node t_node;
 
 extern const char *token_kind_strings[]; //! tester-printing-token-type
 
@@ -58,8 +57,6 @@ typedef struct s_simple_cmd
 	bool has_quotes;
 } t_simple_cmd;
 
-typedef struct s_node t_node;
-
 typedef struct s_child
 {
 	t_node *left;
@@ -79,7 +76,8 @@ typedef struct s_node
 } t_node;
 
 // check_word_inquote.c
-bool check_word_inquote(char **word);
+bool word_error(char *s, size_t len);
+bool check_word_inquote(char **word, char *tmp_str);
 
 // check_word_tokens.c
 bool check_wordtokens(t_token *token);
@@ -99,36 +97,33 @@ t_token *redirect_token(char **remaining, char *line);
 t_token *word_token(char **remaining, char *line);
 t_token *create_token(char *word, t_tk_kind kind);
 
+// clear_tokens.c
+void clear_tokens(t_token *head);
+
 // tokenizer.c
 t_token *tokenizer(char *input);
 
 // tokenizer_utils.c
 bool check_whitespace(char **next_inline, char *line);
 bool check_prefix(char *line, char *prefix);
-void tk_error_manager(char *error_msg);
+void tk_error(char *error_msg, char *token);
 void check_missingquotes(char **line, bool *flag, char quote_type);
 
-// parse_logical.c
-bool is_logical_operator(enum e_tk_kind kind);
-bool parse_logical_operator(t_token **tokens, t_node **ast,
-							bool is_subshell);
-
-// parse_parenthesis.c
-bool parse_parenthesis(t_token **tokens, t_node **ast);
-
 // parse_pipeline.c
-bool parse_pipeline(t_token **tokens, t_node **ast, bool is_subshell);
+bool parse_pipeline(t_token **tokens, t_node **ast);
 
 // parse_simple_cmd.c
 bool is_redirect_word(enum e_tk_kind kind);
-bool parse_simple_cmd(t_token **tokens, t_node **ast, bool is_subshell);
+bool parse_simple_cmd(t_token **tokens, t_node **ast);
 
 // parser_utils.c
 void consume_token(t_token **tokens);
-void clear_tokens(t_token **tokens);
 
 // parser.c
-bool build_ast(t_token **tokens, t_node **ast, bool is_subshell);
+bool build_ast(t_token **tokens, t_node **ast);
+
+// clear_ast.c
+void clear_ast(t_node **ast);
 
 // clear.c
 void free_token(t_token *head);

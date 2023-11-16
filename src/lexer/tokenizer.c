@@ -6,13 +6,12 @@
 /*   By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/30 23:09:27 by jdagoy            #+#    #+#             */
-/*   Updated: 2023/11/08 13:45:33 by jdagoy           ###   ########.fr       */
+/*   Updated: 2023/11/14 02:16:14 by jdagoy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 #include "lexer_parsing.h"
-
 
 static void	tokenizer_error(char *error_msg, char **remaining, char *current)
 {
@@ -53,7 +52,6 @@ t_token	*tokenizer(char *line)
 		}
 		else
 			tokenizer_error("Unexpected Token", &line, line);
-
 	}
 	current->next = create_token(NULL, TK_EOF);
 	return (head.next);

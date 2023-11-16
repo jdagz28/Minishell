@@ -6,7 +6,7 @@
 /*   By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 10:26:10 by jdagoy            #+#    #+#             */
-/*   Updated: 2023/11/09 21:38:38 by jdagoy           ###   ########.fr       */
+/*   Updated: 2023/11/11 22:02:51 by jdagoy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,12 +45,12 @@ static bool	check_errors_pipeline(t_token *tokens)
  * * if the token list is not empty, parse_simple_cmd is called to parse the 
  * 	next simple command
 */
-bool	parse_pipeline(t_token **tokens, t_node **ast, bool is_subshell)
+bool	parse_pipeline(t_token **tokens, t_node **ast)
 {
 	t_node	*pipe_node;
 	t_node	*simple_cmd;
 
-	if (parse_simple_cmd(tokens, &simple_cmd, is_subshell) == false)
+	if (parse_simple_cmd(tokens, &simple_cmd) == false)
 		return (false);
 	*ast = simple_cmd;
 	while (*tokens != NULL && (*tokens)->kind == TK_PIPE)
@@ -64,8 +64,7 @@ bool	parse_pipeline(t_token **tokens, t_node **ast, bool is_subshell)
 		pipe_node->type = PIPE_NODE;
 		pipe_node->content.child.left = *ast;
 		*ast = pipe_node;
-		if (!parse_simple_cmd(tokens, &(pipe_node->content.child.right), \
-				is_subshell))
+		if (!parse_simple_cmd(tokens, &(pipe_node->content.child.right)))
 			return (false);
 	}
 	return (true);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_simple_cmd.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jdagoy <jdagoy@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 00:28:24 by jdagoy            #+#    #+#             */
-/*   Updated: 2023/11/09 12:38:43 by jdagoy           ###   ########.fr       */
+/*   Updated: 2023/11/15 15:42:17 by jdagoy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,13 +19,9 @@
  * if in_subshell, within parenthesis -- before closing parenthesis
  * else -- unexpected 'newline' token
 */
-static bool	check_error_cmdargs(bool is_subshell)
+static bool	error_cmdargs(void)
 {
-	if (is_subshell)
-		ft_putstr_fd("\nminishell: syntax error near unexpected token ')'\n", \
-						STDERR_FILENO);
-	else
-		ft_putstr_fd("\nminishell: syntax error near unexpected token \
+	ft_putstr_fd("\nminishell: syntax error near unexpected token \
 						'newline'\n", STDERR_FILENO);
 	return (false);
 }
@@ -70,8 +66,7 @@ static unsigned int	num_args(t_token *tokens)
  * extracting arguments and handling I/O redirections.
  * extracts arguments from the tokens list and sets up redirections if necessary
 */
-static bool	parse_cmdargs(t_token **tokens, t_node *simple_cmd, \
-							bool is_subshell)
+static bool	parse_cmdargs(t_token **tokens, t_node *simple_cmd)
 {
 	int	i;
 
@@ -87,7 +82,7 @@ static bool	parse_cmdargs(t_token **tokens, t_node *simple_cmd, \
 		{
 			consume_token(tokens);
 			if (*tokens == NULL)
-				return (check_error_cmdargs(is_subshell));
+				return (error_cmdargs());
 			if ((*tokens)->kind != TK_WORD)
 				return (false);
 		}
@@ -108,14 +103,14 @@ static bool	parse_cmdargs(t_token **tokens, t_node *simple_cmd, \
  * command node including its arguments and I/O redirections
  * parse_cmdargs fills the argv array of the simple_cmd 
 */
-bool	parse_simple_cmd(t_token **tokens, t_node **ast, bool is_subshell)
+bool	parse_simple_cmd(t_token **tokens, t_node **ast)
 {
 	t_node	*simple_cmd;
 
 	if ((*tokens)->kind == TK_CL_PAREN)
 		return (false);
 	else if ((*tokens)->kind == TK_OP_PAREN)
-		return (parse_parenthesis(tokens, ast));
+		return (false);
 	if (is_redirect_word((*tokens)->kind) == false)
 		return (false);
 	simple_cmd = (t_node *)ft_calloc(1, sizeof(t_node));
@@ -124,7 +119,7 @@ bool	parse_simple_cmd(t_token **tokens, t_node **ast, bool is_subshell)
 	simple_cmd->type = SIMPLE_CMD;
 	simple_cmd->content.simple_cmd.fd_input = STDIN_FILENO;
 	simple_cmd->content.simple_cmd.fd_output = STDOUT_FILENO;
-	if (parse_cmdargs(tokens, simple_cmd, is_subshell) == false)
+	if (parse_cmdargs(tokens, simple_cmd) == false)
 		return (false);
 	*ast = simple_cmd;
 	return (true);

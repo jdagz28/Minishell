@@ -6,11 +6,11 @@
 #    By: jdagoy <jdagoy@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/10/07 15:33:53 by tbarbe            #+#    #+#              #
-#    Updated: 2023/11/16 09:36:33 by jdagoy           ###   ########.fr        #
+#    Updated: 2023/11/16 09:36:28 by jdagoy           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME				= parser
+NAME				= expander
 
 OS					= $(shell uname -s)
 USERNAME			= $(shell whoami)
@@ -38,8 +38,9 @@ LIBFT				= $(LIBFT_DIRECTORY)libft.a
 
 OBJECTS_DIRECTORY	= ./objects/
 INCLUDE_DIRECTORY	= ../../include/
-PARSER_DIRECTORY	= ./
+PARSER_DIRECTORY	= ../parser/
 LEXER_DIRECTORY		= ../lexer/
+EXPAND_DIRECTORY	= ./
 
 LIBRARIES			= -lreadline -L$(LIBFT_DIRECTORY) -lft $(MAC_LIBS)
 INCLUDES			= -I$(INCLUDE_DIRECTORY) $(MAC_INCLUDES)
@@ -49,15 +50,6 @@ HEADER_LIST			= minishell.h\
 
 HEADER_FILES		= $(addprefix $(INCLUDE_DIRECTORY), $(HEADER_LIST))
 
-SRCS_LIST			=	parsing.c\
-						parse_logical.c\
-						parse_parenthesis.c\
-						parse_pipeline.c\
-						parse_simple_cmd.c\
-						parser_utils.c\
-						parser.c\
-						clear_ast.c
-
 LEXER_SRCS_LIST		= tokenizer.c\
 						check_opred_tokens.c\
                         check_token.c\
@@ -66,9 +58,28 @@ LEXER_SRCS_LIST		= tokenizer.c\
                         create_token.c\
                         tokenizer_utils.c\
 						clear_tokens.c
+
+PARSING_SRCS_LIST	= parse_pipeline.c\
+						parse_simple_cmd.c\
+						parser_utils.c\
+						parser.c\
+						clear_ast.c
+
+EXPAND_SRCS_LIST	= expand_cmds.c\
+						expand_replace_var_value.c\
+						expand_utils.c\
+						expand_var_realloc_argv.c\
+						expand_vars_utils.c\
+						expand_vars.c\
+						remove_quotes.c\
+						expand_test.c\
+						free_array.c
                  
-OBJECTS_LIST		= $(patsubst %.c, %.o, $(SRCS_LIST))
-OBJECTS				= $(addprefix $(OBJECTS_DIRECTORY), $(OBJECTS_LIST))
+EXPAND_LIST			= $(patsubst %.c, %.o, $(EXPAND_SRCS_LIST))
+EXPAND_OBJECTS		= $(addprefix $(OBJECTS_DIRECTORY), $(EXPAND_LIST))
+
+PARSER_LIST			= $(patsubst %.c, %.o, $(PARSING_SRCS_LIST))
+PARSER_OBJECTS				= $(addprefix $(OBJECTS_DIRECTORY), $(PARSER_LIST))
 
 LEXER_LIST			= $(patsubst %.c, %.o, $(LEXER_SRCS_LIST))
 LEXER_OBJECTS		= $(addprefix $(OBJECTS_DIRECTORY), $(LEXER_LIST))
@@ -83,13 +94,16 @@ $(OBJECTS_DIRECTORY)%.o: $(LEXER_DIRECTORY)/%.c $(HEADER_FILES)
 $(OBJECTS_DIRECTORY)%.o: $(PARSER_DIRECTORY)/%.c $(HEADER_FILES)
 	$(CC) $(CFLAGS) -c $(INCLUDES) $< -o $@
 
+$(OBJECTS_DIRECTORY)%.o: $(EXPAND_DIRECTORY)/%.c $(HEADER_FILES)
+	$(CC) $(CFLAGS) -c $(INCLUDES) $< -o $@
+
 $(LIBFT):
 	@echo "$(NAME): Compiling $(LIBFT)"
 	@$(MAKE) -sC $(LIBFT_DIRECTORY) 
 
-$(NAME): $(LIBFT) $(OBJECTS_DIRECTORY) $(LEXER_OBJECTS) $(OBJECTS) $(HEADER_FILES)
+$(NAME): $(LIBFT) $(OBJECTS_DIRECTORY) $(LEXER_OBJECTS) $(PARSER_OBJECTS) $(EXPAND_OBJECTS) $(HEADER_FILES)
 	@echo "$(NAME)..."
-	@$(CC) $(CFLAGS) $(LEXER_OBJECTS) $(OBJECTS) $(LIBRARIES) $(INCLUDES) -o $(NAME)
+	@$(CC) $(CFLAGS) $(LEXER_OBJECTS) $(PARSER_OBJECTS) $(EXPAND_OBJECTS) $(LIBRARIES) $(INCLUDES) -o $(NAME)
 
 clean:
 	$(MAKE) -sC $(LIBFT_DIRECTORY) clean
@@ -102,6 +116,6 @@ fclean: clean
 re: fclean all
 
 valgrind:
-	valgrind --leak-check=full --show-leak-kinds=all --leak-check=full --track-origins=yes ./$(NAME) 
+	valgrind --leak-check=full --show-leak-kinds=all --verbose --track-origins=yes ./$(NAME) 
 
 .PHONY: all clean fclean re

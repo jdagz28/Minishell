@@ -44,7 +44,7 @@ typedef struct s_user
 /*
 typedef struct s_cmd
 {
-    t_simple_cmd *cmds;
+    // t_simple_cmd *cmds;
     char ***cmd;
     int len;
     int (*pipes)[2];
