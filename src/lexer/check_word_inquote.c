@@ -6,52 +6,50 @@
 /*   By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/03 23:44:50 by jdagoy            #+#    #+#             */
-/*   Updated: 2023/11/04 00:06:21 by jdagoy           ###   ########.fr       */
+/*   Updated: 2023/11/14 02:16:42 by jdagoy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 #include "lexer_parsing.h"
 
-static void skip_quoted(char **str)
+bool	word_error(char *s, size_t len)
+{
+	if (s[len - 1] == '\\')
+	{
+		tk_error("syntax error near newline ' ", "\\n");
+		return (false);
+	}
+	tk_error("syntax error near quote '", s);
+	return (false);
+}
+
+static void	skip_escape(char **str)
+{
+	if (**str == '\\')
+		(*str)++;
+	(*str)++;
+}
+
+bool	check_word_inquote(char **word, char *tmp_str)
 {
 	char	type;
 
-	type = **str;
-	(*str)++;
-
-	while (**str != '\0' && **str != type)
+	while (**word != '\0')
 	{
-		if (**str == '\\')
-			(*str)++;
-		(*str)++;	
-	}
-	if (**str == type)
-		(*str)++;
-}
-
-bool	check_word_inquote(char **word)
-{
-	char	*str;
-
-	str = *word;
-	while (*str != '\0')
-	{
-		while (*str != '\'' && *str != '\"')
+		while (**word != '\'' && **word != '\"')
 		{
-			if (*str == '\0')
+			if (**word == '\0')
 				return (true);
-			if (*str == '\\')
-				str++;
-			str++;	
+			skip_escape(&(*word));
 		}
-		skip_quoted(&str);
-		if (*str == '\0')
-		{
-			tk_error_manager("Invalid syntax: newline after escape char");
-			return (false);
-		}
-		str++;
+		type = **word;
+		(*word)++;
+		while (**word != type && **word != '\0')
+			skip_escape(&(*word));
+		if (**word == '\0')
+			return (word_error(tmp_str, ft_strlen(tmp_str)));
+		(*word)++;
 	}
 	return (true);
-}	
+}
