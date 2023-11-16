@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_test.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+        */
+/*   By: jdagoy <jdagoy@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 13:54:17 by jdagoy            #+#    #+#             */
-/*   Updated: 2023/11/14 02:48:30 by jdagoy           ###   ########.fr       */
+/*   Updated: 2023/11/16 09:33:06 by jdagoy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,9 +32,7 @@ const char *node_type_strings[] = {
 	"AND_NODE",
 	"SEMICOLON_NODE"};
 
-void	free_token(t_token *head);
 void	print_tokens(t_token *tokens);
-void	clear_ast(t_node **ast);
 void	print_ast_recursive(t_node *node);
 void	print_ast_dot(t_node *node, FILE *output);
 
@@ -84,27 +82,12 @@ int	main(void)
 		// create_dotfile(ast, cmd_index);
 		if (ast != NULL)
 			clear_ast(&ast);
-		free_token(tokens);
+		clear_tokens(tokens);
 		free(line);
 		cmd_index++;
 	}
 }
 
-void	free_token(t_token *head)
-{
-	t_token	*itr;
-	t_token	*next;
-
-	if (head == NULL)
-		return ;
-	itr = head;
-	while (itr != NULL)
-	{
-		next = itr->next;
-		free(itr);
-		itr = next;
-	}
-}
 
 void	print_tokens(t_token *tokens)
 {
@@ -120,46 +103,6 @@ void	print_tokens(t_token *tokens)
 			printf("Token: \t%s\n", current->word);
 		printf("Type: \t%s\n\n", token_kind_strings[current->kind]);
 		current = current->next;
-	}
-	// free_token(tokens);
-}
-
-static void	free_simple_cmd(t_node **simple_cmd)
-{
-	int	i;
-	int	fd;
-
-	i = 0;
-	if (*simple_cmd != NULL)
-	{
-		i = 0;
-		while ((*simple_cmd)->content.simple_cmd.argv[i] != NULL)
-		{
-			free((*simple_cmd)->content.simple_cmd.argv[i]);
-			++i;
-		}
-		fd = (*simple_cmd)->content.simple_cmd.fd_input;
-		if (fd > 0 && fd != STDIN_FILENO)
-			close(fd);
-		fd = (*simple_cmd)->content.simple_cmd.fd_output;
-		if (fd > 0 && fd != STDOUT_FILENO)
-			close(fd);
-		free((*simple_cmd)->content.simple_cmd.argv);
-		free(*simple_cmd);
-	}
-}
-
-void	clear_ast(t_node **ast)
-{
-	if (*ast == NULL)
-		return ;
-	if ((*ast)->type == SIMPLE_CMD)
-		free_simple_cmd(ast);
-	else
-	{
-		clear_ast(&((*ast)->content.child.left));
-		clear_ast(&((*ast)->content.child.right));
-		free(*ast);
 	}
 }
 

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parser_utils.c                                     :+:      :+:    :+:   */
+/*   clear_tokens.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jdagoy <jdagoy@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/09 00:28:37 by jdagoy            #+#    #+#             */
-/*   Updated: 2023/11/16 09:36:00 by jdagoy           ###   ########.fr       */
+/*   Created: 2023/11/16 09:30:08 by jdagoy            #+#    #+#             */
+/*   Updated: 2023/11/16 09:35:54 by jdagoy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,16 +14,26 @@
 #include "lexer_parsing.h"
 
 /**
- * * consume_token
- * free the current token and move to the succeeding token
+ * * clear_tokens
+ * free the tokens list
+ * iterates through the list and frees the word and token itself
 */
-void	consume_token(t_token **tokens)
+void	clear_tokens(t_token *head)
 {
-	t_token	*temp;
+	t_token	*itr;
+	t_token	*next;
 
-	temp = *tokens;
-	if (*tokens == NULL)
+	if (head == NULL)
 		return ;
-	*tokens = (*tokens)->next;
-	free(temp);
+	itr = head;
+	next = itr->next;
+	while (next != NULL)
+	{
+		free(itr->word);
+		free(itr);
+		itr = next;
+		next = itr->next;
+	}
+	free(itr->word);
+	free(itr);
 }

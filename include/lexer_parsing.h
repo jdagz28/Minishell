@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer_parsing.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+        */
+/*   By: jdagoy <jdagoy@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/30 23:08:42 by jdagoy            #+#    #+#             */
-/*   Updated: 2023/11/14 11:22:57 by jdagoy           ###   ########.fr       */
+/*   Updated: 2023/11/16 09:35:12 by jdagoy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,6 +97,9 @@ t_token	*redirect_token(char **remaining, char *line);
 t_token	*word_token(char **remaining, char *line);
 t_token	*create_token(char *word, t_tk_kind kind);
 
+// clear_tokens.c
+void	clear_tokens(t_token *head);
+
 // tokenizer.c
 t_token	*tokenizer(char *input);
 
@@ -115,9 +118,11 @@ bool	parse_simple_cmd(t_token **tokens, t_node **ast);
 
 // parser_utils.c
 void	consume_token(t_token **tokens);
-void	clear_tokens(t_token **tokens);
 
 // parser.c
 bool	build_ast(t_token **tokens, t_node **ast);
+
+// clear_ast.c
+void	clear_ast(t_node **ast);
 
 #endif

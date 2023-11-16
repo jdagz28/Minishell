@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+         #
+#    By: jdagoy <jdagoy@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/10/07 15:33:53 by tbarbe            #+#    #+#              #
-#    Updated: 2023/11/14 03:08:53 by jdagoy           ###   ########.fr        #
+#    Updated: 2023/11/16 09:36:33 by jdagoy           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -55,7 +55,8 @@ SRCS_LIST			= parsing_test.c\
 						parse_pipeline.c\
 						parse_simple_cmd.c\
 						parser_utils.c\
-						parser.c
+						parser.c\
+						clear_ast.c
 
 LEXER_SRCS_LIST		= tokenizer.c\
 						check_opred_tokens.c\
@@ -63,7 +64,8 @@ LEXER_SRCS_LIST		= tokenizer.c\
 						check_word_inquote.c\
                         check_word_tokens.c\
                         create_token.c\
-                        tokenizer_utils.c
+                        tokenizer_utils.c\
+						clear_tokens.c
                  
 OBJECTS_LIST		= $(patsubst %.c, %.o, $(SRCS_LIST))
 OBJECTS				= $(addprefix $(OBJECTS_DIRECTORY), $(OBJECTS_LIST))
