@@ -6,7 +6,7 @@
 /*   By: jdagoy <jdagoy@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/27 00:23:51 by jdagoy            #+#    #+#             */
-/*   Updated: 2023/11/16 09:57:07 by jdagoy           ###   ########.fr       */
+/*   Updated: 2023/11/16 10:21:12 by jdagoy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,8 @@ bool	ft_strncmp_twice(const char *s1, const char *s2)
 		return (true);
 	return (false);
 }
-
-void	execute_builtin(t_simple_cmd command)
+//! env in t_shell
+void	execute_builtin(t_simple_cmd command, t_shell   *shell)
 {
 	int	status;
 
@@ -35,7 +35,7 @@ void	execute_builtin(t_simple_cmd command)
 	if (ft_strncmp_twice((const char *)command.argv[0], "env"))
         //TODO: link env(from toto)
 	if (ft_strncmp_twice((const char *)command.argv[0], "cd"))
-		status = cd(command.argv);
+		status = cd(command.argv, shell->env);
 	if (ft_strncmp_twice((const char *)command.argv[0], "pwd"))
 		//TODO: link pwd(from toto)
         status = pwd();

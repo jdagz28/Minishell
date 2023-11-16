@@ -6,13 +6,13 @@
 /*   By: jdagoy <jdagoy@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/26 23:59:25 by jdagoy            #+#    #+#             */
-/*   Updated: 2023/11/16 09:57:30 by jdagoy           ###   ########.fr       */
+/*   Updated: 2023/11/16 10:12:37 by jdagoy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-bool	echo(char **argv)
+int	echo(char **argv)
 {
 	int		i;
 	int		dash_flag;
