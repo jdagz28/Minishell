@@ -6,18 +6,18 @@
 /*   By: jdagoy <jdagoy@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/27 00:23:51 by jdagoy            #+#    #+#             */
-/*   Updated: 2023/11/16 09:54:04 by jdagoy           ###   ########.fr       */
+/*   Updated: 2023/11/16 09:57:07 by jdagoy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	ft_strncmp_twice(const char *s1, const char *s2)
+bool	ft_strncmp_twice(const char *s1, const char *s2)
 {
 	if (ft_strncmp(s1, s2, ft_strlen(s1)) == 0 \
 			&& ft_strncmp(s1, s2, ft_strlen(s2)) == 0)
-		return (1);
-	return (0);
+		return (true);
+	return (false);
 }
 
 void	execute_builtin(t_simple_cmd command)
