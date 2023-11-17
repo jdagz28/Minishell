@@ -1,37 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   echo.c                                             :+:      :+:    :+:   */
+/*   env_getvar.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jdagoy <jdagoy@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/07/26 23:59:25 by jdagoy            #+#    #+#             */
-/*   Updated: 2023/11/17 09:41:03 by jdagoy           ###   ########.fr       */
+/*   Created: 2023/07/28 22:54:01 by jdagoy            #+#    #+#             */
+/*   Updated: 2023/11/17 10:45:39 by jdagoy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	echo(char **argv)
+char	*ft_get_env_var(char **environ, const char *var)
 {
-	int		i;
-	int		dash_flag;
+	int	i;
+	int	len;
 
-	i = 1;
-	dash_flag = 0;
-	if (check_arg_len(argv) >= 2 && ft_strncmp_twice(argv[i], "-n") == true)
+	len = ft_strlen(var);
+	i = 0;
+	while (environ[i] != NULL)
 	{
-		i = 2;
-		dash_flag = 1;
-	}
-	while (argv[i] != NULL)
-	{
-		ft_putstr_fd(argv[i], STDOUT_FILENO);
+		if (!ft_strncmp(var, environ[i], len) && environ[i][len] == '=')
+			return (environ[i] + len + 1);
 		i++;
-		if (argv[i] != NULL)
-			ft_putchar_fd(' ', STDOUT_FILENO);
 	}
-	if (argv == NULL || dash_flag == 0)
-		ft_putstr_fd("\n", STDOUT_FILENO);
-	return (EXIT_SUCCESS);
+	return (NULL);
 }
