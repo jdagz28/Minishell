@@ -20,7 +20,8 @@
 #include <sys/wait.h>
 #include <readline/readline.h>
 #include <readline/history.h>
-#include <stdbool.h>
+#include <signal.h>
+#include <stdio.h>
 
 typedef struct s_var
 {
@@ -40,7 +41,7 @@ typedef struct s_user
     char *machinename;
     char *lastinput;
 } t_user;
-
+/*
 typedef struct s_cmd
 {
     // t_simple_cmd *cmds;
@@ -48,7 +49,7 @@ typedef struct s_cmd
     int len;
     int (*pipes)[2];
 } t_cmd;
-
+*/
 typedef struct s_shell
 {
     char **env;
@@ -56,7 +57,8 @@ typedef struct s_shell
     int err;
     t_pwd pwd;
     t_user user;
-    t_cmd cmd;
+    t_node *ast;
+    //  t_cmd cmd;
 } t_shell;
 
 /* strtab_utils */
@@ -75,8 +77,7 @@ void strmatrix_print(char ***matrix, char cesa, char cesb);
 int shell_init(t_shell *shell, char *cmds, char **env);
 void shell_clear(t_shell *shell);
 int shell_prompt(t_shell *shell);
-int shell_exec_all(t_shell *shell);
-void shell_exec(t_cmd *cmd, int id, t_shell *shell);
+int shell_exec(t_shell *shell);
 /* env */
 char *env_get(char *start, char end, char **env);
 char *env_getpath(char *str, char **env);
@@ -90,13 +91,13 @@ int pwd_init(t_pwd *pwd, char **env);
 void pwd_clear(t_pwd *pwd);
 char *pwd_cat(t_pwd *pwd);
 /* command */
-int command_init(t_cmd *cmd, char *str);
-int command_clear(t_cmd *cmd);
-void command_exec(char **cmd, t_shell *shell);
+// int command_init(t_cmd *cmd, char *str);
+// int command_clear(t_cmd *cmd);
+// void command_exec(char **cmd, t_shell *shell);
 /* pipes file descriptors*/
-int (*pipes_init(int len))[2];
-void pipes_close(int (*pipes)[2], int len);
-void pipes_dup(int (*pipes)[2], int id, int len);
+// int (*pipes_init(int len))[2];
+// void pipes_close(int (*pipes)[2], int len);
+// void pipes_dup(int (*pipes)[2], int id, int len);
 /* files redirections */
 int open_file_dup2(char *path, char mode);
 char **files_redirect(char **tab);
@@ -104,13 +105,22 @@ char **files_redirect(char **tab);
 t_var *var_new(char *key, char *value);
 void var_clear(void *addr);
 int var_set(t_var *var, char *value);
-/* var list */
+/* varcmd */
+int var_extract(t_shell *shell, t_node *node);
+int var_inject(t_shell *shell, t_node *node);
+int var_unset(t_shell *shell, t_node *node); // unprotected
+/* varlst */
 char *varlst_getvalue(t_list *lst, char *key);
 int varlst_getid(t_list *lst, char *key);
-int varlst_set(t_list **lst, char *key, char *value);
+int varlst_set(t_shell *shell, char *key, char *value);
 void varlst_unset(t_list **lst, char *key);
 /* utils */
 void print_error(char *str1, char *str2);
 void clean_exit(t_shell *data, int err);
-
+/* exec */
+void exec_node(t_shell *shell, t_node *node);
+void exec_simple(t_shell *shell, t_node *node);
+void exec_pipe(t_shell *shell, t_node *node);
+/* signals */
+int signal_unset(int sig);
 #endif

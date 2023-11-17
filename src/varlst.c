@@ -35,13 +35,13 @@ int varlst_getid(t_list *lst, char *key)
     return (-1);
 }
 
-int varlst_set(t_list **lst, char *key, char *value)
+int varlst_set(t_shell *shell, char *key, char *value)
 {
     t_list *l;
     t_var *var;
     int len;
 
-    l = *lst;
+    l = shell->varlst;
     while (l)
     {
         var = (t_var *)l->content;
@@ -53,7 +53,7 @@ int varlst_set(t_list **lst, char *key, char *value)
     var = var_new(key, value);
     if (!var)
         return (EXIT_FAILURE);
-    ft_lstadd_back(lst, ft_lstnew(var));
+    ft_lstadd_back(&shell->varlst, ft_lstnew(var));
     return (EXIT_SUCCESS);
 }
 

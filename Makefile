@@ -14,6 +14,22 @@
 
 NAME	=	minishell
 
+PARSER_SRCS			=	parsing.c\
+						parse_pipeline.c\
+						parse_simple_cmd.c\
+						parser_utils.c\
+						parser.c\
+						clear_ast.c
+
+LEXER_SRCS		= tokenizer.c\
+						check_opred_tokens.c\
+                        check_token.c\
+						check_word_inquote.c\
+                        check_word_tokens.c\
+                        create_token.c\
+                        tokenizer_utils.c\
+						clear_tokens.c
+
 SRCS	=	minishell.c \
 			shell.c \
 			strtab_utils.c \
@@ -26,11 +42,19 @@ SRCS	=	minishell.c \
 			utils.c \
 			files.c \
 			var.c \
-			varlst.c
+			varlst.c \
+			varcmd.c \
+			exec.c \
+			signal.c
 
 INCLUDE	=	./include
 
-SRCS_	=	$(addprefix src/, $(SRCS))
+PARSER_SRCS_	=	$(addprefix src/parser/, $(PARSER_SRCS))
+
+LEXER_SRCS_	=		$(addprefix src/lexer/, $(LEXER_SRCS))
+
+SRCS_	=			$(addprefix src/, $(SRCS))
+
 
 LIBFT	=	./libft/libft.a
 
@@ -45,7 +69,7 @@ all:		${NAME}
 ${NAME}:	
 			$(MAKE) -C ./libft
 			echo "libft done"
-			${CC} ${SRCS_} ${LIBFT} ${PRINTF} -I ${INCLUDE} -o ${NAME} ${CFLAGS}
+			${CC} ${PARSER_SRCS_} ${LEXER_SRCS_} ${SRCS_} ${LIBFT} ${PRINTF} -I ${INCLUDE} -o ${NAME} ${CFLAGS}
 			echo "minishell done"
 			echo "use 'make only' to only compile the minishell"
 
@@ -58,7 +82,7 @@ fclean: 	clean
 re:			fclean all
 
 only:		
-			${CC} ${SRCS_} ${LIBFT} ${PRINTF} -o ${NAME} ${CFLAGS}
+			${CC} ${PARSER_SRCS_} ${LEXER_SRCS_} ${SRCS_} ${LIBFT} ${PRINTF} -I ${INCLUDE} -o ${NAME} ${CFLAGS}
 			echo "minishell done"
 
 .PHONY:		all clean fclean re
