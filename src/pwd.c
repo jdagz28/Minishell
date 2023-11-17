@@ -35,8 +35,8 @@ void pwd_clear(t_pwd *pwd)
 char *pwd_cat(t_pwd *pwd)
 {
     char *res;
-    int len;
     char *str;
+    int len;
     int home;
 
     len = ft_strlen(pwd->home);
@@ -44,13 +44,13 @@ char *pwd_cat(t_pwd *pwd)
     if (strncmp(pwd->home, pwd->root, len) == 0)
         home = 1;
     str = &pwd->root[len * home];
-    len = ft_strlen(str) + ft_strlen("$ ") + home;
-    res = malloc(sizeof(char) * (len + 1));
+    len = ft_strlen(str) + ft_strlen("$ ") + home + 1;
+    res = malloc(sizeof(char) * len);
     if (!res)
         return (NULL);
     if (home)
         res[0] = '~';
-    ft_strlcat(res, str, len + 1);
-    ft_strlcat(res, "$ ", len + 1);
+    ft_strlcat(res, str, len);
+    ft_strlcat(res, "$ ", len);
     return (res);
 }

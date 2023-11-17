@@ -14,7 +14,7 @@
 
 int run(t_shell *shell)
 {
-    // signal_unset(SIGINT);
+    signal_unset(SIGINT);
     while (1)
         shell->err = shell_prompt(shell);
     return (EXIT_SUCCESS);

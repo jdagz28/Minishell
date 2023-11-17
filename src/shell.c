@@ -106,6 +106,7 @@ int shell_exec(t_shell *shell)
         return (EXIT_FAILURE);
     if (pid == 0)
     {
+        signal_set(SIGINT, SIG_DFL);
         cmd = &node->content.simple_cmd.argv;
         *cmd = cmd[argv_inc];
         exec_node(shell, shell->ast);

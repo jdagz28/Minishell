@@ -41,24 +41,15 @@ typedef struct s_user
     char *machinename;
     char *lastinput;
 } t_user;
-/*
-typedef struct s_cmd
-{
-    // t_simple_cmd *cmds;
-    char ***cmd;
-    int len;
-    int (*pipes)[2];
-} t_cmd;
-*/
+
 typedef struct s_shell
 {
     char **env;
     t_list *varlst;
-    int err;
     t_pwd pwd;
     t_user user;
     t_node *ast;
-    //  t_cmd cmd;
+    int err;
 } t_shell;
 
 /* strtab_utils */
@@ -90,14 +81,6 @@ char *user_cat(t_user *user);
 int pwd_init(t_pwd *pwd, char **env);
 void pwd_clear(t_pwd *pwd);
 char *pwd_cat(t_pwd *pwd);
-/* command */
-// int command_init(t_cmd *cmd, char *str);
-// int command_clear(t_cmd *cmd);
-// void command_exec(char **cmd, t_shell *shell);
-/* pipes file descriptors*/
-// int (*pipes_init(int len))[2];
-// void pipes_close(int (*pipes)[2], int len);
-// void pipes_dup(int (*pipes)[2], int id, int len);
 /* files redirections */
 int open_file_dup2(char *path, char mode);
 char **files_redirect(char **tab);
@@ -123,4 +106,6 @@ void exec_simple(t_shell *shell, t_node *node);
 void exec_pipe(t_shell *shell, t_node *node);
 /* signals */
 int signal_unset(int sig);
+int signal_set(int sig, void *f);
+
 #endif
