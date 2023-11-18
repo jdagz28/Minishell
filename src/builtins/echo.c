@@ -6,11 +6,13 @@
 /*   By: jdagoy <jdagoy@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/26 23:59:25 by jdagoy            #+#    #+#             */
-/*   Updated: 2023/11/17 09:41:03 by jdagoy           ###   ########.fr       */
+/*   Updated: 2023/11/17 13:21:39 by jdagoy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+#include "builtins.h"
+#include "expansion.h"
 
 int	echo(char **argv)
 {
@@ -19,7 +21,7 @@ int	echo(char **argv)
 
 	i = 1;
 	dash_flag = 0;
-	if (check_arg_len(argv) >= 2 && ft_strncmp_twice(argv[i], "-n") == true)
+	if (ft_arraylen(argv) >= 2 && ft_strncmp_twice(argv[i], "-n") == true)
 	{
 		i = 2;
 		dash_flag = 1;

@@ -6,7 +6,7 @@
 #    By: jdagoy <jdagoy@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/10/07 15:33:53 by tbarbe            #+#    #+#              #
-#    Updated: 2023/11/17 10:50:25 by jdagoy           ###   ########.fr        #
+#    Updated: 2023/11/17 13:12:56 by jdagoy           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -43,6 +43,7 @@ LEXER_DIRECTORY		= ../lexer/
 EXPAND_DIRECTORY	= ../expander/
 ENV_DIRECTORY		= ./
 REST_DIRECTORY		= ../
+BUILTINS_DIRECTORY	= ../builtins/
 
 
 LIBRARIES			= -lreadline -L$(LIBFT_DIRECTORY) -lft $(MAC_LIBS)
@@ -69,7 +70,9 @@ PARSING_SRCS_LIST	= parse_pipeline.c\
 						parse_simple_cmd.c\
 						parser_utils.c\
 						parser.c\
-						clear_ast.c
+						clear_ast.c\
+						parsing.c\
+						debug_print.c
 
 EXPAND_SRCS_LIST	= expand_cmds.c\
 						expand_replace_var_value.c\
@@ -86,15 +89,25 @@ ENV_SRCS_LIST		= env_getvar.c\
 
 REST_SRCS_LIST		= commands.c\
 						env.c\
+						exec.c\
 						files.c\
 						pipes.c\
 						pwd.c\
 						shell.c\
 						strmatrix_utils.c\
+						strtab_utils.c\
 						user.c\
 						utils.c\
 						var.c\
+						varcmd.c\
 						varlst.c
+
+BUILTINS_SRCS_LIST	= builtins.c\
+						cd.c\
+						echo.c
+
+BUILTINS_LIST	 	= $(patsubst %.c, %.o, $(BUILTINS_SRCS_LIST))
+BUILTINS_OBJECTS	= $(addprefix $(OBJECTS_DIRECTORY), $(BUILTINS_LIST))
 
 REST_LIST			= $(patsubst %.c, %.o, $(REST_SRCS_LIST))
 REST_OBJECTS		= $(addprefix $(OBJECTS_DIRECTORY),$(REST_LIST))	
@@ -106,7 +119,7 @@ EXPAND_LIST			= $(patsubst %.c, %.o, $(EXPAND_SRCS_LIST))
 EXPAND_OBJECTS		= $(addprefix $(OBJECTS_DIRECTORY), $(EXPAND_LIST))
 
 PARSER_LIST			= $(patsubst %.c, %.o, $(PARSING_SRCS_LIST))
-PARSER_OBJECTS				= $(addprefix $(OBJECTS_DIRECTORY), $(PARSER_LIST))
+PARSER_OBJECTS		= $(addprefix $(OBJECTS_DIRECTORY), $(PARSER_LIST))
 
 LEXER_LIST			= $(patsubst %.c, %.o, $(LEXER_SRCS_LIST))
 LEXER_OBJECTS		= $(addprefix $(OBJECTS_DIRECTORY), $(LEXER_LIST))
@@ -130,13 +143,16 @@ $(OBJECTS_DIRECTORY)%.o: $(ENV_DIRECTORY)/%.c $(HEADER_FILES)
 $(OBJECTS_DIRECTORY)%.o: $(REST_DIRECTORY)/%.c $(HEADER_FILES)
 	$(CC) $(CFLAGS) -c $(INCLUDES) $< -o $@
 
+$(OBJECTS_DIRECTORY)%.o: $(BUILTINS_DIRECTORY)/%.c $(HEADER_FILES)
+	$(CC) $(CFLAGS) -c $(INCLUDES) $< -o $@
+
 $(LIBFT):
 	@echo "$(NAME): Compiling $(LIBFT)"
 	@$(MAKE) -sC $(LIBFT_DIRECTORY) 
 
-$(NAME): $(LIBFT) $(OBJECTS_DIRECTORY) $(LEXER_OBJECTS) $(PARSER_OBJECTS) $(EXPAND_OBJECTS) $(ENV_OBJECTS) $(REST_OBJECTS) $(HEADER_FILES)
+$(NAME): $(LIBFT) $(OBJECTS_DIRECTORY) $(LEXER_OBJECTS) $(PARSER_OBJECTS) $(EXPAND_OBJECTS) $(ENV_OBJECTS) $(REST_OBJECTS) $(BUILTINS_OBJECTS) $(HEADER_FILES)
 	@echo "$(NAME)..."
-	@$(CC) $(CFLAGS) $(LEXER_OBJECTS) $(PARSER_OBJECTS) $(EXPAND_OBJECTS) $(ENV_OBJECTS) $(REST_OBJECTS) $(LIBRARIES) $(INCLUDES) -o $(NAME)
+	@$(CC) $(CFLAGS) $(LEXER_OBJECTS) $(PARSER_OBJECTS) $(EXPAND_OBJECTS) $(ENV_OBJECTS) $(REST_OBJECTS) $(BUILTINS_OBJECTS) $(LIBRARIES) $(INCLUDES) -o $(NAME)
 
 clean:
 	$(MAKE) -sC $(LIBFT_DIRECTORY) clean

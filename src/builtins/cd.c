@@ -6,13 +6,15 @@
 /*   By: jdagoy <jdagoy@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/29 02:08:41 by jdagoy            #+#    #+#             */
-/*   Updated: 2023/11/17 09:45:58 by jdagoy           ###   ########.fr       */
+/*   Updated: 2023/11/18 20:31:09 by jdagoy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 #include "lexer_parsing.h"
+#include "expansion.h"
 #include "builtins.h"
+#include "environment.h"
 
 static int	update_pwd(char **argv, char **env)
 {
@@ -27,7 +29,7 @@ static int	update_pwd(char **argv, char **env)
 		ft_putstr_fd("pwd: getcwd():", STDERR_FILENO);
 		ft_putstr_fd(strerror(errno), STDERR_FILENO);
 		pwd = ft_strjoin(ft_get_env_var(env, "PWD"), argv[1]);
-		if (ft_setenv("PWD", pwd, env, 1) == -1)
+		if (ft_setenv("PWD", pwd, &env, 1) == -1)
 		{
 			free(new_pwd);
 			return (EXIT_FAILURE);
@@ -35,7 +37,7 @@ static int	update_pwd(char **argv, char **env)
 	}
 	else
 	{
-		if (ft_setenv("PWD", new_pwd, 1) == EXIT_FAILURE)
+		if (ft_setenv("PWD", new_pwd, &env, 1) == EXIT_FAILURE)
 		{
 			free(new_pwd);
 			return (EXIT_FAILURE);
