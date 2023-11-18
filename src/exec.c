@@ -12,27 +12,56 @@
 
 #include "../include/minishell.h"
 
-/*
-int exec_builtin(t_shell *shell, t_node *node)
+int exec_node(t_shell *shell, t_node *node)
 {
-}
-*/
-void exec_node(t_shell *shell, t_node *node)
-{
+    signal_set(SIGINT, SIG_IGN);
     if (node->type == SIMPLE_CMD)
-        exec_simple(shell, node);
+        return (exec_simple(shell, node));
     if (node->type == PIPE_NODE)
-        exec_pipe(shell, node);
+        return (exec_pipe(shell, node));
+    return (EXIT_SUCCESS);
 }
 
-void exec_simple(t_shell *shell, t_node *node)
+int exec_simple(t_shell *shell, t_node *node)
 {
     char **cmd;
+    int err;
+    int pid;
+    int status;
+
+    pid = fork();
+    if (pid == -1)
+        return (EXIT_FAILURE);
+    if (pid == 0)
+    {
+        cmd = node->content.simple_cmd.argv;
+        cmd = files_redirect(cmd);
+        err = exec_builtin(shell, cmd);
+        if (err)
+            exit(err);
+        exec_bin(cmd, shell->env);
+    }
+    waitpid(pid, &status, 0);
+    return (WEXITSTATUS(status));
+}
+
+int exec_builtin(t_shell *shell, char **cmd)
+{
+    if (ft_strncmp(cmd[0], "exit", 4) == 0)
+        exit(128);
+    if (ft_strncmp(cmd[0], "pwd", 3) == 0)
+    {
+        ft_printf("%s\n", shell->pwd.root);
+        return (1);
+    }
+    return (0);
+}
+
+void exec_bin(char **cmd, char **env)
+{
     char *bin;
 
-    cmd = node->content.simple_cmd.argv;
-    cmd = files_redirect(cmd);
-    bin = env_getpath(cmd[0], shell->env);
+    bin = env_getpath(cmd[0], env);
     if (!bin)
     {
         print_error(cmd[0], "command not found");
@@ -40,7 +69,7 @@ void exec_simple(t_shell *shell, t_node *node)
     }
     free(cmd[0]);
     cmd[0] = bin;
-    execve(cmd[0], cmd, shell->env);
+    execve(cmd[0], cmd, env);
     exit(127);
 }
 
@@ -50,12 +79,11 @@ static void close_pipe(int fd[2])
     close(fd[1]);
 }
 
-void exec_pipe(t_shell *shell, t_node *node)
+int exec_pipe(t_shell *shell, t_node *node)
 {
     int pid;
-    int status;
     int fd[2];
-    t_node *next;
+    int res;
 
     if (pipe(fd) < 0)
         exit(EXIT_FAILURE);
@@ -68,14 +96,12 @@ void exec_pipe(t_shell *shell, t_node *node)
     if (pid == 0)
     {
         dup2(fd[1], STDOUT_FILENO);
-        next = node->content.child.left;
+        close_pipe(fd);
+        exit(exec_node(shell, node->content.child.left));
     }
-    else
-    {
-        waitpid(pid, &status, 0);
-        dup2(fd[0], STDIN_FILENO);
-        next = node->content.child.right;
-    }
+    dup2(fd[0], STDIN_FILENO);
     close_pipe(fd);
-    exec_node(shell, next);
+    res = exec_node(shell, node->content.child.right);
+    waitpid(pid, NULL, 0);
+    return (res);
 }

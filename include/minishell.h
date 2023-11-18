@@ -101,11 +101,13 @@ void varlst_unset(t_list **lst, char *key);
 void print_error(char *str1, char *str2);
 void clean_exit(t_shell *data, int err);
 /* exec */
-void exec_node(t_shell *shell, t_node *node);
-void exec_simple(t_shell *shell, t_node *node);
-void exec_pipe(t_shell *shell, t_node *node);
+int exec_node(t_shell *shell, t_node *node);
+int exec_simple(t_shell *shell, t_node *node);
+int exec_pipe(t_shell *shell, t_node *node);
+void exec_bin(char **cmd, char **env);
+int exec_builtin(t_shell *shell, char **cmd);
 /* signals */
-int signal_unset(int sig);
+void prompt_interrupt();
 int signal_set(int sig, void *f);
-
+void write_newline();
 #endif

@@ -34,8 +34,6 @@ SRCS	=	minishell.c \
 			shell.c \
 			strtab_utils.c \
 			strmatrix_utils.c \
-			pipes.c \
-			commands.c \
 			env.c \
 			user.c \
 			pwd.c \

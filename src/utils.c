@@ -14,6 +14,7 @@
 
 void clean_exit(t_shell *data, int err)
 {
+    rl_clear_history();
     shell_clear(data);
     exit(err);
 }

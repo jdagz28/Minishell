@@ -48,6 +48,7 @@ char *pwd_cat(t_pwd *pwd)
     res = malloc(sizeof(char) * len);
     if (!res)
         return (NULL);
+    ft_memset(res, 0, len);
     if (home)
         res[0] = '~';
     ft_strlcat(res, str, len);

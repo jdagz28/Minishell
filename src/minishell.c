@@ -14,10 +14,10 @@
 
 int run(t_shell *shell)
 {
-    signal_unset(SIGINT);
-    while (1)
+    while (shell->err != 128)
         shell->err = shell_prompt(shell);
-    return (EXIT_SUCCESS);
+    ft_printf("exit\n");
+    return (128);
 }
 
 int main(int argc, char **argv, char **env)
