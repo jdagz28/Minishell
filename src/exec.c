@@ -52,6 +52,7 @@ int exec_bin(t_simple_cmd *cmd, char **env)
     int pid;
     int status;
 
+    signal_set(SIGINT, &write_newline);
     bin = env_getpath(cmd->argv[0], env);
     if (!bin)
     {
