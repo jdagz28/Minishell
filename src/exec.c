@@ -14,7 +14,6 @@
 
 int exec_node(t_shell *shell, t_node *node)
 {
-    signal_set(SIGINT, SIG_IGN);
     if (node->type == SIMPLE_CMD)
         return (exec_simple(shell, node));
     if (node->type == PIPE_NODE)
@@ -24,25 +23,15 @@ int exec_node(t_shell *shell, t_node *node)
 
 int exec_simple(t_shell *shell, t_node *node)
 {
-    char **cmd;
+    char ***cmd;
     int err;
-    int pid;
-    int status;
 
-    pid = fork();
-    if (pid == -1)
-        return (EXIT_FAILURE);
-    if (pid == 0)
-    {
-        cmd = node->content.simple_cmd.argv;
-        cmd = files_redirect(cmd);
-        err = exec_builtin(shell, cmd);
-        if (err)
-            exit(err);
-        exec_bin(cmd, shell->env);
-    }
-    waitpid(pid, &status, 0);
-    return (WEXITSTATUS(status));
+    cmd = &node->content.simple_cmd.argv;
+    *cmd = files_redirect(*cmd);
+    err = exec_builtin(shell, *cmd);
+    if (!err)
+        err = exec_bin(&node->content.simple_cmd, shell->env);
+    return (err);
 }
 
 int exec_builtin(t_shell *shell, char **cmd)
@@ -57,20 +46,30 @@ int exec_builtin(t_shell *shell, char **cmd)
     return (0);
 }
 
-void exec_bin(char **cmd, char **env)
+int exec_bin(t_simple_cmd *cmd, char **env)
 {
     char *bin;
+    int pid;
+    int status;
 
-    bin = env_getpath(cmd[0], env);
+    bin = env_getpath(cmd->argv[0], env);
     if (!bin)
     {
-        print_error(cmd[0], "command not found");
+        print_error(cmd->argv[0], "command not found");
         exit(127);
     }
-    free(cmd[0]);
-    cmd[0] = bin;
-    execve(cmd[0], cmd, env);
-    exit(127);
+    free(cmd->argv[0]);
+    cmd->argv[0] = bin;
+    pid = fork();
+    if (pid == -1)
+        return (EXIT_FAILURE);
+    if (pid == 0)
+    {
+        execve(cmd->argv[0], cmd->argv, env);
+        exit(127);
+    }
+    waitpid(pid, &status, 0);
+    return (WEXITSTATUS(status));
 }
 
 static void close_pipe(int fd[2])

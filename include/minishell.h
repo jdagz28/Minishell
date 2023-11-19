@@ -67,6 +67,7 @@ void strmatrix_print(char ***matrix, char cesa, char cesb);
 /* shell */
 int shell_init(t_shell *shell, char *cmds, char **env);
 void shell_clear(t_shell *shell);
+int shell_run(t_shell *shell);
 int shell_prompt(t_shell *shell);
 int shell_exec(t_shell *shell);
 /* env */
@@ -104,7 +105,7 @@ void clean_exit(t_shell *data, int err);
 int exec_node(t_shell *shell, t_node *node);
 int exec_simple(t_shell *shell, t_node *node);
 int exec_pipe(t_shell *shell, t_node *node);
-void exec_bin(char **cmd, char **env);
+int exec_bin(t_simple_cmd *cmd, char **env);
 int exec_builtin(t_shell *shell, char **cmd);
 /* signals */
 void prompt_interrupt();

@@ -54,15 +54,22 @@ static char *shell_cat(t_shell *shell)
     return (res);
 }
 
-int shell_prompt(t_shell *shell)
+int shell_run(t_shell *shell)
+{
+    while (shell->err != 128)
+        shell->err = shell_prompt(shell);
+    ft_printf("exit\n");
+    return (128);
+}
+
+static char *shell_readline(t_shell *shell)
 {
     char *cat;
     char *line;
-    int err;
 
     cat = shell_cat(shell);
     if (!cat)
-        return (EXIT_FAILURE);
+        return (NULL);
     signal_set(SIGINT, &prompt_interrupt);
     line = readline(cat);
     signal_set(SIGINT, &write_newline);
@@ -73,13 +80,21 @@ int shell_prompt(t_shell *shell)
         write(1, "exit\n", 5);
         exit(128);
     }
-    err = user_setlastinput(&shell->user, line);
+    user_setlastinput(&shell->user, line);
+    return (line);
+}
+
+int shell_prompt(t_shell *shell)
+{
+    char *line;
+    int err;
+
+    line = shell_readline(shell);
     shell->ast = parse(line);
     free(line);
     if (!shell->ast)
         return (EXIT_FAILURE);
-    if (!err)
-        err = shell_exec(shell);
+    err = shell_exec(shell);
     clear_ast(&shell->ast);
     return (err);
 }
@@ -93,13 +108,12 @@ int shell_exec(t_shell *shell)
     node = shell->ast;
     if (!node)
         return (EXIT_FAILURE);
+    signal_set(SIGINT, SIG_IGN);
     pid = fork();
     if (pid == -1)
         return (EXIT_FAILURE);
     if (pid == 0)
-    {
         exit(exec_node(shell, node));
-    }
     waitpid(pid, &status, 0);
     return (WEXITSTATUS(status));
 }

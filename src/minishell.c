@@ -12,14 +12,6 @@
 
 #include "../include/minishell.h"
 
-int run(t_shell *shell)
-{
-    while (shell->err != 128)
-        shell->err = shell_prompt(shell);
-    ft_printf("exit\n");
-    return (128);
-}
-
 int main(int argc, char **argv, char **env)
 {
     t_shell shell;
@@ -35,7 +27,7 @@ int main(int argc, char **argv, char **env)
     if (cmds)
         err = shell_exec(&shell);
     else
-        run(&shell);
+        shell_run(&shell);
     shell_clear(&shell);
     return (err);
 }
