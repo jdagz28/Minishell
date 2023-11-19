@@ -40,7 +40,7 @@ int user_setlastinput(t_user *user, char *str)
     if (str && ft_strncmp(user->lastinput, str, ft_strlen(str)) != 0)
     {
         add_history(str);
-        // leaks = still reachable: 4,054 bytes in 4 blocks
+        //  leaks = still reachable: 4,054 bytes in 4 blocks
         if (user->lastinput)
             free(user->lastinput);
         user->lastinput = ft_strdup(str);

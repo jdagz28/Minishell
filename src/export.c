@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.c                                        :+:      :+:    :+:   */
+/*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tbarbe <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -12,22 +12,30 @@
 
 #include "../include/minishell.h"
 
-int main(int argc, char **argv, char **env)
+int export(t_shell *shell, char *str)
 {
-    t_shell shell;
-    char *cmds;
+    int envid;
+    int varid;
+    char *new;
     int err;
 
-    if (argc == 1)
-        cmds = NULL;
-    else
-        cmds = argv[1];
-    if (shell_init(&shell, cmds, env))
+    if (!str)
         return (EXIT_FAILURE);
-    if (cmds)
-        err = shell_exec(&shell);
+    varid = strtab_beginwith(shell->var, str);
+    if (varid == -1)
+        return (EXIT_FAILURE);
+    new = ft_strdup(shell->var[varid]);
+    if (!new)
+        return (EXIT_FAILURE);
+    envid = strtab_beginwith(shell->env, str);
+    if (envid != -1)
+        err = strtab_replace_line(&shell->env, new, envid);
     else
-        shell_run(&shell);
-    shell_clear(&shell);
-    return (err);
+        err = strtab_add_line(&shell->env, new);
+    if (err)
+    {
+        free(new);
+        return (EXIT_FAILURE);
+    }
+    return (EXIT_SUCCESS);
 }

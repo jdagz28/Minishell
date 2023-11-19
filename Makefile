@@ -34,18 +34,15 @@ SRCS	=	minishell.c \
 			shell.c \
 			strtab_utils.c \
 			strmatrix_utils.c \
-			pipes.c \
-			commands.c \
 			env.c \
 			user.c \
 			pwd.c \
 			utils.c \
 			files.c \
 			var.c \
-			varlst.c \
-			varcmd.c \
 			exec.c \
-			signal.c
+			signal.c \
+			export.c
 
 INCLUDE	=	./include
 
