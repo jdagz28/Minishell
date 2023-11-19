@@ -56,6 +56,7 @@ static char *shell_cat(t_shell *shell)
 
 int shell_run(t_shell *shell)
 {
+    signal_set(SIGQUIT, SIG_IGN);
     while (shell->err != 128)
         shell->err = shell_prompt(shell);
     ft_printf("exit\n");

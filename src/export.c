@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   signals.c                                          :+:      :+:    :+:   */
+/*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tbarbe <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -11,28 +11,11 @@
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
-
-void write_newline()
+/*
+int export(char ***env, char *key, char *value)
 {
-    write(1, "\n", 1);
+    int len;
+
+    len = strtab_len(env);
 }
-
-void prompt_interrupt()
-{
-    write(1, "\n", 1);
-    rl_on_new_line();
-    rl_replace_line("", 0);
-    rl_redisplay();
-}
-
-int signal_set(int sig, void *f)
-{
-    struct sigaction sa;
-
-    sa.sa_handler = f;
-    sa.sa_flags = 0;
-
-    if (sigaction(sig, &sa, NULL) != 0)
-        return (EXIT_FAILURE);
-    return (EXIT_SUCCESS);
-}
+*/

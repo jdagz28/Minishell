@@ -1,134 +1,61 @@
-[?1h=[?25l[H[2J(B[mtop - 14:12:51 up  2:19,  1 user,  load average: 1,26, 1,04, 0,81(B[m[39;49m(B[m[39;49m[K
-Tasks:(B[m[39;49m[1m 271 (B[m[39;49mtotal,(B[m[39;49m[1m   1 (B[m[39;49mrunning,(B[m[39;49m[1m 215 (B[m[39;49msleeping,(B[m[39;49m[1m   0 (B[m[39;49mstopped,(B[m[39;49m[1m   1 (B[m[39;49mzombie(B[m[39;49m(B[m[39;49m[K
-%Cpu(s):(B[m[39;49m[1m  8,9 (B[m[39;49mus,(B[m[39;49m[1m  2,1 (B[m[39;49msy,(B[m[39;49m[1m  0,0 (B[m[39;49mni,(B[m[39;49m[1m 88,6 (B[m[39;49mid,(B[m[39;49m[1m  0,1 (B[m[39;49mwa,(B[m[39;49m[1m  0,0 (B[m[39;49mhi,(B[m[39;49m[1m  0,3 (B[m[39;49msi,(B[m[39;49m[1m  0,0 (B[m[39;49mst(B[m[39;49m(B[m[39;49m[K
-KiB Mem :(B[m[39;49m[1m  1873060 (B[m[39;49mtotal,(B[m[39;49m[1m   144992 (B[m[39;49mfree,(B[m[39;49m[1m  1214748 (B[m[39;49mused,(B[m[39;49m[1m   513320 (B[m[39;49mbuff/cache(B[m[39;49m(B[m[39;49m[K
-KiB Swap:(B[m[39;49m[1m  2097148 (B[m[39;49mtotal,(B[m[39;49m[1m   828412 (B[m[39;49mfree,(B[m[39;49m[1m  1268736 (B[m[39;49mused.(B[m[39;49m[1m   302752 (B[m[39;49mavail Mem (B[m[39;49m(B[m[39;49m[K
-[K
-[7m  PID USER      PR  NI    VIRT    RES    SHR S  %CPU %MEM     TIME+ COMMAND                                                             (B[m[39;49m[K
-(B[m 7918 toto      20   0  1,108t 170800  47748 S  16,7  9,1   5:47.32 code                                                                (B[m[39;49m[K
-(B[m 7851 toto      20   0  1,097t  72388  42140 S   5,6  3,9   0:43.65 code                                                                (B[m[39;49m[K
-(B[m 8001 toto      20   0  1,097t  17564  14252 S   5,6  0,9   0:02.05 code                                                                (B[m[39;49m[K
-(B[m[1m12790 toto      20   0   44216   4044   3336 R   5,6  0,2   0:00.04 top                                                                 (B[m[39;49m[K
-(B[m    1 root      20   0  225912   3508   1768 S   0,0  0,2   0:03.82 systemd                                                             (B[m[39;49m[K
-(B[m    2 root      20   0       0      0      0 S   0,0  0,0   0:00.01 kthreadd                                                            (B[m[39;49m[K
-(B[m    3 root       0 -20       0      0      0 I   0,0  0,0   0:00.00 rcu_gp                                                              (B[m[39;49m[K
-(B[m    4 root       0 -20       0      0      0 I   0,0  0,0   0:00.00 rcu_par_gp                                                          (B[m[39;49m[K
-(B[m    8 root       0 -20       0      0      0 I   0,0  0,0   0:00.00 mm_percpu_wq                                                        (B[m[39;49m[K
-(B[m    9 root      20   0       0      0      0 S   0,0  0,0   0:00.83 ksoftirqd/0                                                         (B[m[39;49m[K
-(B[m   10 root      20   0       0      0      0 I   0,0  0,0   0:15.80 rcu_sched                                                           (B[m[39;49m[K
-(B[m   11 root      rt   0       0      0      0 S   0,0  0,0   0:00.06 migration/0                                                         (B[m[39;49m[K
-(B[m   13 root     -51   0       0      0      0 S   0,0  0,0   0:00.00 idle_inject/0                                                       (B[m[39;49m[K
-(B[m   14 root      20   0       0      0      0 S   0,0  0,0   0:00.00 cpuhp/0                                                             (B[m[39;49m[K
-(B[m   15 root      20   0       0      0      0 S   0,0  0,0   0:00.00 cpuhp/1                                                             (B[m[39;49m[K
-(B[m   16 root     -51   0       0      0      0 S   0,0  0,0   0:00.00 idle_inject/1                                                       (B[m[39;49m[K
-(B[m   17 root      rt   0       0      0      0 S   0,0  0,0   0:00.07 migration/1                                                         (B[m[39;49m[K
-(B[m   18 root      20   0       0      0      0 S   0,0  0,0   0:00.61 ksoftirqd/1                                                         (B[m[39;49m[K
-(B[m   21 root      20   0       0      0      0 S   0,0  0,0   0:00.00 cpuhp/2                                                             (B[m[39;49m[K
-(B[m   22 root     -51   0       0      0      0 S   0,0  0,0   0:00.00 idle_inject/2                                                       (B[m[39;49m[K
-(B[m   23 root      rt   0       0      0      0 S   0,0  0,0   0:00.07 migration/2                                                         (B[m[39;49m[K
-(B[m   24 root      20   0       0      0      0 S   0,0  0,0   0:05.91 ksoftirqd/2                                                         (B[m[39;49m[K
-(B[m   26 root       0 -20       0      0      0 I   0,0  0,0   0:01.21 kworker/2:0H-ev                                                     (B[m[39;49m[K
-(B[m   27 root      20   0       0      0      0 S   0,0  0,0   0:00.00 cpuhp/3                                                             (B[m[39;49m[K
-(B[m   28 root     -51   0       0      0      0 S   0,0  0,0   0:00.00 idle_inject/3                                                       (B[m[39;49m[K
-(B[m   29 root      rt   0       0      0      0 S   0,0  0,0   0:00.07 migration/3                                                         (B[m[39;49m[K
-(B[m   30 root      20   0       0      0      0 S   0,0  0,0   0:00.40 ksoftirqd/3                                                         (B[m[39;49m[K[H(B[mtop - 14:12:54 up  2:19,  1 user,  load average: 1,16, 1,02, 0,80(B[m[39;49m(B[m[39;49m[K
-Tasks:(B[m[39;49m[1m 271 (B[m[39;49mtotal,(B[m[39;49m[1m   1 (B[m[39;49mrunning,(B[m[39;49m[1m 215 (B[m[39;49msleeping,(B[m[39;49m[1m   0 (B[m[39;49mstopped,(B[m[39;49m[1m   1 (B[m[39;49mzombie(B[m[39;49m(B[m[39;49m[K
-%Cpu(s):(B[m[39;49m[1m  2,6 (B[m[39;49mus,(B[m[39;49m[1m  1,8 (B[m[39;49msy,(B[m[39;49m[1m  0,0 (B[m[39;49mni,(B[m[39;49m[1m 95,6 (B[m[39;49mid,(B[m[39;49m[1m  0,0 (B[m[39;49mwa,(B[m[39;49m[1m  0,0 (B[m[39;49mhi,(B[m[39;49m[1m  0,0 (B[m[39;49msi,(B[m[39;49m[1m  0,0 (B[m[39;49mst(B[m[39;49m(B[m[39;49m[K
-KiB Mem :(B[m[39;49m[1m  1873060 (B[m[39;49mtotal,(B[m[39;49m[1m   150996 (B[m[39;49mfree,(B[m[39;49m[1m  1213704 (B[m[39;49mused,(B[m[39;49m[1m   508360 (B[m[39;49mbuff/cache(B[m[39;49m(B[m[39;49m[K
-KiB Swap:(B[m[39;49m[1m  2097148 (B[m[39;49mtotal,(B[m[39;49m[1m   828412 (B[m[39;49mfree,(B[m[39;49m[1m  1268736 (B[m[39;49mused.(B[m[39;49m[1m   308840 (B[m[39;49mavail Mem (B[m[39;49m(B[m[39;49m[K
-[K
-
-(B[m 7918 toto      20   0  1,108t 169164  47796 S   4,6  9,0   5:47.46 code                                                                (B[m[39;49m[K
-(B[m 7990 toto      20   0  1,099t  87016  20520 S   3,3  4,6   0:44.45 code                                                                (B[m[39;49m[K
-(B[m 7886 toto      20   0 32,581g  43968  34252 S   1,7  2,3   1:35.25 code                                                                (B[m[39;49m[K
-(B[m 2389 toto      20   0 2777200  14000   9024 S   1,3  0,7  13:26.60 stremio                                                             (B[m[39;49m[K
-(B[m 8042 toto      20   0  1,097t  29116  17284 S   1,0  1,6   0:12.84 code                                                                (B[m[39;49m[K
-(B[m10898 toto      20   0 2788916 127908  23672 S   0,7  6,8   1:44.51 Isolated Web Co                                                     (B[m[39;49m[K
-(B[m[1m12790 toto      20   0   44216   4044   3336 R   0,7  0,2   0:00.06 top                                                                 (B[m[39;49m[K
-(B[m   10 root      20   0       0      0      0 I   0,3  0,0   0:15.81 rcu_sched                                                           (B[m[39;49m[K
-(B[m  943 systemd+  20   0   70624    764    428 S   0,3  0,0   0:12.78 systemd-resolve                                                     (B[m[39;49m[K
-(B[m 1169 kernoops  20   0   56940    552    508 S   0,3  0,0   0:00.48 kerneloops                                                          (B[m[39;49m[K
-(B[m 1291 root      20   0  928696  22200  14044 S   0,3  1,2   2:17.95 Xorg                                                                (B[m[39;49m[K
-(B[m 2432 toto      20   0  972908  25372   5364 S   0,3  1,4   3:54.84 node                                                                (B[m[39;49m[K
-(B[m 8001 toto      20   0  1,097t  17680  14252 S   0,3  0,9   0:02.06 code                                                                (B[m[39;49m[K
-(B[m    1 root      20   0  225912   3508   1768 S   0,0  0,2   0:03.82 systemd                                                             (B[m[39;49m[K
-(B[m    2 root      20   0       0      0      0 S   0,0  0,0   0:00.01 kthreadd                                                            (B[m[39;49m[K
-(B[m    3 root       0 -20       0      0      0 I   0,0  0,0   0:00.00 rcu_gp                                                              (B[m[39;49m[K
-(B[m    4 root       0 -20       0      0      0 I   0,0  0,0   0:00.00 rcu_par_gp                                                          (B[m[39;49m[K
-(B[m    8 root       0 -20       0      0      0 I   0,0  0,0   0:00.00 mm_percpu_wq                                                        (B[m[39;49m[K
-(B[m    9 root      20   0       0      0      0 S   0,0  0,0   0:00.83 ksoftirqd/0                                                         (B[m[39;49m[K
-(B[m   11 root      rt   0       0      0      0 S   0,0  0,0   0:00.06 migration/0                                                         (B[m[39;49m[K
-(B[m   13 root     -51   0       0      0      0 S   0,0  0,0   0:00.00 idle_inject/0                                                       (B[m[39;49m[K
-(B[m   14 root      20   0       0      0      0 S   0,0  0,0   0:00.00 cpuhp/0                                                             (B[m[39;49m[K
-(B[m   15 root      20   0       0      0      0 S   0,0  0,0   0:00.00 cpuhp/1                                                             (B[m[39;49m[K
-(B[m   16 root     -51   0       0      0      0 S   0,0  0,0   0:00.00 idle_inject/1                                                       (B[m[39;49m[K
-(B[m   17 root      rt   0       0      0      0 S   0,0  0,0   0:00.07 migration/1                                                         (B[m[39;49m[K
-(B[m   18 root      20   0       0      0      0 S   0,0  0,0   0:00.61 ksoftirqd/1                                                         (B[m[39;49m[K
-(B[m   21 root      20   0       0      0      0 S   0,0  0,0   0:00.00 cpuhp/2                                                             (B[m[39;49m[K[H(B[mtop - 14:12:57 up  2:19,  1 user,  load average: 1,07, 1,01, 0,80(B[m[39;49m(B[m[39;49m[K
-
-%Cpu(s):(B[m[39;49m[1m  1,8 (B[m[39;49mus,(B[m[39;49m[1m  1,1 (B[m[39;49msy,(B[m[39;49m[1m  0,0 (B[m[39;49mni,(B[m[39;49m[1m 97,0 (B[m[39;49mid,(B[m[39;49m[1m  0,1 (B[m[39;49mwa,(B[m[39;49m[1m  0,0 (B[m[39;49mhi,(B[m[39;49m[1m  0,0 (B[m[39;49msi,(B[m[39;49m[1m  0,0 (B[m[39;49mst(B[m[39;49m(B[m[39;49m[K
-KiB Mem :(B[m[39;49m[1m  1873060 (B[m[39;49mtotal,(B[m[39;49m[1m   156084 (B[m[39;49mfree,(B[m[39;49m[1m  1211776 (B[m[39;49mused,(B[m[39;49m[1m   505200 (B[m[39;49mbuff/cache(B[m[39;49m(B[m[39;49m[K
-KiB Swap:(B[m[39;49m[1m  2097148 (B[m[39;49mtotal,(B[m[39;49m[1m   828412 (B[m[39;49mfree,(B[m[39;49m[1m  1268736 (B[m[39;49mused.(B[m[39;49m[1m   313952 (B[m[39;49mavail Mem (B[m[39;49m(B[m[39;49m[K
-[K
-
-(B[m 1969 toto      20   0 3560600  60776  19936 S   1,0  3,2   3:56.20 cinnamon                                                            (B[m[39;49m[K
-(B[m 2389 toto      20   0 2777200  14000   9024 S   1,0  0,7  13:26.63 stremio                                                             (B[m[39;49m[K
-(B[m 7918 toto      20   0  1,108t 168548  47748 S   1,0  9,0   5:47.49 code                                                                (B[m[39;49m[K
-(B[m 8042 toto      20   0  1,097t  28868  17284 S   1,0  1,5   0:12.87 code                                                                (B[m[39;49m[K
-(B[m[1m12790 toto      20   0   44216   4044   3336 R   1,0  0,2   0:00.09 top                                                                 (B[m[39;49m[K
-(B[m 2432 toto      20   0  972908  25636   5364 S   0,7  1,4   3:54.86 node                                                                (B[m[39;49m[K
-(B[m 7851 toto      20   0  1,097t  72344  42140 S   0,7  3,9   0:43.67 code                                                                (B[m[39;49m[K
-(B[m10898 toto      20   0 2788916 127908  23672 S   0,7  6,8   1:44.53 Isolated Web Co                                                     (B[m[39;49m[K
-(B[m    9 root      20   0       0      0      0 S   0,3  0,0   0:00.84 ksoftirqd/0                                                         (B[m[39;49m[K
-(B[m  943 systemd+  20   0   70624    764    428 S   0,3  0,0   0:12.79 systemd-resolve                                                     (B[m[39;49m[K
-(B[m 7886 toto      20   0 32,578g  43920  34204 S   0,3  2,3   1:35.26 code                                                                (B[m[39;49m[K
-(B[m11699 toto      20   0 4258684  17412   8708 S   0,3  0,9   0:00.23 cpptools-srv                                                        (B[m[39;49m[K
-(B[m    1 root      20   0  225912   3508   1768 S   0,0  0,2   0:03.82 systemd                                                             (B[m[39;49m[K
-(B[m    2 root      20   0       0      0      0 S   0,0  0,0   0:00.01 kthreadd                                                            (B[m[39;49m[K
-(B[m    3 root       0 -20       0      0      0 I   0,0  0,0   0:00.00 rcu_gp                                                              (B[m[39;49m[K
-(B[m    4 root       0 -20       0      0      0 I   0,0  0,0   0:00.00 rcu_par_gp                                                          (B[m[39;49m[K
-(B[m    8 root       0 -20       0      0      0 I   0,0  0,0   0:00.00 mm_percpu_wq                                                        (B[m[39;49m[K
-(B[m   10 root      20   0       0      0      0 I   0,0  0,0   0:15.81 rcu_sched                                                           (B[m[39;49m[K
-(B[m   11 root      rt   0       0      0      0 S   0,0  0,0   0:00.06 migration/0                                                         (B[m[39;49m[K
-(B[m   13 root     -51   0       0      0      0 S   0,0  0,0   0:00.00 idle_inject/0                                                       (B[m[39;49m[K
-(B[m   14 root      20   0       0      0      0 S   0,0  0,0   0:00.00 cpuhp/0                                                             (B[m[39;49m[K
-(B[m   15 root      20   0       0      0      0 S   0,0  0,0   0:00.00 cpuhp/1                                                             (B[m[39;49m[K
-(B[m   16 root     -51   0       0      0      0 S   0,0  0,0   0:00.00 idle_inject/1                                                       (B[m[39;49m[K
-(B[m   17 root      rt   0       0      0      0 S   0,0  0,0   0:00.07 migration/1                                                         (B[m[39;49m[K
-(B[m   18 root      20   0       0      0      0 S   0,0  0,0   0:00.61 ksoftirqd/1                                                         (B[m[39;49m[K
-(B[m   21 root      20   0       0      0      0 S   0,0  0,0   0:00.00 cpuhp/2                                                             (B[m[39;49m[K
-(B[m   22 root     -51   0       0      0      0 S   0,0  0,0   0:00.00 idle_inject/2                                                       (B[m[39;49m[K[H(B[mtop - 14:13:00 up  2:19,  1 user,  load average: 1,07, 1,01, 0,80(B[m[39;49m(B[m[39;49m[K
-
-%Cpu(s):(B[m[39;49m[1m  2,2 (B[m[39;49mus,(B[m[39;49m[1m  1,3 (B[m[39;49msy,(B[m[39;49m[1m  0,0 (B[m[39;49mni,(B[m[39;49m[1m 96,3 (B[m[39;49mid,(B[m[39;49m[1m  0,1 (B[m[39;49mwa,(B[m[39;49m[1m  0,0 (B[m[39;49mhi,(B[m[39;49m[1m  0,2 (B[m[39;49msi,(B[m[39;49m[1m  0,0 (B[m[39;49mst(B[m[39;49m(B[m[39;49m[K
-KiB Mem :(B[m[39;49m[1m  1873060 (B[m[39;49mtotal,(B[m[39;49m[1m   159376 (B[m[39;49mfree,(B[m[39;49m[1m  1210564 (B[m[39;49mused,(B[m[39;49m[1m   503120 (B[m[39;49mbuff/cache(B[m[39;49m(B[m[39;49m[K
-KiB Swap:(B[m[39;49m[1m  2097148 (B[m[39;49mtotal,(B[m[39;49m[1m   828412 (B[m[39;49mfree,(B[m[39;49m[1m  1268736 (B[m[39;49mused.(B[m[39;49m[1m   317276 (B[m[39;49mavail Mem (B[m[39;49m(B[m[39;49m[K
-[K
-
-(B[m 7918 toto      20   0  1,108t 167216  47736 S   3,3  8,9   5:47.59 code                                                                (B[m[39;49m[K
-(B[m 7886 toto      20   0 32,576g  43836  34156 S   1,7  2,3   1:35.31 code                                                                (B[m[39;49m[K
-(B[m 7990 toto      20   0  1,099t  86508  20520 S   1,7  4,6   0:44.50 code                                                                (B[m[39;49m[K
-(B[m 1969 toto      20   0 3560600  60780  19940 S   1,0  3,2   3:56.23 cinnamon                                                            (B[m[39;49m[K
-(B[m 2432 toto      20   0  972908  25064   5364 S   1,0  1,3   3:54.89 node                                                                (B[m[39;49m[K
-(B[m 2389 toto      20   0 2777200  14000   9024 S   0,7  0,7  13:26.65 stremio                                                             (B[m[39;49m[K
-(B[m 7851 toto      20   0  1,097t  72804  42440 S   0,7  3,9   0:43.69 code                                                                (B[m[39;49m[K
-(B[m10898 toto      20   0 2788916 127908  23672 S   0,7  6,8   1:44.55 Isolated Web Co                                                     (B[m[39;49m[K
-(B[m[1m12790 toto      20   0   44216   4044   3336 R   0,7  0,2   0:00.11 top                                                                 (B[m[39;49m[K
-(B[m   10 root      20   0       0      0      0 I   0,3  0,0   0:15.82 rcu_sched                                                           (B[m[39;49m[K
-(B[m  155 root      20   0       0      0      0 I   0,3  0,0   0:02.18 kworker/0:2-eve                                                     (B[m[39;49m[K
-(B[m 1291 root      20   0  928696  22200  14044 S   0,3  1,2   2:17.96 Xorg                                                                (B[m[39;49m[K
-(B[m 2080 toto      20   0  712752   2876   2308 S   0,3  0,2   0:00.91 blueberry-tray                                                      (B[m[39;49m[K
-(B[m 8001 toto      20   0  1,097t  17768  14252 S   0,3  0,9   0:02.07 code                                                                (B[m[39;49m[K
-(B[m 8042 toto      20   0  1,097t  28868  17284 S   0,3  1,5   0:12.88 code                                                                (B[m[39;49m[K
-(B[m    1 root      20   0  225912   3508   1768 S   0,0  0,2   0:03.82 systemd                                                             (B[m[39;49m[K
-(B[m    2 root      20   0       0      0      0 S   0,0  0,0   0:00.01 kthreadd                                                            (B[m[39;49m[K
-(B[m    3 root       0 -20       0      0      0 I   0,0  0,0   0:00.00 rcu_gp                                                              (B[m[39;49m[K
-(B[m    4 root       0 -20       0      0      0 I   0,0  0,0   0:00.00 rcu_par_gp                                                          (B[m[39;49m[K
-(B[m    8 root       0 -20       0      0      0 I   0,0  0,0   0:00.00 mm_percpu_wq                                                        (B[m[39;49m[K
-(B[m    9 root      20   0       0      0      0 S   0,0  0,0   0:00.84 ksoftirqd/0                                                         (B[m[39;49m[K
-(B[m   11 root      rt   0       0      0      0 S   0,0  0,0   0:00.06 migration/0                                                         (B[m[39;49m[K
-(B[m   13 root     -51   0       0      0      0 S   0,0  0,0   0:00.00 idle_inject/0                                                       (B[m[39;49m[K
-(B[m   14 root      20   0       0      0      0 S   0,0  0,0   0:00.00 cpuhp/0                                                             (B[m[39;49m[K
-(B[m   15 root      20   0       0      0      0 S   0,0  0,0   0:00.00 cpuhp/1                                                             (B[m[39;49m[K
-(B[m   16 root     -51   0       0      0      0 S   0,0  0,0   0:00.00 idle_inject/1                                                       (B[m[39;49m[K
-(B[m   17 root      rt   0       0      0      0 S   0,0  0,0   0:00.07 migration/1                                                         (B[m[39;49m[K[?1l>[35;1H
-[?12l[?25h[K
+LS_COLORS=rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=00:su=37;41:sg=30;43:ca=30;41:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arc=01;31:*.arj=01;31:*.taz=01;31:*.lha=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.tzo=01;31:*.t7z=01;31:*.zip=01;31:*.z=01;31:*.Z=01;31:*.dz=01;31:*.gz=01;31:*.lrz=01;31:*.lz=01;31:*.lzo=01;31:*.xz=01;31:*.zst=01;31:*.tzst=01;31:*.bz2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.alz=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.cab=01;31:*.wim=01;31:*.swm=01;31:*.dwm=01;31:*.esd=01;31:*.jpg=01;35:*.jpeg=01;35:*.mjpg=01;35:*.mjpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.m4a=00;36:*.mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc=00;36:*.ogg=00;36:*.ra=00;36:*.wav=00;36:*.oga=00;36:*.opus=00;36:*.spx=00;36:*.xspf=00;36:
+LESSCLOSE=/usr/bin/lesspipe %s %s
+LANG=fr_FR.UTF-8
+GDM_LANG=fr
+DISPLAY=:0
+ORIGINAL_XDG_CURRENT_DESKTOP=X-Cinnamon
+GTK_OVERLAY_SCROLLING=1
+COLORTERM=truecolor
+VSCODE_GIT_ASKPASS_EXTRA_ARGS=--ms-enable-electron-run-as-node
+CHROME_DESKTOP=code-url-handler.desktop
+XDG_VTNR=7
+GIO_LAUNCHED_DESKTOP_FILE_PID=7851
+SSH_AUTH_SOCK=/run/user/1000/keyring/ssh
+XDG_SESSION_ID=c1
+XDG_GREETER_DATA_DIR=/var/lib/lightdm-data/toto
+USER=toto
+DESKTOP_SESSION=cinnamon
+TEXTDOMAINDIR=/usr/share/locale/
+QT_QPA_PLATFORMTHEME=qt5ct
+PWD=/home/toto/Bureau/19/Projets/minishell
+HOME=/home/toto
+VSCODE_GIT_ASKPASS_NODE=/usr/share/code/code
+TEXTDOMAIN=im-config
+SSH_AGENT_PID=1437
+TERM_PROGRAM=vscode
+TERM_PROGRAM_VERSION=1.82.2
+QT_ACCESSIBILITY=1
+XDG_SESSION_TYPE=x11
+caca=2
+XDG_DATA_DIRS=/usr/share/cinnamon:/usr/share/gnome:/home/toto/.local/share/flatpak/exports/share:/var/lib/flatpak/exports/share:/usr/local/share:/usr/share:/var/lib/snapd/desktop
+XDG_SESSION_DESKTOP=cinnamon
+GJS_DEBUG_OUTPUT=stderr
+GTK_MODULES=gail:atk-bridge
+VSCODE_GIT_ASKPASS_MAIN=/usr/share/code/resources/app/extensions/git/dist/askpass-main.js
+TERM=xterm-256color
+SHELL=/bin/bash
+XDG_SEAT_PATH=/org/freedesktop/DisplayManager/Seat0
+IM_CONFIG_PHASE=2
+XDG_CURRENT_DESKTOP=X-Cinnamon
+GPG_AGENT_INFO=/run/user/1000/gnupg/S.gpg-agent:0:1
+GIO_LAUNCHED_DESKTOP_FILE=/usr/share/applications/code.desktop
+SHLVL=2
+XDG_SEAT=seat0
+LANGUAGE=fr
+VSCODE_GIT_IPC_HANDLE=/run/user/1000/vscode-git-e6681349a5.sock
+GDK_BACKEND=x11
+GDMSESSION=cinnamon
+GNOME_DESKTOP_SESSION_ID=this-is-deprecated
+LOGNAME=toto
+DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/1000/bus
+GIT_ASKPASS=/usr/share/code/resources/app/extensions/git/dist/askpass.sh
+XDG_RUNTIME_DIR=/run/user/1000
+XAUTHORITY=/home/toto/.Xauthority
+XDG_SESSION_PATH=/org/freedesktop/DisplayManager/Session0
+XDG_CONFIG_DIRS=/etc/xdg/xdg-cinnamon:/etc/xdg
+PATH=/home/toto/.local/bin:/home/toto/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin
+CINNAMON_VERSION=4.4.8
+GJS_DEBUG_TOPICS=JS ERROR;JS LOG
+SESSION_MANAGER=local/lemacatoto:@/tmp/.ICE-unix/1368,unix/lemacatoto:/tmp/.ICE-unix/1368
+LESSOPEN=| /usr/bin/lesspipe %s
+_=./minishell

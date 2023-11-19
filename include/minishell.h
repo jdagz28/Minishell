@@ -111,4 +111,6 @@ int exec_builtin(t_shell *shell, char **cmd);
 void prompt_interrupt();
 int signal_set(int sig, void *f);
 void write_newline();
+/* export */
+int export(char ***env, char *key, char *value);
 #endif
