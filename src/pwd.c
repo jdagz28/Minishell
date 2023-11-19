@@ -15,8 +15,8 @@
 int pwd_init(t_pwd *pwd, char **env)
 {
     pwd->root = env_get("PWD=", 0, env);
-    pwd->home = NULL;
-    if (!pwd->root)
+    pwd->home = env_get("HOME=", 0, env);
+    if (!pwd->root || !pwd->home)
     {
         pwd_clear(pwd);
         return (EXIT_FAILURE);
@@ -35,13 +35,23 @@ void pwd_clear(t_pwd *pwd)
 char *pwd_cat(t_pwd *pwd)
 {
     char *res;
+    char *str;
     int len;
+    int home;
 
-    len = ft_strlen(pwd->root) + 2;
-    res = malloc(sizeof(char) * (len + 1));
+    len = ft_strlen(pwd->home);
+    home = 0;
+    if (strncmp(pwd->home, pwd->root, len) == 0)
+        home = 1;
+    str = &pwd->root[len * home];
+    len = ft_strlen(str) + ft_strlen("$ ") + home + 1;
+    res = malloc(sizeof(char) * len);
     if (!res)
         return (NULL);
-    ft_strlcpy(res, pwd->root, len + 1);
-    ft_strlcat(res, "$ ", len + 1);
+    ft_memset(res, 0, len);
+    if (home)
+        res[0] = '~';
+    ft_strlcat(res, str, len);
+    ft_strlcat(res, "$ ", len);
     return (res);
 }

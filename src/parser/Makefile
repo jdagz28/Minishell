@@ -49,7 +49,7 @@ HEADER_LIST			= minishell.h\
 
 HEADER_FILES		= $(addprefix $(INCLUDE_DIRECTORY), $(HEADER_LIST))
 
-SRCS_LIST			= parsing_test.c\
+SRCS_LIST			=	parsing.c\
 						parse_logical.c\
 						parse_parenthesis.c\
 						parse_pipeline.c\

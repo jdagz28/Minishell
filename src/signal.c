@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.c                                        :+:      :+:    :+:   */
+/*   signals.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tbarbe <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -12,22 +12,27 @@
 
 #include "../include/minishell.h"
 
-int main(int argc, char **argv, char **env)
+void write_newline()
 {
-    t_shell shell;
-    char *cmds;
-    int err;
+    write(1, "\n", 1);
+}
 
-    if (argc == 1)
-        cmds = NULL;
-    else
-        cmds = argv[1];
-    if (shell_init(&shell, cmds, env))
+void prompt_interrupt()
+{
+    write(1, "\n", 1);
+    rl_on_new_line();
+    rl_replace_line("", 0);
+    rl_redisplay();
+}
+
+int signal_set(int sig, void *f)
+{
+    struct sigaction sa;
+
+    sa.sa_handler = f;
+    sa.sa_flags = 0;
+
+    if (sigaction(sig, &sa, NULL) != 0)
         return (EXIT_FAILURE);
-    if (cmds)
-        err = shell_exec(&shell);
-    else
-        shell_run(&shell);
-    shell_clear(&shell);
-    return (err);
+    return (EXIT_SUCCESS);
 }

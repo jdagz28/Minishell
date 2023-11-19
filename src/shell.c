@@ -16,10 +16,13 @@ int shell_init(t_shell *shell, char *cmds, char **env)
 {
     shell->env = strtab_cpy(env);
     shell->err = 0;
-    shell->varlst = NULL;
+    shell->var = NULL;
     if (!shell->env)
         return (EXIT_FAILURE);
-    if (user_init(&shell->user, env) || pwd_init(&shell->pwd, env) || command_init(&shell->cmd, cmds))
+    shell->ast = parse(cmds);
+    if (cmds && !shell->ast)
+        return (EXIT_FAILURE);
+    if (user_init(&shell->user, env) || pwd_init(&shell->pwd, env))
     {
         shell_clear(shell);
         return (EXIT_FAILURE);
@@ -31,9 +34,10 @@ void shell_clear(t_shell *shell)
 {
     if (shell->env)
         strtab_free(shell->env);
+    if (shell->ast)
+        clear_ast(&shell->ast);
     user_clear(&shell->user);
     pwd_clear(&shell->pwd);
-    command_clear(&shell->cmd);
 }
 
 static char *shell_cat(t_shell *shell)
@@ -50,66 +54,69 @@ static char *shell_cat(t_shell *shell)
     return (res);
 }
 
-int shell_prompt(t_shell *shell)
+int shell_run(t_shell *shell)
+{
+    signal_set(SIGQUIT, SIG_IGN);
+    var_set(shell, "toto=1");
+    export(shell, "tot");
+    while (shell->err != 128)
+        shell->err = shell_prompt(shell);
+    ft_printf("exit\n");
+    return (128);
+}
+
+static char *shell_readline(t_shell *shell)
 {
     char *cat;
     char *line;
-    int err;
 
     cat = shell_cat(shell);
     if (!cat)
-        return (EXIT_FAILURE);
+        return (NULL);
+    signal_set(SIGINT, &prompt_interrupt);
     line = readline(cat);
+    signal_set(SIGINT, &write_newline);
     // leaks = still reachable : 130, 253 bytes in 191 blocks
     free(cat);
-    err = user_setlastinput(&shell->user, line);
-    if (!err)
-        err = command_init(&shell->cmd, line);
-    if (!err)
-        err = shell_exec_all(shell);
-    command_clear(&shell->cmd);
+    if (!line)
+    {
+        write(1, "exit\n", 5);
+        exit(128);
+    }
+    user_setlastinput(&shell->user, line);
+    return (line);
+}
+
+int shell_prompt(t_shell *shell)
+{
+    char *line;
+    int err;
+
+    line = shell_readline(shell);
+    shell->ast = parse(line);
     free(line);
+    if (!shell->ast)
+        return (EXIT_FAILURE);
+    err = shell_exec(shell);
+    clear_ast(&shell->ast);
     return (err);
 }
 
-int shell_exec_all(t_shell *shell)
+int shell_exec(t_shell *shell)
 {
+    t_node *node;
     int pid;
     int status;
-    int i;
-    t_cmd *cmd;
 
-    cmd = &shell->cmd;
-    if (!cmd->cmd)
+    node = shell->ast;
+    if (!node)
         return (EXIT_FAILURE);
-    pid = 0;
-    i = 0;
-    while (i < cmd->len)
-    {
-        if (ft_strncmp(cmd->cmd[i][0], "exit", 4) == 0)
-            clean_exit(shell, EXIT_SUCCESS);
-        pid = fork();
-        if (pid < 0)
-            return (EXIT_FAILURE);
-        if (pid == 0)
-            shell_exec(cmd, i, shell);
-        i++;
-    }
-    pipes_close(cmd->pipes, cmd->len - 1);
+    signal_set(SIGINT, SIG_IGN);
+    pid = fork();
+    if (pid == -1)
+        return (EXIT_FAILURE);
+    if (pid == 0)
+        exit(exec_node(shell, node));
     waitpid(pid, &status, 0);
     return (WEXITSTATUS(status));
-}
-
-void shell_exec(t_cmd *cmd, int id, t_shell *shell)
-{
-    char **tab;
-
-    if (!cmd)
-        exit(EXIT_FAILURE);
-    pipes_dup(cmd->pipes, id, cmd->len);
-    pipes_close(cmd->pipes, cmd->len - 1);
-    if (id > 0)
-        wait(NULL);
-    tab = files_redirect(cmd->cmd[id]);
-    command_exec(tab, shell);
 }

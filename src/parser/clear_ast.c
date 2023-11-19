@@ -13,10 +13,26 @@
 #include "minishell.h"
 #include "lexer_parsing.h"
 
-static void	free_simple_cmd(t_node **simple_cmd)
+void free_token(t_token *head)
 {
-	int	i;
-	int	fd;
+	t_token *itr;
+	t_token *next;
+
+	if (head == NULL)
+		return;
+	itr = head;
+	while (itr != NULL)
+	{
+		next = itr->next;
+		free(itr);
+		itr = next;
+	}
+}
+
+static void free_simple_cmd(t_node **simple_cmd)
+{
+	int i;
+	int fd;
 
 	if (*simple_cmd != NULL)
 	{
@@ -39,10 +55,10 @@ static void	free_simple_cmd(t_node **simple_cmd)
 	}
 }
 
-void	clear_ast(t_node **ast)
+void clear_ast(t_node **ast)
 {
 	if (*ast == NULL)
-		return ;
+		return;
 	if ((*ast)->type == SIMPLE_CMD)
 	{
 		free_simple_cmd(ast);

@@ -12,7 +12,7 @@
 
 #include "../include/minishell.h"
 
-char *strtab_beginwith(char **tab, char *str)
+int strtab_beginwith(char **tab, char *str)
 {
     int i;
     int len;
@@ -22,10 +22,13 @@ char *strtab_beginwith(char **tab, char *str)
     while (tab[i])
     {
         if (ft_strncmp(tab[i], str, len) == 0)
-            return (tab[i] + len);
+        {
+            if ((int)ft_strlen(tab[i]) > len)
+                return (i);
+        }
         i++;
     }
-    return (NULL);
+    return (-1);
 }
 
 void strtab_print(char **tab, char ces)
@@ -119,4 +122,32 @@ void strtab_freeend(char **tab, int start)
         }
         i++;
     }
+}
+
+int strtab_replace_line(char ***tab, char *str, int id)
+{
+    if (id < 0)
+        return (EXIT_FAILURE);
+    free(*tab[id]);
+    *tab[id] = str;
+    return (EXIT_SUCCESS);
+}
+
+int strtab_add_line(char ***tab, char *str)
+{
+    char **res;
+    int len;
+
+    if (!tab || !str)
+        return (EXIT_FAILURE);
+    len = strtab_len(*tab);
+    res = malloc(sizeof(char *) * (len + 2));
+    if (!res)
+        return (EXIT_FAILURE);
+    ft_memcpy(res, *tab, sizeof(char *) * len);
+    res[len] = str;
+    res[len + 1] = NULL;
+    free(*tab);
+    *tab = res;
+    return (EXIT_SUCCESS);
 }

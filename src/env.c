@@ -16,8 +16,13 @@ char *env_get(char *start, char end, char **env)
     char *res;
     char *line;
     int len;
+    int id;
 
-    line = strtab_beginwith(env, start);
+    id = strtab_beginwith(env, start);
+    if (id == -1)
+        return (NULL);
+    line = env[id];
+    line = &line[ft_strlen(start)];
     len = ft_strchr(line, end) - line;
     res = malloc(sizeof(char) * (len + 1));
     if (!res)
