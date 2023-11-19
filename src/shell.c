@@ -16,7 +16,7 @@ int shell_init(t_shell *shell, char *cmds, char **env)
 {
     shell->env = strtab_cpy(env);
     shell->err = 0;
-    shell->varlst = NULL;
+    shell->var = NULL;
     if (!shell->env)
         return (EXIT_FAILURE);
     shell->ast = parse(cmds);
@@ -57,6 +57,8 @@ static char *shell_cat(t_shell *shell)
 int shell_run(t_shell *shell)
 {
     signal_set(SIGQUIT, SIG_IGN);
+    var_set(shell, "toto=1");
+    export(shell, "tot");
     while (shell->err != 128)
         shell->err = shell_prompt(shell);
     ft_printf("exit\n");

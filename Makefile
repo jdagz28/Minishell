@@ -40,10 +40,9 @@ SRCS	=	minishell.c \
 			utils.c \
 			files.c \
 			var.c \
-			varlst.c \
-			varcmd.c \
 			exec.c \
-			signal.c
+			signal.c \
+			export.c
 
 INCLUDE	=	./include
 

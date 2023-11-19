@@ -11,11 +11,31 @@
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
-/*
-int export(char ***env, char *key, char *value)
-{
-    int len;
 
-    len = strtab_len(env);
+int export(t_shell *shell, char *str)
+{
+    int envid;
+    int varid;
+    char *new;
+    int err;
+
+    if (!str)
+        return (EXIT_FAILURE);
+    varid = strtab_beginwith(shell->var, str);
+    if (varid == -1)
+        return (EXIT_FAILURE);
+    new = ft_strdup(shell->var[varid]);
+    if (!new)
+        return (EXIT_FAILURE);
+    envid = strtab_beginwith(shell->env, str);
+    if (envid != -1)
+        err = strtab_replace_line(&shell->env, new, envid);
+    else
+        err = strtab_add_line(&shell->env, new);
+    if (err)
+    {
+        free(new);
+        return (EXIT_FAILURE);
+    }
+    return (EXIT_SUCCESS);
 }
-*/

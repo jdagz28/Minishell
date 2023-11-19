@@ -23,12 +23,6 @@
 #include <signal.h>
 #include <stdio.h>
 
-typedef struct s_var
-{
-    char *key;
-    char *value;
-} t_var;
-
 typedef struct s_pwd
 {
     char *root;
@@ -45,7 +39,7 @@ typedef struct s_user
 typedef struct s_shell
 {
     char **env;
-    t_list *varlst;
+    char **var;
     t_pwd pwd;
     t_user user;
     t_node *ast;
@@ -57,8 +51,10 @@ int strtab_len(char **tab);
 char **strtab_cpy(char **tab);
 void strtab_free(char **tab);
 void strtab_freeend(char **tab, int start);
-char *strtab_beginwith(char **tab, char *str);
+int strtab_beginwith(char **tab, char *str);
 void strtab_print(char **cmd, char ces);
+int strtab_replace_line(char ***tab, char *str, int id);
+int strtab_add_line(char ***tab, char *str);
 /* strmatrix_utils */
 int strmatrix_len(char ***matrix);
 char ***strtab_split(char **tab, char c);
@@ -85,19 +81,6 @@ char *pwd_cat(t_pwd *pwd);
 /* files redirections */
 int open_file_dup2(char *path, char mode);
 char **files_redirect(char **tab);
-/* var */
-t_var *var_new(char *key, char *value);
-void var_clear(void *addr);
-int var_set(t_var *var, char *value);
-/* varcmd */
-int var_extract(t_shell *shell, t_node *node);
-int var_inject(t_shell *shell, t_node *node);
-int var_unset(t_shell *shell, t_node *node); // unprotected
-/* varlst */
-char *varlst_getvalue(t_list *lst, char *key);
-int varlst_getid(t_list *lst, char *key);
-int varlst_set(t_shell *shell, char *key, char *value);
-void varlst_unset(t_list **lst, char *key);
 /* utils */
 void print_error(char *str1, char *str2);
 void clean_exit(t_shell *data, int err);
@@ -112,5 +95,9 @@ void prompt_interrupt();
 int signal_set(int sig, void *f);
 void write_newline();
 /* export */
-int export(char ***env, char *key, char *value);
+int export(t_shell *shell, char *str);
+/* var */
+int var_set(t_shell *shell, char *str);
+int var_get_id(char **tab, char *str);
+
 #endif
