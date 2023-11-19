@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+         #
+#    By: jdagoy <jdagoy@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/10/07 15:33:53 by tbarbe            #+#    #+#              #
-#    Updated: 2023/11/04 00:15:12 by jdagoy           ###   ########.fr        #
+#    Updated: 2023/11/17 10:21:53 by jdagoy           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,7 +23,7 @@ SRCS = ft_isalpha.c ft_isdigit.c ft_isalnum.c ft_isascii.c ft_isprint.c \
        ft_lstadd_back.c ft_lstdelone.c ft_lstclear.c  ft_lstiter.c \
        ft_lstmap.c ft_lstget.c ft_lstpop.c ft_lstcopy.c ft_intlst.c \
        ft_iseven.c ft_abs.c ft_splitfree.c ft_stradd.c ft_strncpy.c \
-       get_next_line.c ft_isspace.c ft_strndup.c
+       get_next_line.c ft_isspace.c ft_strndup.c ft_strjoin_del.c
 
 OBJ_DIR = ./objects/
 OBJ_LIST = $(patsubst %.c, %.o, $(SRCS))
