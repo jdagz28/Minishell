@@ -14,9 +14,9 @@
 #include "signal.h"
 #include "execution.h"
 
-int	exec_bin(t_simple_cmd *cmd, char **env)
+int	exec_bin(t_simple_cmd* cmd, char** env)
 {
-	char	*bin;
+	char* bin;
 	int		pid;
 	int		status;
 

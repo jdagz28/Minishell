@@ -80,6 +80,8 @@ int	shell_exec(t_shell* shell)
 	if (!node)
 		return (EXIT_FAILURE);
 	signal_set(SIGINT, SIG_IGN);
+	if (node->type == SIMPLE_CMD)
+		return(exec_simple(shell, node));
 	pid = fork();
 	if (pid == -1)
 		return (EXIT_FAILURE);
