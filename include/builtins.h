@@ -6,7 +6,7 @@
 /*   By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 15:15:05 by jdagoy            #+#    #+#             */
-/*   Updated: 2023/11/20 20:13:44 by jdagoy           ###   ########.fr       */
+/*   Updated: 2023/11/20 20:47:23 by jdagoy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ int		cd(char **argv, char **env);
 
 //cd_errors.c
 int		update_pwd_error(char *new_pwd);
-int		cd_error(char *path, char *error);
+int		cd_error(int error, char *str);
 
 //echo.c
 int		echo(char **argv);
