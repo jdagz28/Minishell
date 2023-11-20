@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: jdagoy <jdagoy@student.42.fr>              +#+  +:+       +#+         #
+#    By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/10/07 15:33:53 by tbarbe            #+#    #+#              #
-#    Updated: 2023/11/16 09:36:28 by jdagoy           ###   ########.fr        #
+#    Updated: 2023/11/19 23:14:58 by jdagoy           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -38,9 +38,10 @@ LIBFT				= $(LIBFT_DIRECTORY)libft.a
 
 OBJECTS_DIRECTORY	= ./objects/
 INCLUDE_DIRECTORY	= ../../include/
-PARSER_DIRECTORY	= ../parser/
-LEXER_DIRECTORY		= ../lexer/
-EXPAND_DIRECTORY	= ./
+PARSER_DIRECTORY	= ../../src/parser/
+LEXER_DIRECTORY		= ../../src/lexer/
+EXPAND_DIRECTORY	= ../../src/expander/
+CURRENT_DIRECTORY	= ./
 
 LIBRARIES			= -lreadline -L$(LIBFT_DIRECTORY) -lft $(MAC_LIBS)
 INCLUDES			= -I$(INCLUDE_DIRECTORY) $(MAC_INCLUDES)
@@ -72,8 +73,13 @@ EXPAND_SRCS_LIST	= expand_cmds.c\
 						expand_vars_utils.c\
 						expand_vars.c\
 						remove_quotes.c\
-						expand_test.c\
 						free_array.c
+
+SRCS_LIST			= ../../src/utils.c \
+						expand_test.c
+
+OBJECTS_LIST		= $(patsubst %.c, %.o, $(SRCS_LIST))
+OBJECTS				= $(addprefix $(OBJECTS_DIRECTORY), $(OBJECTS_LIST))
                  
 EXPAND_LIST			= $(patsubst %.c, %.o, $(EXPAND_SRCS_LIST))
 EXPAND_OBJECTS		= $(addprefix $(OBJECTS_DIRECTORY), $(EXPAND_LIST))
@@ -97,13 +103,16 @@ $(OBJECTS_DIRECTORY)%.o: $(PARSER_DIRECTORY)/%.c $(HEADER_FILES)
 $(OBJECTS_DIRECTORY)%.o: $(EXPAND_DIRECTORY)/%.c $(HEADER_FILES)
 	$(CC) $(CFLAGS) -c $(INCLUDES) $< -o $@
 
+$(OBJECTS_DIRECTORY)%.o: $(CURRENT_DIRECTORY)/%.c $(HEADER_FILES)
+	$(CC) $(CFLAGS) -MMD -c $(INCLUDES) $< -o $@
+
 $(LIBFT):
 	@echo "$(NAME): Compiling $(LIBFT)"
 	@$(MAKE) -sC $(LIBFT_DIRECTORY) 
 
-$(NAME): $(LIBFT) $(OBJECTS_DIRECTORY) $(LEXER_OBJECTS) $(PARSER_OBJECTS) $(EXPAND_OBJECTS) $(HEADER_FILES)
+$(NAME): $(LIBFT) $(OBJECTS_DIRECTORY) $(LEXER_OBJECTS) $(PARSER_OBJECTS) $(EXPAND_OBJECTS) $(OBJECTS) $(HEADER_FILES)
 	@echo "$(NAME)..."
-	@$(CC) $(CFLAGS) $(LEXER_OBJECTS) $(PARSER_OBJECTS) $(EXPAND_OBJECTS) $(LIBRARIES) $(INCLUDES) -o $(NAME)
+	@$(CC) $(CFLAGS) $(LEXER_OBJECTS) $(PARSER_OBJECTS) $(EXPAND_OBJECTS) $(OBJECTS) $(LIBRARIES) $(INCLUDES) -o $(NAME)
 
 clean:
 	$(MAKE) -sC $(LIBFT_DIRECTORY) clean

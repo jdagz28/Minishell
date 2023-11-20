@@ -3,15 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   env_set.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jdagoy <jdagoy@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/29 02:08:41 by jdagoy            #+#    #+#             */
-/*   Updated: 2023/11/18 20:36:24 by jdagoy           ###   ########.fr       */
+/*   Updated: 2023/11/20 10:51:21 by jdagoy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 #include "expansion.h"
+#include "environment.h"
 
 static char	**append_new_environ(char **new_environ, char *env_var)
 {

@@ -6,7 +6,7 @@
 /*   By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 20:57:03 by jdagoy            #+#    #+#             */
-/*   Updated: 2023/11/14 10:56:18 by jdagoy           ###   ########.fr       */
+/*   Updated: 2023/11/20 09:16:57 by jdagoy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,6 @@ int		get_len_var_name(char *argv);
 char	*get_var_name(char *argv);
 void	get_var_name_value(char *argv, char **var_name, char **var_value);
 
-
 //expand_vars.c
 bool	expand_vars(t_simple_cmd *cmd, int const i);
 
@@ -62,6 +61,5 @@ void	remove_quotes_arg(char **argv);
 
 //free_array.c
 void	free_array(char ***array);
-void	print_error(char *str1, char *str2);
 
 #endif

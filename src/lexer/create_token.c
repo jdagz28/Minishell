@@ -6,7 +6,7 @@
 /*   By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/02 21:12:54 by jdagoy            #+#    #+#             */
-/*   Updated: 2023/11/15 15:35:25 by jdagoy           ###   ########.fr       */
+/*   Updated: 2023/11/20 10:57:31 by jdagoy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,11 @@ t_token	*operator_token(char **remaining, char *line)
 		if (check_prefix(line, operators[i]))
 		{
 			*remaining = line + ft_strlen(operators[i]);
-			return (create_operator_token(operators[i]));
+			if (ft_strncmp(operators[i], "|", \
+					ft_strlen(operators[i])) == 0)
+				return (create_token(operators[i], TK_PIPE));
+			else
+				return (create_token(operators[i], TK_OPERATOR));
 		}
 		i++;
 	}
@@ -113,25 +117,4 @@ t_token	*create_token(char *word, t_tk_kind kind)
 	token->word = word;
 	token->kind = kind;
 	return (token);
-}
-
-t_token	*create_operator_token(char *operator)
-{
-	t_tk_kind	kind;
-
-	if (ft_strncmp(operator, "||", ft_strlen("||")) == 0)
-		kind = TK_OR;
-	else if (ft_strncmp(operator, "&&", ft_strlen("&&")) == 0)
-		kind = TK_AND;
-	else if (ft_strncmp(operator, ";", ft_strlen(";")) == 0)
-		kind = TK_SEMICOLON;
-	else if (ft_strncmp(operator, "|", ft_strlen("|")) == 0)
-		kind = TK_PIPE;
-	else if (ft_strncmp(operator, "(", ft_strlen("(")) == 0)
-		kind = TK_OP_PAREN;
-	else if (ft_strncmp(operator, ")", ft_strlen(")")) == 0)
-		kind = TK_CL_PAREN;
-	else
-		kind = TK_OPERATOR;
-	return (create_token(operator, kind));
 }
