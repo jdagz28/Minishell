@@ -6,7 +6,7 @@
 /*   By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/27 00:23:51 by jdagoy            #+#    #+#             */
-/*   Updated: 2023/11/20 11:09:22 by jdagoy           ###   ########.fr       */
+/*   Updated: 2023/11/20 20:45:42 by jdagoy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,11 +40,14 @@ int	execute_builtin(t_simple_cmd command, t_shell *shell)
 		status = EXIT_SUCCESS;
 	}
 	if (ft_strncmp_twice((const char *)command.argv[0], "cd"))
+	{	
 		status = cd(command.argv, shell->env);
-	if (ft_strncmp_twice((const char *)command.argv[0], "pwd"))
-	{
-		status = pwd(command.argv);
+		shell->pwd.root = env_get("PWD=", 0, shell->env);
+		if (shell->pwd.root == NULL)
+			return (EXIT_FAILURE);
 	}
+	if (ft_strncmp_twice((const char *)command.argv[0], "pwd"))
+		status = pwd(command.argv);
 	if (ft_strncmp_twice((const char *)command.argv[0], "export"))
 		status = export(shell, command.argv[1]);
 	if (status != EXIT_SUCCESS)
