@@ -6,14 +6,14 @@
 /*   By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/30 23:08:42 by jdagoy            #+#    #+#             */
-/*   Updated: 2023/11/19 23:32:50 by jdagoy           ###   ########.fr       */
+/*   Updated: 2023/11/20 11:13:08 by jdagoy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LEXER_PARSING_H
 # define LEXER_PARSING_H
 # include <stdbool.h>
-
+# include <stddef.h>
 
 typedef enum e_tk_kind
 {

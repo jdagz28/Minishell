@@ -6,12 +6,13 @@
 /*   By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/11 16:43:09 by tbarbe            #+#    #+#             */
-/*   Updated: 2023/11/20 09:17:17 by jdagoy           ###   ########.fr       */
+/*   Updated: 2023/11/20 10:53:42 by jdagoy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 #include "signal.h"
+#include "execution.h"
 
 int	exec_bin(t_simple_cmd *cmd, char **env)
 {

@@ -6,7 +6,7 @@
 /*   By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/02 21:12:54 by jdagoy            #+#    #+#             */
-/*   Updated: 2023/11/19 23:35:55 by jdagoy           ###   ########.fr       */
+/*   Updated: 2023/11/20 10:57:31 by jdagoy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,8 @@ t_token	*operator_token(char **remaining, char *line)
 		if (check_prefix(line, operators[i]))
 		{
 			*remaining = line + ft_strlen(operators[i]);
-			if (operators[i] == "|")
+			if (ft_strncmp(operators[i], "|", \
+					ft_strlen(operators[i])) == 0)
 				return (create_token(operators[i], TK_PIPE));
 			else
 				return (create_token(operators[i], TK_OPERATOR));

@@ -6,12 +6,13 @@
 /*   By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/27 00:23:51 by jdagoy            #+#    #+#             */
-/*   Updated: 2023/11/20 08:51:11 by jdagoy           ###   ########.fr       */
+/*   Updated: 2023/11/20 11:09:22 by jdagoy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 #include "builtins.h"
+#include "environment.h"
 
 bool	ft_strncmp_twice(const char *s1, const char *s2)
 {
@@ -21,7 +22,7 @@ bool	ft_strncmp_twice(const char *s1, const char *s2)
 	return (false);
 }
 
-void	execute_builtin(t_simple_cmd command, t_shell *shell)
+int	execute_builtin(t_simple_cmd command, t_shell *shell)
 {
 	int	status;
 
@@ -48,6 +49,7 @@ void	execute_builtin(t_simple_cmd command, t_shell *shell)
 		status = export(shell, command.argv[1]);
 	if (status != EXIT_SUCCESS)
 		exit(EXIT_FAILURE);
+	return (status);
 }
 
 bool	is_builtin(char **command)

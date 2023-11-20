@@ -6,12 +6,12 @@
 /*   By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/20 02:26:35 by jdagoy            #+#    #+#             */
-/*   Updated: 2023/11/20 02:26:56 by jdagoy           ###   ########.fr       */
+/*   Updated: 2023/11/20 10:51:40 by jdagoy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
+#include "environment.h"
 
 int	strtab_replace_line(char ***tab, char *str, int id)
 {

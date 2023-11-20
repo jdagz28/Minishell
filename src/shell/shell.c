@@ -6,11 +6,15 @@
 /*   By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/11 16:43:09 by tbarbe            #+#    #+#             */
-/*   Updated: 2023/11/20 02:31:00 by jdagoy           ###   ########.fr       */
+/*   Updated: 2023/11/20 11:01:25 by jdagoy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
+#include "environment.h"
+#include "signal.h"
+#include "builtins.h"
+#include "shell.h"
 
 int	shell_init(t_shell *shell, char *cmds, char **env)
 {
@@ -30,7 +34,7 @@ int	shell_init(t_shell *shell, char *cmds, char **env)
 	return (EXIT_SUCCESS);
 }
 
-static char	*shell_cat(t_shell *shell)
+char	*shell_cat(t_shell *shell)
 {
 	char	*res;
 	char	*user;

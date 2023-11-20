@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   env_getvar.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jdagoy <jdagoy@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/28 22:54:01 by jdagoy            #+#    #+#             */
-/*   Updated: 2023/11/17 10:45:39 by jdagoy           ###   ########.fr       */
+/*   Updated: 2023/11/20 10:59:43 by jdagoy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+#include "environment.h"
 
 char	*ft_get_env_var(char **environ, const char *var)
 {
@@ -26,4 +27,24 @@ char	*ft_get_env_var(char **environ, const char *var)
 		i++;
 	}
 	return (NULL);
+}
+
+char	*env_get(char *start, char end, char **env)
+{
+	char	*res;
+	char	*line;
+	int		len;
+	int		id;
+
+	id = strtab_beginwith(env, start);
+	if (id == -1)
+		return (NULL);
+	line = env[id];
+	line = &line[ft_strlen(start)];
+	len = ft_strchr(line, end) - line;
+	res = malloc(sizeof(char) * (len + 1));
+	if (!res)
+		return (NULL);
+	ft_strlcpy(res, line, len + 1);
+	return (res);
 }

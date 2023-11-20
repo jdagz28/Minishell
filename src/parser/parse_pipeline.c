@@ -6,7 +6,7 @@
 /*   By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 10:26:10 by jdagoy            #+#    #+#             */
-/*   Updated: 2023/11/11 22:02:51 by jdagoy           ###   ########.fr       */
+/*   Updated: 2023/11/20 10:54:23 by jdagoy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,6 @@ static bool	check_errors_pipeline(t_token *tokens)
 						STDERR_FILENO);
 		return (false);
 	}
-	if (tokens->kind == TK_OP_PAREN)
-		return (false);
 	return (true);
 }
 

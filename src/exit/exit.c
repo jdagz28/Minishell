@@ -6,11 +6,12 @@
 /*   By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/20 02:28:33 by jdagoy            #+#    #+#             */
-/*   Updated: 2023/11/20 09:15:52 by jdagoy           ###   ########.fr       */
+/*   Updated: 2023/11/20 12:01:50 by jdagoy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+#include "environment.h"
 
 void	shell_clear(t_shell *shell)
 {

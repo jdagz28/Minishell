@@ -6,11 +6,13 @@
 /*   By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/20 00:36:23 by jdagoy            #+#    #+#             */
-/*   Updated: 2023/11/20 09:12:02 by jdagoy           ###   ########.fr       */
+/*   Updated: 2023/11/20 11:08:06 by jdagoy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+#include "execution.h"
+#include "builtins.h"
 
 static void	close_pipe(int fd[2])
 {
@@ -51,15 +53,15 @@ static int	exec_simple(t_shell *shell, t_node *node)
 	int		err;
 
 	cmd = &node->content.simple_cmd.argv;
-	*cmd = files_redirect(*cmd);
-	if (is_builtin(*cmd == true))
-		err = exec_builtin(shell, *cmd);
+	//! *cmd = files_redirect(*cmd); //!function not found
+	if (is_builtin(*cmd) == true)
+		err = execute_builtin(node->content.simple_cmd, shell);
 	else
 		err = exec_bin(&node->content.simple_cmd, shell->env);
 	return (err);
 }
 
-static int	exec_node(t_shell *shell, t_node *node)
+int	exec_node(t_shell *shell, t_node *node)
 {
 	if (node->type == SIMPLE_CMD)
 		return (exec_simple(shell, node));

@@ -6,12 +6,12 @@
 /*   By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/20 02:27:02 by jdagoy            #+#    #+#             */
-/*   Updated: 2023/11/20 02:27:11 by jdagoy           ###   ########.fr       */
+/*   Updated: 2023/11/20 10:51:53 by jdagoy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
+#include "environment.h"
 
 void	strtab_free(char **tab)
 {

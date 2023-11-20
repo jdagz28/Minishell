@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
+#include "environment.h"
 
 int	var_replace(t_shell *shell, char *str, int id)
 {

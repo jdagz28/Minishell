@@ -6,7 +6,7 @@
 /*   By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/20 09:18:51 by jdagoy            #+#    #+#             */
-/*   Updated: 2023/11/20 09:22:28 by jdagoy           ###   ########.fr       */
+/*   Updated: 2023/11/20 11:59:32 by jdagoy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,8 @@ typedef struct s_user
 	char	*lastinput;
 }	t_user;
 
+typedef struct s_shell	t_shell;
+
 //init_pwd.c
 int		pwd_init(t_pwd *pwd, char **env);
 void	pwd_clear(t_pwd *pwd);
@@ -36,10 +38,13 @@ int		shell_prompt(t_shell *shell);
 
 //shell.c
 int		shell_init(t_shell *shell, char *cmds, char **env);
+char	*shell_cat(t_shell *shell);
+int		shell_run(t_shell *shell);
 
 //user.c
 int		user_init(t_user *user, char **env);
 void	user_clear(t_user *user);
-
+int		user_setlastinput(t_user *user, char *str);
+char	*user_cat(t_user *user);
 
 #endif

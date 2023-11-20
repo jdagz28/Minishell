@@ -6,7 +6,7 @@
 /*   By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/17 10:34:45 by jdagoy            #+#    #+#             */
-/*   Updated: 2023/11/20 09:08:25 by jdagoy           ###   ########.fr       */
+/*   Updated: 2023/11/20 10:59:25 by jdagoy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 
 //env_getvar.c
 char	*ft_get_env_var(char **environ, const char *var);
+char	*env_get(char *start, char end, char **env);
 
 //env_set.c
 int		ft_setenv(const char *name, const char *value, \

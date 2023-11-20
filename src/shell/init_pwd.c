@@ -6,12 +6,13 @@
 /*   By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/11 16:43:09 by tbarbe            #+#    #+#             */
-/*   Updated: 2023/11/20 09:19:45 by jdagoy           ###   ########.fr       */
+/*   Updated: 2023/11/20 10:54:39 by jdagoy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 #include "shell.h"
+#include "environment.h"
 
 int	pwd_init(t_pwd *pwd, char **env)
 {

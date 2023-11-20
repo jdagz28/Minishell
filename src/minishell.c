@@ -6,11 +6,13 @@
 /*   By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/11 16:43:09 by tbarbe            #+#    #+#             */
-/*   Updated: 2023/11/20 02:55:28 by jdagoy           ###   ########.fr       */
+/*   Updated: 2023/11/20 11:11:43 by jdagoy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
+#include "execution.h"
+#include "shell.h"
 
 int	main(int argc, char **argv, char **env)
 {

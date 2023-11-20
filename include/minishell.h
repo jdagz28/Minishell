@@ -6,7 +6,7 @@
 /*   By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/11 16:43:09 by tbarbe            #+#    #+#             */
-/*   Updated: 2023/11/20 09:24:16 by jdagoy           ###   ########.fr       */
+/*   Updated: 2023/11/20 11:18:22 by jdagoy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,9 @@
 # include <readline/history.h>
 # include <signal.h>
 # include <stdio.h>
+
+typedef struct s_pwd	t_pwd;
+typedef struct s_user	t_user;
 
 typedef struct s_shell
 {
