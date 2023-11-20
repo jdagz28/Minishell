@@ -6,7 +6,7 @@
 /*   By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/27 00:23:51 by jdagoy            #+#    #+#             */
-/*   Updated: 2023/11/20 00:14:51 by jdagoy           ###   ########.fr       */
+/*   Updated: 2023/11/20 03:04:22 by jdagoy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,7 @@ void	execute_builtin(t_simple_cmd command, t_shell *shell)
 		status = cd(command.argv, shell->env);
 	if (ft_strncmp_twice((const char *)command.argv[0], "pwd"))
 	{
-		ft_printf("%s\n", shell->pwd.root);
-		status = EXIT_SUCCESS;
+		status = pwd(command.argv);
 	}
 	if (ft_strncmp_twice((const char *)command.argv[0], "export"))
 		status = export(shell, command.argv[1]);
