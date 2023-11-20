@@ -27,24 +27,24 @@
 # endif
 
 //builtins.c
-bool	ft_strncmp_twice(const char *s1, const char *s2);
-int		execute_builtin(t_simple_cmd command, t_shell *shell);
-bool	is_builtin(char **command);
+bool	ft_strncmp_twice(const char* s1, const char* s2);
+int		execute_builtin(t_simple_cmd command, t_shell* shell);
+bool	is_builtin(char** command);
 
 //cd.c
-int		cd(char **argv, char **env);
+int		cd(char** argv, char** env);
 
 //cd_errors.c
-int		update_pwd_error(char *new_pwd);
-int		cd_error(char *path, char *error);
+int		update_pwd_error(char* new_pwd);
+int		cd_error(int error, char* str);
 
 //echo.c
-int		echo(char **argv);
+int		echo(char** argv);
 
 //export.c
-int		export(t_shell *shell, char *str);
+int		export(t_shell* shell, char* str);
 
 //pwd.c
-int		pwd(char **argv);
+int		pwd(char** argv);
 
 #endif
