@@ -10,14 +10,14 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/minishell.h"
+#include "minishell.h"
 #include "execution.h"
 #include "shell.h"
 
-int	main(int argc, char **argv, char **env)
+int	main(int argc, char** argv, char** env)
 {
 	t_shell	shell;
-	char	*cmds;
+	char* cmds;
 	int		err;
 
 	if (argc == 1)

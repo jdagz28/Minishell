@@ -88,6 +88,8 @@ PARSER_SRCS			=	clear_ast.c\
 							parser.c\
 							parsing.c
 
+REDIRECT_SRCS			=	files.c
+
 SHELL_SRCS			=	init_pwd.c\
 							shell_prompt.c\
 							shell.c\
@@ -108,6 +110,7 @@ EXIT_SRCS_			= 	$(addprefix src/exit/, $(EXIT_SRCS))
 EXPAND_SRCS_		= 	$(addprefix src/expander/, $(EXPAND_SRCS))
 LEXER_SRCS_			=	$(addprefix src/lexer/, $(LEXER_SRCS))
 PARSER_SRCS_		=	$(addprefix src/parser/, $(PARSER_SRCS))
+REDIRECT_SRCS_		=	$(addprefix src/redirection/, $(REDIRECT_SRCS))
 SHELL_SRCS_			= 	$(addprefix src/shell/, $(SHELL_SRCS))
 SIGNAL_SRCS_		=	$(addprefix src/signals/, $(SIGNAL_SRCS))
 SRCS_				=	$(addprefix src/, $(SRCS))
@@ -127,7 +130,10 @@ all:		${NAME}
 ${NAME}:	
 			$(MAKE) -C ./libft
 			echo "libft done"
-			${CC} ${BUILTINS_SRCS_} ${ENV_SRCS_} ${EXECUTE_SRCS_} ${EXIT_SRCS_} ${EXPAND_SRCS_} ${LEXER_SRCS_} ${PARSER_SRCS_} ${SHELL_SRCS_} ${SIGNAL_SRCS_} ${SRCS_} ${LIBFT} ${HEADER_FILES} ${INCLUDES} -o ${NAME} ${CFLAGS} ${LIBRARIES}
+			${CC} ${BUILTINS_SRCS_} ${ENV_SRCS_} ${EXECUTE_SRCS_} \
+			${EXIT_SRCS_} ${EXPAND_SRCS_} ${LEXER_SRCS_} ${PARSER_SRCS_} \
+			${REDIRECT_SRCS_} ${SHELL_SRCS_} ${SIGNAL_SRCS_} ${SRCS_} ${LIBFT} ${HEADER_FILES} \
+			${INCLUDES} -o ${NAME} ${CFLAGS} ${LIBRARIES}
 			echo "minishell done"
 			echo "use 'make only' to only compile the minishell"
 
@@ -140,7 +146,10 @@ fclean: 	clean
 re:			fclean all
 
 only:		
-			${CC} ${BUILTINS_SRCS_} ${ENV_SRCS_} ${EXECUTE_SRCS_} ${EXIT_SRCS_} ${EXPAND_SRCS_} ${LEXER_SRCS_} ${PARSER_SRCS_} ${SHELL_SRCS_} ${SIGNAL_SRCS_} ${SRCS_} ${LIBFT} ${HEADER_FILES} ${INCLUDES} -o ${NAME} ${CFLAGS} ${LIBRARIES}
+			${CC} ${BUILTINS_SRCS_} ${ENV_SRCS_} ${EXECUTE_SRCS_} \
+			${EXIT_SRCS_} ${EXPAND_SRCS_} ${LEXER_SRCS_} ${PARSER_SRCS_} \
+			${REDIRECT_SRCS_} ${SHELL_SRCS_} ${SIGNAL_SRCS_} ${SRCS_} ${LIBFT} ${HEADER_FILES} \
+			${INCLUDES} -o ${NAME} ${CFLAGS} ${LIBRARIES}
 			echo "minishell done"
 
 .PHONY:		all clean fclean re

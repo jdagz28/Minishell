@@ -29,24 +29,27 @@ typedef struct s_user	t_user;
 
 typedef struct s_shell
 {
-	char	**env;
-	char	**var;
+	char** env;
+	char** var;
 	t_pwd	pwd;
 	t_user	user;
-	t_node	*ast;
+	t_node* ast;
 	int		err;
 }	t_shell;
 
 //exit.c
-void	shell_clear(t_shell *shell);
-void	clean_exit(t_shell *data, int err);
+void	shell_clear(t_shell* shell);
+void	clean_exit(t_shell* data, int err);
 
 //signal.c
 void	write_newline(void);
 void	prompt_interrupt(void);
-int		signal_set(int sig, void *f);
+int		signal_set(int sig, void* f);
+
+// redirection
+char** files_redirect(char** tab);
 
 //utils.c
-void	print_error(char *str1, char *str2);
+void	print_error(char* str1, char* str2);
 
 #endif
