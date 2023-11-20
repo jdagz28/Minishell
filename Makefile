@@ -6,7 +6,7 @@
 #    By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/10/07 15:33:53 by tbarbe            #+#    #+#              #
-#    Updated: 2023/11/20 12:03:09 by jdagoy           ###   ########.fr        #
+#    Updated: 2023/11/20 20:14:14 by jdagoy           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -45,6 +45,7 @@ LIBRARIES			= 	-lreadline $(MAC_LIBS)
 
 BUILTINS_SRCS		=	builtins.c\
 							cd.c\
+							cd_errors.c\
 							echo.c\
 							export.c\
 							pwd.c\

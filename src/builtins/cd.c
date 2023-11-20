@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jdagoy <jdagoy@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/29 02:08:41 by jdagoy            #+#    #+#             */
-/*   Updated: 2023/11/18 20:31:09 by jdagoy           ###   ########.fr       */
+/*   Updated: 2023/11/20 20:13:07 by jdagoy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static int	update_pwd(char **argv, char **env)
 	char	*pwd;
 
 	new_pwd = (char *)malloc(PATH_MAX + 1);
-	if (!new_pwd)
+	if (new_pwd == NULL)
 		return (EXIT_FAILURE);
 	if (getcwd(new_pwd, PATH_MAX + 1) == NULL)
 	{
@@ -30,38 +30,12 @@ static int	update_pwd(char **argv, char **env)
 		ft_putstr_fd(strerror(errno), STDERR_FILENO);
 		pwd = ft_strjoin(ft_get_env_var(env, "PWD"), argv[1]);
 		if (ft_setenv("PWD", pwd, &env, 1) == -1)
-		{
-			free(new_pwd);
-			return (EXIT_FAILURE);
-		}
+			return (update_pwd_error(new_pwd));
 	}
 	else
 	{
 		if (ft_setenv("PWD", new_pwd, &env, 1) == EXIT_FAILURE)
-		{
-			free(new_pwd);
-			return (EXIT_FAILURE);
-		}
-	}
-	return (EXIT_SUCCESS);
-}
-
-static int	check_stat(char **argv, char *path, struct stat fs)
-{
-	if (path != NULL && !S_ISDIR(fs.st_mode))
-	{
-		ft_putstr_fd("cd: ", STDERR_FILENO);
-		ft_putstr_fd(path, STDERR_FILENO);
-		ft_putstr_fd("Not a directory\n", STDERR_FILENO);
-		return (EXIT_FAILURE);
-	}
-	else if (path != NULL && chdir(path) == -1)
-	{
-		ft_putstr_fd("minishell: ", STDERR_FILENO);
-		ft_putstr_fd(argv[0], STDERR_FILENO);
-		ft_putstr_fd(": ", STDERR_FILENO);
-		ft_putstr_fd(": No such file or directory\n", STDERR_FILENO);
-		return (EXIT_FAILURE);
+			return (update_pwd_error(new_pwd));
 	}
 	return (EXIT_SUCCESS);
 }
@@ -72,7 +46,7 @@ static char	*ft_get_pwd(char *var)
 	char	*temp;
 
 	cwd = (char *)malloc(PATH_MAX + 1);
-	if (!cwd)
+	if (cwd == NULL)
 		return (NULL);
 	if (getcwd(cwd, PATH_MAX + 1) == NULL)
 	{
@@ -81,10 +55,23 @@ static char	*ft_get_pwd(char *var)
 		ft_putstr_fd(strerror(errno), STDERR_FILENO);
 	}
 	temp = ft_strjoin(var, cwd);
-	if (!temp)
+	if (temp == NULL)
 		return (NULL);
 	free(cwd);
 	return (temp);
+}
+
+static char	*get_home_path(char **env)
+{
+	char	*home_path;
+
+	home_path = ft_get_env_var(env, "HOME");
+	if (home_path == NULL)
+	{
+		ft_putstr_fd("cd: HOME not set\n", STDERR_FILENO);
+		return (NULL);
+	}
+	return (ft_strdup(home_path));
 }
 
 int	cd(char **argv, char **env)
@@ -94,33 +81,22 @@ int	cd(char **argv, char **env)
 	char		*pwd;
 
 	if (ft_arraylen(argv) > 2)
-	{
-		ft_putstr_fd("cd: too many arguments\n", STDERR_FILENO);
-		return (EXIT_FAILURE);
-	}
+		return (cd_error(0, NULL));
 	if (ft_arraylen(argv) < 2)
-	{
-		path = ft_get_env_var(env, "HOME");
-		if (!path)
-		{
-			ft_putstr_fd("minishell: cd: HOME not set\n", STDERR_FILENO);
-			return (EXIT_FAILURE);
-		}
-		path = ft_strdup(path);
-	}
+		path = get_home_path(env);
 	else
 		path = ft_strdup(argv[1]);
 	pwd = ft_get_pwd("OLDPDWD=");
-	if (!pwd)
+	if (path == NULL || pwd == NULL)
 		return (EXIT_FAILURE);
 	stat(path, &fs);
-	if (check_stat(argv, path, fs) == EXIT_FAILURE)
-	{
-		free(path);
-		return (EXIT_FAILURE);
-	}
+	if (!S_ISDIR(fs.st_mode))
+		return (cd_error(1, path));
+	if (chdir(path) == -1)
+		return (cd_error(2, argv[0]));
 	free(path);
 	if (update_pwd(argv, env) != 0)
 		return (EXIT_FAILURE);
 	return (EXIT_SUCCESS);
 }
+
