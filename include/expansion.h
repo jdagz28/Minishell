@@ -6,7 +6,7 @@
 /*   By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 20:57:03 by jdagoy            #+#    #+#             */
-/*   Updated: 2023/11/14 10:56:18 by jdagoy           ###   ########.fr       */
+/*   Updated: 2023/11/19 23:25:25 by jdagoy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,6 @@ bool	realloc_argv(t_simple_cmd *cmd, int const i, int *j, \
 int		get_len_var_name(char *argv);
 char	*get_var_name(char *argv);
 void	get_var_name_value(char *argv, char **var_name, char **var_value);
-
 
 //expand_vars.c
 bool	expand_vars(t_simple_cmd *cmd, int const i);

@@ -6,7 +6,7 @@
 /*   By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/14 10:36:11 by jdagoy            #+#    #+#             */
-/*   Updated: 2023/11/14 13:47:03 by jdagoy           ###   ########.fr       */
+/*   Updated: 2023/11/19 23:19:16 by jdagoy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,6 @@ char	*get_var_name(char *argv)
 		++j;
 	}
 	var_name[j] = '\0';
-	// printf("var_name: %s\n",var_name);
 	return (var_name);
 }
 
@@ -59,8 +58,6 @@ void	get_var_name_value(char *argv, char **var_name, char **var_value)
 	{
 		*var_name = get_var_name(argv);
 		*var_value = reverse_quotes(getenv(*var_name));
-		// printf("var name: %s\n", *var_name);
-		// printf("var value: %s\n", getenv(*var_name));
 		if (*var_value == NULL)
 			*var_value = "";
 	}

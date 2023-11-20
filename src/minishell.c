@@ -3,31 +3,31 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tbarbe <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/11 16:43:09 by tbarbe            #+#    #+#             */
-/*   Updated: 2023/10/09 13:26:05 by tbarbe           ###   ########.fr       */
+/*   Updated: 2023/11/20 02:55:28 by jdagoy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-int main(int argc, char **argv, char **env)
+int	main(int argc, char **argv, char **env)
 {
-    t_shell shell;
-    char *cmds;
-    int err;
+	t_shell	shell;
+	char	*cmds;
+	int		err;
 
-    if (argc == 1)
-        cmds = NULL;
-    else
-        cmds = argv[1];
-    if (shell_init(&shell, cmds, env))
-        return (EXIT_FAILURE);
-    if (cmds)
-        err = shell_exec(&shell);
-    else
-        shell_run(&shell);
-    shell_clear(&shell);
-    return (err);
+	if (argc == 1)
+		cmds = NULL;
+	else
+		cmds = argv[1];
+	if (shell_init(&shell, cmds, env))
+		return (EXIT_FAILURE);
+	if (cmds)
+		err = shell_exec(&shell);
+	else
+		shell_run(&shell);
+	shell_clear(&shell);
+	return (err);
 }

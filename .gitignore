@@ -7,6 +7,6 @@
 /src/expander/expander
 /src/parser/parser
 /minishell
-.vscode
-.editorconfig
+# .vscode
+# .editorconfig
 *.o

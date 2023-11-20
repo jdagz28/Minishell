@@ -1,22 +1,41 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.c                                            :+:      :+:    :+:   */
+/*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/11 16:43:09 by tbarbe            #+#    #+#             */
-/*   Updated: 2023/11/20 02:39:11 by jdagoy           ###   ########.fr       */
+/*   Updated: 2023/11/20 00:06:44 by jdagoy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-void	print_error(char *str1, char *str2)
+int	export(t_shell *shell, char *str)
 {
-	write(STDERR_FILENO, "minishell: ", 11);
-	write(STDERR_FILENO, str1, ft_strlen(str1));
-	write(STDERR_FILENO, ": ", 2);
-	write(STDERR_FILENO, str2, ft_strlen(str2));
-	write(STDERR_FILENO, "\n", 1);
+	int		envid;
+	int		varid;
+	char	*new;
+	int		err;
+
+	if (!str)
+		return (EXIT_FAILURE);
+	varid = strtab_beginwith(shell->var, str);
+	if (varid == -1)
+		return (EXIT_FAILURE);
+	new = ft_strdup(shell->var[varid]);
+	if (!new)
+		return (EXIT_FAILURE);
+	envid = strtab_beginwith(shell->env, str);
+	if (envid != -1)
+		err = strtab_replace_line(&shell->env, new, envid);
+	else
+		err = strtab_add_line(&shell->env, new);
+	if (err)
+	{
+		free(new);
+		return (EXIT_FAILURE);
+	}
+	return (EXIT_SUCCESS);
 }

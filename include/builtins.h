@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtins.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jdagoy <jdagoy@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 15:15:05 by jdagoy            #+#    #+#             */
-/*   Updated: 2023/11/18 20:40:40 by jdagoy           ###   ########.fr       */
+/*   Updated: 2023/11/19 23:25:11 by jdagoy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,9 @@ define NAME_MAX 255
 
 # endif
 
-int	cd(char **argv, char **env);
-int	echo(char **argv);
+int cd(char **argv, char **env);
+int		echo(char **argv);
 bool	is_builtin(char **command);
 bool	ft_strncmp_twice(const char *s1, const char *s2);
-#endif
+
+# endif

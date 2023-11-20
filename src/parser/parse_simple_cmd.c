@@ -6,7 +6,7 @@
 /*   By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 00:28:24 by jdagoy            #+#    #+#             */
-/*   Updated: 2023/11/15 15:42:17 by jdagoy           ###   ########.fr       */
+/*   Updated: 2023/11/19 23:32:29 by jdagoy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,9 +107,7 @@ bool	parse_simple_cmd(t_token **tokens, t_node **ast)
 {
 	t_node	*simple_cmd;
 
-	if ((*tokens)->kind == TK_CL_PAREN)
-		return (false);
-	else if ((*tokens)->kind == TK_OP_PAREN)
+	if ((*tokens)->kind == TK_OPERATOR)
 		return (false);
 	if (is_redirect_word((*tokens)->kind) == false)
 		return (false);

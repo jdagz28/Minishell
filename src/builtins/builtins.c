@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtins.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jdagoy <jdagoy@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/27 00:23:51 by jdagoy            #+#    #+#             */
-/*   Updated: 2023/11/17 13:15:13 by jdagoy           ###   ########.fr       */
+/*   Updated: 2023/11/20 00:14:51 by jdagoy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,29 +20,36 @@ bool	ft_strncmp_twice(const char *s1, const char *s2)
 		return (true);
 	return (false);
 }
-//! env in t_shell
-// void	execute_builtin(t_simple_cmd command, t_shell   *shell)
-// {
-// 	int	status;
 
-// 	status = -1;
-// 	if (ft_strncmp_twice((const char *)command.argv[0], "exit"))
-// 	{	
-// 		//TODO: close(IO_file)
-//         //TODO: exit
-// 	}
-// 	if (ft_strncmp_twice((const char *)command.argv[0], "echo"))
-// 		status = echo(command.argv);
-// 	if (ft_strncmp_twice((const char *)command.argv[0], "env"))
-//         //TODO: link env(from toto)
-// 	if (ft_strncmp_twice((const char *)command.argv[0], "cd"))
-// 		status = cd(command.argv, shell->env);
-// 	if (ft_strncmp_twice((const char *)command.argv[0], "pwd"))
-// 		//TODO: link pwd(from toto)
-//         // status = pwd();
-// 	if (status != EXIT_SUCCESS)
-// 		exit(EXIT_FAILURE);
-// }
+void	execute_builtin(t_simple_cmd command, t_shell *shell)
+{
+	int	status;
+
+	status = -1;
+	if (ft_strncmp_twice((const char *)command.argv[0], "exit"))
+	{	
+		//TODO: close(IO_file)
+        //TODO: exit
+	}
+	if (ft_strncmp_twice((const char *)command.argv[0], "echo"))
+		status = echo(command.argv);
+	if (ft_strncmp_twice((const char *)command.argv[0], "env"))
+	{
+		strtab_print(shell->env, '\n');
+		status = EXIT_SUCCESS;
+	}
+	if (ft_strncmp_twice((const char *)command.argv[0], "cd"))
+		status = cd(command.argv, shell->env);
+	if (ft_strncmp_twice((const char *)command.argv[0], "pwd"))
+	{
+		ft_printf("%s\n", shell->pwd.root);
+		status = EXIT_SUCCESS;
+	}
+	if (ft_strncmp_twice((const char *)command.argv[0], "export"))
+		status = export(shell, command.argv[1]);
+	if (status != EXIT_SUCCESS)
+		exit(EXIT_FAILURE);
+}
 
 bool	is_builtin(char **command)
 {
