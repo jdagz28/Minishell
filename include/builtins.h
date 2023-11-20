@@ -6,7 +6,7 @@
 /*   By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 15:15:05 by jdagoy            #+#    #+#             */
-/*   Updated: 2023/11/20 11:08:51 by jdagoy           ###   ########.fr       */
+/*   Updated: 2023/11/20 20:13:44 by jdagoy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,10 @@ bool	is_builtin(char **command);
 
 //cd.c
 int		cd(char **argv, char **env);
+
+//cd_errors.c
+int		update_pwd_error(char *new_pwd);
+int		cd_error(char *path, char *error);
 
 //echo.c
 int		echo(char **argv);
