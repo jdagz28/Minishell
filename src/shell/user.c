@@ -6,11 +6,12 @@
 /*   By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/11 16:43:09 by tbarbe            #+#    #+#             */
-/*   Updated: 2023/11/20 02:35:15 by jdagoy           ###   ########.fr       */
+/*   Updated: 2023/11/20 09:21:41 by jdagoy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+#include "shell.h"
 
 int	user_init(t_user *user, char **env)
 {

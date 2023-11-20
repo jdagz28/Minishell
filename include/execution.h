@@ -1,30 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   exit.c                                             :+:      :+:    :+:   */
+/*   execution.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/20 02:28:33 by jdagoy            #+#    #+#             */
-/*   Updated: 2023/11/20 09:15:52 by jdagoy           ###   ########.fr       */
+/*   Created: 2023/11/20 09:09:39 by jdagoy            #+#    #+#             */
+/*   Updated: 2023/11/20 09:12:41 by jdagoy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#ifndef EXECUTION_H
+# define EXECUTION_H
+# include "minishell.h"
 
-void	shell_clear(t_shell *shell)
-{
-	if (shell->env)
-		strtab_free(shell->env);
-	if (shell->ast)
-		clear_ast(&shell->ast);
-	user_clear(&shell->user);
-	pwd_clear(&shell->pwd);
-}
+//exec_binpath.c
+char	*env_get(char *start, char end, char **env);
+char	*env_getpath(char *str, char **env);
 
-void	clean_exit(t_shell *data, int err)
-{
-	rl_clear_history();
-	shell_clear(data);
-	exit(err);
-}
+//exec_utils.c
+int		exec_bin(t_simple_cmd *cmd, char **env);
+
+//exec.c
+int		shell_exec(t_shell *shell);
+
+#endif

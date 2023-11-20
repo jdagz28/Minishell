@@ -6,11 +6,12 @@
 /*   By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/20 02:30:33 by jdagoy            #+#    #+#             */
-/*   Updated: 2023/11/20 02:31:06 by jdagoy           ###   ########.fr       */
+/*   Updated: 2023/11/20 09:20:36 by jdagoy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+#include "signal.h"
 
 
 static char	*shell_readline(t_shell *shell)

@@ -6,7 +6,7 @@
 /*   By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/11 16:43:09 by tbarbe            #+#    #+#             */
-/*   Updated: 2023/11/20 02:52:27 by jdagoy           ###   ########.fr       */
+/*   Updated: 2023/11/20 09:23:10 by jdagoy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	write_newline(void)
 	write(1, "\n", 1);
 }
 
-void	prompt_interrupt()
+void	prompt_interrupt(void)
 {
 	write(1, "\n", 1);
 	rl_on_new_line();

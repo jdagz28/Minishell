@@ -6,13 +6,19 @@
 /*   By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/20 00:36:23 by jdagoy            #+#    #+#             */
-/*   Updated: 2023/11/20 00:37:52 by jdagoy           ###   ########.fr       */
+/*   Updated: 2023/11/20 09:12:02 by jdagoy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	exec_pipe(t_shell *shell, t_node *node)
+static void	close_pipe(int fd[2])
+{
+	close(fd[0]);
+	close(fd[1]);
+}
+
+static int	exec_pipe(t_shell *shell, t_node *node)
 {
 	int	pid;
 	int	fd[2];
@@ -39,7 +45,7 @@ int	exec_pipe(t_shell *shell, t_node *node)
 	return (res);
 }
 
-int	exec_simple(t_shell *shell, t_node *node)
+static int	exec_simple(t_shell *shell, t_node *node)
 {
 	char	***cmd;
 	int		err;
@@ -53,7 +59,7 @@ int	exec_simple(t_shell *shell, t_node *node)
 	return (err);
 }
 
-int	exec_node(t_shell *shell, t_node *node)
+static int	exec_node(t_shell *shell, t_node *node)
 {
 	if (node->type == SIMPLE_CMD)
 		return (exec_simple(shell, node));

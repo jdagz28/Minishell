@@ -3,16 +3,33 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: tbarbe <marvin@42.fr>                      +#+  +:+       +#+         #
+#    By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/10/07 15:33:53 by tbarbe            #+#    #+#              #
-#    Updated: 2023/03/03 16:29:53 by tbarbe           ###   ########.fr        #
+#    Updated: 2023/11/20 09:26:14 by jdagoy           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 .SILENT:
 
-NAME	=	minishell
+NAME				=	minishell
+
+OS					= $(shell uname -s)
+USERNAME			= $(shell whoami)
+
+ifeq ($(OS),Linux)
+	FSANITIZE		= -fsanitize=leak -fsanitize=address
+	MAC_INCLUDES	=
+	MAC_LIBS		=
+else
+	FSANITIZE		= -fsanitize=address
+	MAC_INCLUDES	= -I /Users/$(USERNAME)/.brew/opt/readline/include
+	MAC_LIBS		= -L /Users/$(USERNAME)/.brew/opt/readline/lib
+endif
+
+ifdef fsanitizeoff
+	FSANITIZE		=
+endif
 
 PARSER_SRCS			=	parsing.c\
 						parse_pipeline.c\
@@ -21,7 +38,7 @@ PARSER_SRCS			=	parsing.c\
 						parser.c\
 						clear_ast.c
 
-LEXER_SRCS		= tokenizer.c\
+LEXER_SRCS			= tokenizer.c\
 						check_opred_tokens.c\
                         check_token.c\
 						check_word_inquote.c\
@@ -30,25 +47,23 @@ LEXER_SRCS		= tokenizer.c\
                         tokenizer_utils.c\
 						clear_tokens.c
 
-SRCS	=	minishell.c \
-			shell.c \
-			strtab_utils.c \
-			strmatrix_utils.c \
-			env.c \
-			user.c \
-			pwd.c \
-			utils.c \
-			files.c \
-			var.c \
-			exec.c \
-			signal.c \
-			export.c
+SRCS				=	minishell.c \
+						shell.c \
+						strtab_utils.c \
+						strmatrix_utils.c \
+						env.c \
+						user.c \
+						pwd.c \
+						utils.c \
+						files.c \
+						var.c \
+						exec.c \
+						signal.c \
+						export.c
 
-INCLUDE	=	./include
-
-PARSER_SRCS_	=	$(addprefix src/parser/, $(PARSER_SRCS))
-
-LEXER_SRCS_	=		$(addprefix src/lexer/, $(LEXER_SRCS))
+INCLUDE				=	./include
+PARSER_SRCS_		=	$(addprefix src/parser/, $(PARSER_SRCS))
+LEXER_SRCS_			=		$(addprefix src/lexer/, $(LEXER_SRCS))
 
 SRCS_	=			$(addprefix src/, $(SRCS))
 

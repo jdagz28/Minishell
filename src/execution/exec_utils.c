@@ -6,11 +6,12 @@
 /*   By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/11 16:43:09 by tbarbe            #+#    #+#             */
-/*   Updated: 2023/11/20 00:37:11 by jdagoy           ###   ########.fr       */
+/*   Updated: 2023/11/20 09:17:17 by jdagoy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
+#include "signal.h"
 
 int	exec_bin(t_simple_cmd *cmd, char **env)
 {
@@ -39,8 +40,3 @@ int	exec_bin(t_simple_cmd *cmd, char **env)
 	return (WEXITSTATUS(status));
 }
 
-static void	close_pipe(int fd[2])
-{
-	close(fd[0]);
-	close(fd[1]);
-}

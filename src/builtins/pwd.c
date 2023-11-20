@@ -6,18 +6,12 @@
 /*   By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/20 03:02:35 by jdagoy            #+#    #+#             */
-/*   Updated: 2023/11/20 03:12:04 by jdagoy           ###   ########.fr       */
+/*   Updated: 2023/11/20 08:58:05 by jdagoy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.c"
+#include "minishell.h"
 #include "builtins.h"
-
-int	pwd_error(void)
-{
-	ft_putstr_fd("pwd: too many arguments\n", STDERR_FILENO);
-	return (EXIT_FAILURE);
-}
 
 int	pwd(char **argv)
 {
@@ -26,7 +20,10 @@ int	pwd(char **argv)
 
 	count = strtab_len(argv);
 	if (count > 1)
-		return (pwd_error());
+	{
+		ft_putstr_fd("pwd: too many arguments\n", STDERR_FILENO);
+		return (EXIT_FAILURE);
+	}
 	if (getcwd(pwd, PATH_MAX) == NULL)
 	{
 		ft_putstr_fd("pwd: getcwd(): ", STDERR_FILENO);

@@ -6,7 +6,7 @@
 /*   By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 20:57:03 by jdagoy            #+#    #+#             */
-/*   Updated: 2023/11/19 23:25:25 by jdagoy           ###   ########.fr       */
+/*   Updated: 2023/11/20 09:16:57 by jdagoy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,5 @@ void	remove_quotes_arg(char **argv);
 
 //free_array.c
 void	free_array(char ***array);
-void	print_error(char *str1, char *str2);
 
 #endif
