@@ -1,35 +1,43 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.c                                        :+:      :+:    :+:   */
+/*   buitins_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/11 16:43:09 by tbarbe            #+#    #+#             */
-/*   Updated: 2023/11/20 11:11:43 by jdagoy           ###   ########.fr       */
+/*   Updated: 2023/11/20 11:01:25 by jdagoy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
-#include "execution.h"
-#include "shell.h"
+#include "builtins.h"
 
-int	main(int argc, char** argv, char** env)
+static int key_cmp(char* line, char* needle)
 {
-	t_shell	shell;
-	char* cmds;
-	int		err;
+	size_t len;
 
-	if (argc == 1)
-		cmds = NULL;
-	else
-		cmds = argv[1];
-	if (shell_init(&shell, cmds, env))
+	if (!line || !needle)
+		return(EXIT_FAILURE);
+	len = ft_strlen(needle);
+	if (ft_strncmp(line, needle, len) != 0)
 		return (EXIT_FAILURE);
-	if (cmds)
-		err = shell_exec(&shell);
-	else
-		shell_run(&shell);
-	shell_clear(&shell);
-	return (err);
+	if (ft_strlen(line) <= len)
+		return (EXIT_FAILURE);
+	if (line[len] != '=')
+		return(EXIT_FAILURE);
+	return(EXIT_SUCCESS);
+}
+
+int	strtab_getkey(char** tab, char* str)
+{
+	int	i;
+
+	i = 0;
+	while (tab[i])
+	{
+		if (key_cmp(tab[i], str) == 0)
+			return(i);
+		i++;
+	}
+	return (-1);
 }

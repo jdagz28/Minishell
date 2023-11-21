@@ -13,7 +13,7 @@
 #include "../include/minishell.h"
 #include "environment.h"
 
-int	strtab_beginwith(char **tab, char *str)
+int	strtab_beginwith(char** tab, char* str)
 {
 	int	i;
 	int	len;
@@ -32,12 +32,12 @@ int	strtab_beginwith(char **tab, char *str)
 	return (-1);
 }
 
-void	strtab_print(char **tab, char ces)
+void	strtab_print(char** tab, char ces)
 {
 	int	i;
 
 	if (!tab)
-		return ;
+		return;
 	i = 0;
 	while (tab[i])
 	{
@@ -46,7 +46,7 @@ void	strtab_print(char **tab, char ces)
 	}
 }
 
-int	strtab_len(char **tab)
+int	strtab_len(char** tab)
 {
 	int	i;
 
@@ -58,16 +58,16 @@ int	strtab_len(char **tab)
 	return (i);
 }
 
-char	**strtab_cpy(char **tab)
+char** strtab_cpy(char** tab)
 {
-	char	**res;
+	char** res;
 	int		i;
 	int		len;
 
 	len = strtab_len(tab);
 	if (len == 0)
 		return (NULL);
-	res = malloc(sizeof(char **) * (len + 1));
+	res = malloc(sizeof(char**) * (len + 1));
 	if (!res)
 		return (NULL);
 	i = 0;

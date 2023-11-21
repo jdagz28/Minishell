@@ -14,9 +14,9 @@
 #include "signal.h"
 #include "execution.h"
 
-int	exec_bin(t_simple_cmd *cmd, char **env)
+int	exec_bin(t_simple_cmd* cmd, char** env)
 {
-	char	*bin;
+	char* bin;
 	int		pid;
 	int		status;
 
@@ -25,7 +25,7 @@ int	exec_bin(t_simple_cmd *cmd, char **env)
 	if (!bin)
 	{
 		print_error(cmd->argv[0], "command not found");
-		exit(127);
+		return(127);
 	}
 	free(cmd->argv[0]);
 	cmd->argv[0] = bin;

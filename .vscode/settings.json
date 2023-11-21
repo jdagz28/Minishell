@@ -1,5 +1,7 @@
 {
     "files.associations": {
+        "shell.h": "c",
+        "cstdlib": "c"
         "minishell.h": "c",
         "cstdlib": "c",
         "environment.h": "c",

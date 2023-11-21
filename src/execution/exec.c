@@ -20,7 +20,7 @@ static void	close_pipe(int fd[2])
 	close(fd[1]);
 }
 
-static int	exec_pipe(t_shell *shell, t_node *node)
+static int	exec_pipe(t_shell* shell, t_node* node)
 {
 	int	pid;
 	int	fd[2];
@@ -47,13 +47,13 @@ static int	exec_pipe(t_shell *shell, t_node *node)
 	return (res);
 }
 
-static int	exec_simple(t_shell *shell, t_node *node)
+static int	exec_simple(t_shell* shell, t_node* node)
 {
-	char	***cmd;
+	char*** cmd;
 	int		err;
 
 	cmd = &node->content.simple_cmd.argv;
-	//! *cmd = files_redirect(*cmd); //!function not found
+	*cmd = files_redirect(*cmd); //!function not found
 	if (is_builtin(*cmd) == true)
 		err = execute_builtin(node->content.simple_cmd, shell);
 	else
@@ -61,7 +61,7 @@ static int	exec_simple(t_shell *shell, t_node *node)
 	return (err);
 }
 
-int	exec_node(t_shell *shell, t_node *node)
+int	exec_node(t_shell* shell, t_node* node)
 {
 	if (node->type == SIMPLE_CMD)
 		return (exec_simple(shell, node));
@@ -70,9 +70,9 @@ int	exec_node(t_shell *shell, t_node *node)
 	return (EXIT_SUCCESS);
 }
 
-int	shell_exec(t_shell *shell)
+int	shell_exec(t_shell* shell)
 {
-	t_node	*node;
+	t_node* node;
 	int		pid;
 	int		status;
 
@@ -80,6 +80,8 @@ int	shell_exec(t_shell *shell)
 	if (!node)
 		return (EXIT_FAILURE);
 	signal_set(SIGINT, SIG_IGN);
+	if (node->type == SIMPLE_CMD)
+		return(exec_simple(shell, node));
 	pid = fork();
 	if (pid == -1)
 		return (EXIT_FAILURE);

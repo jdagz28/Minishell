@@ -16,7 +16,7 @@
 #include "builtins.h"
 #include "shell.h"
 
-int	shell_init(t_shell *shell, char *cmds, char **env)
+int	shell_init(t_shell* shell, char* cmds, char** env)
 {
 	shell->env = strtab_cpy(env);
 	shell->err = 0;
@@ -34,11 +34,11 @@ int	shell_init(t_shell *shell, char *cmds, char **env)
 	return (EXIT_SUCCESS);
 }
 
-char	*shell_cat(t_shell *shell)
+char* shell_cat(t_shell* shell)
 {
-	char	*res;
-	char	*user;
-	char	*pwd;
+	char* res;
+	char* user;
+	char* pwd;
 
 	user = user_cat(&shell->user);
 	pwd = pwd_cat(&shell->pwd);
@@ -48,11 +48,12 @@ char	*shell_cat(t_shell *shell)
 	return (res);
 }
 
-int	shell_run(t_shell *shell)
+int	shell_run(t_shell* shell)
 {
 	signal_set(SIGQUIT, SIG_IGN);
 	var_set(shell, "toto=1");
-	export(shell, "tot");
+	//var_unset(shell, "tot");
+	//export(shell, "toto");
 	while (shell->err != 128)
 		shell->err = shell_prompt(shell);
 	ft_printf("exit\n");
