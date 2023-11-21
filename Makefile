@@ -18,7 +18,7 @@ OS					= 	$(shell uname -s)
 USERNAME			= 	$(shell whoami)
 
 ifeq ($(OS),Linux)
-	FSANITIZE		= 	-fsanitize=address #-fsanitize=leak 
+	FSANITIZE		= 	-fsanitize=address -fsanitize=leak 
 	MAC_INCLUDES	=
 	MAC_LIBS		=
 else
