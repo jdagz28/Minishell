@@ -6,7 +6,7 @@
 #    By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/10/07 15:33:53 by tbarbe            #+#    #+#              #
-#    Updated: 2023/11/20 20:14:14 by jdagoy           ###   ########.fr        #
+#    Updated: 2023/11/21 01:22:10 by jdagoy           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,7 @@ OS					= 	$(shell uname -s)
 USERNAME			= 	$(shell whoami)
 
 ifeq ($(OS),Linux)
-	FSANITIZE		= 	-fsanitize=leak -fsanitize=address
+	FSANITIZE		= 	-fsanitize=address #-fsanitize=leak 
 	MAC_INCLUDES	=
 	MAC_LIBS		=
 else

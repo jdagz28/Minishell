@@ -6,7 +6,7 @@
 /*   By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/14 01:22:23 by jdagoy            #+#    #+#             */
-/*   Updated: 2023/11/14 10:53:49 by jdagoy           ###   ########.fr       */
+/*   Updated: 2023/11/20 23:11:09 by jdagoy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +98,7 @@ static char	*remove_quotes(char *str)
 			change_quote_state(str[i], &in_squotes, &in_dquotes);
 		else
 			without_quotes[j++] = str[i];
-		i++;
+		++i;
 	}
 	restore_quotes(without_quotes);
 	return (without_quotes);

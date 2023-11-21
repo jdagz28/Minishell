@@ -5,10 +5,10 @@
             "name": "Debug",
             "type": "cppdbg",
             "request": "launch",
-            "program": "${workspaceFolder}/src/expander/expander", // replace <your-program> with your executable
-            "args": [], // any command-line arguments go here
+            "program": "${workspaceFolder}/minishell", // replace <your-program> with your executable
+            "args": ["echo '$'$'$'$'$'"], // any command-line arguments go here
             "stopAtEntry": false,
-            "cwd": "${workspaceFolder}/src/expander/",
+            "cwd": "${workspaceFolder}/",
             "environment": [],
             "externalConsole": false,
             "MIMode": "gdb",
