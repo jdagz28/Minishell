@@ -6,7 +6,7 @@
 /*   By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 22:58:02 by jdagoy            #+#    #+#             */
-/*   Updated: 2023/11/14 11:10:58 by jdagoy           ###   ########.fr       */
+/*   Updated: 2023/11/21 20:01:25 by jdagoy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,31 +43,67 @@ static bool	expand_singlevar(t_simple_cmd *cmd, int const i, \
 	return (true);
 }
 
-bool	expand_vars(t_simple_cmd *cmd, int const i)
+static void	update_command_arg(t_expandvar *params)
 {
-	int		j;
-	bool	sin_quote;
-	bool	dou_quote;
-
-	j = 0;
-	sin_quote = false;
-	dou_quote = false;
-	while (cmd->argv[i] != NULL && cmd->argv[i][j] != '\0')
+	if (params->new_word)
 	{
-		if (cmd->argv[i][j] == '$' && sin_quote == false)
+		free(params->cmd_argv[params->i]);
+		params->cmd_argv[params->i] = ft_strdup(params->new_word);
+		free(params->new_word);
+		params->new_word = NULL;
+	}
+}
+
+static void	process_non_var(t_expandvar *params, char c)
+{
+	change_quote_state(c, &(params->sin_quotes), &(params->dou_quotes));
+	append_char(&(params->new_word), c);
+}
+
+static bool	handle_dollar_sign(t_expandvar *params)
+{
+	char	*temp;
+	int		original_j;
+
+	temp = &(params->cmd_argv[params->i][params->j]);
+	if (params->cmd_argv[params->i][params->j] == '$')
+	{
+		if (next_char(params->cmd_argv[params->i][params->j + 1]) == true)
 		{
-			if (next_char(cmd->argv[i][j + 1]) == true)
-				cmd->argv[i] = replace_varval(&cmd->argv[i], 0, j++, "$");
-			{
-				if (expand_singlevar(cmd, i, &j, dou_quote) == false)
-					return (false);
-			}
+			params->cmd_argv[params->i] = replace_varval(\
+						&params->cmd_argv[params->i], 0, params->j++, "$");
+		}
+		else if (*temp == '$' && (*(temp + 1) == '\0' || \
+					*(temp + 1) == '\'' || *(temp + 1) == '\"'))
+		{
+			append_char(&(params->new_word), *temp);
+			params->j++;
 		}
 		else
 		{
-			change_quote_state(cmd->argv[i][j], &sin_quote, &dou_quote);
-			j++;
+			original_j = params->j;
+			return (expand_singlevar(params->cmd, params->i, &original_j, \
+								params->dou_quotes));
 		}
 	}
+	return (true);
+}
+
+bool	expand_vars(t_simple_cmd *cmd, int const i)
+{
+	t_expandvar	p;
+
+	init_expandvar(&p, i, cmd);
+	while (p.cmd_argv[p.i] != NULL && p.cmd_argv[p.i][p.j] != '\0')
+	{
+		if (p.cmd_argv[p.i][p.j] == '$' && p.sin_quotes == false)
+		{
+			if (handle_dollar_sign(&p) == false)
+				return (false);
+		}
+		else
+			process_non_var(&p, p.cmd_argv[p.i][p.j++]);
+	}
+	update_command_arg(&p);
 	return (true);
 }
