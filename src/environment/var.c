@@ -12,54 +12,11 @@
 
 #include "../include/minishell.h"
 #include "environment.h"
+#include "builtins.h"
 
-int	var_replace(t_shell *shell, char *str, int id)
+static int	var_extract_id(char** tab, char* str)
 {
-	char	*new;
-
-	new = ft_strdup(str);
-	if (!new)
-		return (EXIT_FAILURE);
-	free(shell->var[id]);
-	shell->var[id] = new;
-	return (EXIT_SUCCESS);
-}
-
-int	var_add(t_shell *shell, char *str)
-{
-	char	**res;
-	char	*new;
-	int		len;
-	int		i;
-
-	len = strtab_len(shell->var) + 1;
-	res = malloc(sizeof(char *) * (len + 1));
-	if (!res)
-		return (EXIT_FAILURE);
-	new = ft_strdup(str);
-	if (!new)
-	{
-		free(res);
-		return (EXIT_FAILURE);
-	}
-	i = 0;
-	while (i < len)
-	{
-		if (i == len - 1)
-			res[i] = new;
-		else
-			res[i] = shell->var[i];
-		i++;
-	}
-	res[i] = NULL;
-	free(shell->var);
-	shell->var = res;
-	return (EXIT_SUCCESS);
-}
-
-int	var_get_id(char **tab, char *str)
-{
-	char	*sep;
+	char* sep;
 	int		len;
 	int		i;
 
@@ -77,50 +34,29 @@ int	var_get_id(char **tab, char *str)
 	return (-1);
 }
 
-int	var_unset(t_shell *shell, char *str)
+int	var_unset(t_shell* shell, char* str)
 {
-	char	**res;
-	int		len;
 	int		id;
-	int		i;
 
-	id = var_get_id(shell->var, str);
+	id = strtab_getkey(shell->var, str);
 	if (id == -1)
 		return (EXIT_SUCCESS);
-	len = strtab_len(shell->var);
-	if (len == 1)
-	{
-		strtab_free(shell->var);
-		shell->var = NULL;
-	}
-	res = malloc(sizeof(char *) * len);
-	if (!res)
-		return (EXIT_FAILURE);
-	i = 0;
-	while (i < len)
-	{
-		if (i < id)
-			res[i] = shell->var[i];
-		if (i == id)
-			free(shell->var[i]);
-		if (i > id)
-			res[i - 1] = shell->var[i];
-		i++;
-	}
-	res[i] = NULL;
-	free(shell->var);
-	shell->var = res;
-	return (EXIT_SUCCESS);
+	return(strtab_remove_line(&shell->var, id));
 }
 
-int	var_set(t_shell *shell, char *str)
+int	var_set(t_shell* shell, char* str)
 {
 	int	id;
+	char* new;
+	int err;
 
-	id = var_get_id(shell->var, str);
+	new = ft_strdup(str);
+	if (!new)
+		return(EXIT_FAILURE);
+	id = var_extract_id(shell->var, str);
 	if (id != -1)
-		var_replace(shell, str, id);
+		err = strtab_replace_line(&shell->var, str, id);
 	else
-		var_add(shell, str);
-	return (id);
+		err = strtab_add_line(&shell->var, new);
+	return (err);
 }

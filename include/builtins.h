@@ -47,4 +47,7 @@ int		export(t_shell* shell, char* str);
 //pwd.c
 int		pwd(char** argv);
 
+//utils.c
+int	strtab_getkey(char** tab, char* str);
+
 #endif

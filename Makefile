@@ -49,6 +49,7 @@ BUILTINS_SRCS		=	builtins.c\
 							echo.c\
 							export.c\
 							pwd.c\
+							builtins_utils.c
 
 ENV_SRCS			=	env_getvar.c\
 							env_set.c\
