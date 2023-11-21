@@ -6,7 +6,7 @@
 #    By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/10/07 15:33:53 by tbarbe            #+#    #+#              #
-#    Updated: 2023/11/21 01:22:10 by jdagoy           ###   ########.fr        #
+#    Updated: 2023/11/21 20:08:57 by jdagoy           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -70,6 +70,7 @@ EXPAND_SRCS			=	expand_cmds.c\
 							expand_vars_utils.c\
 							expand_vars.c\
 							free_array.c\
+							remove_quotes_utils.c\
 							remove_quotes.c
 
 LEXER_SRCS			=	check_opred_tokens.c\

@@ -6,7 +6,7 @@
 /*   By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 20:57:03 by jdagoy            #+#    #+#             */
-/*   Updated: 2023/11/20 09:16:57 by jdagoy           ###   ########.fr       */
+/*   Updated: 2023/11/21 20:08:35 by jdagoy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,17 @@ typedef struct s_expand
 	int		index_dollar;
 }	t_expand;
 
+typedef struct s_expandvar
+{
+	char			**cmd_argv;
+	int				j;
+	char			*new_word;
+	int				i;
+	bool			dou_quotes;
+	bool			sin_quotes;
+	t_simple_cmd	*cmd;
+}	t_expandvar;
+
 //expand_cmds.c
 bool	expand_cmds(t_node *ast);
 
@@ -47,6 +58,8 @@ bool	realloc_argv(t_simple_cmd *cmd, int const i, int *j, \
 							char *var_value);
 
 //expand_var_utils.c
+void	append_char(char **s, char c);
+void	init_expandvar(t_expandvar *params, int const i, t_simple_cmd *cmd);
 int		get_len_var_name(char *argv);
 char	*get_var_name(char *argv);
 void	get_var_name_value(char *argv, char **var_name, char **var_value);
@@ -54,9 +67,12 @@ void	get_var_name_value(char *argv, char **var_name, char **var_value);
 //expand_vars.c
 bool	expand_vars(t_simple_cmd *cmd, int const i);
 
-//remove_quotes
+//remove_quotes_uitls.c
 char	*reverse_quotes(char *var_value);
 void	change_quote_state(char quote, bool *in_squote, bool *in_dquotes);
+int		get_len_without_quotes(char *str);
+
+//remove_quotes.c
 void	remove_quotes_arg(char **argv);
 
 //free_array.c

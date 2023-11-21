@@ -6,7 +6,7 @@
 /*   By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 22:58:02 by jdagoy            #+#    #+#             */
-/*   Updated: 2023/11/21 01:38:19 by jdagoy           ###   ########.fr       */
+/*   Updated: 2023/11/21 20:01:25 by jdagoy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,60 +43,47 @@ static bool	expand_singlevar(t_simple_cmd *cmd, int const i, \
 	return (true);
 }
 
-static void	append_char(char **s, char c)
+static void	update_command_arg(t_expandvar *params)
 {
-	size_t	size;
-	char	*new;
-
-	size = 2;
-	if (*s)
-		size += ft_strlen(*s);
-	new = malloc(size);
-	// if (new == NULL)
-	// 	fatal_error("malloc");
-	if (*s)
-		ft_strlcpy(new, *s, size);
-	new[size - 2] = c;
-	new[size - 1] = '\0';
-	if (*s)
-		free(*s);
-	*s = new;
-}
-
-
-static void	update_command_arg(char **cmd_argv, int i, char *new_word)
-{
-	if (new_word)
-	{	
-		free(cmd_argv[i]);
-		cmd_argv[i] = ft_strdup(new_word);
-		free(new_word);
+	if (params->new_word)
+	{
+		free(params->cmd_argv[params->i]);
+		params->cmd_argv[params->i] = ft_strdup(params->new_word);
+		free(params->new_word);
+		params->new_word = NULL;
 	}
 }
 
-static void	process_non_var(char **new_word, char c, bool *sin_quotes, \
-								bool *dou_quotes)
+static void	process_non_var(t_expandvar *params, char c)
 {
-	change_quote_state(c, sin_quotes, dou_quotes);
-	append_char(new_word, c);
+	change_quote_state(c, &(params->sin_quotes), &(params->dou_quotes));
+	append_char(&(params->new_word), c);
 }
 
-static int	handle_dollar_sign(char **cmd_argv, int *j, char **new_word, \
-				bool sin_quotes)
+static bool	handle_dollar_sign(t_expandvar *params)
 {
-	char *temp;
+	char	*temp;
+	int		original_j;
 
-	temp = &(*cmd_argv)[*j];
-	if ((*cmd_argv)[*j] == '$' && sin_quotes == false)
+	temp = &(params->cmd_argv[params->i][params->j]);
+	if (params->cmd_argv[params->i][params->j] == '$')
 	{
-		if (next_char((*cmd_argv)[*j + 1]) == true)
-			*cmd_argv = replace_varval(cmd_argv, 0, (*j)++, "$");
-		else if (*temp == '$' && (*(temp + 1) == '\0' || *(temp + 1) == '\'' \
-					|| *(temp + 1) == '\"')) 
+		if (next_char(params->cmd_argv[params->i][params->j + 1]) == true)
 		{
-			printf("Appending dollar sign: %c\n", *temp);
-			append_char(new_word, *temp);
-			(*j)++;
+			params->cmd_argv[params->i] = replace_varval(\
+						&params->cmd_argv[params->i], 0, params->j++, "$");
+		}
+		else if (*temp == '$' && (*(temp + 1) == '\0' || \
+					*(temp + 1) == '\'' || *(temp + 1) == '\"'))
+		{
+			append_char(&(params->new_word), *temp);
+			params->j++;
+		}
+		else
+		{
+			original_j = params->j;
+			return (expand_singlevar(params->cmd, params->i, &original_j, \
+								params->dou_quotes));
 		}
 	}
 	return (true);
@@ -104,29 +91,19 @@ static int	handle_dollar_sign(char **cmd_argv, int *j, char **new_word, \
 
 bool	expand_vars(t_simple_cmd *cmd, int const i)
 {
-	int		j;
-	bool	sin_quote;
-	bool	dou_quote;
-	char	*new_word;
+	t_expandvar	p;
 
-	j = 0;
-	new_word = NULL;
-	sin_quote = false;
-	dou_quote = false;
-	while (cmd->argv[i] != NULL && cmd->argv[i][j] != '\0')
+	init_expandvar(&p, i, cmd);
+	while (p.cmd_argv[p.i] != NULL && p.cmd_argv[p.i][p.j] != '\0')
 	{
-		if (cmd->argv[i][j] == '$' && sin_quote == false)
+		if (p.cmd_argv[p.i][p.j] == '$' && p.sin_quotes == false)
 		{
-			if (!handle_dollar_sign(&cmd->argv[i], &j, &new_word, \
-										sin_quote))
+			if (handle_dollar_sign(&p) == false)
 				return (false);
-			else 
-				return(expand_singlevar(cmd, i, &j, dou_quote));
 		}
 		else
-			process_non_var(&new_word, cmd->argv[i][j++], &sin_quote, \
-									&dou_quote);
+			process_non_var(&p, p.cmd_argv[p.i][p.j++]);
 	}
-	update_command_arg(cmd->argv, i, new_word);
+	update_command_arg(&p);
 	return (true);
 }
