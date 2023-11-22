@@ -6,7 +6,7 @@
 /*   By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/30 23:08:42 by jdagoy            #+#    #+#             */
-/*   Updated: 2023/11/20 11:13:08 by jdagoy           ###   ########.fr       */
+/*   Updated: 2023/11/22 14:17:30 by jdagoy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define LEXER_PARSING_H
 # include <stdbool.h>
 # include <stddef.h>
+# define SYNTAX_ERROR 2
 
 typedef enum e_tk_kind
 {

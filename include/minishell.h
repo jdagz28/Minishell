@@ -6,7 +6,7 @@
 /*   By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/11 16:43:09 by tbarbe            #+#    #+#             */
-/*   Updated: 2023/11/20 11:18:22 by jdagoy           ###   ########.fr       */
+/*   Updated: 2023/11/22 14:07:15 by jdagoy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,10 @@ typedef struct s_shell
 //exit.c
 void	shell_clear(t_shell* shell);
 void	clean_exit(t_shell* data, int err);
+
+//exit_value.c
+int		*get_exit_value(void);
+void	set_exit_value(int exit_value);
 
 //signal.c
 void	write_newline(void);

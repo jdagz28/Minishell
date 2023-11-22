@@ -6,7 +6,7 @@
 /*   By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 15:15:05 by jdagoy            #+#    #+#             */
-/*   Updated: 2023/11/20 20:47:23 by jdagoy           ###   ########.fr       */
+/*   Updated: 2023/11/22 11:41:15 by jdagoy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ int		export(t_shell* shell, char* str);
 //pwd.c
 int		pwd(char** argv);
 
-//utils.c
+//builtins_utils.c
 int	strtab_getkey(char** tab, char* str);
 
 #endif

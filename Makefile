@@ -6,7 +6,7 @@
 #    By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/10/07 15:33:53 by tbarbe            #+#    #+#              #
-#    Updated: 2023/11/21 20:08:57 by jdagoy           ###   ########.fr        #
+#    Updated: 2023/11/22 14:48:26 by jdagoy           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,7 @@ OS					= 	$(shell uname -s)
 USERNAME			= 	$(shell whoami)
 
 ifeq ($(OS),Linux)
-	FSANITIZE		= 	-fsanitize=address -fsanitize=leak 
+	FSANITIZE		= 	#-fsanitize=address -fsanitize=leak 
 	MAC_INCLUDES	=
 	MAC_LIBS		=
 else
@@ -62,7 +62,8 @@ EXECUTE_SRCS		=	exec_binpath.c\
 							exec_utils.c\
 							exec.c
 
-EXIT_SRCS			=	exit.c
+EXIT_SRCS			=	exit_clean.c\
+							exit_value.c
 
 EXPAND_SRCS			=	expand_cmds.c\
 							expand_replace_var_value.c\
