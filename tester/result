@@ -1,0 +1,100 @@
+1c1
+< ./fulltest.sh: line 21: bash}: command not found
+---
+> ./fulltest.sh: line 25: ./minishell}: No such file or directory
+1,2c1
+< bash: line 1: syntax error near unexpected token `>'
+< bash: line 1: `cat < >'
+---
+> ./fulltest.sh: line 25: ./minishell: No such file or directory
+1,2c1
+< bash: line 1: syntax error near unexpected token `>'
+< bash: line 1: `cat < >'
+---
+> ./fulltest.sh: line 25: ./minishell: No such file or directory
+1,2c1
+< bash: line 1: syntax error near unexpected token `>'
+< bash: line 1: `cat < >'
+---
+> ./fulltest.sh: line 25: ./minishell: No such file or directory
+1,2c1
+< bash: line 1: syntax error near unexpected token `>'
+< bash: line 1: `cat < >'
+---
+> ./fulltest.sh: line 25: ./minishell: No such file or directory
+1,2c1,3
+< bash: line 1: syntax error near unexpected token `>'
+< bash: line 1: `cat < >'
+---
+> jdagoy@GS63VR-7RF:~/Documents/19/Minishell/tester$ cat < >
+> minishell: syntax erorr near unexpected token >
+> jdagoy@GS63VR-7RF:~/Documents/19/Minishell/tester$ exit
+1,2c1,3
+< bash: line 1: syntax error near unexpected token `>'
+< bash: line 1: `cat < >'
+---
+> jdagoy@GS63VR-7RF:~/Documents/19/Minishell/tester$ cat < >
+> minishell: syntax erorr near unexpected token >
+> jdagoy@GS63VR-7RF:~/Documents/19/Minishell/tester$ exit
+1,2c1,3
+< bash: line 1: syntax error near unexpected token `>'
+< bash: line 1: `cat < >'
+---
+> jdagoy@GS63VR-7RF:~/Documents/19/Minishell/tester$ cat < >
+> minishell: syntax erorr near unexpected token >
+> jdagoy@GS63VR-7RF:~/Documents/19/Minishell/tester$ exit
+1,2c1,3
+< bash: line 1: syntax error near unexpected token `>'
+< bash: line 1: `cat < >'
+---
+> jdagoy@GS63VR-7RF:~/Documents/19/Minishell/tester$ cat < >
+> minishell: syntax erorr near unexpected token >
+> jdagoy@GS63VR-7RF:~/Documents/19/Minishell/tester$ exit
+1,2c1,3
+< bash: line 1: syntax error near unexpected token `>'
+< bash: line 1: `cat < >'
+---
+> jdagoy@GS63VR-7RF:~/Documents/19/Minishell/tester$ cat < >
+> minishell: syntax erorr near unexpected token >
+> jdagoy@GS63VR-7RF:~/Documents/19/Minishell/tester$ exit
+1,2c1,3
+< bash: line 1: syntax error near unexpected token `>'
+< bash: line 1: `cat < >'
+---
+> jdagoy@GS63VR-7RF:~/Documents/19/Minishell/tester$ cat < >
+> minishell: syntax erorr near unexpected token >
+> jdagoy@GS63VR-7RF:~/Documents/19/Minishell/tester$ exit
+1,2c1,3
+< bash: line 1: syntax error near unexpected token `>'
+< bash: line 1: `cat < >'
+---
+> jdagoy@GS63VR-7RF:~/Documents/19/Minishell/tester$ cat < >
+> minishell: syntax erorr near unexpected token >
+> jdagoy@GS63VR-7RF:~/Documents/19/Minishell/tester$ exit
+1,2c1
+< bash: line 1: syntax error near unexpected token `>'
+< bash: line 1: `cat < >'
+---
+> minishell: syntax erorr near unexpected token >
+1,2c1
+< bash: line 1: syntax error near unexpected token `>'
+< bash: line 1: `cat < >'
+---
+> minishell: syntax erorr near unexpected token >
+1,2c1
+< bash: line 1: syntax error near unexpected token `>>'
+< bash: line 1: `cat ! >>>>>'
+---
+> minishell: syntax error near unexpected token >
+1,2c1
+< bash: line 1: syntax error near unexpected token `>'
+< bash: line 1: `cat > >'
+---
+> minishell: syntax error near unexpected token 'newline'
+1,2c1
+< bash: line 1: syntax error near unexpected token `newline'
+< bash: line 1: `cat @ >'
+---
+> minishell: syntax error near unexpected token 'newline'
+0a1
+> /usr/bin/cat: '#': No such file or directory
