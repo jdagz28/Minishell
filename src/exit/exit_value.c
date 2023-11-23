@@ -1,31 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   exit.c                                             :+:      :+:    :+:   */
+/*   exit_value.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/20 02:28:33 by jdagoy            #+#    #+#             */
-/*   Updated: 2023/11/20 12:01:50 by jdagoy           ###   ########.fr       */
+/*   Created: 2023/11/22 14:04:33 by jdagoy            #+#    #+#             */
+/*   Updated: 2023/11/22 14:06:33 by jdagoy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-#include "environment.h"
 
-void	shell_clear(t_shell *shell)
+int	*get_exit_value(void)
 {
-	if (shell->env)
-		strtab_free(shell->env);
-	if (shell->ast)
-		clear_ast(&shell->ast);
-	user_clear(&shell->user);
-	pwd_clear(&shell->pwd);
+	static int	exit_value = 0;
+
+	return (&exit_value);
 }
 
-void	clean_exit(t_shell *data, int err)
+void	set_exit_value(int exit_value)
 {
-	rl_clear_history();
-	shell_clear(data);
-	exit(err);
+	*get_exit_value() = exit_value;
 }

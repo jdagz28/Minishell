@@ -6,7 +6,7 @@
 /*   By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/20 00:36:23 by jdagoy            #+#    #+#             */
-/*   Updated: 2023/11/20 11:08:06 by jdagoy           ###   ########.fr       */
+/*   Updated: 2023/11/23 09:01:43 by jdagoy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ static int	exec_pipe(t_shell* shell, t_node* node)
 	int	fd[2];
 	int	res;
 
+	set_is_piped(true);
 	if (pipe(fd) < 0)
 		exit(EXIT_FAILURE);
 	pid = fork();
@@ -44,6 +45,7 @@ static int	exec_pipe(t_shell* shell, t_node* node)
 	close_pipe(fd);
 	res = exec_node(shell, node->content.child.right);
 	waitpid(pid, NULL, 0);
+	set_is_piped(false);
 	return (res);
 }
 
@@ -53,7 +55,7 @@ static int	exec_simple(t_shell* shell, t_node* node)
 	int		err;
 
 	cmd = &node->content.simple_cmd.argv;
-	*cmd = files_redirect(*cmd); //!function not found
+	*cmd = files_redirect(*cmd);
 	if (is_builtin(*cmd) == true)
 		err = execute_builtin(node->content.simple_cmd, shell);
 	else

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jdagoy <jdagoy@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/07 15:34:35 by tbarbe            #+#    #+#             */
-/*   Updated: 2023/11/17 10:21:58 by jdagoy           ###   ########.fr       */
+/*   Updated: 2023/11/23 08:47:47 by jdagoy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,5 +97,6 @@ char	*get_next_line(int fd);
 int		ft_isspace(char c);
 char	*ft_strndup(const char *s1, size_t n);
 char	*ft_strjoin_del(char const *s1, char const *s2, char const *sep);
+int		ft_isnum(char *s);
 
 #endif

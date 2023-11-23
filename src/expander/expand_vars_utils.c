@@ -6,7 +6,7 @@
 /*   By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/14 10:36:11 by jdagoy            #+#    #+#             */
-/*   Updated: 2023/11/21 20:04:09 by jdagoy           ###   ########.fr       */
+/*   Updated: 2023/11/23 08:59:37 by jdagoy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ void	get_var_name_value(char *argv, char **var_name, char **var_value)
 	if (*(argv + 1) == '?')
 	{
 		*var_name = ft_strdup("?");
-		*var_value = ft_strdup("test"); //!ft_itoa(*get_exit_value());
+		*var_value = ft_itoa(*get_exit_value());
 	}
 	else
 	{

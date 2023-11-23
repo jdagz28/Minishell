@@ -1,34 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.c                                            :+:      :+:    :+:   */
+/*   exit_clean.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/07/11 16:43:09 by tbarbe            #+#    #+#             */
-/*   Updated: 2023/11/23 08:58:08 by jdagoy           ###   ########.fr       */
+/*   Created: 2023/11/20 02:28:33 by jdagoy            #+#    #+#             */
+/*   Updated: 2023/11/22 14:47:55 by jdagoy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+#include "environment.h"
 
-bool	*is_piped(void)
+void	shell_clear(t_shell *shell)
 {
-	static bool	is_piped = false;
-
-	return (&is_piped);
+	if (shell->env)
+		strtab_free(shell->env);
+	if (shell->ast)
+		clear_ast(&shell->ast);
+	user_clear(&shell->user);
+	pwd_clear(&shell->pwd);
 }
 
-void	set_is_piped(bool value)
+void	clean_exit(t_shell *data, int err)
 {
-	*is_piped() = value;
-}
-
-void	print_error(char *str1, char *str2)
-{
-	write(STDERR_FILENO, "minishell: ", 11);
-	write(STDERR_FILENO, str1, ft_strlen(str1));
-	write(STDERR_FILENO, ": ", 2);
-	write(STDERR_FILENO, str2, ft_strlen(str2));
-	write(STDERR_FILENO, "\n", 1);
+	rl_clear_history();
+	shell_clear(data);
+	exit(err);
 }
