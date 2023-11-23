@@ -6,11 +6,12 @@
 /*   By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 13:54:17 by jdagoy            #+#    #+#             */
-/*   Updated: 2023/11/20 09:18:33 by jdagoy           ###   ########.fr       */
+/*   Updated: 2023/11/20 23:06:45 by jdagoy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+#include "expansion.h"
 
 t_node	*parse(char *line)
 {
@@ -34,6 +35,7 @@ t_node	*parse(char *line)
 						tokens->word);
 		return (NULL);
 	}
+	expand_cmds(ast);
 	free_token(tokens);
 	return (ast);
 }
