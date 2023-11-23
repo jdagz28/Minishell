@@ -14,37 +14,7 @@
 #include "environment.h"
 #include "builtins.h"
 
-static int	var_extract_id(char** tab, char* str)
-{
-	char* sep;
-	int		len;
-	int		i;
-
-	sep = ft_strchr(str, '=');
-	if (!sep)
-		return (-1);
-	len = sep - str;
-	i = 0;
-	while (tab && tab[i])
-	{
-		if (ft_strncmp(tab[i], str, len + 1) == 0)
-			return (i);
-		i++;
-	}
-	return (-1);
-}
-
-int	var_unset(t_shell* shell, char* str)
-{
-	int		id;
-
-	id = strtab_getkey(shell->var, str);
-	if (id == -1)
-		return (EXIT_SUCCESS);
-	return(strtab_remove_line(&shell->var, id));
-}
-
-int	var_set(t_shell* shell, char* str)
+int	vartab_set(char*** tab, char* str)
 {
 	int	id;
 	char* new;
@@ -53,10 +23,20 @@ int	var_set(t_shell* shell, char* str)
 	new = ft_strdup(str);
 	if (!new)
 		return(EXIT_FAILURE);
-	id = var_extract_id(shell->var, str);
+	id = vartab_keypos(*tab, str);
 	if (id != -1)
-		err = strtab_replace_line(&shell->var, str, id);
+		err = strtab_replace(*tab, new, id);
 	else
-		err = strtab_add_line(&shell->var, new);
+		err = strtab_add(tab, new);
 	return (err);
+}
+
+int	vartab_unset(char*** tab, char* str)
+{
+	int		id;
+
+	id = vartab_pos(*tab, str);
+	if (id == -1)
+		return (EXIT_SUCCESS);
+	return(strtab_remove(tab, id));
 }

@@ -28,15 +28,37 @@ static int key_cmp(char* line, char* needle)
 	return(EXIT_SUCCESS);
 }
 
-int	strtab_getkey(char** tab, char* str)
+int	vartab_pos(char** tab, char* str)
 {
 	int	i;
 
+	if (!tab)
+		return(-1);
 	i = 0;
 	while (tab[i])
 	{
 		if (key_cmp(tab[i], str) == 0)
 			return(i);
+		i++;
+	}
+	return (-1);
+}
+
+int	vartab_keypos(char** tab, char* str)
+{
+	char* sep;
+	int		len;
+	int		i;
+
+	sep = ft_strchr(str, '=');
+	if (!sep)
+		return (-1);
+	len = sep - str;
+	i = 0;
+	while (tab && tab[i])
+	{
+		if (ft_strncmp(tab[i], str, len + 1) == 0)
+			return (i);
 		i++;
 	}
 	return (-1);

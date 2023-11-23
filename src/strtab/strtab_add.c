@@ -1,54 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   strtab_free.c                                      :+:      :+:    :+:   */
+/*   strtab_addreplace.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/20 02:27:02 by jdagoy            #+#    #+#             */
-/*   Updated: 2023/11/20 10:51:53 by jdagoy           ###   ########.fr       */
+/*   Created: 2023/11/20 02:26:35 by jdagoy            #+#    #+#             */
+/*   Updated: 2023/11/20 10:51:40 by jdagoy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 #include "environment.h"
 
-void	strtab_free(char **tab)
+int	strtab_add(char*** tab, char* str)
 {
-	int	i;
-	int	len;
+	char** res;
+	int		len;
 
-	if (!tab)
-		return ;
-	len = strtab_len(tab);
-	i = 0;
-	while (i < len)
-	{
-		if (tab[i])
-			free(tab[i]);
-		i++;
-	}
-	free(tab);
-}
-
-void	strtab_freeend(char **tab, int start)
-{
-	int	i;
-	int	len;
-
-	if (!tab)
-		return ;
-	len = strtab_len(tab);
-	if (start >= len)
-		return ;
-	i = start;
-	while (i < len)
-	{
-		if (tab[i])
-		{
-			free(tab[i]);
-			tab[i] = NULL;
-		}
-		i++;
-	}
+	if (!tab || !str)
+		return (EXIT_FAILURE);
+	len = strtab_len(*tab);
+	res = malloc(sizeof(char*) * (len + 2));
+	if (!res)
+		return (EXIT_FAILURE);
+	ft_memcpy(res, *tab, sizeof(char*) * len);
+	res[len] = str;
+	res[len + 1] = NULL;
+	if (*tab)
+		free(*tab);
+	*tab = res;
+	return (EXIT_SUCCESS);
 }

@@ -10,23 +10,22 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef ENVIRONMENT_H
-# define ENVIRONMENT_H
+#ifndef STRTAB_H
+# define STRTAB_H
 # include "minishell.h"
-# include "strtab.h"
 
-//env_getvar.c
-char* ft_get_env_var(char** environ, const char* var);
-char* env_get(char* start, char end, char** env);
+//strtab_addreplace.c
+int		strtab_replace(char** tab, char* str, int id);
+int		strtab_add(char*** tab, char* str);
+int		strtab_remove(char*** tab, int id);
 
-//env_set.c
-int		ft_setenv(const char* name, const char* value, \
-	char*** env, int overwrite);
+//strtab_free.c
+void	strtab_free(char** tab);
+void	strtab_freeend(char** tab, int start);
 
-//var.c
-int		vartab_set(char*** tab, char* str);
-int		vartab_unset(char*** tab, char* str);
-int		vartab_pos(char** tab, char* str);
-int		vartab_keypos(char** tab, char* str);
-
+//strtab_utils.c
+int		strtab_beginwith(char** tab, char* str);
+void	strtab_print(char** tab, char ces);
+int		strtab_len(char** tab);
+char** strtab_cpy(char** tab);
 #endif
