@@ -6,7 +6,7 @@
 #    By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/10/07 15:33:53 by tbarbe            #+#    #+#              #
-#    Updated: 2023/11/22 14:48:26 by jdagoy           ###   ########.fr        #
+#    Updated: 2023/11/23 08:54:14 by jdagoy           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -47,6 +47,7 @@ BUILTINS_SRCS		=	builtins.c\
 							cd.c\
 							cd_errors.c\
 							echo.c\
+							exit.c\
 							export.c\
 							pwd.c\
 							builtins_utils.c
