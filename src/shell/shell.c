@@ -53,8 +53,8 @@ int	shell_run(t_shell* shell)
 	signal_set(SIGQUIT, SIG_IGN);
 	vartab_set(&shell->var, "caca=2");
 	vartab_set(&shell->var, "toto=caca");
-	export(shell, "caca=3");
-	//unset(shell, "caca");
+	export(shell, "3caca=3");
+	unset(shell, "cac");
 	while (shell->err != 128)
 		shell->err = shell_prompt(shell);
 	ft_printf("exit\n");
