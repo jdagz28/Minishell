@@ -29,6 +29,6 @@ int		vartab_unset(char*** tab, char* str);
 int		vartab_pos(char** tab, char* str);
 int		vartab_keypos(char** tab, char* str);
 int		key_isvalid(char* str);
-
+int		var_set(t_shell* shell, char** cmd);
 
 #endif

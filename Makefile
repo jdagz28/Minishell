@@ -55,8 +55,8 @@ ENV_SRCS			=	env_getvar.c\
 							env_set.c\
 							vartab_set_unset.c\
 							vartab_pos.c\
-							var_key.c
-
+							var_key.c\
+							var_set.c
 
 EXECUTE_SRCS		=	exec_binpath.c\
 							exec_utils.c\
