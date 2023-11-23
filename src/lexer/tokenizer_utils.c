@@ -6,7 +6,7 @@
 /*   By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/03 12:34:48 by jdagoy            #+#    #+#             */
-/*   Updated: 2023/11/11 22:29:08 by jdagoy           ###   ########.fr       */
+/*   Updated: 2023/11/23 12:05:19 by jdagoy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,11 @@ void	tk_error(char *error_msg, char *token)
 {
 	ft_putstr_fd("minishell: ", STDERR_FILENO);
 	ft_putstr_fd(error_msg, STDERR_FILENO);
+	if (ft_strncmp(token, "'newline'", ft_strlen("'newline'")))
+		ft_putstr_fd("\'", STDERR_FILENO);
 	ft_putstr_fd(token, STDERR_FILENO);
+	if (ft_strncmp(token, "'newline'", ft_strlen("'newline'")))
+		ft_putstr_fd("\'", STDERR_FILENO);
 	ft_putstr_fd("\n", STDERR_FILENO);
 	if ((ft_strnstr(error_msg, "Calloc", ft_strlen(error_msg)) != NULL) \
 		|| (ft_strnstr(error_msg, "ft_strndup", ft_strlen(error_msg)) != NULL))

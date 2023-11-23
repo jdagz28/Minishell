@@ -6,7 +6,7 @@
 /*   By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/11 16:43:09 by tbarbe            #+#    #+#             */
-/*   Updated: 2023/11/20 11:11:43 by jdagoy           ###   ########.fr       */
+/*   Updated: 2023/11/23 11:51:05 by jdagoy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int	main(int argc, char** argv, char** env)
 	else
 		cmds = argv[1];
 	if (shell_init(&shell, cmds, env))
-		return (EXIT_FAILURE);
+		return (*get_exit_value());
 	if (cmds)
 		err = shell_exec(&shell);
 	else

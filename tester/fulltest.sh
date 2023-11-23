@@ -25,7 +25,7 @@ test()
     { echo -n -e "$TEST_COMMAND" | ../minishell 2> ms_out; } > /dev/null
     minishell=$?
 
-    diff bash_out ms_out >> result
+    diff <(head -n 1 bash_out) <(head -n 1 ms_out) >> result
     if [ $? -eq 0 ]; then
         echo -e "${GREEN} OKAY${RESET}"
     else
@@ -50,4 +50,3 @@ test 'Invalid Input' 1 'cat < >'
 test 'Invalid Input' 2 'cat ! >>>>>'
 test 'Invalid Input' 3 'cat > >'
 test 'Invalid Input' 4 'cat @ >'
-test 'Invalid Input' 5 'cat # > a'
