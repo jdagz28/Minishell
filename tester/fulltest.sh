@@ -17,13 +17,20 @@ test()
 
     printf '  Test %-2s: %-50s' "$TEST_NUMBER" "\"$TEST_COMMAND\""
 
-    # Run in bash
-    { echo -n -e "$TEST_COMMAND" | bash; } >bash_out 2>&1
-    bash=$?
+    if [ "$TEST_TYPE" == "Invalid Input" ]; then
+        { echo -n -e "$TEST_COMMAND" | bash; } 2>&1 | head -n 1 > bash_out 
+        bash=$?
 
-    # Run in minishell
-    { echo -n -e "$TEST_COMMAND" | ../minishell 2> ms_out; } > /dev/null
-    minishell=$?
+        { echo -n -e "$TEST_COMMAND" | ../minishell 2> ms_out; } > /dev/null
+        minishell=$?
+    else
+        { echo -n -e "$TEST_COMMAND" | bash; } > bash_out
+        bash=$?
+
+        { echo -n -e "$TEST_COMMAND" | ../minishell > ms_stdout; } > /dev/null
+        minishell=$?
+        sed -n '2p' ms_stdout > ms_out
+    fi
 
     diff <(head -n 1 bash_out) <(head -n 1 ms_out) >> result
     if [ $? -eq 0 ]; then

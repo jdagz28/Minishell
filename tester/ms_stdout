@@ -1,0 +1,3 @@
+jdagoy@GS63VR-7RF:~/Documents/19/Minishell/tester$ echo $SHLVL + $SHLVL
+2 + 2
+jdagoy@GS63VR-7RF:~/Documents/19/Minishell/tester$ exit
