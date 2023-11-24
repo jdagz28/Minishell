@@ -93,11 +93,7 @@ PARSER_SRCS			=	clear_ast.c\
 							parsing.c
 
 REDIRECT_SRCS			=	redirect.c\
-<<<<<<< HEAD
 							file.c\
-=======
-							open_file_dup2.c\
->>>>>>> a7431d18d96f1457ee8e10a9b5f18c2bf4b24745
 							here_doc.c
 
 SHELL_SRCS			=	init_pwd.c\
