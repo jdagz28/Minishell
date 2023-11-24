@@ -13,7 +13,7 @@
 #include "minishell.h"
 #include "lexer_parsing.h"
 
-static bool	check_operatorsyntax_cont(t_token *token)
+static bool	check_operatorsyntax_cont(t_token* token)
 {
 	if (ft_strncmp(token->word, "(", 1) == 0)
 	{
@@ -27,7 +27,7 @@ static bool	check_operatorsyntax_cont(t_token *token)
 	return (true);
 }
 
-static bool	check_operatorsyntax(t_token *token)
+static bool	check_operatorsyntax(t_token* token)
 {
 	if (token->next->kind == TK_EOF)
 	{
@@ -35,10 +35,10 @@ static bool	check_operatorsyntax(t_token *token)
 		return (false);
 	}
 	if (ft_strncmp(token->word, "||", 2) == 0 || \
-	ft_strncmp(token->word, "&&", 2) == 0 || ft_strncmp(token->word, ";", 1))
+		ft_strncmp(token->word, "&&", 2) == 0 || ft_strncmp(token->word, ";", 1))
 	{
 		if (token->next->kind != TK_WORD && token->next->kind != TK_OPERATOR \
-		&& ft_strncmp(token->next->word, "(", 1) != 0)
+			&& ft_strncmp(token->next->word, "(", 1) != 0)
 		{
 			tk_error("syntax error near unexpected token ", token->word);
 			return (false);
@@ -59,7 +59,7 @@ static bool	check_operatorsyntax(t_token *token)
  * * check_redirectsyntax
  *  checks if redirect is valid, followed by expected tokens
 */
-static bool	check_redirectsyntax(t_token *token)
+static bool	check_redirectsyntax(t_token* token)
 {
 	if (token->next->kind == TK_EOF)
 	{
@@ -82,11 +82,11 @@ static bool	check_redirectsyntax(t_token *token)
 	{
 		tk_error("syntax error near unexpected token ", token->next->word);
 		return (false);
-	}
+	}*/
 	return (true);
 }
 
-bool	check_tokens(t_token *tokens)
+bool	check_tokens(t_token* tokens)
 {
 	while (tokens != NULL)
 	{

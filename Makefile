@@ -50,14 +50,14 @@ BUILTINS_SRCS		=	builtins.c\
 							exit.c\
 							export.c\
 							pwd.c\
-							builtins_utils.c
+							unset.c
 
 ENV_SRCS			=	env_getvar.c\
 							env_set.c\
-							strtab_addreplace.c\
-							strtab_free.c\
-							strtab_utils.c\
-							var.c
+							vartab_set_unset.c\
+							vartab_pos.c\
+							var_key.c\
+							var_set.c
 
 EXECUTE_SRCS		=	exec_binpath.c\
 							exec_utils.c\
@@ -104,6 +104,12 @@ SIGNAL_SRCS			=	signal.c
 SRCS				=	minishell.c\
 							utils.c
 
+STRTAB_SRCS			=		strtab_add.c\
+							strtab_replace.c\
+							strtab_remove.c\
+							strtab_free.c\
+							strtab_utils.c\
+
 
 INCLUDE				=	./include/
 INCLUDES			= 	-I $(INCLUDE) $(MAC_INCLUDES)
@@ -118,6 +124,8 @@ REDIRECT_SRCS_		=	$(addprefix src/redirection/, $(REDIRECT_SRCS))
 SHELL_SRCS_			= 	$(addprefix src/shell/, $(SHELL_SRCS))
 SIGNAL_SRCS_		=	$(addprefix src/signals/, $(SIGNAL_SRCS))
 SRCS_				=	$(addprefix src/, $(SRCS))
+STRTAB_SRCS_		=	$(addprefix src/strtab/, $(STRTAB_SRCS))
+
 
 HEADER_LIST			=	minishell.h\
 						lexer_parsing.h\
@@ -135,7 +143,7 @@ ${NAME}:
 			$(MAKE) -C ./libft
 			echo "libft done"
 			${CC} ${BUILTINS_SRCS_} ${ENV_SRCS_} ${EXECUTE_SRCS_} \
-			${EXIT_SRCS_} ${EXPAND_SRCS_} ${LEXER_SRCS_} ${PARSER_SRCS_} \
+			${EXIT_SRCS_} ${EXPAND_SRCS_} ${LEXER_SRCS_} ${PARSER_SRCS_} ${STRTAB_SRCS_} \
 			${REDIRECT_SRCS_} ${SHELL_SRCS_} ${SIGNAL_SRCS_} ${SRCS_} ${LIBFT} ${HEADER_FILES} \
 			${INCLUDES} -o ${NAME} ${CFLAGS} ${LIBRARIES}
 			echo "minishell done"
@@ -151,7 +159,7 @@ re:			fclean all
 
 only:		
 			${CC} ${BUILTINS_SRCS_} ${ENV_SRCS_} ${EXECUTE_SRCS_} \
-			${EXIT_SRCS_} ${EXPAND_SRCS_} ${LEXER_SRCS_} ${PARSER_SRCS_} \
+			${EXIT_SRCS_} ${EXPAND_SRCS_} ${LEXER_SRCS_} ${PARSER_SRCS_} ${STRTAB_SRCS_} \
 			${REDIRECT_SRCS_} ${SHELL_SRCS_} ${SIGNAL_SRCS_} ${SRCS_} ${LIBFT} ${HEADER_FILES} \
 			${INCLUDES} -o ${NAME} ${CFLAGS} ${LIBRARIES}
 			echo "minishell done"

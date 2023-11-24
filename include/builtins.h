@@ -47,10 +47,10 @@ int		echo(char** argv);
 //export.c
 int		export(t_shell* shell, char* str);
 
+//unset.c
+int		unset(t_shell* shell, char* str);
+
 //pwd.c
 int		pwd(char** argv);
-
-//builtins_utils.c
-int	strtab_getkey(char** tab, char* str);
 
 #endif

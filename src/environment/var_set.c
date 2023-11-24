@@ -1,43 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   export.c                                           :+:      :+:    :+:   */
+/*   files.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+        */
+/*   By: tbarbe <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/11 16:43:09 by tbarbe            #+#    #+#             */
-/*   Updated: 2023/11/20 10:50:50 by jdagoy           ###   ########.fr       */
+/*   Updated: 2023/10/09 13:26:05 by tbarbe           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/minishell.h"
+#include "minishell.h"
 #include "environment.h"
-#include "builtins.h"
 
-static char* define_str(char** tab, char* str)
-{
-	int		id;
-
-	id = vartab_keypos(tab, str);
-	if (id != -1)
-		return (str);
-	id = vartab_pos(tab, str);
-	if (id != -1)
-		return (tab[id]);
-	return(NULL);
-}
-
-int	export(t_shell* shell, char* str)
+static int	var_set_one(t_shell* shell, char* str)
 {
 	int		id;
 	char* new;
 	int		err;
 
+	if (ft_strchr(str, '=') == NULL)
+		return(EXIT_FAILURE);
 	if (!key_isvalid(str))
+	{
 		print_error(str, "not a valid identifier");
-	str = define_str(shell->var, str);
-	if (!str)
-		return (EXIT_FAILURE);
+		return(EXIT_FAILURE);
+	}
 	new = ft_strdup(str);
 	if (!new)
 		return (EXIT_FAILURE);
@@ -52,4 +40,15 @@ int	export(t_shell* shell, char* str)
 		return (EXIT_FAILURE);
 	}
 	return (EXIT_SUCCESS);
+}
+
+int var_set(t_shell* shell, char** cmd)
+{
+	int i;
+
+	if (!cmd || !*cmd)
+		return(EXIT_FAILURE);
+	i = 0;
+	while (cmd[i] && var_set_one(shell, cmd[i++]) == EXIT_SUCCESS);
+	return(i);
 }

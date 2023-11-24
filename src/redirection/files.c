@@ -87,7 +87,7 @@ char** files_redirect(char** tab)
 	len = strtab_len(tab);
 	if (len > 1 && tab[0][0] == '<')
 	{
-		if (strlen(tab[0]) > 1 && tab[0][1] == '<')
+		if (strlen(tab[0]) > 1 && tab[0][1] == '2')
 			read_here_doc(tab[1]);
 		else if (open_file_dup2(tab[1], 'r'))
 			print_error(tab[1], strerror(errno));
