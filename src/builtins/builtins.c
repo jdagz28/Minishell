@@ -14,9 +14,8 @@
 #include "builtins.h"
 #include "environment.h"
 
-bool	ft_strncmp_twice(const char* s1, const char* s2)
+bool	ft_strncmp_twice(const char* s1, const char* s2) // == ft_strncmp(str1, str2, ft_strlen(str1 + 1));
 {
-	// == ft_strncmp(s1, s2, ft_strlen(s1 + 1));
 	if (ft_strncmp(s1, s2, ft_strlen(s1)) == 0 \
 		&& ft_strncmp(s1, s2, ft_strlen(s2)) == 0)
 		return (true);
@@ -37,7 +36,7 @@ int	execute_builtin(t_simple_cmd command, t_shell* shell)
 		status = echo(command.argv);
 	if (ft_strncmp_twice((const char*)command.argv[0], "env"))
 	{
-		strtab_write(shell->env, '\n', command.fd_output);
+		strtab_print(shell->env, '\n');
 		status = EXIT_SUCCESS;
 	}
 	if (ft_strncmp_twice((const char*)command.argv[0], "cd"))
@@ -64,7 +63,7 @@ int	execute_builtin(t_simple_cmd command, t_shell* shell)
 	/*if (ft_strncmp_twice((const char*)command.argv[0], "./minishell"))
 		status = ;*/
 	if (status != EXIT_SUCCESS)
-		return(EXIT_FAILURE);
+		return(EXIT_FAILURE); 
 	return (status);
 }
 

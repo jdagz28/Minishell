@@ -16,9 +16,9 @@
 #include "environment.h"
 
 
-static int	exec_bin_error(char* cmd, char** env)
+static int	exec_bin_error(char *cmd, char **env)
 {
-	char* pwd;
+	char	*pwd;
 	int		pwd_len;
 
 	pwd = ft_get_env_var(env, "PWD");
@@ -50,8 +50,6 @@ int	exec_bin(t_simple_cmd* cmd, char** env)
 		return (EXIT_FAILURE);
 	if (pid == 0)
 	{
-		dup2(cmd->fd_input, STDIN_FILENO);
-		dup2(cmd->fd_output, STDOUT_FILENO);
 		execve(cmd->argv[0], cmd->argv, env);
 		exit(127);
 	}

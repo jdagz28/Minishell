@@ -13,7 +13,6 @@
 #include "minishell.h"
 #include "execution.h"
 #include "builtins.h"
-#include "strtab.h"
 
 static void	close_pipe(int fd[2])
 {
@@ -52,21 +51,17 @@ static int	exec_pipe(t_shell* shell, t_node* node)
 
 static int	exec_simple(t_shell* shell, t_node* node)
 {
-	t_simple_cmd* cmd;
-	char*** argv;
+	char*** cmd;
 	int		err;
 
-	cmd = &node->content.simple_cmd;
+	cmd = &node->content.simple_cmd.argv;
 	err = redirect(cmd);
 	if (err)
-		return(EXIT_FAILURE);
-	argv = &cmd->argv;
-	if (strtab_len(*argv) == 0)
-		return(EXIT_SUCCESS);
-	if (is_builtin(*argv) == true)
-		err = execute_builtin(*cmd, shell);
+		return(err);
+	if (is_builtin(*cmd) == true)
+		err = execute_builtin(node->content.simple_cmd, shell);
 	else
-		err = exec_bin(cmd, shell->env);
+		err = exec_bin(&node->content.simple_cmd, shell->env);
 	return (err);
 }
 
@@ -84,12 +79,18 @@ int	shell_exec(t_shell* shell)
 	t_node* node;
 	int		pid;
 	int		status;
+	int		err;
 	node = shell->ast;
 	if (!node)
 		return (EXIT_FAILURE);
 	signal_set(SIGINT, SIG_IGN);
 	if (node->type == SIMPLE_CMD)
-		return(exec_simple(shell, node));
+	{
+		err = exec_simple(shell, node);
+		dup2(0, STDIN_FILENO);
+		dup2(1, STDOUT_FILENO);
+		return(err);
+	}
 	pid = fork();
 	if (pid == -1)
 		return (EXIT_FAILURE);
