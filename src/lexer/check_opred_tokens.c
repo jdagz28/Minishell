@@ -6,7 +6,7 @@
 /*   By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/02 21:15:07 by jdagoy            #+#    #+#             */
-/*   Updated: 2023/11/23 12:34:15 by jdagoy           ###   ########.fr       */
+/*   Updated: 2023/11/24 02:45:26 by jdagoy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,8 @@ static bool	check_operatorsyntax(t_token* token)
 		return (false);
 	}
 	if (ft_strncmp(token->word, "||", 2) == 0 || \
-		ft_strncmp(token->word, "&&", 2) == 0 || ft_strncmp(token->word, ";", 1))
+		ft_strncmp(token->word, "&&", 2) == 0 || \
+		ft_strncmp(token->word, ";", 1))
 	{
 		if (token->next->kind != TK_WORD && token->next->kind != TK_OPERATOR \
 			&& ft_strncmp(token->next->word, "(", 1) != 0)
@@ -82,7 +83,7 @@ static bool	check_redirectsyntax(t_token* token)
 	{
 		tk_error("syntax error near unexpected token ", token->next->word);
 		return (false);
-	}*/
+	}
 	return (true);
 }
 

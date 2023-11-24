@@ -6,7 +6,7 @@
 /*   By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/27 00:23:51 by jdagoy            #+#    #+#             */
-/*   Updated: 2023/11/23 09:10:20 by jdagoy           ###   ########.fr       */
+/*   Updated: 2023/11/24 02:48:08 by jdagoy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,8 +52,6 @@ int	execute_builtin(t_simple_cmd command, t_shell* shell)
 		ft_printf("exit\n");
 		clean_exit(shell, shell->err);
 	}
-	if (ft_strncmp_twice((const char *)command.argv[0], "unset"))
-		status = var_unset(shell, command.argv[1]);
 	if (status != EXIT_SUCCESS)
 		return(EXIT_FAILURE); 
 	return (status);
