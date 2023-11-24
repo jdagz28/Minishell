@@ -6,7 +6,7 @@
 /*   By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/11 16:43:09 by tbarbe            #+#    #+#             */
-/*   Updated: 2023/11/24 00:59:35 by jdagoy           ###   ########.fr       */
+/*   Updated: 2023/11/24 04:05:48 by jdagoy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 #include "environment.h"
 
 
-static void	exec_bin_error(char *cmd, char **env)
+static int	exec_bin_error(char *cmd, char **env)
 {
 	char	*pwd;
 	int		pwd_len;
@@ -27,6 +27,7 @@ static void	exec_bin_error(char *cmd, char **env)
 		print_error(cmd, "is a directory");
 	else
 		print_error(cmd, "command not found");
+	return (127);
 }
 
 int	exec_bin(t_simple_cmd* cmd, char** env)
@@ -36,12 +37,12 @@ int	exec_bin(t_simple_cmd* cmd, char** env)
 	int		status;
 
 	signal_set(SIGINT, &write_newline);
-	bin = env_getpath(cmd->argv[0], env);
+	if (access(cmd->argv[0], F_OK) == 0)
+		bin = ft_strdup(cmd->argv[0]);
+	else
+		bin = env_getpath(cmd->argv[0], env);
 	if (!bin)
-	{
-		exec_bin_error(cmd->argv[0], env);
-		return (127);
-	}
+		return (exec_bin_error(cmd->argv[0], env));
 	free(cmd->argv[0]);
 	cmd->argv[0] = bin;
 	pid = fork();
