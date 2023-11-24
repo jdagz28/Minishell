@@ -13,6 +13,7 @@
 #include "minishell.h"
 #include "execution.h"
 #include "builtins.h"
+#include "strtab.h"
 
 static void	close_pipe(int fd[2])
 {
@@ -55,7 +56,9 @@ static int	exec_simple(t_shell* shell, t_node* node)
 	int		err;
 
 	cmd = &node->content.simple_cmd.argv;
-	*cmd = files_redirect(*cmd);
+	err = redirect(cmd);
+	if (err)
+		return (err);
 	if (is_builtin(*cmd) == true)
 		err = execute_builtin(node->content.simple_cmd, shell);
 	else
