@@ -51,9 +51,6 @@ char* shell_cat(t_shell* shell)
 void	shell_run(t_shell* shell)
 {
 	signal_set(SIGQUIT, SIG_IGN);
-	vartab_set(&shell->var, "toto=caca");
-	/*export(shell, "3caca=3");
-	unset(shell, "cac");*/
 	while (*get_exit_value() != 128)
 		shell_prompt(shell);
 }

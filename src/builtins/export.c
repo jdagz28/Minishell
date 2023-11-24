@@ -18,10 +18,12 @@ static char* define_str(char** tab, char* str)
 {
 	int		id;
 
-	id = vartab_keypos(tab, str);
+	id = vartab_strpos(tab, str);
+	ft_printf("vartab_strpos = %d\n", id);
 	if (id != -1)
 		return (str);
-	id = vartab_pos(tab, str);
+	id = vartab_keypos(tab, str);
+	ft_printf("vartab_keypos = %d\n", id);
 	if (id != -1)
 		return (tab[id]);
 	return(NULL);
@@ -41,7 +43,7 @@ int	export(t_shell* shell, char* str)
 	new = ft_strdup(str);
 	if (!new)
 		return (EXIT_FAILURE);
-	id = vartab_pos(shell->env, str);
+	id = vartab_strpos(shell->env, str);
 	if (id != -1)
 		err = strtab_replace(shell->env, new, id);
 	else

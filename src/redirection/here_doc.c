@@ -10,45 +10,32 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../include/minishell.h"
 #include "environment.h"
 
-static int	var_set_one(t_shell* shell, char* str)
+int read_here_doc(char* limiter)
 {
-	int		id;
-	char* new;
-	int		err;
+	char* line;
+	char* red;
+	int len;
 
-	if (ft_strchr(str, '=') == NULL)
-		return(EXIT_FAILURE);
-	if (!key_isvalid(str))
+	red = NULL;
+	len = ft_strlen(limiter);
+	while (1)
 	{
-		print_error(str, "not a valid identifier");
-		return(EXIT_FAILURE);
+		write(1, "> ", 2);
+		line = get_next_line(0);
+		if (ft_strncmp(line, limiter, len) == 0)
+		{
+			free(line);
+			break;
+		}
+		red = ft_stradd(red, line);
+		free(line);
+		if (red == NULL)
+			return (EXIT_FAILURE);
 	}
-	new = ft_strdup(str);
-	if (!new)
-		return (EXIT_FAILURE);
-	id = vartab_strpos(shell->var, str);
-	if (id != -1)
-		err = strtab_replace(shell->var, new, id);
-	else
-		err = strtab_add(&shell->var, new);
-	if (err)
-	{
-		free(new);
-		return (EXIT_FAILURE);
-	}
+	write(STDIN_FILENO, red, ft_strlen(red) + 1);
+	free(red);
 	return (EXIT_SUCCESS);
-}
-
-int var_set(t_shell* shell, char** cmd)
-{
-	int i;
-
-	if (!cmd || !*cmd)
-		return(EXIT_FAILURE);
-	i = 0;
-	while (cmd[i] && var_set_one(shell, cmd[i++]) == EXIT_SUCCESS);
-	return(i);
 }

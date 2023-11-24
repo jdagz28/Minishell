@@ -55,7 +55,9 @@ static int	exec_simple(t_shell* shell, t_node* node)
 	int		err;
 
 	cmd = &node->content.simple_cmd.argv;
-	*cmd = files_redirect(*cmd);
+	err = redirect(cmd);
+	if (err)
+		return(err);
 	if (is_builtin(*cmd) == true)
 		err = execute_builtin(node->content.simple_cmd, shell);
 	else
@@ -77,13 +79,18 @@ int	shell_exec(t_shell* shell)
 	t_node* node;
 	int		pid;
 	int		status;
-
+	int		err;
 	node = shell->ast;
 	if (!node)
 		return (EXIT_FAILURE);
 	signal_set(SIGINT, SIG_IGN);
 	if (node->type == SIMPLE_CMD)
-		return(exec_simple(shell, node));
+	{
+		err = exec_simple(shell, node);
+		dup2(0, STDIN_FILENO);
+		dup2(1, STDOUT_FILENO);
+		return(err);
+	}
 	pid = fork();
 	if (pid == -1)
 		return (EXIT_FAILURE);
