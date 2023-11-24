@@ -6,7 +6,7 @@
 /*   By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/27 00:23:51 by jdagoy            #+#    #+#             */
-/*   Updated: 2023/11/24 15:35:36 by jdagoy           ###   ########.fr       */
+/*   Updated: 2023/11/20 20:45:42 by jdagoy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,13 @@ int	execute_builtin(t_simple_cmd command, t_shell* shell)
 	int	status;
 
 	status = -1;
+	// if (ft_strncmp_twice((const char *)command.argv[0], "exit"))
+	// {	
+	// 	//TODO: close(IO_file)
+	//     //TODO: exit
+	// }
+	if (ft_strncmp_twice((const char*)command.argv[0], "echo"))
+		status = echo(command.argv);
 	if (ft_strncmp_twice((const char*)command.argv[0], "env"))
 	{
 		strtab_write(shell->env, '\n', command.fd_output);
@@ -50,7 +57,12 @@ int	execute_builtin(t_simple_cmd command, t_shell* shell)
 		status = unset(shell, command.argv[1]);
 	status = var_set(shell, command.argv);
 	if (ft_strncmp_twice((const char*)command.argv[0], "exit"))
-		status = builtin_exit(command.argv, shell);
+	{
+		ft_printf("exit\n");
+		clean_exit(shell, shell->err);
+	}
+	/*if (ft_strncmp_twice((const char*)command.argv[0], "./minishell"))
+		status = ;*/
 	if (status != EXIT_SUCCESS)
 		return(EXIT_FAILURE);
 	return (status);

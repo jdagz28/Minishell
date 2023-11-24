@@ -57,6 +57,7 @@ int open_file(char* path, char mode);
 
 //utils.c
 bool* is_piped(void);
+bool* is_piped(void);
 void	set_is_piped(bool value);
 void	print_error(char* str1, char* str2);
 
