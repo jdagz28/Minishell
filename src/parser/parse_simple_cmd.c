@@ -6,7 +6,7 @@
 /*   By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 00:28:24 by jdagoy            #+#    #+#             */
-/*   Updated: 2023/11/19 23:32:29 by jdagoy           ###   ########.fr       */
+/*   Updated: 2023/11/24 10:28:07 by jdagoy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,8 +83,6 @@ static bool	parse_cmdargs(t_token **tokens, t_node *simple_cmd)
 			consume_token(tokens);
 			if (*tokens == NULL)
 				return (error_cmdargs());
-			if ((*tokens)->kind != TK_WORD)
-				return (false);
 		}
 		simple_cmd->content.simple_cmd.argv[i] = ft_strdup((*tokens)->word);
 		if (simple_cmd->content.simple_cmd.argv[i++] == NULL)
