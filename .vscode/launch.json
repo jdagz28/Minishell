@@ -6,7 +6,7 @@
             "type": "cppdbg",
             "request": "launch",
             "program": "${workspaceFolder}/minishell", // replace <your-program> with your executable
-            "args": ["echo -nnnnnnn hello world"], // any command-line arguments go here
+            "args": ["$PWD"], // any command-line arguments go here
             "stopAtEntry": false,
             "cwd": "${workspaceFolder}/",
             "environment": [],

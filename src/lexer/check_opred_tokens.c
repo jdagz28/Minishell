@@ -6,7 +6,7 @@
 /*   By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/02 21:15:07 by jdagoy            #+#    #+#             */
-/*   Updated: 2023/11/11 22:28:00 by jdagoy           ###   ########.fr       */
+/*   Updated: 2023/11/23 12:34:15 by jdagoy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,11 +63,10 @@ static bool	check_redirectsyntax(t_token *token)
 {
 	if (token->next->kind == TK_EOF)
 	{
-		tk_error("syntax error near unexpected token 'newline'", NULL);
+		tk_error("syntax error near unexpected token ", "'newline'");
 		return (false);
 	}
-	if (token->next->kind == TK_REDIRECT && token->word[0] \
-		!= token->next->word[0])
+	if (token->next->kind == TK_REDIRECT && token->next->next->word == NULL)
 	{
 		tk_error("syntax erorr near unexpected token ", token->next->word);
 		return (false);
@@ -76,7 +75,7 @@ static bool	check_redirectsyntax(t_token *token)
 		&& token->next->next->kind == TK_REDIRECT)
 	{
 		tk_error("syntax error near unexpected token ", \
-					token->next->next->word);
+				ft_strjoin(token->next->word, token->next->next->word));
 		return (false);
 	}
 	if (token->next->kind == TK_OPERATOR)
