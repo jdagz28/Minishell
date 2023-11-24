@@ -25,6 +25,5 @@ void	consume_token(t_token **tokens)
 	if (*tokens == NULL)
 		return ;
 	*tokens = (*tokens)->next;
-	free(temp->word);
 	free(temp);
 }
