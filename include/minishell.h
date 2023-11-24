@@ -6,7 +6,7 @@
 /*   By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/11 16:43:09 by tbarbe            #+#    #+#             */
-/*   Updated: 2023/11/20 11:18:22 by jdagoy           ###   ########.fr       */
+/*   Updated: 2023/11/23 08:57:15 by jdagoy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,10 @@ typedef struct s_shell
 void	shell_clear(t_shell* shell);
 void	clean_exit(t_shell* data, int err);
 
+//exit_value.c
+int		*get_exit_value(void);
+void	set_exit_value(int exit_value);
+
 //signal.c
 void	write_newline(void);
 void	prompt_interrupt(void);
@@ -50,6 +54,8 @@ int		signal_set(int sig, void* f);
 char** files_redirect(char** tab);
 
 //utils.c
+bool	*is_piped(void);
+void	set_is_piped(bool value);
 void	print_error(char* str1, char* str2);
 
 #endif

@@ -11,14 +11,28 @@
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
-#include "environment.h"
-#include "builtins.h"
 
-
-int	unset(t_shell* shell, char* str)
+int key_isvalid(char* str)
 {
-	if (ft_strchr(str, '=') || !key_isvalid(str))
-		print_error(str, "not a valid identifier");
-	vartab_unset(&shell->var, str);
-	return(vartab_unset(&shell->env, str));
+	char* pos;
+	int len;
+	int i;
+
+	if (!str)
+		return (0);
+	pos = ft_strchr(str, '=');
+	if (pos)
+		len = pos - str;
+	else
+		len = ft_strlen(str);
+	if (!ft_isalpha(str[0]) && str[0] != '_')
+		return(0);
+	i = 0;
+	while (i < len)
+	{
+		if (!ft_isalpha(str[i]) && !ft_isdigit(str[i]) && str[i] != '_')
+			return(0);
+		i++;
+	}
+	return (1);
 }

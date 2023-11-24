@@ -6,7 +6,7 @@
             "type": "cppdbg",
             "request": "launch",
             "program": "${workspaceFolder}/minishell", // replace <your-program> with your executable
-            "args": ["echo '$'$'$'$'$'"], // any command-line arguments go here
+            "args": ["exit 42"], // any command-line arguments go here
             "stopAtEntry": false,
             "cwd": "${workspaceFolder}/",
             "environment": [],

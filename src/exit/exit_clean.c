@@ -1,24 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   var.c                                            :+:      :+:    :+:   */
+/*   exit_clean.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/07/11 16:43:09 by tbarbe            #+#    #+#             */
-/*   Updated: 2023/11/13 21:08:55 by jdagoy           ###   ########.fr       */
+/*   Created: 2023/11/20 02:28:33 by jdagoy            #+#    #+#             */
+/*   Updated: 2023/11/22 14:47:55 by jdagoy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/minishell.h"
+#include "minishell.h"
 #include "environment.h"
-#include "builtins.h"
 
-
-int	unset(t_shell* shell, char* str)
+void	shell_clear(t_shell *shell)
 {
-	if (ft_strchr(str, '=') || !key_isvalid(str))
-		print_error(str, "not a valid identifier");
-	vartab_unset(&shell->var, str);
-	return(vartab_unset(&shell->env, str));
+	if (shell->env)
+		strtab_free(shell->env);
+	if (shell->ast)
+		clear_ast(&shell->ast);
+	user_clear(&shell->user);
+	pwd_clear(&shell->pwd);
+}
+
+void	clean_exit(t_shell *data, int err)
+{
+	rl_clear_history();
+	shell_clear(data);
+	exit(err);
 }

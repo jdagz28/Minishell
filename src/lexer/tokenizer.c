@@ -6,7 +6,7 @@
 /*   By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/30 23:09:27 by jdagoy            #+#    #+#             */
-/*   Updated: 2023/11/14 02:16:14 by jdagoy           ###   ########.fr       */
+/*   Updated: 2023/11/22 14:17:16 by jdagoy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 static void	tokenizer_error(char *error_msg, char **remaining, char *current)
 {
+	set_exit_value(SYNTAX_ERROR);
 	ft_putstr_fd("Error: ", STDERR_FILENO);
 	ft_putstr_fd(error_msg, STDERR_FILENO);
 	ft_putstr_fd("\n", STDERR_FILENO);

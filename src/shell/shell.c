@@ -6,7 +6,7 @@
 /*   By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/11 16:43:09 by tbarbe            #+#    #+#             */
-/*   Updated: 2023/11/20 11:01:25 by jdagoy           ###   ########.fr       */
+/*   Updated: 2023/11/23 15:08:13 by jdagoy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,15 +48,13 @@ char* shell_cat(t_shell* shell)
 	return (res);
 }
 
-int	shell_run(t_shell* shell)
+void	shell_run(t_shell* shell)
 {
 	signal_set(SIGQUIT, SIG_IGN);
-	//vartab_set(&shell->var, "a=2");
-	//export(shell, "b=3");
-	//unset(shell, "a");
-	while (shell->err != 128)
-		shell->err = shell_prompt(shell);
-	ft_printf("exit\n");
-	return (128);
+	vartab_set(&shell->var, "toto=caca");
+	/*export(shell, "3caca=3");
+	unset(shell, "cac");*/
+	while (*get_exit_value() != 128)
+		shell_prompt(shell);
 }
 

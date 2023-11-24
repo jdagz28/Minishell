@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jdagoy <jdagoy@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/26 23:59:25 by jdagoy            #+#    #+#             */
-/*   Updated: 2023/11/17 13:21:39 by jdagoy           ###   ########.fr       */
+/*   Updated: 2023/11/23 12:59:24 by jdagoy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,15 +17,18 @@
 int	echo(char **argv)
 {
 	int		i;
-	int		dash_flag;
+	bool	dash_flag;
 
 	i = 1;
-	dash_flag = 0;
+	dash_flag = false;
 	if (ft_arraylen(argv) >= 2 && ft_strncmp_twice(argv[i], "-n") == true)
 	{
-		i = 2;
-		dash_flag = 1;
+		i++;
+		dash_flag = true;
 	}
+	if (ft_arraylen(argv) >= 2 && ft_strncmp(argv[i], "-n", \
+		ft_strlen("-n")) == 0 && ft_strncmp_twice(argv[i], "-n") == false)
+		i++;
 	while (argv[i] != NULL)
 	{
 		ft_putstr_fd(argv[i], STDOUT_FILENO);
@@ -33,7 +36,7 @@ int	echo(char **argv)
 		if (argv[i] != NULL)
 			ft_putchar_fd(' ', STDOUT_FILENO);
 	}
-	if (argv == NULL || dash_flag == 0)
+	if (argv == NULL || dash_flag == false)
 		ft_putstr_fd("\n", STDOUT_FILENO);
 	return (EXIT_SUCCESS);
 }
