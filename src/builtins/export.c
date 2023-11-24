@@ -19,11 +19,9 @@ static char* define_str(char** tab, char* str)
 	int		id;
 
 	id = vartab_strpos(tab, str);
-	ft_printf("vartab_strpos = %d\n", id);
 	if (id != -1)
 		return (str);
 	id = vartab_keypos(tab, str);
-	ft_printf("vartab_keypos = %d\n", id);
 	if (id != -1)
 		return (tab[id]);
 	return(NULL);

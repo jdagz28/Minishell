@@ -46,6 +46,21 @@ void	strtab_print(char** tab, char ces)
 	}
 }
 
+void	strtab_write(char** tab, char ces, int fd)
+{
+	int	i;
+
+	if (!tab)
+		return;
+	i = 0;
+	while (tab[i])
+	{
+		ft_putstr_fd(tab[i], fd);
+		write(fd, &ces, 1);
+		i++;
+	}
+}
+
 int	strtab_len(char** tab)
 {
 	int	i;

@@ -27,6 +27,34 @@ static int check_access(char* path, char mode)
 	return (EXIT_SUCCESS);
 }
 
+int open_file(char* path, char mode)
+{
+	int fd;
+
+	fd = -1;
+	if (check_access(path, mode))
+		return (fd);
+	if (mode == 'r')
+		fd = open(path, O_RDONLY);
+	else if (mode == 'w')
+		fd = open(path, O_WRONLY | O_CREAT | O_TRUNC, 0664);
+	else if (mode == 'a')
+		fd = open(path, O_WRONLY | O_CREAT | O_APPEND, 0664);
+	return(fd);
+}
+/*
+int open_file_dup2(char* path, char mode)
+{
+	int err;
+
+	if (mode == 'r')
+		err = dup2(fd, STDIN_FILENO);
+	else
+		err = dup2(fd, STDOUT_FILENO);
+	return(err);
+}
+*/
+/*
 int open_file_dup2(char* path, char mode)
 {
 	int err;
@@ -50,4 +78,4 @@ int open_file_dup2(char* path, char mode)
 	if (err == -1)
 		return (EXIT_FAILURE);
 	return (EXIT_SUCCESS);
-}
+}*/

@@ -51,9 +51,9 @@ void	prompt_interrupt(void);
 int		signal_set(int sig, void* f);
 
 // redirection
-int redirect(char*** tab);
+int redirect(t_simple_cmd* cmd);
 int read_here_doc(char* limiter);
-int open_file_dup2(char* path, char mode);
+int open_file(char* path, char mode);
 
 //utils.c
 bool* is_piped(void);

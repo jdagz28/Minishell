@@ -13,63 +13,59 @@
 #include "../include/minishell.h"
 #include "environment.h"
 
-static int redirect_input(char* type, char* dest)
+static void redirect_input(t_simple_cmd* cmd, char* type, char* dest)
 {
-	int err;
-
-	err = EXIT_SUCCESS;
 	if (ft_strlen(type) == 2 && type[1] == '<')
-		err = read_here_doc(dest);
+		cmd->here_doc = true;
 	else
-		err = open_file_dup2(dest, 'r');
-	if (err)
+		cmd->fd_input = open_file(dest, 'r');
+	if (cmd->fd_input == -1)
 		print_error(dest, strerror(errno));
-	return(err);
 }
 
-static int redirect_output(char* type, char* dest)
+static void redirect_output(t_simple_cmd* cmd, char* type, char* dest)
 {
-	int err;
 	char c;
 
 	c = 'w';
 	if (ft_strlen(type) == 2 && type[1] == '>')
 		c = 'a';
-	err = open_file_dup2(dest, c);
-	if (err)
+	cmd->fd_output = open_file(dest, c);
+	if (cmd->fd_output == -1)
 		print_error(dest, strerror(errno));
-	return(err);
 }
 
-int redirect_one(char* type, char* dest)
+int redirect_one(t_simple_cmd* cmd, char* type, char* dest)
 {
 	char c;
 
 	//ft_printf("%s %s\n", type, dest);
 	c = type[0];
 	if (c == '<')
-		redirect_input(type, dest);
+		redirect_input(cmd, type, dest);
 	else if (c == '>')
-		redirect_output(type, dest);
+		redirect_output(cmd, type, dest);
 	else
 		return(0);
 	return(1);
 }
 
-int redirect(char*** tab)
+int redirect(t_simple_cmd* cmd)
 {
-	char** cmd;
-	int len;
 	int i;
+	char** argv;
 
-	cmd = *tab;
-	len = strtab_len(cmd);
+	argv = cmd->argv;
 	i = 0;
-	while (i < len)
+	while (i < strtab_len(argv))
 	{
-		if (redirect_one(cmd[i], cmd[i + 1]))
-			return(strtab_remove_mult(tab, i, 2));
-		i++;
+		if (redirect_one(cmd, argv[i], argv[i + 1]))
+		{
+			strtab_remove_mult(&cmd->argv, i, 2);
+			argv = cmd->argv;
+		}
+		else
+			i++;
 	}
 	return (EXIT_SUCCESS);
 }
