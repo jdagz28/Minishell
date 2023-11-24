@@ -6,7 +6,7 @@
 /*   By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/02 21:12:54 by jdagoy            #+#    #+#             */
-/*   Updated: 2023/11/20 10:57:31 by jdagoy           ###   ########.fr       */
+/*   Updated: 2023/11/24 10:25:49 by jdagoy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ t_token	*operator_token(char **remaining, char *line)
 */
 t_token	*redirect_token(char **remaining, char *line)
 {
-	static char *const	redirects[] = {"<", ">", "<<", ">>", NULL};
+	static char *const	redirects[] = {"<<", ">>", "<", ">", NULL};
 	int					i;
 	char				*redirect;
 
