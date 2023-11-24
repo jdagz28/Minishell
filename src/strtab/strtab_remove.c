@@ -39,3 +39,19 @@ int	strtab_remove(char*** tab, int id)
 	*tab = res;
 	return (EXIT_SUCCESS);
 }
+
+int	strtab_remove_mult(char*** tab, int id, int len)
+{
+	int i;
+	int err;
+
+	i = 0;
+	while (i < len)
+	{
+		err = strtab_remove(tab, id);
+		if (err == EXIT_FAILURE)
+			return(err);
+		i++;
+	}
+	return (EXIT_SUCCESS);
+}

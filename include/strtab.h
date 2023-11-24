@@ -18,6 +18,7 @@
 int		strtab_replace(char** tab, char* str, int id);
 int		strtab_add(char*** tab, char* str);
 int		strtab_remove(char*** tab, int id);
+int		strtab_remove_mult(char*** tab, int id, int len);
 
 //strtab_free.c
 void	strtab_free(char** tab);

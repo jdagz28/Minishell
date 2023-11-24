@@ -9,7 +9,7 @@ COLORTERM=truecolor
 VSCODE_GIT_ASKPASS_EXTRA_ARGS=--ms-enable-electron-run-as-node
 CHROME_DESKTOP=code-url-handler.desktop
 XDG_VTNR=7
-GIO_LAUNCHED_DESKTOP_FILE_PID=4211
+GIO_LAUNCHED_DESKTOP_FILE_PID=2875
 SSH_AUTH_SOCK=/run/user/1000/keyring/ssh
 XDG_SESSION_ID=c1
 XDG_GREETER_DATA_DIR=/var/lib/lightdm-data/toto
@@ -21,7 +21,7 @@ PWD=/home/toto/Bureau/19/Projets/minishell
 HOME=/home/toto
 VSCODE_GIT_ASKPASS_NODE=/usr/share/code/code
 TEXTDOMAIN=im-config
-SSH_AGENT_PID=1441
+SSH_AGENT_PID=1440
 TERM_PROGRAM=vscode
 TERM_PROGRAM_VERSION=1.82.2
 QT_ACCESSIBILITY=1
@@ -55,9 +55,6 @@ XDG_CONFIG_DIRS=/etc/xdg/xdg-cinnamon:/etc/xdg
 PATH=/home/toto/.local/bin:/home/toto/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin
 CINNAMON_VERSION=4.4.8
 GJS_DEBUG_TOPICS=JS ERROR;JS LOG
-SESSION_MANAGER=local/lemacatoto:@/tmp/.ICE-unix/1375,unix/lemacatoto:/tmp/.ICE-unix/1375
+SESSION_MANAGER=local/lemacatoto:@/tmp/.ICE-unix/1373,unix/lemacatoto:/tmp/.ICE-unix/1373
 LESSOPEN=| /usr/bin/lesspipe %s
-_=./minishell
-toto@lemacatoto:~/Bureau/19/Projets/minishell$ ^C
-toto@lemacatoto:~/Bureau/19/Projets/minishell$ ^C
-toto@lemacatoto:~/Bureau/19/Projets/minishell$ [Ktoto@lemacatoto:~/Bureau/19/Projets/minishell$ [Ktoto@lemacatoto:~/Bureau/19/Projets/minishell$ 
+_=/usr/bin/env
