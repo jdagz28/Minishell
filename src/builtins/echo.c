@@ -6,7 +6,7 @@
 /*   By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/26 23:59:25 by jdagoy            #+#    #+#             */
-/*   Updated: 2023/11/23 12:59:24 by jdagoy           ###   ########.fr       */
+/*   Updated: 2023/11/25 19:57:44 by jdagoy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,8 @@ int	echo(char **argv)
 	}
 	if (ft_arraylen(argv) >= 2 && ft_strncmp(argv[i], "-n", \
 		ft_strlen("-n")) == 0 && ft_strncmp_twice(argv[i], "-n") == false)
+		i++;
+	while (dash_flag == true && ft_strncmp_twice(argv[i], "-n") == true)
 		i++;
 	while (argv[i] != NULL)
 	{

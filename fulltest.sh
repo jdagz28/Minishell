@@ -89,7 +89,7 @@ test 'cd Test' 2 'cd ../'
 test 'cd Test' 3 'cd                                           ./src '
 
 test 'pwd Test' 1 'echo $PWD'
-test 'pwd Test' 2 '$PWD'
+test 'pwd Test' 2 'pwd'
 
 # test 'env Test' 1 'env'
 # test 'env Test' 2 'printenv'
@@ -103,4 +103,7 @@ test 'exit Test' 6 'exit 1ab'
 test 'exit Test' 7 '                 exit             42'
 
 
-test 'Redirect Test' 1
+test 'Command Path' 1 'usr/bin/ls'
+test 'Command Path' 2 'usr/bin.pwd'
+test 'Command Path' 3 'usr/bin/echo hello'
+
