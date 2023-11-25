@@ -6,7 +6,7 @@
 /*   By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/20 02:30:33 by jdagoy            #+#    #+#             */
-/*   Updated: 2023/11/25 15:59:19 by jdagoy           ###   ########.fr       */
+/*   Updated: 2023/11/25 18:18:52 by jdagoy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ void	shell_prompt(t_shell *shell)
 		if (line == NULL || ft_strallnonzero(line) == 0)
 			clean_exit(shell, EXIT_FAILURE);
 	}
-	shell->ast = parse(line);
+	shell->ast = parse(line, shell);
 	free(line);
 	if (!shell->ast)
 		set_exit_value(EXIT_FAILURE);
