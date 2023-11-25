@@ -6,7 +6,7 @@
 /*   By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 23:00:34 by jdagoy            #+#    #+#             */
-/*   Updated: 2023/11/20 23:19:04 by jdagoy           ###   ########.fr       */
+/*   Updated: 2023/11/25 18:03:16 by jdagoy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,8 @@ static void	handle_last_join(char *arg, char **new_argv, \
 		free((void **)&new_argv[utils->i_new - 1]);
 		new_argv[utils->i_new - 1] = \
 				ft_strjoin(splitted_var[utils->i_split - 1], after_var);
+		if (new_argv[utils->i_new - 1] == NULL)
+			return ;
 		utils->i_split++;
 	}
 	else if (*after_var != '\0')
@@ -36,10 +38,17 @@ static void	handle_first_join(char *arg, char **new_argv, \
 	char	*before_dollar;
 
 	before_dollar = ft_strndup(arg, utils->index_dollar);
+	if (before_dollar == NULL)
+		return ;
 	if (utils->first_join == true)
 	{
 		new_argv[utils->i_new] = \
 				ft_strjoin(before_dollar, splitted_var[utils->i_split]);
+		if (new_argv[utils->i_new] == NULL)
+		{
+			free(before_dollar);
+			return ;
+		}
 		utils->i_new++;
 		utils->i_split++;
 		free(before_dollar);
