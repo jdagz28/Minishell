@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+        */
+/*   By: jdagoy <jdagoy@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/11 16:43:09 by tbarbe            #+#    #+#             */
-/*   Updated: 2023/11/24 04:05:48 by jdagoy           ###   ########.fr       */
+/*   Updated: 2023/11/26 14:54:21 by jdagoy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,8 @@ int	exec_bin(t_simple_cmd* cmd, char** env)
 		return (EXIT_FAILURE);
 	if (pid == 0)
 	{
+		dup2(cmd->fd_input, STDIN_FILENO);
+		dup2(cmd->fd_output, STDOUT_FILENO);
 		execve(cmd->argv[0], cmd->argv, env);
 		exit(127);
 	}

@@ -1,55 +1,44 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   export.c                                           :+:      :+:    :+:   */
+/*   file.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jdagoy <jdagoy@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/11 16:43:09 by tbarbe            #+#    #+#             */
-/*   Updated: 2023/11/26 14:52:44 by jdagoy           ###   ########.fr       */
+/*   Updated: 2023/11/26 14:55:43 by jdagoy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 #include "environment.h"
-#include "builtins.h"
 
-static char* define_str(char** tab, char* str)
+static int check_access(char* path, char mode)
 {
-	int		id;
-
-	id = vartab_strpos(tab, str);
-	if (id != -1)
-		return (str);
-	id = vartab_keypos(tab, str);
-	if (id != -1)
-		return (tab[id]);
-	return(str);
-}
-
-int	export(t_shell* shell, char* str)
-{
-	int		id;
-	char* new;
-	int		err;
-
-	if (!key_isvalid(str))
-		print_error(str, "not a valid identifier");
-	str = define_str(shell->var, str);
-	if (!str)
-		return (EXIT_FAILURE);
-	new = ft_strdup(str);
-	if (!new)
-		return (EXIT_FAILURE);
-	id = vartab_strpos(shell->env, str);
-	if (id != -1)
-		err = strtab_replace(shell->env, new, id);
-	else
-		err = strtab_add(&shell->env, new);
-	if (err)
+	if (ft_strlen(path) == 0)
 	{
-		free(new);
+		print_error("", "No such file or directory");
 		return (EXIT_FAILURE);
 	}
+	if (mode == 'r')
+		return (EXIT_SUCCESS);
+	if (access(path, F_OK) == 0 && access(path, W_OK) == -1)
+		return (EXIT_FAILURE);
 	return (EXIT_SUCCESS);
+}
+
+int open_file(char* path, char mode)
+{
+	int fd;
+
+	fd = -1;
+	if (check_access(path, mode))
+		return (fd);
+	if (mode == 'r')
+		fd = open(path, O_RDONLY);
+	else if (mode == 'w')
+		fd = open(path, O_WRONLY | O_CREAT | O_TRUNC, 0664);
+	else if (mode == 'a')
+		fd = open(path, O_WRONLY | O_CREAT | O_APPEND, 0664);
+	return(fd);
 }
