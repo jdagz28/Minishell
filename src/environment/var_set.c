@@ -29,11 +29,11 @@ static int	var_set_one(t_shell* shell, char* str)
 	new = ft_strdup(str);
 	if (!new)
 		return (EXIT_FAILURE);
-	id = vartab_pos(shell->env, str);
+	id = vartab_strpos(shell->var, str);
 	if (id != -1)
-		err = strtab_replace(shell->env, new, id);
+		err = strtab_replace(shell->var, new, id);
 	else
-		err = strtab_add(&shell->env, new);
+		err = strtab_add(&shell->var, new);
 	if (err)
 	{
 		free(new);

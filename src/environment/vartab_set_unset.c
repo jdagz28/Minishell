@@ -23,7 +23,7 @@ int	vartab_set(char*** tab, char* str)
 	new = ft_strdup(str);
 	if (!new)
 		return(EXIT_FAILURE);
-	id = vartab_keypos(*tab, str);
+	id = vartab_strpos(*tab, str);
 	if (id != -1)
 		err = strtab_replace(*tab, new, id);
 	else
@@ -35,7 +35,7 @@ int	vartab_unset(char*** tab, char* str)
 {
 	int		id;
 
-	id = vartab_pos(*tab, str);
+	id = vartab_keypos(*tab, str);
 	if (id == -1)
 		return (EXIT_SUCCESS);
 	return(strtab_remove(tab, id));

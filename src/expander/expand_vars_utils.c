@@ -6,12 +6,13 @@
 /*   By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/14 10:36:11 by jdagoy            #+#    #+#             */
-/*   Updated: 2023/11/23 08:59:37 by jdagoy           ###   ########.fr       */
+/*   Updated: 2023/11/25 19:02:28 by jdagoy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 #include "expansion.h"
+#include "environment.h"
 
 void	append_char(char **s, char c)
 {
@@ -78,7 +79,8 @@ char	*get_var_name(char *argv)
 	return (var_name);
 }
 
-void	get_var_name_value(char *argv, char **var_name, char **var_value)
+void	get_var_name_value(char *argv, char **var_name, \
+					char **var_value, t_shell *shell)
 {
 	if (*(argv + 1) == '?')
 	{
@@ -88,7 +90,10 @@ void	get_var_name_value(char *argv, char **var_name, char **var_value)
 	else
 	{
 		*var_name = get_var_name(argv);
-		*var_value = reverse_quotes(getenv(*var_name));
+		if (checktab_for_var(shell->env, *var_name) == true)
+			*var_value = reverse_quotes(ft_get_env_var(shell->env, *var_name));
+		else
+			*var_value = reverse_quotes(ft_get_env_var(shell->var, *var_name));
 		if (*var_value == NULL)
 			*var_value = "";
 	}

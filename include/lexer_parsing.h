@@ -6,7 +6,7 @@
 /*   By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/30 23:08:42 by jdagoy            #+#    #+#             */
-/*   Updated: 2023/11/22 14:17:30 by jdagoy           ###   ########.fr       */
+/*   Updated: 2023/11/26 15:29:22 by jdagoy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ typedef enum e_tk_kind
 
 typedef struct s_token	t_token;
 typedef struct s_node	t_node;
+typedef struct s_shell	t_shell;
 
 typedef struct s_token
 {
@@ -46,6 +47,7 @@ typedef struct s_simple_cmd
 	char	**argv;
 	int		fd_input;
 	int		fd_output;
+	bool	here_doc;
 	bool	has_quotes;
 }	t_simple_cmd;
 
@@ -122,6 +124,6 @@ void	free_token(t_token *head);
 void	clear_ast(t_node **ast);
 
 // parsing.c
-t_node	*parse(char *line);
+t_node	*parse(char *line, t_shell *shell);
 
 #endif

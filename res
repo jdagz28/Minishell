@@ -1,9 +1,4 @@
-XDG_GREETE
-USER=toto
-PWD=/home/
-HOME=/home
-XDG_DATA_D
-LOGNAME=to
-XAUTHORITY
-PATH=/home
-SESSION_MA
+out
+shell exec err: 1
+toto@lemacatoto:~/Bureau/19/Projets/minishell$ ^C
+toto@lemacatoto:~/Bureau/19/Projets/minishell$ [Ktoto@lemacatoto:~/Bureau/19/Projets/minishell$ [Ktoto@lemacatoto:~/Bureau/19/Projets/minishell$ 

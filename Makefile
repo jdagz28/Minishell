@@ -6,7 +6,7 @@
 #    By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/10/07 15:33:53 by tbarbe            #+#    #+#              #
-#    Updated: 2023/11/23 08:54:14 by jdagoy           ###   ########.fr        #
+#    Updated: 2023/11/25 18:47:34 by jdagoy           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -74,7 +74,8 @@ EXPAND_SRCS			=	expand_cmds.c\
 							expand_vars.c\
 							free_array.c\
 							remove_quotes_utils.c\
-							remove_quotes.c
+							remove_quotes.c\
+							checktab_for_var.c
 
 LEXER_SRCS			=	check_opred_tokens.c\
 							check_token.c\
@@ -93,7 +94,7 @@ PARSER_SRCS			=	clear_ast.c\
 							parsing.c
 
 REDIRECT_SRCS			=	redirect.c\
-							open_file_dup2.c\
+							file.c\
 							here_doc.c
 
 SHELL_SRCS			=	init_pwd.c\

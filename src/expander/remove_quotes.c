@@ -6,7 +6,7 @@
 /*   By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 20:06:22 by jdagoy            #+#    #+#             */
-/*   Updated: 2023/11/21 20:07:19 by jdagoy           ###   ########.fr       */
+/*   Updated: 2023/11/25 17:55:02 by jdagoy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,8 @@ static char	*remove_quotes(char *str)
 	j = 0;
 	without_quotes = ft_calloc(get_len_without_quotes(str) + 1, \
 									sizeof(*without_quotes));
+	if (without_quotes == NULL)
+		return (NULL);
 	while (str[i] != '\0')
 	{
 		if ((str[i] == '\'' && in_dquotes == false) \

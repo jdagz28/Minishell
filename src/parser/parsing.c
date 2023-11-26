@@ -6,29 +6,29 @@
 /*   By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 13:54:17 by jdagoy            #+#    #+#             */
-/*   Updated: 2023/11/22 14:28:09 by jdagoy           ###   ########.fr       */
+/*   Updated: 2023/11/25 18:18:34 by jdagoy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 #include "expansion.h"
 
-static void	parse_error(t_token *tokens, int error)
+static void	parse_error(t_token* tokens, int error)
 {
 	if (error == 1)
 	{
 		if (tokens)
 			printf("\nminishell: syntax error near unexpected token '%s'\n", \
-						tokens->word);
+				tokens->word);
 	}
 	free_token(tokens);
 	set_exit_value(SYNTAX_ERROR);
 }
 
-t_node	*parse(char *line)
+t_node	*parse(char *line, t_shell *shell)
 {
-	t_token		*tokens;
-	t_node		*ast;
+	t_token* tokens;
+	t_node* ast;
 
 	if (!line)
 		return (NULL);
@@ -44,7 +44,7 @@ t_node	*parse(char *line)
 		parse_error(tokens, 1);
 		return (NULL);
 	}
-	expand_cmds(ast);
+	expand_cmds(ast, shell);
 	free_token(tokens);
 	return (ast);
 }

@@ -6,7 +6,7 @@
 /*   By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/11 13:35:49 by jdagoy            #+#    #+#             */
-/*   Updated: 2023/11/20 23:24:24 by jdagoy           ###   ########.fr       */
+/*   Updated: 2023/11/25 18:20:48 by jdagoy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include "lexer_parsing.h"
 #include "expansion.h"
 
-static void	expand_quotes(t_simple_cmd *cmd)
+static void	expand_quotes(t_simple_cmd* cmd)
 {
 	int		i;
 	bool	quotes;
@@ -25,14 +25,14 @@ static void	expand_quotes(t_simple_cmd *cmd)
 	{
 		if (ft_strncmp(cmd->argv[i], "<<", ft_strlen("<<")) == 0)
 			quotes = (ft_strchr(cmd->argv[i + 1], '\'') != NULL
-					|| ft_strchr(cmd->argv[i + 1], '"') != NULL);
+				|| ft_strchr(cmd->argv[i + 1], '"') != NULL);
 		cmd->has_quotes = quotes;
 		remove_quotes_arg(&cmd->argv[i]);
 		i++;
 	}
 }
 
-static bool	expand_simplecmd(t_simple_cmd *cmd)
+static bool	expand_simplecmd(t_simple_cmd *cmd, t_shell *shell)
 {
 	int	i;
 
@@ -41,9 +41,9 @@ static bool	expand_simplecmd(t_simple_cmd *cmd)
 	{
 		if (ft_strchr(cmd->argv[i], '$') != NULL \
 			&& !(i > 0 && ft_strncmp(cmd->argv[i - 1], "<<", \
-			ft_strlen("<<")) == 0))
+				ft_strlen("<<")) == 0))
 		{
-			if (expand_vars(cmd, i) == false)
+			if (expand_vars(cmd, i, shell) == false)
 				return (false);
 		}
 		i++;
@@ -52,20 +52,22 @@ static bool	expand_simplecmd(t_simple_cmd *cmd)
 	return (true);
 }
 
-bool	expand_cmds(t_node *ast)
+bool	expand_cmds(t_node *ast, t_shell *shell)
 {
+	if (!ast)
+		return(true);
 	if (ast->type == SIMPLE_CMD)
 	{	
-		if (expand_simplecmd(&ast->content.simple_cmd) == false)
+		if (expand_simplecmd(&ast->content.simple_cmd, shell) == false)
 			return (false);
 	}
 	else
 	{
 		if (ast->content.child.left != NULL)
-			if (expand_cmds(ast->content.child.left) == false)
+			if (expand_cmds(ast->content.child.left, shell) == false)
 				return (false);
 		if (ast->content.child.right != NULL)
-			if (expand_cmds(ast->content.child.right) == false)
+			if (expand_cmds(ast->content.child.right, shell) == false)
 				return (false);
 	}
 	return (true);

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   files.c                                            :+:      :+:    :+:   */
+/*   file.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tbarbe <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: jdagoy <jdagoy@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/11 16:43:09 by tbarbe            #+#    #+#             */
-/*   Updated: 2023/10/09 13:26:05 by tbarbe           ###   ########.fr       */
+/*   Updated: 2023/11/26 14:55:43 by jdagoy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,27 +27,18 @@ static int check_access(char* path, char mode)
 	return (EXIT_SUCCESS);
 }
 
-int open_file_dup2(char* path, char mode)
+int open_file(char* path, char mode)
 {
-	int err;
 	int fd;
 
+	fd = -1;
 	if (check_access(path, mode))
-		return (EXIT_FAILURE);
+		return (fd);
 	if (mode == 'r')
 		fd = open(path, O_RDONLY);
 	else if (mode == 'w')
 		fd = open(path, O_WRONLY | O_CREAT | O_TRUNC, 0664);
 	else if (mode == 'a')
 		fd = open(path, O_WRONLY | O_CREAT | O_APPEND, 0664);
-	if (fd == -1)
-		return (EXIT_FAILURE);
-	if (mode == 'r')
-		err = dup2(fd, STDIN_FILENO);
-	else
-		err = dup2(fd, STDOUT_FILENO);
-	close(fd);
-	if (err == -1)
-		return (EXIT_FAILURE);
-	return (EXIT_SUCCESS);
+	return(fd);
 }

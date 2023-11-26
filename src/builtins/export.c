@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+        */
+/*   By: jdagoy <jdagoy@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/11 16:43:09 by tbarbe            #+#    #+#             */
-/*   Updated: 2023/11/20 10:50:50 by jdagoy           ###   ########.fr       */
+/*   Updated: 2023/11/26 14:52:44 by jdagoy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,13 +18,13 @@ static char* define_str(char** tab, char* str)
 {
 	int		id;
 
-	id = vartab_keypos(tab, str);
+	id = vartab_strpos(tab, str);
 	if (id != -1)
 		return (str);
-	id = vartab_pos(tab, str);
+	id = vartab_keypos(tab, str);
 	if (id != -1)
 		return (tab[id]);
-	return(NULL);
+	return(str);
 }
 
 int	export(t_shell* shell, char* str)
@@ -41,7 +41,7 @@ int	export(t_shell* shell, char* str)
 	new = ft_strdup(str);
 	if (!new)
 		return (EXIT_FAILURE);
-	id = vartab_pos(shell->env, str);
+	id = vartab_strpos(shell->env, str);
 	if (id != -1)
 		err = strtab_replace(shell->env, new, id);
 	else
