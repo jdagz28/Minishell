@@ -13,13 +13,13 @@
 #include "minishell.h"
 #include "expansion.h"
 
-static void	parse_error(t_token *tokens, int error)
+static void	parse_error(t_token* tokens, int error)
 {
 	if (error == 1)
 	{
 		if (tokens)
 			printf("\nminishell: syntax error near unexpected token '%s'\n", \
-						tokens->word);
+				tokens->word);
 	}
 	free_token(tokens);
 	set_exit_value(SYNTAX_ERROR);
@@ -27,8 +27,8 @@ static void	parse_error(t_token *tokens, int error)
 
 t_node	*parse(char *line, t_shell *shell)
 {
-	t_token		*tokens;
-	t_node		*ast;
+	t_token* tokens;
+	t_node* ast;
 
 	if (!line)
 		return (NULL);

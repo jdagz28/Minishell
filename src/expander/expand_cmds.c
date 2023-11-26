@@ -14,7 +14,7 @@
 #include "lexer_parsing.h"
 #include "expansion.h"
 
-static void	expand_quotes(t_simple_cmd *cmd)
+static void	expand_quotes(t_simple_cmd* cmd)
 {
 	int		i;
 	bool	quotes;
@@ -25,7 +25,7 @@ static void	expand_quotes(t_simple_cmd *cmd)
 	{
 		if (ft_strncmp(cmd->argv[i], "<<", ft_strlen("<<")) == 0)
 			quotes = (ft_strchr(cmd->argv[i + 1], '\'') != NULL
-					|| ft_strchr(cmd->argv[i + 1], '"') != NULL);
+				|| ft_strchr(cmd->argv[i + 1], '"') != NULL);
 		cmd->has_quotes = quotes;
 		remove_quotes_arg(&cmd->argv[i]);
 		i++;
@@ -41,7 +41,7 @@ static bool	expand_simplecmd(t_simple_cmd *cmd, t_shell *shell)
 	{
 		if (ft_strchr(cmd->argv[i], '$') != NULL \
 			&& !(i > 0 && ft_strncmp(cmd->argv[i - 1], "<<", \
-			ft_strlen("<<")) == 0))
+				ft_strlen("<<")) == 0))
 		{
 			if (expand_vars(cmd, i, shell) == false)
 				return (false);
@@ -54,6 +54,8 @@ static bool	expand_simplecmd(t_simple_cmd *cmd, t_shell *shell)
 
 bool	expand_cmds(t_node *ast, t_shell *shell)
 {
+	if (!ast)
+		return(true);
 	if (ast->type == SIMPLE_CMD)
 	{	
 		if (expand_simplecmd(&ast->content.simple_cmd, shell) == false)

@@ -28,7 +28,7 @@ static int key_cmp(char* line, char* needle)
 	return(EXIT_SUCCESS);
 }
 
-int	vartab_pos(char** tab, char* str)
+int	vartab_keypos(char** tab, char* str)
 {
 	int	i;
 
@@ -44,7 +44,7 @@ int	vartab_pos(char** tab, char* str)
 	return (-1);
 }
 
-int	vartab_keypos(char** tab, char* str)
+int	vartab_strpos(char** tab, char* str)
 {
 	char* sep;
 	int		len;

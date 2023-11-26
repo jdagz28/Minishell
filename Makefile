@@ -93,7 +93,9 @@ PARSER_SRCS			=	clear_ast.c\
 							parser.c\
 							parsing.c
 
-REDIRECT_SRCS			=	files.c
+REDIRECT_SRCS			=	redirect.c\
+							file.c\
+							here_doc.c
 
 SHELL_SRCS			=	init_pwd.c\
 							shell_prompt.c\

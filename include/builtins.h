@@ -32,7 +32,7 @@ int		execute_builtin(t_simple_cmd command, t_shell* shell);
 bool	is_builtin(char** command);
 
 //exit.c
-int		builtin_exit(char **argv, t_shell *shell);
+int		builtin_exit(char** argv, t_shell* shell);
 
 //cd.c
 int		cd(char** argv, char** env);

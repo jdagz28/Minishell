@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+        */
+/*   By: jdagoy <jdagoy@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/11 16:43:09 by tbarbe            #+#    #+#             */
 /*   Updated: 2023/11/25 15:20:50 by jdagoy           ###   ########.fr       */
@@ -43,7 +43,7 @@ void	shell_clear(t_shell* shell);
 void	clean_exit(t_shell* data, int err);
 
 //exit_value.c
-int		*get_exit_value(void);
+int* get_exit_value(void);
 void	set_exit_value(int exit_value);
 
 //signal.c
@@ -52,10 +52,12 @@ void	prompt_interrupt(void);
 int		signal_set(int sig, void* f);
 
 // redirection
-char** files_redirect(char** tab);
+int redirect(t_simple_cmd* cmd);
+int read_here_doc(char* limiter);
+int open_file(char* path, char mode);
 
 //utils.c
-bool	*is_piped(void);
+bool* is_piped(void);
 void	set_is_piped(bool value);
 void	print_error(char* str1, char* str2);
 

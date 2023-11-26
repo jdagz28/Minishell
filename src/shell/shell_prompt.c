@@ -16,10 +16,10 @@
 #include "execution.h"
 
 
-static char	*shell_readline(t_shell *shell)
+static char* shell_readline(t_shell* shell)
 {
-	char	*cat;
-	char	*line;
+	char* cat;
+	char* line;
 
 	cat = shell_cat(shell);
 	if (!cat)
@@ -50,7 +50,6 @@ static int	ft_strallnonzero(char *str)
 	}
 	return (1);
 }
-
 
 void	shell_prompt(t_shell *shell)
 {
