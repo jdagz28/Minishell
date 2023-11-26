@@ -14,7 +14,7 @@
 #include "builtins.h"
 #include "environment.h"
 
-int	pwd(char **argv)
+int	pwd(char** argv, int fd)
 {
 	char	pwd[PATH_MAX];
 	int		count;
@@ -32,7 +32,7 @@ int	pwd(char **argv)
 		ft_putstr_fd("\n", STDERR_FILENO);
 		return (EXIT_FAILURE);
 	}
-	ft_putstr_fd(pwd, STDOUT_FILENO);
-	ft_putstr_fd("\n", STDOUT_FILENO);
+	ft_putstr_fd(pwd, fd);
+	ft_putstr_fd("\n", fd);
 	return (EXIT_SUCCESS);
 }

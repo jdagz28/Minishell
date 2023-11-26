@@ -37,7 +37,7 @@ static char* shell_readline(t_shell* shell)
 	return (line);
 }
 
-static int	ft_strallnonzero(char *str)
+static int	ft_strallnonzero(char* str)
 {
 	int	i;
 
@@ -51,9 +51,9 @@ static int	ft_strallnonzero(char *str)
 	return (1);
 }
 
-void	shell_prompt(t_shell *shell)
+void	shell_prompt(t_shell* shell)
 {
-	char	*line;
+	char* line;
 	int		err;
 
 	if (shell->inline_mode == false)

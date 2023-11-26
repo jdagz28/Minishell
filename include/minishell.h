@@ -53,8 +53,10 @@ int		signal_set(int sig, void* f);
 
 // redirection
 int redirect(t_simple_cmd* cmd);
-int read_here_doc(char* limiter);
+int read_here_doc(t_simple_cmd* cmd, char* limiter);
+int write_here_doc(t_simple_cmd* cmd);
 int open_file(char* path, char mode);
+void close_redirect(t_simple_cmd* cmd);
 
 //utils.c
 bool* is_piped(void);

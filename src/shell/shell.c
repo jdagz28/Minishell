@@ -31,6 +31,7 @@ int	shell_init(t_shell* shell, char* cmds, char** env)
 		return (EXIT_FAILURE);
 	shell->inline_mode = check_inline_mode();
 	shell->ast = NULL;
+	shell_init_level(shell);
 	if (user_init(&shell->user, env) || pwd_init(&shell->pwd, env))
 	{
 		shell_clear(shell);

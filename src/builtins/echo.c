@@ -14,7 +14,7 @@
 #include "builtins.h"
 #include "expansion.h"
 
-int	echo(char **argv)
+int	echo(char** argv, int fd)
 {
 	int		i;
 	bool	dash_flag;
@@ -33,12 +33,12 @@ int	echo(char **argv)
 		i++;
 	while (argv[i] != NULL)
 	{
-		ft_putstr_fd(argv[i], STDOUT_FILENO);
+		ft_putstr_fd(argv[i], fd);
 		i++;
 		if (argv[i] != NULL)
-			ft_putchar_fd(' ', STDOUT_FILENO);
+			ft_putchar_fd(' ', fd);
 	}
 	if (argv == NULL || dash_flag == false)
-		ft_putstr_fd("\n", STDOUT_FILENO);
+		ft_putstr_fd("\n", fd);
 	return (EXIT_SUCCESS);
 }

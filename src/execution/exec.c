@@ -6,7 +6,7 @@
 /*   By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/20 00:36:23 by jdagoy            #+#    #+#             */
-/*   Updated: 2023/11/26 15:28:34 by jdagoy           ###   ########.fr       */
+/*   Updated: 2023/11/23 09:01:43 by jdagoy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,17 +53,17 @@ static int	exec_pipe(t_shell* shell, t_node* node)
 static int	exec_simple(t_shell* shell, t_node* node)
 {
 	t_simple_cmd* cmd;
-	char	***argv;
+	char** argv;
 	int		err;
 
 	cmd = &node->content.simple_cmd;
-	err = redirect(cmd);
-	if (err)
-		return (EXIT_FAILURE);
-	argv = &cmd->argv;
-	if (strtab_len(*argv) == 0)
-		return (EXIT_SUCCESS);
-	if (is_builtin(*argv) == true)
+	err = redirect(cmd); // need to close fd from now
+	if (err || cmd->fd_input == -1 || cmd->fd_output == -1)
+		return(EXIT_FAILURE);
+	argv = cmd->argv;
+	if (strtab_len(argv) == 0)
+		return(EXIT_SUCCESS);
+	if (is_builtin(argv) == true)
 		err = execute_builtin(*cmd, shell);
 	else
 		err = exec_bin(cmd, shell->env);
@@ -84,18 +84,12 @@ int	shell_exec(t_shell* shell)
 	t_node* node;
 	int		pid;
 	int		status;
-	int		err;
 	node = shell->ast;
 	if (!node)
 		return (EXIT_FAILURE);
 	signal_set(SIGINT, SIG_IGN);
 	if (node->type == SIMPLE_CMD)
-	{
-		err = exec_simple(shell, node);
-		dup2(0, STDIN_FILENO);
-		dup2(1, STDOUT_FILENO);
-		return(err);
-	}
+		return(exec_simple(shell, node));
 	pid = fork();
 	if (pid == -1)
 		return (EXIT_FAILURE);

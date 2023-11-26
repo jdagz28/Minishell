@@ -34,7 +34,10 @@ int	export(t_shell* shell, char* str)
 	int		err;
 
 	if (!key_isvalid(str))
+	{
 		print_error(str, "not a valid identifier");
+		return(EXIT_FAILURE);
+	}
 	str = define_str(shell->var, str);
 	if (!str)
 		return (EXIT_FAILURE);
