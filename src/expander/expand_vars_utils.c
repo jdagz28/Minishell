@@ -6,7 +6,7 @@
 /*   By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/14 10:36:11 by jdagoy            #+#    #+#             */
-/*   Updated: 2023/11/25 19:02:28 by jdagoy           ###   ########.fr       */
+/*   Updated: 2023/11/26 19:00:57 by jdagoy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,9 +90,11 @@ void	get_var_name_value(char *argv, char **var_name, \
 	else
 	{
 		*var_name = get_var_name(argv);
+		*var_value = NULL;
 		if (checktab_for_var(shell->env, *var_name) == true)
 			*var_value = reverse_quotes(ft_get_env_var(shell->env, *var_name));
-		else
+		else if (strtab_len(shell->var) \
+					&& checktab_for_var(shell->var, *var_name) == true)
 			*var_value = reverse_quotes(ft_get_env_var(shell->var, *var_name));
 		if (*var_value == NULL)
 			*var_value = "";
