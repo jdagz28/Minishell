@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+         #
+#    By: jdagoy <jdagoy@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/10/07 15:33:53 by tbarbe            #+#    #+#              #
-#    Updated: 2023/11/25 18:47:34 by jdagoy           ###   ########.fr        #
+#    Updated: 2023/11/26 19:48:12 by jdagoy           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -129,6 +129,19 @@ SIGNAL_SRCS_		=	$(addprefix src/signals/, $(SIGNAL_SRCS))
 SRCS_				=	$(addprefix src/, $(SRCS))
 STRTAB_SRCS_		=	$(addprefix src/strtab/, $(STRTAB_SRCS))
 
+OBJ_DIR				=	./objects/
+OBJ_BUILTINS		=	$(addprefix $(OBJ_DIR), $(BUILTINS_SRCS:.c=.o))
+OBJ_ENV				=	$(addprefix $(OBJ_DIR), $(ENV_SRCS:.c=.o))
+OBJ_EXECUTE			=	$(addprefix $(OBJ_DIR), $(EXECUTE_SRCS:.c=.o))
+OBJ_EXIT			=	$(addprefix $(OBJ_DIR), $(EXIT_SRCS:.c=.o))
+OBJ_EXPAND			=	$(addprefix $(OBJ_DIR), $(EXPAND_SRCS:.c=.o))
+OBJ_LEXER			=	$(addprefix $(OBJ_DIR), $(LEXER_SRCS:.c=.o))
+OBJ_PARSER			=	$(addprefix $(OBJ_DIR), $(PARSER_SRCS:.c=.o))
+OBJ_REDIRECT		=	$(addprefix $(OBJ_DIR), $(REDIRECT_SRCS:.c=.o))
+OBJ_SHELL			=	$(addprefix $(OBJ_DIR), $(SHELL_SRCS:.c=.o))
+OBJ_SIGNAL			=	$(addprefix $(OBJ_DIR), $(SIGNAL_SRCS:.c=.o))
+OBJ_SRCS			=	$(addprefix $(OBJ_DIR), $(SRCS:.c=.o))
+OBJ_STRTAB			=	$(addprefix $(OBJ_DIR), $(STRTAB_SRCS:.c=.o))
 
 HEADER_LIST			=	minishell.h\
 						lexer_parsing.h\
@@ -140,31 +153,68 @@ HEADER_LIST			=	minishell.h\
 
 HEADER_FILES		=	$(addprefix $(INCLUDE), $(HEADER_LIST))
 
-all:		${NAME}
+all: $(OBJ_DIR) $(NAME)
 
-${NAME}:	
-			$(MAKE) -C ./libft
-			echo "libft done"
-			${CC} ${BUILTINS_SRCS_} ${ENV_SRCS_} ${EXECUTE_SRCS_} \
-			${EXIT_SRCS_} ${EXPAND_SRCS_} ${LEXER_SRCS_} ${PARSER_SRCS_} ${STRTAB_SRCS_} \
-			${REDIRECT_SRCS_} ${SHELL_SRCS_} ${SIGNAL_SRCS_} ${SRCS_} ${LIBFT} ${HEADER_FILES} \
-			${INCLUDES} -o ${NAME} ${CFLAGS} ${LIBRARIES}
-			echo "minishell done"
-			echo "use 'make only' to only compile the minishell"
+$(OBJ_DIR):
+	@mkdir -p $(OBJ_DIR)
+
+$(OBJ_DIR)%.o: src/builtins/%.c $(HEADER_FILES)
+	@$(CC) -c $< -o $@ $(CFLAGS) $(INCLUDES)
+
+$(OBJ_DIR)%.o: src/environment/%.c $(HEADER_FILES)
+	@$(CC) -c $< -o $@ $(CFLAGS) $(INCLUDES)
+
+$(OBJ_DIR)%.o: src/execution/%.c $(HEADER_FILES)
+	@$(CC) -c $< -o $@ $(CFLAGS) $(INCLUDES)
+
+$(OBJ_DIR)%.o: src/exit/%.c $(HEADER_FILES)
+	@$(CC) -c $< -o $@ $(CFLAGS) $(INCLUDES)
+
+$(OBJ_DIR)%.o: src/expander/%.c $(HEADER_FILES)
+	@$(CC) -c $< -o $@ $(CFLAGS) $(INCLUDES)
+
+$(OBJ_DIR)%.o: src/lexer/%.c $(HEADER_FILES)
+	@$(CC) -c $< -o $@ $(CFLAGS) $(INCLUDES)
+
+$(OBJ_DIR)%.o: src/parser/%.c $(HEADER_FILES)
+	@$(CC) -c $< -o $@ $(CFLAGS) $(INCLUDES)
+
+$(OBJ_DIR)%.o: src/redirection/%.c $(HEADER_FILES)
+	@$(CC) -c $< -o $@ $(CFLAGS) $(INCLUDES)
+
+$(OBJ_DIR)%.o: src/shell/%.c $(HEADER_FILES)
+	@$(CC) -c $< -o $@ $(CFLAGS) $(INCLUDES)
+
+$(OBJ_DIR)%.o: src/signals/%.c $(HEADER_FILES)
+	@$(CC) -c $< -o $@ $(CFLAGS) $(INCLUDES)
+
+$(OBJ_DIR)%.o: src/%.c $(HEADER_FILES)
+	@$(CC) -c $< -o $@ $(CFLAGS) $(INCLUDES)
+
+$(OBJ_DIR)%.o: src/strtab/%.c $(HEADER_FILES)
+	@$(CC) -c $< -o $@ $(CFLAGS) $(INCLUDES)
+
+$(NAME): $(OBJ_BUILTINS) $(OBJ_ENV) $(OBJ_EXECUTE) $(OBJ_EXIT) $(OBJ_EXPAND) \
+	$(OBJ_LEXER) $(OBJ_PARSER) $(OBJ_REDIRECT) $(OBJ_SHELL) $(OBJ_SIGNAL) $(OBJ_SRCS) $(OBJ_STRTAB)
+	@$(MAKE) -C ./libft
+	@echo "libft done"
+	@$(CC) $^ $(LIBFT) $(CFLAGS) $(LIBRARIES) $(INCLUDES) -o $@
+	@echo "minishell done"
+	@echo "use 'make only' to only compile the minishell"
 
 clean:
-			$(MAKE) clean -C ./libft
+	@$(MAKE) clean -C ./libft
+	@$(RM) -r $(OBJ_DIR)
 
-fclean: 	clean
-			${RM} $(NAME) $(LIBFT)
+fclean: clean
+	@$(RM) $(NAME) $(LIBFT)
 
-re:			fclean all
+re: fclean all
 
 only:		
-			${CC} ${BUILTINS_SRCS_} ${ENV_SRCS_} ${EXECUTE_SRCS_} \
-			${EXIT_SRCS_} ${EXPAND_SRCS_} ${LEXER_SRCS_} ${PARSER_SRCS_} ${STRTAB_SRCS_} \
-			${REDIRECT_SRCS_} ${SHELL_SRCS_} ${SIGNAL_SRCS_} ${SRCS_} ${LIBFT} ${HEADER_FILES} \
-			${INCLUDES} -o ${NAME} ${CFLAGS} ${LIBRARIES}
-			echo "minishell done"
+	@$(CC) $(OBJ_BUILTINS) $(OBJ_ENV) $(OBJ_EXECUTE) $(OBJ_EXIT) $(OBJ_EXPAND) \
+	$(OBJ_LEXER) $(OBJ_PARSER) $(OBJ_REDIRECT) $(OBJ_SHELL) $(OBJ_SIGNAL) $(OBJ_SRCS) $(OBJ_STRTAB) \
+	$(LIBFT) $(CFLAGS) $(INCLUDES) -o $(NAME)
+	@echo "minishell done"
 
-.PHONY:		all clean fclean re
+.PHONY: all clean fclean re
