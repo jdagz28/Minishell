@@ -6,7 +6,7 @@
 /*   By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/29 02:08:41 by jdagoy            #+#    #+#             */
-/*   Updated: 2023/11/20 10:51:21 by jdagoy           ###   ########.fr       */
+/*   Updated: 2023/11/25 17:59:27 by jdagoy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ static int	add_in_env(const char *name, const char *value, char ***env)
 	else
 		env_var = name_with_eq;
 	free(name_with_eq);
-	if (env_var == NULL)
+	if (name_with_eq == NULL || env_var == NULL)
 	{
 		strtab_free(new_environ);
 		return (EXIT_FAILURE);

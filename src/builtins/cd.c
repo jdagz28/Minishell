@@ -6,7 +6,7 @@
 /*   By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/29 02:08:41 by jdagoy            #+#    #+#             */
-/*   Updated: 2023/11/20 20:44:45 by jdagoy           ###   ########.fr       */
+/*   Updated: 2023/11/25 18:05:02 by jdagoy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,8 @@ static int	update_pwd(char **argv, char **env)
 		ft_putstr_fd("pwd: getcwd():", STDERR_FILENO);
 		ft_putstr_fd(strerror(errno), STDERR_FILENO);
 		pwd = ft_strjoin(ft_get_env_var(env, "PWD"), argv[1]);
+		if (pwd == NULL)
+			return (EXIT_FAILURE);
 		if (ft_setenv("PWD", pwd, &env, 1) == -1)
 			return (update_pwd_error(new_pwd));
 	}

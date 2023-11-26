@@ -6,7 +6,7 @@
 /*   By: jdagoy <jdagoy@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/11 16:43:09 by tbarbe            #+#    #+#             */
-/*   Updated: 2023/11/26 14:59:01 by jdagoy           ###   ########.fr       */
+/*   Updated: 2023/11/25 15:20:50 by jdagoy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ typedef struct s_shell
 	t_user	user;
 	t_node* ast;
 	int		err;
+	bool	inline_mode;
 }	t_shell;
 
 //exit.c

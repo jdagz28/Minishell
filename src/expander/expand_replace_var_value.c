@@ -6,7 +6,7 @@
 /*   By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 23:36:42 by jdagoy            #+#    #+#             */
-/*   Updated: 2023/11/20 23:33:43 by jdagoy           ###   ########.fr       */
+/*   Updated: 2023/11/25 17:54:17 by jdagoy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@ static char	*alloc_new_arg(char *argv, int len_varname, char *var_value)
 	len_varvalue = ft_strlen(var_value);
 	new_argv = ft_calloc(ft_strlen(argv) - len_varname + len_varvalue, \
 					sizeof(*new_argv));
+	if (new_argv == NULL)
+		return (NULL);
 	return (new_argv);
 }
 
@@ -33,6 +35,8 @@ char	*replace_varval(char **argv, int len_varname, int i, char *var_value)
 	j = -1;
 	k = 0;
 	new_arg = alloc_new_arg(*argv, len_varname, var_value);
+	if (new_arg == NULL)
+		return (NULL);
 	while (++j < i)
 		new_arg[j] = (*argv)[j];
 	while (var_value[k])

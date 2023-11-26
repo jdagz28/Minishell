@@ -6,7 +6,7 @@
 /*   By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 20:57:03 by jdagoy            #+#    #+#             */
-/*   Updated: 2023/11/21 20:08:35 by jdagoy           ###   ########.fr       */
+/*   Updated: 2023/11/25 18:47:11 by jdagoy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,11 @@ typedef struct s_expandvar
 	t_simple_cmd	*cmd;
 }	t_expandvar;
 
+//checktab_for_var.c
+bool	checktab_for_var(char **tab, char *var_name);
+
 //expand_cmds.c
-bool	expand_cmds(t_node *ast);
+bool	expand_cmds(t_node *ast, t_shell *shell);
 
 //expand_replace_var_value.c
 char	*replace_varval(char **argv, int len_varname, int i, \
@@ -62,10 +65,11 @@ void	append_char(char **s, char c);
 void	init_expandvar(t_expandvar *params, int const i, t_simple_cmd *cmd);
 int		get_len_var_name(char *argv);
 char	*get_var_name(char *argv);
-void	get_var_name_value(char *argv, char **var_name, char **var_value);
+void	get_var_name_value(char *argv, char **var_name, \
+							char **var_value, t_shell *shell);
 
 //expand_vars.c
-bool	expand_vars(t_simple_cmd *cmd, int const i);
+bool	expand_vars(t_simple_cmd *cmd, int const i, t_shell *shell);
 
 //remove_quotes_uitls.c
 char	*reverse_quotes(char *var_value);

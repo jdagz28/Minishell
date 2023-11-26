@@ -6,7 +6,7 @@
 /*   By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/11 16:43:09 by tbarbe            #+#    #+#             */
-/*   Updated: 2023/11/23 15:08:13 by jdagoy           ###   ########.fr       */
+/*   Updated: 2023/11/25 15:45:57 by jdagoy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,16 +16,21 @@
 #include "builtins.h"
 #include "shell.h"
 
+static bool	check_inline_mode(void)
+{
+	return (isatty(STDIN_FILENO) == 0);
+}
+
 int	shell_init(t_shell* shell, char* cmds, char** env)
 {
+	(void)cmds;
 	shell->env = strtab_cpy(env);
 	shell->err = 0;
 	shell->var = NULL;
 	if (!shell->env)
 		return (EXIT_FAILURE);
-	shell->ast = parse(cmds);
-	if (cmds && !shell->ast)
-		return (EXIT_FAILURE);
+	shell->inline_mode = check_inline_mode();
+	shell->ast = NULL;
 	if (user_init(&shell->user, env) || pwd_init(&shell->pwd, env))
 	{
 		shell_clear(shell);
