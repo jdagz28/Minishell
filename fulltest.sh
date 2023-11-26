@@ -27,11 +27,8 @@ test()
         { echo -n -e "$TEST_COMMAND" | bash; } > ./tester/bash_out
         bash=$?
 
-        { echo -n -e "$TEST_COMMAND" | ./minishell > ./tester/ms_out; echo "minishell exit $?"; } > /dev/null; 
-        if [ "$(wc -l < ./tester/ms_out)" -gt 2 ]; then
-            sed '1d;$d' ./tester/ms_out > ./tester/ms_out_temp
-            mv ./tester/ms_out_temp ./tester/ms_out
-        fi
+        { echo -n -e "$TEST_COMMAND" | ./minishell > ./tester/ms_out; } > /dev/null; 
+        minishell=$?
     fi
 
     diff -Z ./tester/bash_out ./tester/ms_out > result
@@ -82,28 +79,31 @@ test 'Basic Commands' 3 'ls -la'
 test 'Echo Test' 1 'echo                                   hello world'
 test 'Echo Test' 2 'echo                       "hello" world'
 test 'Echo Test' 3 "echo                        '\$'\$'\$'\$'\$'"
-# test 'Echo Test' 4 'echo -n hello world'
-# test 'Echo Test' 5 'echo -n                    $PWD'
+test 'Echo Test' 4 'echo -n hello world'
+test 'Echo Test' 5 'echo -n                    $PWD'
 test 'Echo Test' 6 'echo -nnnnn $USER'
-# test 'Echo Test' 7 'echo                   -n             "$USER"'
+test 'Echo Test' 7 'echo                   -n             "$USER"'
 
-# test 'cd Test' 1 'cd ./src'
-# test 'cd Test' 2 'cd ../'
-# test 'cd Test' 3 'cd                                           ./src '
+test 'cd Test' 1 'cd ./src'
+test 'cd Test' 2 'cd ../'
+test 'cd Test' 3 'cd                                           ./src '
 
 test 'pwd Test' 1 'echo $PWD'
-test 'pwd Test' 2 '$PWD'
+test 'pwd Test' 2 'pwd'
 
 # test 'env Test' 1 'env'
 # test 'env Test' 2 'printenv'
 
-# test 'exit Test' 1 'exit 42'
-# test 'exit Test' 2 'exit abc'
-# test 'exit Test' 3 'exit -42'
-# test 'exit Test' 4 'exit 2147483647'
-# test 'exit Test' 5 'exit -2147483648'
-# test 'exit Test' 6 'exit 1ab'
-# test 'exit Test' 7 '                 exit             42'
+test 'exit Test' 1 'exit 42'
+test 'exit Test' 2 'exit abc'
+test 'exit Test' 3 'exit -42'
+test 'exit Test' 4 'exit 2147483647'
+test 'exit Test' 5 'exit -2147483648'
+test 'exit Test' 6 'exit 1ab'
+test 'exit Test' 7 '                 exit             42'
 
 
-test 'Redirect Test' 1
+test 'Command Path' 1 'usr/bin/ls'
+test 'Command Path' 2 'usr/bin.pwd'
+test 'Command Path' 3 'usr/bin/echo hello'
+

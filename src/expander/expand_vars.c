@@ -6,24 +6,23 @@
 /*   By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 22:58:02 by jdagoy            #+#    #+#             */
-/*   Updated: 2023/11/21 20:01:25 by jdagoy           ###   ########.fr       */
+/*   Updated: 2023/11/25 18:38:32 by jdagoy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 #include "expansion.h"
 
-static bool	expand_singlevar(t_simple_cmd *cmd, int const i, \
-								int *j, bool dou_quote)
+static bool	expand_singlevar(t_expandvar *p, int *j, t_shell *shell)
 {
 	char	*var_name;
 	char	*var_value;
 
-	get_var_name_value(&cmd->argv[i][*j], &var_name, &var_value);
-	if (dou_quote == false && var_value != NULL && *var_value != '\0' \
+	get_var_name_value(&p->cmd->argv[p->i][*j], &var_name, &var_value, shell);
+	if (p->dou_quotes == false && var_value != NULL && *var_value != '\0' \
 		&& has_space(var_value) == true)
 	{
-		if (realloc_argv(cmd, i, j, var_value) == false)
+		if (realloc_argv(p->cmd, p->i, j, var_value) == false)
 		{
 			free(var_name);
 			if (*var_value != '\0')
@@ -33,8 +32,8 @@ static bool	expand_singlevar(t_simple_cmd *cmd, int const i, \
 	}
 	else
 	{
-		cmd->argv[i] = \
-			replace_varval(&cmd->argv[i], ft_strlen(var_name), *j, var_value);
+		p->cmd->argv[p->i] = replace_varval(&p->cmd->argv[p->i], \
+				ft_strlen(var_name), *j, var_value);
 		*j = *j + ft_strlen(var_value);
 	}
 	free(var_name);
@@ -60,7 +59,7 @@ static void	process_non_var(t_expandvar *params, char c)
 	append_char(&(params->new_word), c);
 }
 
-static bool	handle_dollar_sign(t_expandvar *params)
+static bool	handle_dollar_sign(t_expandvar *params, t_shell *shell)
 {
 	char	*temp;
 	int		original_j;
@@ -82,14 +81,13 @@ static bool	handle_dollar_sign(t_expandvar *params)
 		else
 		{
 			original_j = params->j;
-			return (expand_singlevar(params->cmd, params->i, &original_j, \
-								params->dou_quotes));
+			return (expand_singlevar(params, &original_j, shell));
 		}
 	}
 	return (true);
 }
 
-bool	expand_vars(t_simple_cmd *cmd, int const i)
+bool	expand_vars(t_simple_cmd *cmd, int const i, t_shell *shell)
 {
 	t_expandvar	p;
 
@@ -98,7 +96,7 @@ bool	expand_vars(t_simple_cmd *cmd, int const i)
 	{
 		if (p.cmd_argv[p.i][p.j] == '$' && p.sin_quotes == false)
 		{
-			if (handle_dollar_sign(&p) == false)
+			if (handle_dollar_sign(&p, shell) == false)
 				return (false);
 		}
 		else
