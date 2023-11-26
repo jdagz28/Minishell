@@ -6,7 +6,7 @@
 /*   By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/30 23:08:42 by jdagoy            #+#    #+#             */
-/*   Updated: 2023/11/25 18:33:48 by jdagoy           ###   ########.fr       */
+/*   Updated: 2023/11/26 15:29:22 by jdagoy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ typedef struct s_simple_cmd
 	char	**argv;
 	int		fd_input;
 	int		fd_output;
+	bool	here_doc;
 	bool	has_quotes;
 }	t_simple_cmd;
 
