@@ -12,11 +12,12 @@
 
 #include "minishell.h"
 #include "lexer_parsing.h"
+#include "strtab.h"
 
-void free_token(t_token *head)
+void free_token(t_token* head)
 {
-	t_token *itr;
-	t_token *next;
+	t_token* itr;
+	t_token* next;
 
 	if (head == NULL)
 		return;
@@ -29,33 +30,25 @@ void free_token(t_token *head)
 	}
 }
 
-static void free_simple_cmd(t_node **simple_cmd)
+static void free_simple_cmd(t_node** simple_cmd)
 {
-	int i;
 	int fd;
 
 	if (*simple_cmd != NULL)
 	{
-		i = 0;
-		while ((*simple_cmd)->content.simple_cmd.argv[i] != NULL)
-		{
-			free((*simple_cmd)->content.simple_cmd.argv[i]);
-			(*simple_cmd)->content.simple_cmd.argv[i] = NULL;
-			++i;
-		}
+		strtab_free((*simple_cmd)->content.simple_cmd.argv);
 		fd = (*simple_cmd)->content.simple_cmd.fd_input;
 		if (fd > 0 && fd != STDIN_FILENO)
 			close(fd);
 		fd = (*simple_cmd)->content.simple_cmd.fd_output;
 		if (fd > 0 && fd != STDOUT_FILENO)
 			close(fd);
-		free((*simple_cmd)->content.simple_cmd.argv);
 		free(*simple_cmd);
 		*simple_cmd = NULL;
 	}
 }
 
-void clear_ast(t_node **ast)
+void clear_ast(t_node** ast)
 {
 	if (*ast == NULL)
 		return;

@@ -1,22 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   redirect.c                                         :+:      :+:    :+:   */
+/*   files.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jdagoy <jdagoy@student.42.fr>              +#+  +:+       +#+        */
+/*   By: tbarbe <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/11 16:43:09 by tbarbe            #+#    #+#             */
-/*   Updated: 2023/11/26 14:57:16 by jdagoy           ###   ########.fr       */
+/*   Updated: 2023/10/09 13:26:05 by tbarbe           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 #include "environment.h"
 
+void close_redirect(t_simple_cmd* cmd)
+{
+	if (cmd->fd_input != 0)
+		close(cmd->fd_input);
+	if (cmd->fd_output != 1)
+		close(cmd->fd_output);
+}
+
 static void redirect_input(t_simple_cmd* cmd, char* type, char* dest)
 {
 	if (ft_strlen(type) == 2 && type[1] == '<')
-		cmd->here_doc = true;
+	{
+		if (read_here_doc(cmd, dest))
+			return;
+	}
 	else
 		cmd->fd_input = open_file(dest, 'r');
 	if (cmd->fd_input == -1)

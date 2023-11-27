@@ -29,7 +29,7 @@ int	execute_builtin(t_simple_cmd command, t_shell* shell)
 	status = -1;
 	if (ft_strncmp_twice((const char*)command.argv[0], "env"))
 	{
-		strtab_print(shell->env, '\n');
+		strtab_write(shell->env, '\n', command.fd_output);
 		status = EXIT_SUCCESS;
 	}
 	if (ft_strncmp_twice((const char*)command.argv[0], "cd"))
@@ -40,9 +40,9 @@ int	execute_builtin(t_simple_cmd command, t_shell* shell)
 			return (EXIT_FAILURE);
 	}
 	if (ft_strncmp_twice((const char*)command.argv[0], "echo"))
-		status = echo(command.argv);
+		status = echo(command.argv, command.fd_output);
 	if (ft_strncmp_twice((const char*)command.argv[0], "pwd"))
-		status = pwd(command.argv);
+		status = pwd(command.argv, command.fd_output);
 	if (ft_strncmp_twice((const char*)command.argv[0], "export"))
 		status = export(shell, command.argv[1]);
 	if (ft_strncmp_twice((const char*)command.argv[0], "unset"))
@@ -52,7 +52,7 @@ int	execute_builtin(t_simple_cmd command, t_shell* shell)
 	if (ft_strchr((const char *)command.argv[0], '='))
 		status = var_set(shell, command.argv);
 	if (status != EXIT_SUCCESS)
-		return(EXIT_FAILURE); 
+		return(EXIT_FAILURE);
 	return (status);
 }
 

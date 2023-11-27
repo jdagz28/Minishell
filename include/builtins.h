@@ -42,7 +42,7 @@ int		update_pwd_error(char* new_pwd);
 int		cd_error(int error, char* str);
 
 //echo.c
-int		echo(char** argv);
+int		echo(char** argv, int fd);
 
 //export.c
 int		export(t_shell* shell, char* str);
@@ -51,6 +51,6 @@ int		export(t_shell* shell, char* str);
 int		unset(t_shell* shell, char* str);
 
 //pwd.c
-int		pwd(char** argv);
+int		pwd(char** argv, int fd);
 
 #endif

@@ -59,8 +59,8 @@ ENV_SRCS			=	env_getvar.c\
 							var_key.c\
 							var_set.c
 
-EXECUTE_SRCS		=	exec_binpath.c\
-							exec_utils.c\
+EXECUTE_SRCS		=	exec_bin.c\
+							exec_bin_utils.c\
 							exec.c
 
 EXIT_SRCS			=	exit_clean.c\
@@ -100,7 +100,8 @@ REDIRECT_SRCS			=	redirect.c\
 SHELL_SRCS			=	init_pwd.c\
 							shell_prompt.c\
 							shell.c\
-							user.c
+							user.c\
+							shell_level.c
 
 SIGNAL_SRCS			=	signal.c
 

@@ -27,6 +27,7 @@ void	strtab_freeend(char** tab, int start);
 //strtab_utils.c
 int		strtab_beginwith(char** tab, char* str);
 void	strtab_print(char** tab, char ces);
+void	strtab_write(char** tab, char ces, int fd);
 int		strtab_len(char** tab);
 char** strtab_cpy(char** tab);
 #endif

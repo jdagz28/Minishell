@@ -13,29 +13,49 @@
 #include "../include/minishell.h"
 #include "environment.h"
 
-int read_here_doc(char* limiter)
+int read_here_doc(t_simple_cmd* cmd, char* limiter)
 {
 	char* line;
-	char* red;
 	int len;
+	int err;
 
-	red = NULL;
 	len = ft_strlen(limiter);
 	while (1)
 	{
-		write(1, "> ", 2);
-		line = get_next_line(0);
+		line = readline("> ");
+		if (!line)
+		{
+			print_error("warning: here-document at line 1 delimited by end-of-file, wanted: ", limiter);
+			return(EXIT_SUCCESS);
+		}
 		if (ft_strncmp(line, limiter, len) == 0)
 		{
 			free(line);
 			break;
 		}
-		red = ft_stradd(red, line);
-		free(line);
-		if (red == NULL)
+		err = strtab_add(&cmd->here_doc, line);
+		if (err)
 			return (EXIT_FAILURE);
 	}
-	write(STDIN_FILENO, red, ft_strlen(red) + 1);
-	free(red);
 	return (EXIT_SUCCESS);
+}
+
+
+int write_here_doc(t_simple_cmd* cmd)
+{
+	int i;
+	char** tab;
+
+	tab = cmd->here_doc;
+	if (!tab || !*tab)
+		return(EXIT_FAILURE);
+	i = 0;
+	while (tab[i])
+	{
+		write(STDIN_FILENO, tab[i], ft_strlen(tab[i]));
+		write(STDIN_FILENO, "\n", 1);
+		i++;
+	}
+	write(STDIN_FILENO, 0, 1);
+	return(EXIT_SUCCESS);
 }
