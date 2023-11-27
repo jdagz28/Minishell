@@ -6,7 +6,7 @@
 /*   By: jdagoy <jdagoy@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/26 23:59:25 by jdagoy            #+#    #+#             */
-/*   Updated: 2023/11/27 10:10:39 by jdagoy           ###   ########.fr       */
+/*   Updated: 2023/11/27 10:25:02 by jdagoy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ static bool	check_option(char *argv, bool *dash_flag)
 		return (false); 
 }
 
-int	echo(char **argv)
+int	echo(char **argv, int fd)
 {
 	int		i;
 	bool	dash_flag;
