@@ -3,32 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   clear_ast.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jdagoy <jdagoy@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 09:24:15 by jdagoy            #+#    #+#             */
-/*   Updated: 2023/11/16 09:33:19 by jdagoy           ###   ########.fr       */
+/*   Updated: 2023/11/28 00:20:50 by jdagoy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 #include "lexer_parsing.h"
 #include "strtab.h"
-
-void free_token(t_token* head)
-{
-	t_token* itr;
-	t_token* next;
-
-	if (head == NULL)
-		return;
-	itr = head;
-	while (itr != NULL)
-	{
-		next = itr->next;
-		free(itr);
-		itr = next;
-	}
-}
 
 static void free_simple_cmd(t_node** simple_cmd)
 {

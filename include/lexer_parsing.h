@@ -6,7 +6,7 @@
 /*   By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/30 23:08:42 by jdagoy            #+#    #+#             */
-/*   Updated: 2023/11/26 15:29:22 by jdagoy           ###   ########.fr       */
+/*   Updated: 2023/11/28 00:20:59 by jdagoy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,7 +120,6 @@ bool	build_ast(t_token** tokens, t_node** ast);
 void	clear_ast(t_node** ast);
 
 // clear.c
-void	free_token(t_token* head);
 void	clear_ast(t_node** ast);
 
 // parsing.c
