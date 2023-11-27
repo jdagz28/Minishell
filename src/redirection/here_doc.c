@@ -6,7 +6,7 @@
 /*   By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/11 16:43:09 by tbarbe            #+#    #+#             */
-/*   Updated: 2023/11/27 20:33:56 by jdagoy           ###   ########.fr       */
+/*   Updated: 2023/11/27 23:11:20 by jdagoy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ int write_here_doc(char** tab)
 		write(fd[1], "\n", 1);
 		i++;
 	}
-	write(fd[1], 0, 1);
+	// write(fd[1], 0, 0);
 	close(fd[1]);
 	return(fd[0]);
 }
