@@ -6,7 +6,7 @@
 /*   By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/14 10:36:11 by jdagoy            #+#    #+#             */
-/*   Updated: 2023/11/26 19:00:57 by jdagoy           ###   ########.fr       */
+/*   Updated: 2023/11/27 20:59:15 by jdagoy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ void	get_var_name_value(char *argv, char **var_name, \
 	if (*(argv + 1) == '?')
 	{
 		*var_name = ft_strdup("?");
-		*var_value = ft_itoa(*get_exit_value());
+		*var_value = ft_itoa(shell->err);
 	}
 	else
 	{

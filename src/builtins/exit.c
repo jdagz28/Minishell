@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jdagoy <jdagoy@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/22 14:48:32 by jdagoy            #+#    #+#             */
-/*   Updated: 2023/11/27 10:12:30 by jdagoy           ###   ########.fr       */
+/*   Updated: 2023/11/27 20:59:52 by jdagoy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int	builtin_exit(char **argv, t_shell *shell)
 	int		exit_value;
 	int		arg_count;
 
-	exit_value = *get_exit_value();
+	exit_value = shell->err;
 	arg_count = strtab_len(argv);
 	if (*is_piped() == false)
 		ft_putstr_fd("exit\n", STDERR_FILENO);

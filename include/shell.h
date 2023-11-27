@@ -6,7 +6,7 @@
 /*   By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/20 09:18:51 by jdagoy            #+#    #+#             */
-/*   Updated: 2023/11/23 15:09:43 by jdagoy           ###   ########.fr       */
+/*   Updated: 2023/11/27 20:55:34 by jdagoy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ char* pwd_cat(t_pwd* pwd);
 void	shell_prompt(t_shell* shell);
 
 //shell.c
-int		shell_init(t_shell* shell, char* cmds, char** env);
+int		shell_init(t_shell* shell, char** env);
 int		shell_init_level(t_shell* shell);
 char* shell_cat(t_shell* shell);
 void	shell_run(t_shell* shell);

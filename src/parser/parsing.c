@@ -6,7 +6,7 @@
 /*   By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 13:54:17 by jdagoy            #+#    #+#             */
-/*   Updated: 2023/11/25 18:18:34 by jdagoy           ###   ########.fr       */
+/*   Updated: 2023/11/27 21:03:43 by jdagoy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ t_node	*parse(char *line, t_shell *shell)
 		return (NULL);
 	}
 	expand_cmds(ast, shell);
+	shell->err = *get_exit_value();
 	free_token(tokens);
 	return (ast);
 }
