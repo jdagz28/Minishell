@@ -6,7 +6,7 @@
 /*   By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/11 16:43:09 by tbarbe            #+#    #+#             */
-/*   Updated: 2023/11/27 23:51:47 by jdagoy           ###   ########.fr       */
+/*   Updated: 2023/11/27 23:57:24 by jdagoy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,8 @@ int shell_init_level(t_shell* shell)
 		return(EXIT_FAILURE);
 	ft_strlcpy(res, "SHLVL=", len);
 	ft_strlcat(res, level, len);
-	free(level);
 	export(shell, res);
+	free(level);
+	free(res);
 	return(EXIT_SUCCESS);
 }
