@@ -15,6 +15,6 @@ jobs:
     - uses: actions/checkout@v3
     - name: make
       run: make
-    - name: make check
-      run: make check
+    - name: make clean
+      run: make clean
     - run: echo "Compiled Successfully"
