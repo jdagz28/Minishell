@@ -6,7 +6,7 @@
 /*   By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/29 02:08:41 by jdagoy            #+#    #+#             */
-/*   Updated: 2023/11/25 18:05:02 by jdagoy           ###   ########.fr       */
+/*   Updated: 2023/11/27 20:30:50 by jdagoy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 #include "expansion.h"
 #include "builtins.h"
 #include "environment.h"
+#include "strtab.h"
 
 static int	update_pwd(char **argv, char **env)
 {
@@ -82,9 +83,9 @@ int	cd(char **argv, char **env)
 	char		*path;
 	char		*pwd;
 
-	if (ft_arraylen(argv) > 2)
+	if (strtab_len(argv) > 2)
 		return (cd_error(0, NULL));
-	if (ft_arraylen(argv) < 2)
+	if (strtab_len(argv) < 2)
 		path = get_home_path(env);
 	else
 		path = ft_strdup(argv[1]);

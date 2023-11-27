@@ -6,31 +6,49 @@
 /*   By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/26 23:59:25 by jdagoy            #+#    #+#             */
-/*   Updated: 2023/11/25 19:57:44 by jdagoy           ###   ########.fr       */
+/*   Updated: 2023/11/27 20:31:24 by jdagoy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 #include "builtins.h"
 #include "expansion.h"
+#include "strtab.h"
 
-int	echo(char** argv, int fd)
+static bool	check_option(int arg_i, char *argv, bool *dash_flag)
+{
+	size_t	i;
+
+	i = 2;
+
+	while (i < ft_strlen(argv) && argv[i] == 'n')
+		i++;
+	if (i == ft_strlen(argv))
+	{
+		if (arg_i == 1)
+			*dash_flag = true;
+		return (true);
+	}
+	else
+		return (false);
+}
+
+int	echo(char **argv, int fd)
 {
 	int		i;
 	bool	dash_flag;
 
 	i = 1;
 	dash_flag = false;
-	if (ft_arraylen(argv) >= 2 && ft_strncmp_twice(argv[i], "-n") == true)
+	if (strtab_len(argv) >= 2)
 	{
-		i++;
-		dash_flag = true;
+		while (ft_strncmp(argv[i], "-n", ft_strlen("-n")) == 0)
+		{
+			if (check_option(i, argv[i], &dash_flag) == false)
+				break ;
+			i++;
+		}
 	}
-	if (ft_arraylen(argv) >= 2 && ft_strncmp(argv[i], "-n", \
-		ft_strlen("-n")) == 0 && ft_strncmp_twice(argv[i], "-n") == false)
-		i++;
-	while (dash_flag == true && ft_strncmp_twice(argv[i], "-n") == true)
-		i++;
 	while (argv[i] != NULL)
 	{
 		ft_putstr_fd(argv[i], fd);

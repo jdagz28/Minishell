@@ -6,12 +6,13 @@
 /*   By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 23:00:34 by jdagoy            #+#    #+#             */
-/*   Updated: 2023/11/25 18:03:16 by jdagoy           ###   ########.fr       */
+/*   Updated: 2023/11/27 20:33:40 by jdagoy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 #include "expansion.h"
+#include "strtab.h"
 
 static void	handle_last_join(char *arg, char **new_argv, \
 									char **splitted_var, t_expand *utils)
@@ -68,8 +69,8 @@ static void	init_expand_utils(char **argv, char **splitted_var, \
 	utils->has_space = has_space(var_value);
 	utils->first_join = (ft_isspace(var_value[0]) == 0);
 	utils->last_join = (ft_isspace(var_value[ft_strlen(var_value) - 1]) == 0);
-	utils->len_old_argv = ft_arraylen(argv);
-	utils->len_argv_to_add = ft_arraylen(splitted_var);
+	utils->len_old_argv = strtab_len(argv);
+	utils->len_argv_to_add = strtab_len(splitted_var);
 	utils->len_new_argv = utils->len_old_argv + utils->len_argv_to_add \
 		- (utils->first_join == false) - (utils->last_join == false) \
 		+ (utils->has_space == true);

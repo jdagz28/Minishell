@@ -6,7 +6,7 @@
 /*   By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/22 14:48:32 by jdagoy            #+#    #+#             */
-/*   Updated: 2023/11/23 09:03:25 by jdagoy           ###   ########.fr       */
+/*   Updated: 2023/11/27 20:59:52 by jdagoy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int	builtin_exit(char **argv, t_shell *shell)
 	int		exit_value;
 	int		arg_count;
 
-	exit_value = *get_exit_value();
+	exit_value = shell->err;
 	arg_count = strtab_len(argv);
 	if (*is_piped() == false)
 		ft_putstr_fd("exit\n", STDERR_FILENO);
@@ -27,7 +27,7 @@ int	builtin_exit(char **argv, t_shell *shell)
 		if (ft_isnum(argv[1]) == false)
 		{
 			print_error(argv[1], "numeric argument required\n");
-			exit_value = 2;
+			exit_value = 255;
 		}
 		else if (arg_count > 2)
 		{

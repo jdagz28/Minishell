@@ -6,13 +6,14 @@
 /*   By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/29 02:08:41 by jdagoy            #+#    #+#             */
-/*   Updated: 2023/11/25 17:59:27 by jdagoy           ###   ########.fr       */
+/*   Updated: 2023/11/27 20:32:38 by jdagoy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 #include "expansion.h"
 #include "environment.h"
+#include "strtab.h"
 
 static char	**append_new_environ(char **new_environ, char *env_var)
 {
@@ -20,7 +21,7 @@ static char	**append_new_environ(char **new_environ, char *env_var)
 	int		i;
 	char	**new_array;
 
-	count = ft_arraylen(new_environ);
+	count = strtab_len(new_environ);
 	new_array = (char **)malloc((count + 2) * sizeof(char *));
 	if (new_array == NULL)
 	{
@@ -42,7 +43,7 @@ static char	**copy_env(char **environ)
 	int		count;
 	char	**new_environ;
 
-	count = ft_arraylen(environ);
+	count = strtab_len(environ);
 	new_environ = strtab_cpy(environ);
 	if (new_environ == NULL)
 		return (NULL);
