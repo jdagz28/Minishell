@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   files.c                                            :+:      :+:    :+:   */
+/*   here_doc.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tbarbe <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/11 16:43:09 by tbarbe            #+#    #+#             */
-/*   Updated: 2023/10/09 13:26:05 by tbarbe           ###   ########.fr       */
+/*   Updated: 2023/11/27 20:33:56 by jdagoy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,6 @@ int write_here_doc(t_simple_cmd* cmd)
 		write(STDIN_FILENO, "\n", 1);
 		i++;
 	}
-	write(STDIN_FILENO, 0, 1);
+	write(STDIN_FILENO, 0, 0);
 	return(EXIT_SUCCESS);
 }

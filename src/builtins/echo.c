@@ -3,16 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jdagoy <jdagoy@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/26 23:59:25 by jdagoy            #+#    #+#             */
-/*   Updated: 2023/11/27 11:40:53 by jdagoy           ###   ########.fr       */
+/*   Updated: 2023/11/27 20:31:24 by jdagoy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 #include "builtins.h"
 #include "expansion.h"
+#include "strtab.h"
 
 static bool	check_option(int arg_i, char *argv, bool *dash_flag)
 {
@@ -29,7 +30,7 @@ static bool	check_option(int arg_i, char *argv, bool *dash_flag)
 		return (true);
 	}
 	else
-		return (false); 
+		return (false);
 }
 
 int	echo(char **argv, int fd)
@@ -39,7 +40,7 @@ int	echo(char **argv, int fd)
 
 	i = 1;
 	dash_flag = false;
-	if (ft_arraylen(argv) >= 2)
+	if (strtab_len(argv) >= 2)
 	{
 		while (ft_strncmp(argv[i], "-n", ft_strlen("-n")) == 0)
 		{

@@ -6,7 +6,7 @@
 /*   By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 20:57:03 by jdagoy            #+#    #+#             */
-/*   Updated: 2023/11/25 18:47:11 by jdagoy           ###   ########.fr       */
+/*   Updated: 2023/11/27 20:32:13 by jdagoy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,6 @@ char	*replace_varval(char **argv, int len_varname, int i, \
 //expand_utils.c
 bool	check_valid_expansion(int i, char ***splitted_var, char **argv);
 bool	next_char(char c);
-int		ft_arraylen(char **array);
 char	*get_after_var(char *str, int index_dollar);
 bool	has_space(char *str);
 
