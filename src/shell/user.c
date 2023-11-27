@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   user.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+        */
+/*   By: jdagoy <jdagoy@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/11 16:43:09 by tbarbe            #+#    #+#             */
-/*   Updated: 2023/11/20 11:10:37 by jdagoy           ###   ########.fr       */
+/*   Updated: 2023/11/27 09:24:42 by jdagoy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@ int	user_init(t_user *user, char **env)
 {
 	user->username = env_get("USER=", 0, env);
 	user->machinename = env_get("SESSION_MANAGER=local/", ':', env);
+	if (!user->machinename)
+		user->machinename = ft_strdup("Campus19");
 	if (!user->username || !user->machinename)
 	{
 		user_clear(user);

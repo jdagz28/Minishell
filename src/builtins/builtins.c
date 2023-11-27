@@ -6,7 +6,7 @@
 /*   By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/27 00:23:51 by jdagoy            #+#    #+#             */
-/*   Updated: 2023/11/25 19:36:54 by jdagoy           ###   ########.fr       */
+/*   Updated: 2023/11/26 16:13:47 by jdagoy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,8 @@ int	execute_builtin(t_simple_cmd command, t_shell* shell)
 		status = unset(shell, command.argv[1]);
 	if (ft_strncmp_twice((const char*)command.argv[0], "exit"))
 		status = builtin_exit(command.argv, shell);
-	status = var_set(shell, command.argv);
+	if (ft_strchr((const char *)command.argv[0], '='))
+		status = var_set(shell, command.argv);
 	if (status != EXIT_SUCCESS)
 		return(EXIT_FAILURE);
 	return (status);

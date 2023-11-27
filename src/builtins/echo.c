@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+        */
+/*   By: jdagoy <jdagoy@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/26 23:59:25 by jdagoy            #+#    #+#             */
-/*   Updated: 2023/11/25 19:57:44 by jdagoy           ###   ########.fr       */
+/*   Updated: 2023/11/27 10:10:39 by jdagoy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,23 +14,36 @@
 #include "builtins.h"
 #include "expansion.h"
 
-int	echo(char** argv, int fd)
+static bool	check_option(char *argv, bool *dash_flag)
+{
+	size_t	i;
+
+	i = 2;
+
+	while (i < ft_strlen(argv) && argv[i] == 'n')
+		i++;
+	if (i == ft_strlen(argv))
+	{
+		*dash_flag = true;
+		return (true);
+	}
+	else
+		return (false); 
+}
+
+int	echo(char **argv)
 {
 	int		i;
 	bool	dash_flag;
 
-	i = 1;
+	i = 0;
 	dash_flag = false;
-	if (ft_arraylen(argv) >= 2 && ft_strncmp_twice(argv[i], "-n") == true)
+	if (ft_arraylen(argv) >= 2)
 	{
-		i++;
-		dash_flag = true;
+		while (ft_strncmp(argv[++i], "-n", ft_strlen("-n")) == 0)
+			if (check_option(argv[i], &dash_flag) == false)
+				break ;
 	}
-	if (ft_arraylen(argv) >= 2 && ft_strncmp(argv[i], "-n", \
-		ft_strlen("-n")) == 0 && ft_strncmp_twice(argv[i], "-n") == false)
-		i++;
-	while (dash_flag == true && ft_strncmp_twice(argv[i], "-n") == true)
-		i++;
 	while (argv[i] != NULL)
 	{
 		ft_putstr_fd(argv[i], fd);
