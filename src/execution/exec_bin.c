@@ -60,15 +60,13 @@ int	exec_bin(t_simple_cmd* cmd, char** env)
 		return (EXIT_FAILURE);
 	if (pid == 0)
 	{
-		if (cmd->here_doc)
-			write_here_doc(cmd);
-		else
-			dup2(cmd->fd_input, STDIN_FILENO);
+		dup2(cmd->fd_input, STDIN_FILENO);
 		dup2(cmd->fd_output, STDOUT_FILENO);
 		close_redirect(cmd);
 		execve(cmd->argv[0], cmd->argv, env);
 		exit(127);
 	}
+	close_redirect(cmd);
 	waitpid(pid, &status, 0);
 	return (WEXITSTATUS(status));
 }
