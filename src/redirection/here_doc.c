@@ -13,12 +13,14 @@
 #include "../include/minishell.h"
 #include "environment.h"
 
-int read_here_doc(t_simple_cmd* cmd, char* limiter)
+char** read_here_doc(char* limiter)
 {
+	char** res;
 	char* line;
 	int len;
 	int err;
 
+	res = NULL;
 	len = ft_strlen(limiter);
 	while (1)
 	{
@@ -26,36 +28,41 @@ int read_here_doc(t_simple_cmd* cmd, char* limiter)
 		if (!line)
 		{
 			print_error("warning: here-document at line 1 delimited by end-of-file, wanted: ", limiter);
-			return(EXIT_SUCCESS);
+			strtab_free(res);
+			return(NULL);
 		}
 		if (ft_strncmp(line, limiter, len) == 0)
 		{
 			free(line);
 			break;
 		}
-		err = strtab_add(&cmd->here_doc, line);
+		err = strtab_add(&res, line);
 		if (err)
-			return (EXIT_FAILURE);
+		{
+			strtab_free(res);
+			return (NULL);
+		}
 	}
-	return (EXIT_SUCCESS);
+	return (res);
 }
 
-
-int write_here_doc(t_simple_cmd* cmd)
+int write_here_doc(char** tab)
 {
 	int i;
-	char** tab;
+	int fd[2];
 
-	tab = cmd->here_doc;
 	if (!tab || !*tab)
-		return(EXIT_FAILURE);
+		return(-1);
+	if (pipe(fd) == -1)
+		return(-1);
 	i = 0;
 	while (tab[i])
 	{
-		write(STDIN_FILENO, tab[i], ft_strlen(tab[i]));
-		write(STDIN_FILENO, "\n", 1);
+		write(fd[1], tab[i], ft_strlen(tab[i]));
+		write(fd[1], "\n", 1);
 		i++;
 	}
-	write(STDIN_FILENO, 0, 0);
-	return(EXIT_SUCCESS);
+	write(fd[1], 0, 1);
+	close(fd[1]);
+	return(fd[0]);
 }

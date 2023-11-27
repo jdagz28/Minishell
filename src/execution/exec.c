@@ -40,10 +40,12 @@ static int	exec_pipe(t_shell* shell, t_node* node)
 	{
 		dup2(fd[1], STDOUT_FILENO);
 		close_pipe(fd);
+		close_redirect(&node->content.simple_cmd);
 		exit(exec_node(shell, node->content.child.left));
 	}
 	dup2(fd[0], STDIN_FILENO);
 	close_pipe(fd);
+	close_redirect(&node->content.simple_cmd);
 	res = exec_node(shell, node->content.child.right);
 	waitpid(pid, NULL, 0);
 	set_is_piped(false);

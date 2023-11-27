@@ -47,7 +47,7 @@ typedef struct s_simple_cmd
 	char** argv;
 	int		fd_input;
 	int		fd_output;
-	char** here_doc;
+	bool	here_doc;
 	bool	has_quotes;
 }	t_simple_cmd;
 
