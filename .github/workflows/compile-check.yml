@@ -18,3 +18,13 @@ jobs:
     - name: make clean
       run: make clean
     - run: echo "Compiled Successfully"
+    - name: make clean
+      run: make clean
+    - run: echo "Compiled Successfully"
+    - run: echo "clean rule present"
+    - name: make fclean
+      run: make fclean
+    - run: echo "fclean - removed minishell and libft"
+    - name: make re
+      run: make re
+    - run: echo "Recompiled Succesfully"
