@@ -31,7 +31,7 @@ test()
         minishell=$?
     fi
 
-    diff -Z ./tester/bash_out ./tester/ms_out > result
+    diff ./tester/bash_out ./tester/ms_out > result
     if [ $? -eq 0 ]; then
         echo -e "${GREEN} OKAY${RESET}"
     else
