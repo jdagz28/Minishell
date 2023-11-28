@@ -9,15 +9,12 @@ on:
 jobs:
   Compilation:
 
-    runs-on: macos-11
+    runs-on: ubuntu-latest
 
     steps:
     - uses: actions/checkout@v3
-    - name: Install Homebrew
-      run: |
-        /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-    - name: Install Readline
-      run: brew install readline
+    - name: Install dependencies
+      run: sudo apt-get install -y libreadline-dev
     - name: make
       run: make
     - run: echo "Compiled Successfully"
@@ -29,4 +26,4 @@ jobs:
     - run: echo "fclean - removed minishell and libft"
     - name: make re
       run: make re
-    - run: echo "Recompiled Succesfully"
+    - run: echo "Recompiled Successfully"

@@ -6,7 +6,7 @@
 /*   By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/11 16:43:09 by tbarbe            #+#    #+#             */
-/*   Updated: 2023/11/28 04:02:48 by jdagoy           ###   ########.fr       */
+/*   Updated: 2023/11/28 14:13:31 by jdagoy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ static void redirect_input(t_simple_cmd* cmd, char* type, \
 		{
 			cmd->fd_input = write_here_doc(here_doc, shell);
 			cmd->here_doc = true;
-			strtab_free(here_doc);
+			// strtab_free(here_doc);
 		}
 	}
 	else
