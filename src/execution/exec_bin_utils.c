@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   exec_binpath.c                                     :+:      :+:    :+:   */
+/*   exec_bin_utils.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/11 16:43:09 by tbarbe            #+#    #+#             */
-/*   Updated: 2023/11/20 12:05:13 by jdagoy           ###   ########.fr       */
+/*   Updated: 2023/11/28 00:15:03 by jdagoy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,11 +59,9 @@ char	*env_getpath(char *str, char **env)
 	{
 		res = env_trypath(paths[i], str);
 		if (res)
-		{
-			free(paths);
 			break ;
-		}
 		i++;
 	}
+	ft_splitfree(paths);
 	return (res);
 }

@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: jdagoy <jdagoy@student.42.fr>              +#+  +:+       +#+         #
+#    By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/10/07 15:33:53 by tbarbe            #+#    #+#              #
-#    Updated: 2023/11/26 19:48:12 by jdagoy           ###   ########.fr        #
+#    Updated: 2023/11/27 23:57:59 by jdagoy           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,7 @@ OS					= 	$(shell uname -s)
 USERNAME			= 	$(shell whoami)
 
 ifeq ($(OS),Linux)
-	FSANITIZE		= 	#-fsanitize=address -fsanitize=leak 
+	FSANITIZE		= 	-fsanitize=address -fsanitize=leak
 	MAC_INCLUDES	=
 	MAC_LIBS		=
 else

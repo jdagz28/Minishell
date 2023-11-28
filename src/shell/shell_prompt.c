@@ -6,7 +6,7 @@
 /*   By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/20 02:30:33 by jdagoy            #+#    #+#             */
-/*   Updated: 2023/11/27 21:02:59 by jdagoy           ###   ########.fr       */
+/*   Updated: 2023/11/28 01:34:04 by jdagoy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ static char* shell_readline(t_shell* shell)
 	if (!line)
 	{
 		write(1, "exit\n", 5);
-		exit(128);
+		exit(0);
 	}
 	user_setlastinput(&shell->user, line);
 	return (line);
@@ -64,13 +64,13 @@ void	shell_prompt(t_shell* shell)
 		if (line == NULL || ft_strallnonzero(line) == 0)
 			clean_exit(shell, EXIT_FAILURE);
 	}
-	shell->ast = parse(line, shell);
-	free(line);
-	if (!shell->ast)
+	if (line)
 	{
-		set_exit_value(EXIT_FAILURE);
-		return ;
+		shell->ast = parse(line, shell);
+		free(line);
 	}
+	if (!shell->ast)
+		return ;
 	err = shell_exec(shell);
 	clear_ast(&shell->ast);
 	set_exit_value(err);

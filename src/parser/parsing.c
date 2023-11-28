@@ -6,7 +6,7 @@
 /*   By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 13:54:17 by jdagoy            #+#    #+#             */
-/*   Updated: 2023/11/27 21:03:43 by jdagoy           ###   ########.fr       */
+/*   Updated: 2023/11/28 00:25:18 by jdagoy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,8 @@ static void	parse_error(t_token* tokens, int error)
 			printf("\nminishell: syntax error near unexpected token '%s'\n", \
 				tokens->word);
 	}
-	free_token(tokens);
+	if (tokens)
+		clear_tokens(tokens);
 	set_exit_value(SYNTAX_ERROR);
 }
 
@@ -46,6 +47,7 @@ t_node	*parse(char *line, t_shell *shell)
 	}
 	expand_cmds(ast, shell);
 	shell->err = *get_exit_value();
-	free_token(tokens);
+	if (tokens)
+		clear_tokens(tokens);
 	return (ast);
 }

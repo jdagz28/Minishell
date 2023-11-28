@@ -6,7 +6,7 @@
 /*   By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 00:28:37 by jdagoy            #+#    #+#             */
-/*   Updated: 2023/11/24 09:29:57 by jdagoy           ###   ########.fr       */
+/*   Updated: 2023/11/28 01:25:51 by jdagoy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,5 +25,6 @@ void	consume_token(t_token **tokens)
 	if (*tokens == NULL)
 		return ;
 	*tokens = (*tokens)->next;
+	free(temp->word);
 	free(temp);
 }
