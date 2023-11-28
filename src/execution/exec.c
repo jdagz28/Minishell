@@ -6,7 +6,7 @@
 /*   By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/20 00:36:23 by jdagoy            #+#    #+#             */
-/*   Updated: 2023/11/28 15:54:41 by jdagoy           ###   ########.fr       */
+/*   Updated: 2023/11/28 23:52:37 by jdagoy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,9 +59,9 @@ static int	exec_simple(t_shell* shell, t_node* node)
 	int		err;
 
 	cmd = &node->content.simple_cmd;
-	// err = redirect(cmd, shell); // need to close fd from now
-	// if (err || cmd->fd_input == -1 || cmd->fd_output == -1)
-	// 	return(EXIT_FAILURE);
+	err = redirect(node, shell); // need to close fd from now
+	if (err || cmd->fd_input == -1 || cmd->fd_output == -1)
+		return(EXIT_FAILURE);
 	argv = cmd->argv;
 	if (strtab_len(argv) == 0)
 		return(EXIT_SUCCESS);
@@ -90,9 +90,6 @@ int	shell_exec(t_shell* shell)
 	if (!node)
 		return (EXIT_FAILURE);
 	signal_set(SIGINT, SIG_IGN);
-	status = redirect(node, shell);
-	if (status || node->content.simple_cmd.fd_input == -1 || node->content.simple_cmd.fd_output == -1)
-		return (EXIT_FAILURE);
 	if (node->type == SIMPLE_CMD)
 		return(exec_simple(shell, node));
 	pid = fork();
