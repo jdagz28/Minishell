@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   files.c                                            :+:      :+:    :+:   */
+/*   redirect.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tbarbe <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/11 16:43:09 by tbarbe            #+#    #+#             */
-/*   Updated: 2023/10/09 13:26:05 by tbarbe           ###   ########.fr       */
+/*   Updated: 2023/11/28 04:02:48 by jdagoy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,8 @@ void close_redirect(t_simple_cmd* cmd)
 		close(cmd->fd_output);
 }
 
-static void redirect_input(t_simple_cmd* cmd, char* type, char* dest)
+static void redirect_input(t_simple_cmd* cmd, char* type, \
+								char* dest, t_shell *shell)
 {
 	char** here_doc;
 	if (cmd->fd_input != -1 && cmd->fd_input != 0)
@@ -31,7 +32,7 @@ static void redirect_input(t_simple_cmd* cmd, char* type, char* dest)
 		here_doc = read_here_doc(dest);
 		if (here_doc)
 		{
-			cmd->fd_input = write_here_doc(here_doc);
+			cmd->fd_input = write_here_doc(here_doc, shell);
 			cmd->here_doc = true;
 			strtab_free(here_doc);
 		}
@@ -56,14 +57,14 @@ static void redirect_output(t_simple_cmd* cmd, char* type, char* dest)
 		print_error(dest, strerror(errno));
 }
 
-int redirect_one(t_simple_cmd* cmd, char* type, char* dest)
+int redirect_one(t_simple_cmd* cmd, char* type, char* dest, t_shell *shell)
 {
 	char c;
 
 	//ft_printf("%s %s\n", type, dest);
 	c = type[0];
 	if (c == '<')
-		redirect_input(cmd, type, dest);
+		redirect_input(cmd, type, dest, shell);
 	else if (c == '>')
 		redirect_output(cmd, type, dest);
 	else
@@ -71,7 +72,7 @@ int redirect_one(t_simple_cmd* cmd, char* type, char* dest)
 	return(1);
 }
 
-int redirect(t_simple_cmd* cmd)
+int redirect(t_simple_cmd* cmd, t_shell *shell)
 {
 	int i;
 	char** argv;
@@ -80,7 +81,7 @@ int redirect(t_simple_cmd* cmd)
 	i = 0;
 	while (i < strtab_len(argv))
 	{
-		if (redirect_one(cmd, argv[i], argv[i + 1]))
+		if (redirect_one(cmd, argv[i], argv[i + 1], shell))
 		{
 			strtab_remove_mult(&cmd->argv, i, 2);
 			argv = cmd->argv;
