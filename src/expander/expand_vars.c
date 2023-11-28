@@ -6,12 +6,42 @@
 /*   By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 22:58:02 by jdagoy            #+#    #+#             */
-/*   Updated: 2023/11/25 18:38:32 by jdagoy           ###   ########.fr       */
+/*   Updated: 2023/11/28 04:53:14 by jdagoy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 #include "expansion.h"
+#include "strtab.h"
+
+void	expand_vars_heredoc(char **argv, t_shell *shell)
+{
+	int		i;
+	char	*var_name;
+	char	*var_value;
+
+	while (*argv)
+	{
+		i = -1;
+		while ((*argv)[i] != '\0')
+		{
+			while (ft_isspace((*argv)[i]) || (*argv)[i] == '\"' || (*argv)[i] == '\'')
+				i++;
+			if ((*argv)[i] == '$')
+			{
+				get_var_name_value(*argv + i, &var_name, &var_value, shell);
+				*argv = replace_varval(argv, ft_strlen(var_name), i, var_value);
+				i += ft_strlen(var_value);
+				free(var_name);
+				if (*var_value != '\0')
+					free(var_value);
+			}
+			else
+				i++;
+		}
+		argv++;
+	}
+}
 
 static bool	expand_singlevar(t_expandvar* p, int* j, t_shell* shell)
 {

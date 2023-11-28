@@ -6,12 +6,13 @@
 /*   By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/11 16:43:09 by tbarbe            #+#    #+#             */
-/*   Updated: 2023/11/27 23:11:20 by jdagoy           ###   ########.fr       */
+/*   Updated: 2023/11/28 04:26:56 by jdagoy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 #include "environment.h"
+#include "expansion.h"
 
 char** read_here_doc(char* limiter)
 {
@@ -46,16 +47,18 @@ char** read_here_doc(char* limiter)
 	return (res);
 }
 
-int write_here_doc(char** tab)
+int write_here_doc(char** tab, t_shell *shell)
 {
 	int i;
 	int fd[2];
+
 
 	if (!tab || !*tab)
 		return(-1);
 	if (pipe(fd) == -1)
 		return(-1);
 	i = 0;
+	expand_vars_heredoc(tab, shell);
 	while (tab[i])
 	{
 		write(fd[1], tab[i], ft_strlen(tab[i]));
