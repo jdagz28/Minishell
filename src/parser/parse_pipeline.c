@@ -6,7 +6,7 @@
 /*   By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 10:26:10 by jdagoy            #+#    #+#             */
-/*   Updated: 2023/11/20 10:54:23 by jdagoy           ###   ########.fr       */
+/*   Updated: 2023/11/28 01:03:49 by jdagoy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,10 @@ bool	parse_pipeline(t_token **tokens, t_node **ast)
 		pipe_node->content.child.left = *ast;
 		*ast = pipe_node;
 		if (!parse_simple_cmd(tokens, &(pipe_node->content.child.right)))
+		{
+			free(pipe_node);
 			return (false);
+		}
 	}
 	return (true);
 }
