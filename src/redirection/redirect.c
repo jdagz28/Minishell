@@ -6,12 +6,14 @@
 /*   By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/11 16:43:09 by tbarbe            #+#    #+#             */
-/*   Updated: 2023/11/28 14:13:31 by jdagoy           ###   ########.fr       */
+/*   Updated: 2023/11/28 15:56:29 by jdagoy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 #include "environment.h"
+#include "lexer_parsing.h"
+#include "builtins.h"
 
 void close_redirect(t_simple_cmd* cmd)
 {
@@ -72,22 +74,57 @@ int redirect_one(t_simple_cmd* cmd, char* type, char* dest, t_shell *shell)
 	return(1);
 }
 
-int redirect(t_simple_cmd* cmd, t_shell *shell)
+static void	remove_redirect_argv(char **argv)
 {
-	int i;
-	char** argv;
+	int	i;
 
-	argv = cmd->argv;
-	i = 0;
-	while (i < strtab_len(argv))
+	i = 2;
+	while (argv[i] != NULL)
 	{
-		if (redirect_one(cmd, argv[i], argv[i + 1], shell))
+		argv[i - 2] = argv[i];
+		i++;
+	}
+	argv[i - 2] = argv[i];
+}
+
+static int	open_redirections(t_simple_cmd *cmd, t_shell *shell)
+{
+	int	i;
+
+	i = 0;
+	while (i < strtab_len(cmd->argv))
+	{
+		if (is_redirect(cmd->argv[i]) == true)
 		{
-			strtab_remove_mult(&cmd->argv, i, 2);
-			argv = cmd->argv;
+			if ((int)ft_strlen(cmd->argv[i + 1]) > 255)
+			{
+				print_error(cmd->argv[i + 1], "file name too long");
+				return (false);
+			}
+			if (redirect_one(cmd, cmd->argv[i], cmd->argv[i + 1], shell))
+				return (EXIT_FAILURE);
+			remove_redirect_argv(&cmd->argv[i]);
 		}
 		else
 			i++;
 	}
 	return (EXIT_SUCCESS);
+}
+
+int redirect(t_node *node, t_shell *shell)
+{
+	if (node->type == SIMPLE_CMD)
+	{
+		return (open_redirections(&node->content.simple_cmd, shell));
+	}
+	else
+	{
+		if (node->content.child.left != NULL)
+			if (redirect(node->content.child.left, shell) == EXIT_FAILURE)
+				return (EXIT_FAILURE);
+		if (node->content.child.right != NULL)
+			if (redirect(node->content.child.right, shell) == EXIT_FAILURE)
+				return (EXIT_FAILURE);
+		return (EXIT_SUCCESS);
+	}
 }
