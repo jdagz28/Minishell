@@ -6,7 +6,7 @@
 #    By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/10/07 15:33:53 by tbarbe            #+#    #+#              #
-#    Updated: 2023/11/27 23:57:59 by jdagoy           ###   ########.fr        #
+#    Updated: 2023/11/28 14:11:31 by jdagoy           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -70,6 +70,7 @@ EXPAND_SRCS			=	expand_cmds.c\
 							expand_replace_var_value.c\
 							expand_utils.c\
 							expand_var_realloc_argv.c\
+							expand_vars_heredoc.c\
 							expand_vars_utils.c\
 							expand_vars.c\
 							free_array.c\

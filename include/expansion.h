@@ -6,7 +6,7 @@
 /*   By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 20:57:03 by jdagoy            #+#    #+#             */
-/*   Updated: 2023/11/28 04:01:06 by jdagoy           ###   ########.fr       */
+/*   Updated: 2023/11/28 14:10:31 by jdagoy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,8 +68,10 @@ void	get_var_name_value(char *argv, char **var_name, \
 							char **var_value, t_shell *shell);
 
 //expand_vars.c
-void	expand_vars_heredoc(char **argv, t_shell *shell);
 bool	expand_vars(t_simple_cmd *cmd, int const i, t_shell *shell);
+
+//expand_vars_heredoc.c
+void	expand_vars_heredoc(char **argv, t_shell *shell);
 
 //remove_quotes_uitls.c
 char	*reverse_quotes(char *var_value);
