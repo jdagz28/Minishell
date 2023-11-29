@@ -6,7 +6,7 @@
 /*   By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/11 16:43:09 by tbarbe            #+#    #+#             */
-/*   Updated: 2023/11/29 01:02:48 by jdagoy           ###   ########.fr       */
+/*   Updated: 2023/11/29 01:18:25 by jdagoy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,6 @@ int write_here_doc(char** tab, t_shell *shell)
 		return(-1);
 	i = 0;
 	expand_vars_heredoc(tab, shell);
-	// strtab_print(tab, '\n');
 	if (pipe(fd) == -1)
 		return(-1);
 	while (tab[i])
@@ -67,7 +66,6 @@ int write_here_doc(char** tab, t_shell *shell)
 		write(fd[1], "\n", 1);
 		i++;
 	}
-	// write(fd[1], 0, 0);
 	close(fd[1]);
 	strtab_free(tab);
 	return(fd[0]);
