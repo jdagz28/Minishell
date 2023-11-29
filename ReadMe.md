@@ -156,7 +156,7 @@ The general process in building the AST.
 
 **Example 1** 
 For the command `<< EOF cat | grep "hello"`. It will be tokenized and parsed as below.
-```
+```bash
 LexParser_Test> << EOF cat | grep "hello"
 Token 0
 Token: 	<<
@@ -193,7 +193,7 @@ LexParser_Test>
 **Example 2**
 For command `cat file.txt | grep "keyword" | sort -r | awk '{print $2}' > output.txt
 `. It has multiple pipes and a redirection
-```
+```bash
 LexParser_Test> cat infile.txt | grep "hello" | sort -r | awk '{print $2}' > output.txt
 Token 0
 Token:  cat
@@ -256,7 +256,7 @@ LexParser_Test>
 
 Here are our functions to produce the `.dot` files for creating the graph and with `graphviz` you can convert it an image on the command line
 
-```
+```c
 void	print_ast_dot(t_node *node, FILE *output);
 
 void	create_dotfile(t_node *ast, int cmd_index)
