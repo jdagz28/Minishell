@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   clear_tokens.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jdagoy <jdagoy@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 09:30:08 by jdagoy            #+#    #+#             */
-/*   Updated: 2023/11/16 09:35:54 by jdagoy           ###   ########.fr       */
+/*   Updated: 2023/11/29 20:47:58 by jdagoy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,11 +29,13 @@ void	clear_tokens(t_token *head)
 	next = itr->next;
 	while (next != NULL)
 	{
-		free(itr->word);
+		if (itr->kind != TK_PIPE)
+			free(itr->word);
 		free(itr);
 		itr = next;
 		next = itr->next;
 	}
-	free(itr->word);
+	if (itr->kind != TK_PIPE)
+		free(itr->word);
 	free(itr);
 }
