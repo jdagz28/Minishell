@@ -6,7 +6,7 @@
 /*   By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/27 00:23:51 by jdagoy            #+#    #+#             */
-/*   Updated: 2023/11/26 16:13:47 by jdagoy           ###   ########.fr       */
+/*   Updated: 2023/11/29 23:28:29 by jdagoy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ int	execute_builtin(t_simple_cmd command, t_shell* shell)
 	if (ft_strncmp_twice((const char*)command.argv[0], "cd"))
 	{
 		status = cd(command.argv, shell->env);
+		free(shell->pwd.root);
 		shell->pwd.root = env_get("PWD=", 0, shell->env);
 		if (shell->pwd.root == NULL)
 			return (EXIT_FAILURE);
