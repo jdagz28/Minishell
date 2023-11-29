@@ -15,8 +15,8 @@ In this project, we aim to create a custom shell, akin to the Bourne Again Shell
 ### Reflection for future projects
 
 - **Keep it simple.** There will instances that you will pursue a rabbit hole. Personally, I have reservations about the vagueness of project subjects (as someone coming from science where specificity is important).
-- **********************GitHub Integration.**********************We should have use GitHub from the very beginning. We initially did the project with the git repository from school and we were not able to manage merging both of our works. We were n
-- **************************************************************************Share utilities and basic functions.************************************************************************** We should have kept the utility functions in the master branch for seamless collaboration. We initially divided the project as Lexer-Parsing and Execution. What happened in the project was we have similar (removed others for redundancy) and slightly similar functions (differs in parameters) that functions for the same goal.
+- **GitHub Integration.**We should have use GitHub from the very beginning. We initially did the project with the git repository from school and we were not able to manage merging both of our works. We were n
+- **Share utilities and basic functions.** We should have kept the utility functions in the master branch for seamless collaboration. We initially divided the project as Lexer-Parsing and Execution. What happened in the project was we have similar (removed others for redundancy) and slightly similar functions (differs in parameters) that functions for the same goal.
 - **Make use of GitHub actions.** Implement GitHub actions early in the project. You can set these checks for the master or pull-request. This would be lengthy for me.
     - keep track that the master would always be compilable. We have issues with the readline library of macos-11, so we have our compilation check ran in `ubuntu-latest`.
     - add an action to check for `norminette` errors (we will have this one later on as we have coded not accordingly to norm)
@@ -98,9 +98,9 @@ Basics:
 
 - **left-hand** - represented by a **non-terminal symbol**
     - a non terminal symbols are placeholders for patterns that can be further expand or replaced by other symbol
-- ********::=******** - defined as
-- ********************unqouted |******************** - or
-- ******************************right-hand****************************** - sequence of symbols that can replace the non-terminal
+- **::=** - defined as
+- **unqouted |*** - or
+- **right-hand** - sequence of symbols that can replace the non-terminal
 
 ```
 pipeline                ::= command
@@ -131,7 +131,7 @@ The Abstract Syntax Tree (AST) serves as hierarchical and structured representat
 > In simple words, AST is making sense out of the tokens that we have
 > 
 
-Since we are only focusing on the mandatory part , we did not deal on command list, logical operators and semicolon. **************************************************************************************The root node of our tree is always a pipe.************************************************************************************** If there is no pipe in the command string then there is no tree but only a single node. 
+Since we are only focusing on the mandatory part , we did not deal on command list, logical operators and semicolon. **The root node of our tree is always a pipe.** If there is no pipe in the command string then there is no tree but only a single node. 
 
 It is important to refer back to the grammar as it is the basis of what consists a valid non-terminal symbol. In short, a valid syntax.
 
