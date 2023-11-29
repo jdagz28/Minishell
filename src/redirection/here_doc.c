@@ -6,7 +6,7 @@
 /*   By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/11 16:43:09 by tbarbe            #+#    #+#             */
-/*   Updated: 2023/11/29 01:30:14 by jdagoy           ###   ########.fr       */
+/*   Updated: 2023/11/29 04:17:24 by jdagoy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #include "environment.h"
 #include "expansion.h"
 #include "strtab.h"
+#include "signal.h"
 
 char** read_here_doc(char* limiter)
 {
