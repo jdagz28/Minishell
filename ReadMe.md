@@ -146,7 +146,7 @@ It is important to refer back to the grammar as it is the basis of what consists
 
 The general process in building the AST. 
 
-- process is always left to right since we build our tokens iterating from left to right and with a linked list.
+- The process is always left to right since we build our tokens iterating from left to right and with a linked list.
 - Initial step involves parsing the pipeline.
 - The first simple command is parsed, resulting in the creation of a `SIMPLE_CMD` node.
 - If a pipe token `TK_PIPE` is encountered,  a `PIPE` node is created.
@@ -156,7 +156,7 @@ The general process in building the AST.
 
 **Example 1** 
 For the command `<< EOF cat | grep "hello"`. It will be tokenized and parsed as below.
-```bash
+```
 LexParser_Test> << EOF cat | grep "hello"
 Token 0
 Token: 	<<
@@ -193,7 +193,7 @@ LexParser_Test>
 **Example 2**
 For command `cat file.txt | grep "keyword" | sort -r | awk '{print $2}' > output.txt
 `. It has multiple pipes and a redirection
-```bash
+```
 LexParser_Test> cat infile.txt | grep "hello" | sort -r | awk '{print $2}' > output.txt
 Token 0
 Token:  cat
@@ -256,7 +256,7 @@ LexParser_Test>
 
 Here are our functions to produce the `.dot` files for creating the graph and with `graphviz` you can convert it an image on the command line
 
-```c
+```
 void	print_ast_dot(t_node *node, FILE *output);
 
 void	create_dotfile(t_node *ast, int cmd_index)
@@ -312,4 +312,20 @@ sudo apt-get install graphviz
 dot -Tpng {filename.dot} -o {output.png} //to convert to .png
 ```
 
-##Expansion
+## Expansion
+
+After building the Abstract Syntax Tree, the next phase is to check the arguments within simple command to identify any arguments needed for expansion. Expansion handles the following:
+- Substituting the key of local and environment variables, if called with `$VARIABLE`, with their values
+- Allows the retrieval of the exit value with `echo $?`
+- Remove quotes if present: ex. `cat << "EOF"`. The delimeter will only be EOF
+- A separate expansion for variables in the `heredoc`, as it solely substitutes `$VARIABLE` with the value and retains any exiting quotes
+
+## Execution
+
+### Redirections
+
+
+### Simple Command Node
+
+
+### Pipe Node
