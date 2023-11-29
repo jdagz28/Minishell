@@ -6,7 +6,7 @@
 /*   By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/29 02:08:41 by jdagoy            #+#    #+#             */
-/*   Updated: 2023/11/27 20:30:50 by jdagoy           ###   ########.fr       */
+/*   Updated: 2023/11/29 23:24:58 by jdagoy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ static int	update_pwd(char **argv, char **env)
 		if (ft_setenv("PWD", new_pwd, &env, 1) == EXIT_FAILURE)
 			return (update_pwd_error(new_pwd));
 	}
+	free(new_pwd);
 	return (EXIT_SUCCESS);
 }
 
