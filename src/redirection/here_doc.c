@@ -6,7 +6,7 @@
 /*   By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/11 16:43:09 by tbarbe            #+#    #+#             */
-/*   Updated: 2023/11/29 01:18:25 by jdagoy           ###   ########.fr       */
+/*   Updated: 2023/11/29 01:30:14 by jdagoy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ char** read_here_doc(char* limiter)
 			strtab_free(res);
 			return (NULL);
 		}
+		free(line);
 	}
 	return (res);
 }
