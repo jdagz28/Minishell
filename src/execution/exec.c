@@ -6,7 +6,7 @@
 /*   By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/20 00:36:23 by jdagoy            #+#    #+#             */
-/*   Updated: 2023/11/28 23:52:37 by jdagoy           ###   ########.fr       */
+/*   Updated: 2023/11/29 00:56:40 by jdagoy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,13 +21,22 @@ static void	close_pipe(int fd[2])
 	close(fd[1]);
 }
 
+
+
 static int	exec_pipe(t_shell* shell, t_node* node)
 {
 	int	pid;
 	int	fd[2];
 	int	res;
-
+	int original_stdin;
+	int original_stdout;
+	
 	set_is_piped(true);
+	res = redirect(node, shell); // need to close fd from now
+	if (res || node->content.simple_cmd.fd_input == -1 || node->content.simple_cmd.fd_output == -1)
+		return(EXIT_FAILURE);
+	original_stdin = dup(STDIN_FILENO);
+	original_stdout = dup (STDOUT_FILENO);
 	if (pipe(fd) < 0)
 		exit(EXIT_FAILURE);
 	pid = fork();
@@ -43,11 +52,18 @@ static int	exec_pipe(t_shell* shell, t_node* node)
 		close_redirect(&node->content.simple_cmd);
 		exit(exec_node(shell, node->content.child.left));
 	}
-	dup2(fd[0], STDIN_FILENO);
-	close_pipe(fd);
-	close_redirect(&node->content.simple_cmd);
-	res = exec_node(shell, node->content.child.right);
-	waitpid(pid, NULL, 0);
+	else
+	{
+		dup2(fd[0], STDIN_FILENO);
+		close_pipe(fd);
+		close_redirect(&node->content.simple_cmd);
+		res = exec_node(shell, node->content.child.right);
+		waitpid(pid, NULL, 0);
+		dup2(original_stdin, STDIN_FILENO);
+		dup2(original_stdout, STDOUT_FILENO);
+		close(original_stdin);
+		close(original_stdout);
+	}
 	set_is_piped(false);
 	return (res);
 }

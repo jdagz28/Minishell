@@ -6,7 +6,7 @@
 /*   By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/11 16:43:09 by tbarbe            #+#    #+#             */
-/*   Updated: 2023/11/28 15:56:29 by jdagoy           ###   ########.fr       */
+/*   Updated: 2023/11/29 01:12:22 by jdagoy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,8 @@ static void redirect_input(t_simple_cmd* cmd, char* type, \
 		close(cmd->fd_input);
 	if (ft_strlen(type) == 2 && type[1] == '<')
 	{
+		if (cmd->fd_input != STDIN_FILENO)
+			close(cmd->fd_input);
 		here_doc = read_here_doc(dest);
 		if (here_doc)
 		{
@@ -102,8 +104,7 @@ static int	open_redirections(t_simple_cmd *cmd, t_shell *shell)
 				return (false);
 			}
 			if (redirect_one(cmd, cmd->argv[i], cmd->argv[i + 1], shell))
-				return (EXIT_FAILURE);
-			remove_redirect_argv(&cmd->argv[i]);
+				remove_redirect_argv(&cmd->argv[i]);
 		}
 		else
 			i++;

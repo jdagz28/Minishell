@@ -6,7 +6,7 @@
 /*   By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/11 16:43:09 by tbarbe            #+#    #+#             */
-/*   Updated: 2023/11/28 16:23:40 by jdagoy           ###   ########.fr       */
+/*   Updated: 2023/11/29 01:02:48 by jdagoy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,10 +63,8 @@ int write_here_doc(char** tab, t_shell *shell)
 		return(-1);
 	while (tab[i])
 	{
-		// printf("%s\n", tab[i]);
-		ft_putstr_fd(tab[i], fd[1]);
-		// write(fd[1], tab[i], ft_strlen(tab[i]));
-		// write(fd[1], "\n", 1);
+		write(fd[1], tab[i], ft_strlen(tab[i]));
+		write(fd[1], "\n", 1);
 		i++;
 	}
 	// write(fd[1], 0, 0);
