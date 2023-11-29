@@ -6,7 +6,7 @@
 /*   By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/11 16:43:09 by tbarbe            #+#    #+#             */
-/*   Updated: 2023/11/29 01:23:55 by jdagoy           ###   ########.fr       */
+/*   Updated: 2023/11/29 21:48:32 by jdagoy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,8 +105,9 @@ static int	open_redirections(t_simple_cmd *cmd, t_shell *shell)
 				print_error(cmd->argv[i + 1], "file name too long");
 				return (false);
 			}
-			if (redirect_one(cmd, cmd->argv[i], cmd->argv[i + 1], shell))
-				remove_redirect_argv(&cmd->argv[i]);
+			if (redirect_one(cmd, cmd->argv[i], cmd->argv[i + 1], shell) == false)
+				return (false);
+			remove_redirect_argv(&cmd->argv[i]);
 		}
 		else
 			i++;

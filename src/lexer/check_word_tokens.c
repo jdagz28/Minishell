@@ -6,7 +6,7 @@
 /*   By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/03 00:33:45 by jdagoy            #+#    #+#             */
-/*   Updated: 2023/11/14 02:16:23 by jdagoy           ###   ########.fr       */
+/*   Updated: 2023/11/29 21:25:51 by jdagoy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,8 @@ bool	check_wordtokens(t_token *token)
 	while (token != NULL && token->kind != TK_EOF)
 	{
 		str = token->word;
+		if (ft_strncmp(str, "\"|\"", ft_strlen("\"|\"")) == 0)
+			return (false);
 		if (check_backslashescape(str) == false)
 			if (check_word(&str) == false)
 				return (false);
