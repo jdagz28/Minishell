@@ -6,7 +6,7 @@
 /*   By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/11 16:43:09 by tbarbe            #+#    #+#             */
-/*   Updated: 2023/11/28 04:02:13 by jdagoy           ###   ########.fr       */
+/*   Updated: 2023/11/28 15:27:58 by jdagoy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ void	prompt_interrupt(void);
 int		signal_set(int sig, void* f);
 
 // redirection
-int redirect(t_simple_cmd* cmd, t_shell *shell);
+int redirect(t_node* node, t_shell *shell);
 char** read_here_doc(char* limiter);
 int write_here_doc(char** tab, t_shell *shell);
 int open_file(char* path, char mode);
