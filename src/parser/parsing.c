@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+        */
+/*   By: jdagoy <jdagoy@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 13:54:17 by jdagoy            #+#    #+#             */
-/*   Updated: 2023/11/28 00:25:18 by jdagoy           ###   ########.fr       */
+/*   Updated: 2023/11/30 09:28:19 by jdagoy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static void	parse_error(t_token* tokens, int error)
 	if (error == 1)
 	{
 		if (tokens)
-			printf("\nminishell: syntax error near unexpected token '%s'\n", \
+			printf("minishell: syntax error near unexpected token '%s'\n", \
 				tokens->word);
 	}
 	if (tokens)

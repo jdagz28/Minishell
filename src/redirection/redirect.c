@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirect.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+        */
+/*   By: jdagoy <jdagoy@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/11 16:43:09 by tbarbe            #+#    #+#             */
-/*   Updated: 2023/11/29 21:48:32 by jdagoy           ###   ########.fr       */
+/*   Updated: 2023/11/30 09:55:25 by jdagoy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,11 +83,9 @@ static void	remove_redirect_argv(char **argv)
 	i = 2;
 	while (argv[i] != NULL)
 	{
-		free(argv[i - 2]);
 		argv[i - 2] = argv[i];
 		i++;
 	}
-	free(argv[i - 2]);
 	argv[i - 2] = argv[i];
 }
 

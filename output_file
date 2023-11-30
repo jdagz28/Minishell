@@ -1,0 +1,297 @@
+[?2004hjdagoy@Campus19:~/Documents/cursus/Minishell$ env | sort | grep -v SHLVL | grep -v ^_
+[?2004lCOLORTERM=truecolor
+GIT_ASKPASS=/Applications/Visual Studio Code.app/Contents/Resources/app/extensions/git/dist/askpass.sh
+HOME=/Users/jdagoy
+HOMEBREW_CACHE=/tmp/jdagoy/Homebrew/Caches
+HOMEBREW_TEMP=/tmp/jdagoy/Homebrew/Temp
+LANG=en_US.UTF-8
+LESS=-R
+LOGNAME=jdagoy
+LSCOLORS=Gxfxcxdxbxegedabagacad
+LS_COLORS=di=1;36:ln=35:so=32:pi=33:ex=31:bd=34;46:cd=34;43:su=30;41:sg=30;46:tw=30;42:ow=30;43
+MallocNanoZone=0
+OLDPWD=/Users/jdagoy/Documents/cursus/Minishell
+ORIGINAL_XDG_CURRENT_DESKTOP=undefined
+P9K_SSH=0
+P9K_TTY=old
+PAGER=less
+PATH=/Users/jdagoy/.brew/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/munki:/Users/jdagoy/.brew/bin:/Users/jdagoy/Desktop/42-ValgrindContainer:/Users/jdagoy/Desktop/42-ValgrindContainer
+PWD=/Users/jdagoy/Documents/cursus/Minishell
+SHELL=/bin/zsh
+SSH_AUTH_SOCK=/private/tmp/com.apple.launchd.KDP6qjNVA2/Listeners
+TERM=xterm-256color
+TERM_PROGRAM=vscode
+TERM_PROGRAM_VERSION=1.73.1
+TMPDIR=/var/folders/zz/zyxvpxvq6csfxvn_n0009x2c002g8l/T/
+USER=jdagoy
+USER_ZDOTDIR=/Users/jdagoy
+VSCODE_GIT_ASKPASS_EXTRA_ARGS=--ms-enable-electron-run-as-node
+VSCODE_GIT_ASKPASS_MAIN=/Applications/Visual Studio Code.app/Contents/Resources/app/extensions/git/dist/askpass-main.js
+VSCODE_GIT_ASKPASS_NODE=/Applications/Visual Studio Code.app/Contents/Frameworks/Code Helper.app/Contents/MacOS/Code Helper
+VSCODE_GIT_IPC_HANDLE=/var/folders/zz/zyxvpxvq6csfxvn_n0009x2c002g8l/T/vscode-git-dbeb0664f7.sock
+VSCODE_INJECTION=1
+XPC_FLAGS=0x0
+XPC_SERVICE_NAME=0
+ZDOTDIR=/Users/jdagoy
+ZSH=/Users/jdagoy/.oh-my-zsh
+[?2004hjdagoy@Campus19:~/Documents/cursus/Minishell$ cat ./test_files/infile_big | grep oi
+[?2004lwas going to happen next. First, she tried to look down and make out
+disappointment it was empty: she did not like to drop the jar for fear
+not going to do _that_ in a hurry. “No, I’ll look first,” she said,
+“and see whether it’s marked ‘_poison_’ or not”; for she had read
+bottle marked “poison,” it is almost certain to disagree with you,
+However, this bottle was _not_ marked “poison,” so Alice ventured to
+brightened up at the thought that she was now the right size for going
+waited for a few minutes to see if she was going to shrink any further:
+said Alice to herself, “in my going out altogether, like a candle. I
+After a while, finding that nothing more happened, she decided on going
+Rabbit came near her, she began, in a low, timid voice, “If you please,
+to repeat it, but her voice sounded hoarse and strange, and the words
+now about two feet high, and was going on shrinking rapidly: she soon
+dropped it hastily, just in time to avoid shrinking away altogether.
+“Not like cats!” cried the Mouse, in a shrill, passionate voice. “Would
+trembling voice, “Let us get to the shore, and then I’ll tell you my
+“What I was going to say,” said the Dodo in an offended tone, “was,
+“But who is to give the prizes?” quite a chorus of voices asked.
+“Why, _she_, of course,” said the Dodo, pointing to Alice with one
+The next thing was to eat the comfits: this caused some noise and
+the others all joined in chorus, “Yes, please do!” but the Mouse only
+doesn’t suit my throat!” and a Canary called out in a trembling voice
+doing out here? Run home this moment, and fetch me a pair of gloves and
+at once in the direction it pointed to, without trying to explain the
+“How queer it seems,” Alice said to herself, “to be going messages for
+gloves, and was just going to leave the room, when her eye fell upon a
+she heard a voice outside, and stopped to listen.
+“Mary Ann! Mary Ann!” said the voice. “Fetch me my gloves this moment!”
+Next came an angry voice—the Rabbit’s—“Pat! Pat! Where are you?” And
+then a voice she had never heard before, “Sure then I’m here! Digging
+rumbling of little cartwheels, and the sound of a good many voices all
+then the Rabbit’s voice along—“Catch him, you by the hedge!” then
+silence, and then another confusion of voices—“Hold up his head—Brandy
+Last came a little feeble, squeaking voice, (“That’s Bill,” thought
+“We must burn the house down!” said the Rabbit’s voice; and Alice
+addressed her in a languid, sleepy voice.
+came different!” Alice replied in a very melancholy voice.
+By the use of this ointment—one shilling the box—
+going to dive in among the leaves, which she found to be nothing but
+Pigeon, raising its voice to a shriek, “and just as I was thinking I
+going to be, from one minute to another! However, I’ve got back to my
+are; secondly, because they’re making such a noise inside, no one could
+noise going on within—a constant howling and sneezing, and every now
+“Oh, _please_ mind what you’re doing!” cried Alice, jumping up and down
+(In which the cook and the baby joined):
+ear and left foot, so as to prevent its undoing itself,) she carried it
+No, there were no tears. “If you’re going to turn into a pig, my dear,”
+eyes, “Of course, of course; just what I was going to remark myself.”
+quarrelled last March—just before _he_ went mad, you know—” (pointing
+hoarse, feeble voice: “I heard every word you fellows were saying.”
+The Dormouse had closed its eyes by this time, and was going off into a
+neither of the others took the least notice of her going, though she
+voice, “Why the fact is, you see, Miss, this here ought to have been a
+you see, Miss, we’re doing our best, afore she comes, to—” At this
+“And who are _these?_” said the Queen, pointing to the three gardeners
+“Get up!” said the Queen, in a shrill, loud voice, and the three
+turning to the rose-tree, she went on, “What _have_ you been doing
+“May it please your Majesty,” said Two, in a very humble tone, going
+“Come on, then!” roared the Queen, and Alice joined the procession,
+“It’s—it’s a very fine day!” said a timid voice at her side. She was
+“Get to your places!” shouted the Queen in a voice of thunder, and
+had got its neck nicely straightened out, and was going to give the
+going to begin again, it was very provoking to find that the hedgehog
+“How do you like the Queen?” said the Cat in a low voice.
+“Who _are_ you talking to?” said the King, going up to Alice, and
+Alice thought she might as well go back, and see how the game was going
+on, as she heard the Queen’s voice in the distance, screaming with
+a large crowd collected round it: there was a dispute going on between
+thing before, and he wasn’t going to begin at _his_ time of life.
+startled when she heard her voice close to her ear. “You’re thinking
+“The game’s going on rather better now,” she said, by way of keeping up
+But here, to Alice’s great surprise, the Duchess’s voice died away,
+“A fine day, your Majesty!” the Duchess began in a low, weak voice.
+about half no time! Take your choice!”
+The Duchess took her choice, and was gone in a moment.
+As they walked off together, Alice heard the King say in a low voice,
+sea. The master was an old Turtle—we used to call him Tortoise—”
+“Why did you call him Tortoise, if he wasn’t one?” Alice asked.
+“We called him Tortoise because he taught us,” said the Mock Turtle
+Fainting in Coils.”
+two sobs choked his voice. “Same as if he had a bone in his throat,”
+the back. At last the Mock Turtle recovered his voice, and, with tears
+“Change lobsters again!” yelled the Gryphon at the top of its voice.
+Turtle, suddenly dropping his voice; and the two creatures, who had
+“There’s a porpoise close behind us, and he’s treading on my tail.
+They are waiting on the shingle—will you come and join the dance?
+Will you, won’t you, will you, won’t you, will you join the dance?
+Will you, won’t you, will you, won’t you, won’t you join the dance?
+Said he thanked the whiting kindly, but he would not join the dance.
+Would not, could not, would not, could not, would not join the dance.
+Would not, could not, would not, could not, could not join the dance.
+Then turn not pale, beloved snail, but come and join the dance.
+Will you, won’t you, will you, won’t you, will you join the dance?
+Will you, won’t you, will you, won’t you, won’t you join the dance?”
+“Boots and shoes under the sea,” the Gryphon went on in a deep voice,
+running on the song, “I’d have said to the porpoise, ‘Keep back,
+wise fish would go anywhere without a porpoise.”
+and told me he was going a journey, I should say ‘With what porpoise?’”
+Alice a little timidly: “but it’s no use going back to yesterday,
+“Stand up and repeat ‘’_Tis the voice of the sluggard_,’” said the
+“’Tis the voice of the Lobster; I heard him declare,
+His voice has a timid and tremulous sound.]
+wrong, and she went on in a trembling voice:—
+The Mock Turtle sighed deeply, and began, in a voice sometimes choked
+they doing?” Alice whispered to the Gryphon. “They can’t have anything
+“Stupid things!” Alice began in a loud, indignant voice, but she
+“I’m a poor man, your Majesty,” the Hatter began, in a trembling voice,
+The King looked anxiously at the White Rabbit, who said in a low voice,
+nearly out of sight, he said in a deep voice, “What are tarts made of?”
+“Treacle,” said a sleepy voice behind her.
+little voice, the name “Alice!”
+“The trial cannot proceed,” said the King in a very grave voice, “until
+verdict,” he said to the jury, in a low, trembling voice.
+“Why, there they are!” said the King triumphantly, pointing to the
+“Off with her head!” the Queen shouted at the top of her voice. Nobody
+looking up into hers—she could hear the very tones of her voice, and
+shared their never-ending meal, and the shrill voice of the Queen
+cries to the voice of the shepherd boy—and the sneeze of the baby, the
+shriek of the Gryphon, and all the other queer noises, would change
+unenforceability of any provision of this agreement shall not void the
+[?2004hjdagoy@Campus19:~/Documents/cursus/Minishell$ cat ./include/minishell.h | grep ");"$
+[?2004lvoid	shell_clear(t_shell* shell);
+void	clean_exit(t_shell* data, int err);
+int* get_exit_value(void);
+void	set_exit_value(int exit_value);
+void	write_newline(void);
+void	prompt_interrupt(void);
+int		signal_set(int sig, void* f);
+int redirect(t_node* node, t_shell *shell);
+char** read_here_doc(char* limiter);
+int write_here_doc(char** tab, t_shell *shell);
+int open_file(char* path, char mode);
+void close_redirect(t_simple_cmd* cmd);
+bool* is_piped(void);
+void	set_is_piped(bool value);
+void	print_error(char* str1, char* str2);
+[?2004hjdagoy@Campus19:~/Documents/cursus/Minishell$ export GHOST=123 | env | grep GHOST
+[?2004l[?2004hjdagoy@Campus19:~/Documents/cursus/Minishell$ |
+[?2004lminishell: syntax error near unexpected token '|'
+[?2004hjdagoy@Campus19:~/Documents/cursus/Minishell$ | echo oi
+[?2004lminishell: syntax error near unexpected token '|'
+[?2004hjdagoy@Campus19:~/Documents/cursus/Minishell$ | |
+[?2004lminishell: syntax error near unexpected token '|'
+[?2004hjdagoy@Campus19:~/Documents/cursus/Minishell$ | $
+[?2004lminishell: syntax error near unexpected token '|'
+[?2004hjdagoy@Campus19:~/Documents/cursus/Minishell$ | >
+[?2004lminishell: syntax error near unexpected token 'newline'
+[?2004hjdagoy@Campus19:~/Documents/cursus/Minishell$ >
+[?2004lminishell: syntax error near unexpected token 'newline'
+[?2004hjdagoy@Campus19:~/Documents/cursus/Minishell$ >>
+[?2004lminishell: syntax error near unexpected token 'newline'
+[?2004hjdagoy@Campus19:~/Documents/cursus/Minishell$ >>>
+[?2004lminishell: syntax erorr near unexpected token '>'
+[?2004hjdagoy@Campus19:~/Documents/cursus/Minishell$ <
+[?2004lminishell: syntax error near unexpected token 'newline'
+[?2004hjdagoy@Campus19:~/Documents/cursus/Minishell$ <<
+[?2004lminishell: syntax error near unexpected token 'newline'
+[?2004hjdagoy@Campus19:~/Documents/cursus/Minishell$ echo hi <
+[?2004lminishell: syntax error near unexpected token 'newline'
+[?2004hjdagoy@Campus19:~/Documents/cursus/Minishell$ cat <| ls
+[?2004lminishell: syntax erorr near unexpected token '|'
+[?2004hjdagoy@Campus19:~/Documents/cursus/Minishell$ echo hi | >
+[?2004lminishell: syntax error near unexpected token 'newline'
+[?2004hjdagoy@Campus19:~/Documents/cursus/Minishell$ echo hi | > >>
+[?2004lminishell: syntax erorr near unexpected token '>>'
+[?2004hjdagoy@Campus19:~/Documents/cursus/Minishell$ echo hi | < |
+[?2004lminishell: syntax erorr near unexpected token '|'
+[?2004hjdagoy@Campus19:~/Documents/cursus/Minishell$ echo hi |   |
+[?2004lminishell: syntax error near unexpected token '|'
+[?2004hjdagoy@Campus19:~/Documents/cursus/Minishell$ echo hi |  "|"
+[?2004l[?2004hjdagoy@Campus19:~/Documents/cursus/Minishell$ grep hi <./test_files/infile
+[?2004lhi
+[?2004hjdagoy@Campus19:~/Documents/cursus/Minishell$ grep hi "<infile" <         ./test_files/infile
+[?2004lminishell: <: No such file or directory
+[?2004hjdagoy@Campus19:~/Documents/cursus/Minishell$ echo hi < ./test_files/infile bye bye
+[?2004lhi =================================================================
+[1m[31m==64336==ERROR: AddressSanitizer: heap-use-after-free on address 0x602000004a50 at pc 0x00010b844b97 bp 0x7ffee445af60 sp 0x7ffee445a730
+[1m[0m[1m[34mREAD of size 1 at 0x602000004a50 thread T0[1m[0m
+    #0 0x10b844b96 in wrap_write+0x176 (libclang_rt.asan_osx_dynamic.dylib:x86_64h+0x1fb96)
+    #1 0x10b7c4132 in ft_putstr_fd+0x42 (minishell:x86_64+0x100020132)
+    #2 0x10b7aa29a in echo+0x2fa (minishell:x86_64+0x10000629a)
+    #3 0x10b7a8b76 in execute_builtin+0x666 (minishell:x86_64+0x100004b76)
+    #4 0x10b7ad466 in exec_simple+0x1b6 (minishell:x86_64+0x100009466)
+    #5 0x10b7adc0b in shell_exec+0x1ab (minishell:x86_64+0x100009c0b)
+    #6 0x10b7c0503 in shell_prompt+0x183 (minishell:x86_64+0x10001c503)
+    #7 0x10b7c0d4c in shell_run+0x8c (minishell:x86_64+0x10001cd4c)
+    #8 0x10b7c1b57 in main+0x137 (minishell:x86_64+0x10001db57)
+    #9 0x7fff684c6cc8 in start+0x0 (libdyld.dylib:x86_64+0x1acc8)
+
+[1m[32m0x602000004a50 is located 0 bytes inside of 4-byte region [0x602000004a50,0x602000004a54)
+[1m[0m[1m[35mfreed by thread T0 here:[1m[0m
+    #0 0x10b86e2c6 in wrap_free+0xa6 (libclang_rt.asan_osx_dynamic.dylib:x86_64h+0x492c6)
+    #1 0x10b7bf3f2 in remove_redirect_argv+0x192 (minishell:x86_64+0x10001b3f2)
+    #2 0x10b7bf22e in open_redirections+0x39e (minishell:x86_64+0x10001b22e)
+    #3 0x10b7bed15 in redirect+0x85 (minishell:x86_64+0x10001ad15)
+    #4 0x10b7ad2dd in exec_simple+0x2d (minishell:x86_64+0x1000092dd)
+    #5 0x10b7adc0b in shell_exec+0x1ab (minishell:x86_64+0x100009c0b)
+    #6 0x10b7c0503 in shell_prompt+0x183 (minishell:x86_64+0x10001c503)
+    #7 0x10b7c0d4c in shell_run+0x8c (minishell:x86_64+0x10001cd4c)
+    #8 0x10b7c1b57 in main+0x137 (minishell:x86_64+0x10001db57)
+    #9 0x7fff684c6cc8 in start+0x0 (libdyld.dylib:x86_64+0x1acc8)
+
+[1m[35mpreviously allocated by thread T0 here:[1m[0m
+    #0 0x10b86e17d in wrap_malloc+0x9d (libclang_rt.asan_osx_dynamic.dylib:x86_64h+0x4917d)
+    #1 0x10b7c3920 in ft_calloc+0x20 (minishell:x86_64+0x10001f920)
+    #2 0x10b7b7022 in remove_quotes+0x1e2 (minishell:x86_64+0x100013022)
+    #3 0x10b7b6da7 in remove_quotes_arg+0x47 (minishell:x86_64+0x100012da7)
+    #4 0x10b7ae7e1 in expand_quotes+0x311 (minishell:x86_64+0x10000a7e1)
+    #5 0x10b7ae4a8 in expand_simplecmd+0x218 (minishell:x86_64+0x10000a4a8)
+    #6 0x10b7ae0f9 in expand_cmds+0x99 (minishell:x86_64+0x10000a0f9)
+    #7 0x10b7bddc0 in parse+0x2f0 (minishell:x86_64+0x100019dc0)
+    #8 0x10b7c045b in shell_prompt+0xdb (minishell:x86_64+0x10001c45b)
+    #9 0x10b7c0d4c in shell_run+0x8c (minishell:x86_64+0x10001cd4c)
+    #10 0x10b7c1b57 in main+0x137 (minishell:x86_64+0x10001db57)
+    #11 0x7fff684c6cc8 in start+0x0 (libdyld.dylib:x86_64+0x1acc8)
+
+SUMMARY: AddressSanitizer: heap-use-after-free (libclang_rt.asan_osx_dynamic.dylib:x86_64h+0x1fb96) in wrap_write+0x176
+Shadow bytes around the buggy address:
+  0x1c04000008f0: [1m[31mfa[1m[0m [1m[31mfa[1m[0m [1m[35mfd[1m[0m [1m[35mfd[1m[0m [1m[31mfa[1m[0m [1m[31mfa[1m[0m [1m[35mfd[1m[0m [1m[31mfa[1m[0m [1m[31mfa[1m[0m [1m[31mfa[1m[0m [1m[35mfd[1m[0m [1m[31mfa[1m[0m [1m[31mfa[1m[0m [1m[31mfa[1m[0m [1m[35mfd[1m[0m [1m[31mfa[1m[0m
+  0x1c0400000900: [1m[31mfa[1m[0m [1m[31mfa[1m[0m [1m[35mfd[1m[0m [1m[31mfa[1m[0m [1m[31mfa[1m[0m [1m[31mfa[1m[0m [1m[35mfd[1m[0m [1m[31mfa[1m[0m [1m[31mfa[1m[0m [1m[31mfa[1m[0m [1m[0m00[1m[0m [1m[31mfa[1m[0m [1m[31mfa[1m[0m [1m[31mfa[1m[0m [1m[0m00[1m[0m [1m[0m04[1m[0m
+  0x1c0400000910: [1m[31mfa[1m[0m [1m[31mfa[1m[0m [1m[0m00[1m[0m [1m[0m04[1m[0m [1m[31mfa[1m[0m [1m[31mfa[1m[0m [1m[35mfd[1m[0m [1m[31mfa[1m[0m [1m[31mfa[1m[0m [1m[31mfa[1m[0m [1m[35mfd[1m[0m [1m[31mfa[1m[0m [1m[31mfa[1m[0m [1m[31mfa[1m[0m [1m[35mfd[1m[0m [1m[31mfa[1m[0m
+  0x1c0400000920: [1m[31mfa[1m[0m [1m[31mfa[1m[0m [1m[35mfd[1m[0m [1m[31mfa[1m[0m [1m[31mfa[1m[0m [1m[31mfa[1m[0m [1m[35mfd[1m[0m [1m[31mfa[1m[0m [1m[31mfa[1m[0m [1m[31mfa[1m[0m [1m[35mfd[1m[0m [1m[31mfa[1m[0m [1m[31mfa[1m[0m [1m[31mfa[1m[0m [1m[35mfd[1m[0m [1m[31mfa[1m[0m
+  0x1c0400000930: [1m[31mfa[1m[0m [1m[31mfa[1m[0m [1m[35mfd[1m[0m [1m[31mfa[1m[0m [1m[31mfa[1m[0m [1m[31mfa[1m[0m [1m[35mfd[1m[0m [1m[31mfa[1m[0m [1m[31mfa[1m[0m [1m[31mfa[1m[0m [1m[35mfd[1m[0m [1m[31mfa[1m[0m [1m[31mfa[1m[0m [1m[31mfa[1m[0m [1m[0m05[1m[0m [1m[31mfa[1m[0m
+=>0x1c0400000940: [1m[31mfa[1m[0m [1m[31mfa[1m[0m [1m[0m03[1m[0m [1m[31mfa[1m[0m [1m[31mfa[1m[0m [1m[31mfa[1m[0m [1m[35mfd[1m[0m [1m[31mfa[1m[0m [1m[31mfa[1m[0m [1m[31mfa[1m[0m[[1m[35mfd[1m[0m][1m[31mfa[1m[0m [1m[31mfa[1m[0m [1m[31mfa[1m[0m [1m[0m04[1m[0m [1m[31mfa[1m[0m
+  0x1c0400000950: [1m[31mfa[1m[0m [1m[31mfa[1m[0m [1m[31mfa[1m[0m [1m[31mfa[1m[0m [1m[31mfa[1m[0m [1m[31mfa[1m[0m [1m[31mfa[1m[0m [1m[31mfa[1m[0m [1m[31mfa[1m[0m [1m[31mfa[1m[0m [1m[31mfa[1m[0m [1m[31mfa[1m[0m [1m[31mfa[1m[0m [1m[31mfa[1m[0m [1m[31mfa[1m[0m [1m[31mfa[1m[0m
+  0x1c0400000960: [1m[31mfa[1m[0m [1m[31mfa[1m[0m [1m[31mfa[1m[0m [1m[31mfa[1m[0m [1m[31mfa[1m[0m [1m[31mfa[1m[0m [1m[31mfa[1m[0m [1m[31mfa[1m[0m [1m[31mfa[1m[0m [1m[31mfa[1m[0m [1m[31mfa[1m[0m [1m[31mfa[1m[0m [1m[31mfa[1m[0m [1m[31mfa[1m[0m [1m[31mfa[1m[0m [1m[31mfa[1m[0m
+  0x1c0400000970: [1m[31mfa[1m[0m [1m[31mfa[1m[0m [1m[31mfa[1m[0m [1m[31mfa[1m[0m [1m[31mfa[1m[0m [1m[31mfa[1m[0m [1m[31mfa[1m[0m [1m[31mfa[1m[0m [1m[31mfa[1m[0m [1m[31mfa[1m[0m [1m[31mfa[1m[0m [1m[31mfa[1m[0m [1m[31mfa[1m[0m [1m[31mfa[1m[0m [1m[31mfa[1m[0m [1m[31mfa[1m[0m
+  0x1c0400000980: [1m[31mfa[1m[0m [1m[31mfa[1m[0m [1m[31mfa[1m[0m [1m[31mfa[1m[0m [1m[31mfa[1m[0m [1m[31mfa[1m[0m [1m[31mfa[1m[0m [1m[31mfa[1m[0m [1m[31mfa[1m[0m [1m[31mfa[1m[0m [1m[31mfa[1m[0m [1m[31mfa[1m[0m [1m[31mfa[1m[0m [1m[31mfa[1m[0m [1m[31mfa[1m[0m [1m[31mfa[1m[0m
+  0x1c0400000990: [1m[31mfa[1m[0m [1m[31mfa[1m[0m [1m[31mfa[1m[0m [1m[31mfa[1m[0m [1m[31mfa[1m[0m [1m[31mfa[1m[0m [1m[31mfa[1m[0m [1m[31mfa[1m[0m [1m[31mfa[1m[0m [1m[31mfa[1m[0m [1m[31mfa[1m[0m [1m[31mfa[1m[0m [1m[31mfa[1m[0m [1m[31mfa[1m[0m [1m[31mfa[1m[0m [1m[31mfa[1m[0m
+Shadow byte legend (one shadow byte represents 8 application bytes):
+  Addressable:           [1m[0m00[1m[0m
+  Partially addressable: [1m[0m01[1m[0m [1m[0m02[1m[0m [1m[0m03[1m[0m [1m[0m04[1m[0m [1m[0m05[1m[0m [1m[0m06[1m[0m [1m[0m07[1m[0m 
+  Heap left redzone:       [1m[31mfa[1m[0m
+  Freed heap region:       [1m[35mfd[1m[0m
+  Stack left redzone:      [1m[31mf1[1m[0m
+  Stack mid redzone:       [1m[31mf2[1m[0m
+  Stack right redzone:     [1m[31mf3[1m[0m
+  Stack after return:      [1m[35mf5[1m[0m
+  Stack use after scope:   [1m[35mf8[1m[0m
+  Global redzone:          [1m[31mf9[1m[0m
+  Global init order:       [1m[36mf6[1m[0m
+  Poisoned by user:        [1m[34mf7[1m[0m
+  Container overflow:      [1m[34mfc[1m[0m
+  Array cookie:            [1m[31mac[1m[0m
+  Intra object redzone:    [1m[33mbb[1m[0m
+  ASan internal:           [1m[33mfe[1m[0m
+  Left alloca redzone:     [1m[34mca[1m[0m
+  Right alloca redzone:    [1m[34mcb[1m[0m
+  Shadow gap:              [1m[0mcc[1m[0m
+==64336==ABORTING
+send: spawn id exp7 not open
+    while executing
+"send -- "$cmd\r""
+    ("while" body line 2)
+    invoked from within
+"while {[gets $fp cmd] != -1} {
+    send -- "$cmd\r"
+    expect "minishell> "
+}"
+    (file "./tester.sh" line 27)
