@@ -154,7 +154,7 @@ looking up into hers—she could hear the very tones of her voice, and
 shared their never-ending meal, and the shrill voice of the Queen
 cries to the voice of the shepherd boy—and the sneeze of the baby, the
 shriek of the Gryphon, and all the other queer noises, would change
-unenforceability of any provision of this agreement shall not void the
+unenforceability of any provision of this agreement shall not void the
 [?2004hjdagoy@Campus19:~/Documents/cursus/Minishell$ cat ./include/minishell.h | grep ");"$
 [?2004lvoid	shell_clear(t_shell* shell);
 void	clean_exit(t_shell* data, int err);
@@ -210,88 +210,76 @@ void	print_error(char* str1, char* str2);
 [?2004hjdagoy@Campus19:~/Documents/cursus/Minishell$ grep hi "<infile" <         ./test_files/infile
 [?2004lminishell: <: No such file or directory
 [?2004hjdagoy@Campus19:~/Documents/cursus/Minishell$ echo hi < ./test_files/infile bye bye
-[?2004lhi =================================================================
-[1m[31m==64336==ERROR: AddressSanitizer: heap-use-after-free on address 0x602000004a50 at pc 0x00010b844b97 bp 0x7ffee445af60 sp 0x7ffee445a730
-[1m[0m[1m[34mREAD of size 1 at 0x602000004a50 thread T0[1m[0m
-    #0 0x10b844b96 in wrap_write+0x176 (libclang_rt.asan_osx_dynamic.dylib:x86_64h+0x1fb96)
-    #1 0x10b7c4132 in ft_putstr_fd+0x42 (minishell:x86_64+0x100020132)
-    #2 0x10b7aa29a in echo+0x2fa (minishell:x86_64+0x10000629a)
-    #3 0x10b7a8b76 in execute_builtin+0x666 (minishell:x86_64+0x100004b76)
-    #4 0x10b7ad466 in exec_simple+0x1b6 (minishell:x86_64+0x100009466)
-    #5 0x10b7adc0b in shell_exec+0x1ab (minishell:x86_64+0x100009c0b)
-    #6 0x10b7c0503 in shell_prompt+0x183 (minishell:x86_64+0x10001c503)
-    #7 0x10b7c0d4c in shell_run+0x8c (minishell:x86_64+0x10001cd4c)
-    #8 0x10b7c1b57 in main+0x137 (minishell:x86_64+0x10001db57)
-    #9 0x7fff684c6cc8 in start+0x0 (libdyld.dylib:x86_64+0x1acc8)
+[?2004lhi bye bye
+[?2004hjdagoy@Campus19:~/Documents/cursus/Minishell$ grep hi <./test_files/infile_big <./test_files/infile
+[?2004lhi
+[?2004hjdagoy@Campus19:~/Documents/cursus/Minishell$ echo <"./test_files/infile" "bonjour       42"
+[?2004lbonjour       42
+[?2004hjdagoy@Campus19:~/Documents/cursus/Minishell$ cat <"./test_files/file name with spaces"
+[?2004lð ð ð
+This will break your minishell
+ð ð ð
+[?2004hjdagoy@Campus19:~/Documents/cursus/Minishell$ cat <./test_files/infile_big ./test_files/infile [A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Ke
+[?2004lhi
+hello
+world
+42
+[?2004hjdagoy@Campus19:~/Documents/cursus/Minishell$ cat <"1""2""3""4""5"
+[?2004lminishell: 12345: No such file or directory
+[?2004hjdagoy@Campus19:~/Documents/cursus/Minishell$ echo <"./test_files/infile" <missing <"./test_files/infile"
+[?2004lminishell: missing: No such file or directory
 
-[1m[32m0x602000004a50 is located 0 bytes inside of 4-byte region [0x602000004a50,0x602000004a54)
-[1m[0m[1m[35mfreed by thread T0 here:[1m[0m
-    #0 0x10b86e2c6 in wrap_free+0xa6 (libclang_rt.asan_osx_dynamic.dylib:x86_64h+0x492c6)
-    #1 0x10b7bf3f2 in remove_redirect_argv+0x192 (minishell:x86_64+0x10001b3f2)
-    #2 0x10b7bf22e in open_redirections+0x39e (minishell:x86_64+0x10001b22e)
-    #3 0x10b7bed15 in redirect+0x85 (minishell:x86_64+0x10001ad15)
-    #4 0x10b7ad2dd in exec_simple+0x2d (minishell:x86_64+0x1000092dd)
-    #5 0x10b7adc0b in shell_exec+0x1ab (minishell:x86_64+0x100009c0b)
-    #6 0x10b7c0503 in shell_prompt+0x183 (minishell:x86_64+0x10001c503)
-    #7 0x10b7c0d4c in shell_run+0x8c (minishell:x86_64+0x10001cd4c)
-    #8 0x10b7c1b57 in main+0x137 (minishell:x86_64+0x10001db57)
-    #9 0x7fff684c6cc8 in start+0x0 (libdyld.dylib:x86_64+0x1acc8)
-
-[1m[35mpreviously allocated by thread T0 here:[1m[0m
-    #0 0x10b86e17d in wrap_malloc+0x9d (libclang_rt.asan_osx_dynamic.dylib:x86_64h+0x4917d)
-    #1 0x10b7c3920 in ft_calloc+0x20 (minishell:x86_64+0x10001f920)
-    #2 0x10b7b7022 in remove_quotes+0x1e2 (minishell:x86_64+0x100013022)
-    #3 0x10b7b6da7 in remove_quotes_arg+0x47 (minishell:x86_64+0x100012da7)
-    #4 0x10b7ae7e1 in expand_quotes+0x311 (minishell:x86_64+0x10000a7e1)
-    #5 0x10b7ae4a8 in expand_simplecmd+0x218 (minishell:x86_64+0x10000a4a8)
-    #6 0x10b7ae0f9 in expand_cmds+0x99 (minishell:x86_64+0x10000a0f9)
-    #7 0x10b7bddc0 in parse+0x2f0 (minishell:x86_64+0x100019dc0)
-    #8 0x10b7c045b in shell_prompt+0xdb (minishell:x86_64+0x10001c45b)
-    #9 0x10b7c0d4c in shell_run+0x8c (minishell:x86_64+0x10001cd4c)
-    #10 0x10b7c1b57 in main+0x137 (minishell:x86_64+0x10001db57)
-    #11 0x7fff684c6cc8 in start+0x0 (libdyld.dylib:x86_64+0x1acc8)
-
-SUMMARY: AddressSanitizer: heap-use-after-free (libclang_rt.asan_osx_dynamic.dylib:x86_64h+0x1fb96) in wrap_write+0x176
-Shadow bytes around the buggy address:
-  0x1c04000008f0: [1m[31mfa[1m[0m [1m[31mfa[1m[0m [1m[35mfd[1m[0m [1m[35mfd[1m[0m [1m[31mfa[1m[0m [1m[31mfa[1m[0m [1m[35mfd[1m[0m [1m[31mfa[1m[0m [1m[31mfa[1m[0m [1m[31mfa[1m[0m [1m[35mfd[1m[0m [1m[31mfa[1m[0m [1m[31mfa[1m[0m [1m[31mfa[1m[0m [1m[35mfd[1m[0m [1m[31mfa[1m[0m
-  0x1c0400000900: [1m[31mfa[1m[0m [1m[31mfa[1m[0m [1m[35mfd[1m[0m [1m[31mfa[1m[0m [1m[31mfa[1m[0m [1m[31mfa[1m[0m [1m[35mfd[1m[0m [1m[31mfa[1m[0m [1m[31mfa[1m[0m [1m[31mfa[1m[0m [1m[0m00[1m[0m [1m[31mfa[1m[0m [1m[31mfa[1m[0m [1m[31mfa[1m[0m [1m[0m00[1m[0m [1m[0m04[1m[0m
-  0x1c0400000910: [1m[31mfa[1m[0m [1m[31mfa[1m[0m [1m[0m00[1m[0m [1m[0m04[1m[0m [1m[31mfa[1m[0m [1m[31mfa[1m[0m [1m[35mfd[1m[0m [1m[31mfa[1m[0m [1m[31mfa[1m[0m [1m[31mfa[1m[0m [1m[35mfd[1m[0m [1m[31mfa[1m[0m [1m[31mfa[1m[0m [1m[31mfa[1m[0m [1m[35mfd[1m[0m [1m[31mfa[1m[0m
-  0x1c0400000920: [1m[31mfa[1m[0m [1m[31mfa[1m[0m [1m[35mfd[1m[0m [1m[31mfa[1m[0m [1m[31mfa[1m[0m [1m[31mfa[1m[0m [1m[35mfd[1m[0m [1m[31mfa[1m[0m [1m[31mfa[1m[0m [1m[31mfa[1m[0m [1m[35mfd[1m[0m [1m[31mfa[1m[0m [1m[31mfa[1m[0m [1m[31mfa[1m[0m [1m[35mfd[1m[0m [1m[31mfa[1m[0m
-  0x1c0400000930: [1m[31mfa[1m[0m [1m[31mfa[1m[0m [1m[35mfd[1m[0m [1m[31mfa[1m[0m [1m[31mfa[1m[0m [1m[31mfa[1m[0m [1m[35mfd[1m[0m [1m[31mfa[1m[0m [1m[31mfa[1m[0m [1m[31mfa[1m[0m [1m[35mfd[1m[0m [1m[31mfa[1m[0m [1m[31mfa[1m[0m [1m[31mfa[1m[0m [1m[0m05[1m[0m [1m[31mfa[1m[0m
-=>0x1c0400000940: [1m[31mfa[1m[0m [1m[31mfa[1m[0m [1m[0m03[1m[0m [1m[31mfa[1m[0m [1m[31mfa[1m[0m [1m[31mfa[1m[0m [1m[35mfd[1m[0m [1m[31mfa[1m[0m [1m[31mfa[1m[0m [1m[31mfa[1m[0m[[1m[35mfd[1m[0m][1m[31mfa[1m[0m [1m[31mfa[1m[0m [1m[31mfa[1m[0m [1m[0m04[1m[0m [1m[31mfa[1m[0m
-  0x1c0400000950: [1m[31mfa[1m[0m [1m[31mfa[1m[0m [1m[31mfa[1m[0m [1m[31mfa[1m[0m [1m[31mfa[1m[0m [1m[31mfa[1m[0m [1m[31mfa[1m[0m [1m[31mfa[1m[0m [1m[31mfa[1m[0m [1m[31mfa[1m[0m [1m[31mfa[1m[0m [1m[31mfa[1m[0m [1m[31mfa[1m[0m [1m[31mfa[1m[0m [1m[31mfa[1m[0m [1m[31mfa[1m[0m
-  0x1c0400000960: [1m[31mfa[1m[0m [1m[31mfa[1m[0m [1m[31mfa[1m[0m [1m[31mfa[1m[0m [1m[31mfa[1m[0m [1m[31mfa[1m[0m [1m[31mfa[1m[0m [1m[31mfa[1m[0m [1m[31mfa[1m[0m [1m[31mfa[1m[0m [1m[31mfa[1m[0m [1m[31mfa[1m[0m [1m[31mfa[1m[0m [1m[31mfa[1m[0m [1m[31mfa[1m[0m [1m[31mfa[1m[0m
-  0x1c0400000970: [1m[31mfa[1m[0m [1m[31mfa[1m[0m [1m[31mfa[1m[0m [1m[31mfa[1m[0m [1m[31mfa[1m[0m [1m[31mfa[1m[0m [1m[31mfa[1m[0m [1m[31mfa[1m[0m [1m[31mfa[1m[0m [1m[31mfa[1m[0m [1m[31mfa[1m[0m [1m[31mfa[1m[0m [1m[31mfa[1m[0m [1m[31mfa[1m[0m [1m[31mfa[1m[0m [1m[31mfa[1m[0m
-  0x1c0400000980: [1m[31mfa[1m[0m [1m[31mfa[1m[0m [1m[31mfa[1m[0m [1m[31mfa[1m[0m [1m[31mfa[1m[0m [1m[31mfa[1m[0m [1m[31mfa[1m[0m [1m[31mfa[1m[0m [1m[31mfa[1m[0m [1m[31mfa[1m[0m [1m[31mfa[1m[0m [1m[31mfa[1m[0m [1m[31mfa[1m[0m [1m[31mfa[1m[0m [1m[31mfa[1m[0m [1m[31mfa[1m[0m
-  0x1c0400000990: [1m[31mfa[1m[0m [1m[31mfa[1m[0m [1m[31mfa[1m[0m [1m[31mfa[1m[0m [1m[31mfa[1m[0m [1m[31mfa[1m[0m [1m[31mfa[1m[0m [1m[31mfa[1m[0m [1m[31mfa[1m[0m [1m[31mfa[1m[0m [1m[31mfa[1m[0m [1m[31mfa[1m[0m [1m[31mfa[1m[0m [1m[31mfa[1m[0m [1m[31mfa[1m[0m [1m[31mfa[1m[0m
-Shadow byte legend (one shadow byte represents 8 application bytes):
-  Addressable:           [1m[0m00[1m[0m
-  Partially addressable: [1m[0m01[1m[0m [1m[0m02[1m[0m [1m[0m03[1m[0m [1m[0m04[1m[0m [1m[0m05[1m[0m [1m[0m06[1m[0m [1m[0m07[1m[0m 
-  Heap left redzone:       [1m[31mfa[1m[0m
-  Freed heap region:       [1m[35mfd[1m[0m
-  Stack left redzone:      [1m[31mf1[1m[0m
-  Stack mid redzone:       [1m[31mf2[1m[0m
-  Stack right redzone:     [1m[31mf3[1m[0m
-  Stack after return:      [1m[35mf5[1m[0m
-  Stack use after scope:   [1m[35mf8[1m[0m
-  Global redzone:          [1m[31mf9[1m[0m
-  Global init order:       [1m[36mf6[1m[0m
-  Poisoned by user:        [1m[34mf7[1m[0m
-  Container overflow:      [1m[34mfc[1m[0m
-  Array cookie:            [1m[31mac[1m[0m
-  Intra object redzone:    [1m[33mbb[1m[0m
-  ASan internal:           [1m[33mfe[1m[0m
-  Left alloca redzone:     [1m[34mca[1m[0m
-  Right alloca redzone:    [1m[34mcb[1m[0m
-  Shadow gap:              [1m[0mcc[1m[0m
-==64336==ABORTING
-send: spawn id exp7 not open
-    while executing
-"send -- "$cmd\r""
-    ("while" body line 2)
-    invoked from within
-"while {[gets $fp cmd] != -1} {
-    send -- "$cmd\r"
-    expect "minishell> "
-}"
-    (file "./tester.sh" line 27)
+[?2004hjdagoy@Campus19:~/Documents/cursus/Minishell$ echo <missing <"./test_files/infile" <missing
+[?2004lminishell: missing: No such file or directory
+minishell: missing: No such file or directory
+[?2004hjdagoy@Campus19:~/Documents/cursus/Minishell$ cat <"./test_files/infile"
+[?2004lhi
+hello
+world
+42
+[?2004hjdagoy@Campus19:~/Documents/cursus/Minishell$ echo <"./test_files/infile_big" | cat <"./test_files/infile"
+[?2004lhi
+hello
+world
+42
+[?2004hjdagoy@Campus19:~/Documents/cursus/Minishell$ echo <"./test_files/infile_big" | cat "./test_files/infile"
+[?2004lhi
+hello
+world
+42
+[?2004hjdagoy@Campus19:~/Documents/cursus/Minishell$ echo <"./test_files/infile_big" | echo <"./test_files/infile"
+[?2004l
+[?2004hjdagoy@Campus19:~/Documents/cursus/Minishell$ echo hi | cat <"./test_files/infile"
+[?2004lhi
+hello
+world
+42
+[?2004hjdagoy@Campus19:~/Documents/cursus/Minishell$ echo hi | cat "./test_files/infile"
+[?2004lhi
+hello
+world
+42
+[?2004hjdagoy@Campus19:~/Documents/cursus/Minishell$ cat <"./test_files/infile" | echo hi
+[?2004lhi
+[?2004hjdagoy@Campus19:~/Documents/cursus/Minishell$ cat <"./test_files/infile" | grep hello
+[?2004lhello
+[?2004hjdagoy@Campus19:~/Documents/cursus/Minishell$ cat <"./test_files/infile_big" | echo hi
+[?2004lhi
+cat <missing
+cat <missing | cat
+cat <missing | echo oi
+cat <missing | cat <"./test_files/infile"
+echo <123 <456 hi | echo 42
+ls >./outfiles/outfile01
+ls >         ./outfiles/outfile01
+echo hi >         ./outfiles/outfile01 bye
+ls >./outfiles/outfile01 >./outfiles/outfile02
+ls >./outfiles/outfile01 >./test_files/invalid_permission
+ls >"./outfiles/outfile with spaces"
+ls >"./outfiles/outfile""1""2""3""4""5"
+ls >"./outfiles/outfile01" >./test_files/invalid_permission >"./outfiles/outfile02"
+ls >./test_files/invalid_permission >"./outfiles/outfile01" >./test_files/invalid_permission
+cat <"./test_files/infile" >"./outfiles/outfile01"
+echo hi >./outfiles/outfile01 | echo bye
+echo hi >./outfiles/outfile01 >./outfiles/outfile02 | echo bye
+echo hi | echo >./outfiles/outfile01 bye
