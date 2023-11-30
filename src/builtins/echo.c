@@ -6,7 +6,7 @@
 /*   By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/26 23:59:25 by jdagoy            #+#    #+#             */
-/*   Updated: 2023/11/27 20:31:24 by jdagoy           ###   ########.fr       */
+/*   Updated: 2023/11/30 15:27:44 by jdagoy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@ static bool	check_option(int arg_i, char *argv, bool *dash_flag)
 	size_t	i;
 
 	i = 2;
-
 	while (i < ft_strlen(argv) && argv[i] == 'n')
 		i++;
 	if (i == ft_strlen(argv))

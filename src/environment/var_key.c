@@ -12,11 +12,11 @@
 
 #include "../include/minishell.h"
 
-int key_isvalid(char* str)
+int	key_isvalid(char *str)
 {
-	char* pos;
-	int len;
-	int i;
+	char	*pos;
+	int		len;
+	int		i;
 
 	if (!str)
 		return (0);
@@ -26,12 +26,12 @@ int key_isvalid(char* str)
 	else
 		len = ft_strlen(str);
 	if (!ft_isalpha(str[0]) && str[0] != '_')
-		return(0);
+		return (0);
 	i = 0;
 	while (i < len)
 	{
 		if (!ft_isalpha(str[i]) && !ft_isdigit(str[i]) && str[i] != '_')
-			return(0);
+			return (0);
 		i++;
 	}
 	return (1);

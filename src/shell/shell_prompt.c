@@ -6,7 +6,7 @@
 /*   By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/20 02:30:33 by jdagoy            #+#    #+#             */
-/*   Updated: 2023/11/29 04:07:14 by jdagoy           ###   ########.fr       */
+/*   Updated: 2023/11/30 13:32:12 by jdagoy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ static char* shell_readline(t_shell* shell)
 		return (NULL);
 	signal_set(SIGINT, &prompt_interrupt);
 	line = readline(cat);
-	// signal_set(SIGINT, &write_newline);
+	signal_set(SIGINT, &write_newline);
 	shell->err = *get_exit_value();
 	free(cat);
 	if (!line)
