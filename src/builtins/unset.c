@@ -13,10 +13,13 @@
 #include "../include/minishell.h"
 #include "environment.h"
 #include "builtins.h"
+#include "strtab.h"
 
 
 int	unset(t_shell* shell, char* str)
 {
+	if (str == NULL)
+		return (EXIT_SUCCESS);
 	if (ft_strchr(str, '=') || !key_isvalid(str))
 		print_error(str, "not a valid identifier");
 	vartab_unset(&shell->var, str);
