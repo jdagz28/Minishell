@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   shell.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+        */
+/*   By: tbarbe <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/11 16:43:09 by tbarbe            #+#    #+#             */
-/*   Updated: 2023/11/27 20:57:43 by jdagoy           ###   ########.fr       */
+/*   Updated: 2023/11/30 14:50:36 by tbarbe           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static bool	check_inline_mode(void)
 	return (isatty(STDIN_FILENO) == 0);
 }
 
-int	shell_init(t_shell* shell, char** env)
+int	shell_init(t_shell *shell, char **env)
 {
 	shell->env = strtab_cpy(env);
 	shell->err = 0;
@@ -39,11 +39,11 @@ int	shell_init(t_shell* shell, char** env)
 	return (EXIT_SUCCESS);
 }
 
-char* shell_cat(t_shell* shell)
+char	*shell_cat(t_shell *shell)
 {
-	char* res;
-	char* user;
-	char* pwd;
+	char	*res;
+	char	*user;
+	char	*pwd;
 
 	user = user_cat(&shell->user);
 	pwd = pwd_cat(&shell->pwd);
@@ -53,10 +53,9 @@ char* shell_cat(t_shell* shell)
 	return (res);
 }
 
-void	shell_run(t_shell* shell)
+void	shell_run(t_shell *shell)
 {
 	signal_set(SIGQUIT, SIG_IGN);
 	while (shell->err != 128)
 		shell_prompt(shell);
 }
-

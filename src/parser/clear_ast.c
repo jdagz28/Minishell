@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   clear_ast.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+        */
+/*   By: tbarbe <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 09:24:15 by jdagoy            #+#    #+#             */
-/*   Updated: 2023/11/28 00:20:50 by jdagoy           ###   ########.fr       */
+/*   Updated: 2023/11/30 14:48:21 by tbarbe           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 #include "lexer_parsing.h"
 #include "strtab.h"
 
-static void free_simple_cmd(t_node** simple_cmd)
+static void	free_simple_cmd(t_node **simple_cmd)
 {
-	int fd;
+	int	fd;
 
 	if (*simple_cmd != NULL)
 	{
@@ -32,10 +32,10 @@ static void free_simple_cmd(t_node** simple_cmd)
 	}
 }
 
-void clear_ast(t_node** ast)
+void	clear_ast(t_node **ast)
 {
 	if (*ast == NULL)
-		return;
+		return ;
 	if ((*ast)->type == SIMPLE_CMD)
 	{
 		free_simple_cmd(ast);

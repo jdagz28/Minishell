@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   shell_prompt.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+        */
+/*   By: tbarbe <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/20 02:30:33 by jdagoy            #+#    #+#             */
-/*   Updated: 2023/11/30 13:32:12 by jdagoy           ###   ########.fr       */
+/*   Updated: 2023/11/30 14:50:50 by tbarbe           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,10 @@
 #include "shell.h"
 #include "execution.h"
 
-
-static char* shell_readline(t_shell* shell)
+static char	*shell_readline(t_shell *shell)
 {
-	char* cat;
-	char* line;
+	char	*cat;
+	char	*line;
 
 	cat = shell_cat(shell);
 	if (!cat)
@@ -38,7 +37,7 @@ static char* shell_readline(t_shell* shell)
 	return (line);
 }
 
-static int	ft_strallnonzero(char* str)
+static int	ft_strallnonzero(char *str)
 {
 	int	i;
 
@@ -52,9 +51,9 @@ static int	ft_strallnonzero(char* str)
 	return (1);
 }
 
-void	shell_prompt(t_shell* shell)
+void	shell_prompt(t_shell *shell)
 {
-	char* line;
+	char	*line;
 	int		err;
 
 	if (shell->inline_mode == false)

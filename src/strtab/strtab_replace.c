@@ -1,24 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   strtab_addreplace.c                                :+:      :+:    :+:   */
+/*   strtab_replace.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+        */
+/*   By: tbarbe <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/20 02:26:35 by jdagoy            #+#    #+#             */
-/*   Updated: 2023/11/20 10:51:40 by jdagoy           ###   ########.fr       */
+/*   Updated: 2023/11/30 14:51:20 by tbarbe           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 #include "environment.h"
 
-int	strtab_replace(char** tab, char* str, int id)
+int	strtab_replace(char **tab, char *str, int id)
 {
-	int len;
+	int	len;
 
 	if (!str)
-		return(EXIT_FAILURE);
+		return (EXIT_FAILURE);
 	len = strtab_len(tab);
 	if (id < 0 || id >= len)
 		return (EXIT_FAILURE);
@@ -27,4 +27,3 @@ int	strtab_replace(char** tab, char* str, int id)
 	tab[id] = str;
 	return (EXIT_SUCCESS);
 }
-

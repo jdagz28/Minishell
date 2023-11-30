@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   environment.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+        */
+/*   By: tbarbe <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/17 10:34:45 by jdagoy            #+#    #+#             */
-/*   Updated: 2023/11/20 10:59:25 by jdagoy           ###   ########.fr       */
+/*   Updated: 2023/11/30 14:56:11 by tbarbe           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,19 +16,19 @@
 # include "strtab.h"
 
 //env_getvar.c
-char* ft_get_env_var(char** environ, const char* var);
-char* env_get(char* start, char end, char** env);
+char	*ft_get_env_var(char **environ, const char *var);
+char	*env_get(char *start, char end, char **env);
 
 //env_set.c
-int		ft_setenv(const char* name, const char* value, \
-	char*** env, int overwrite);
+int		ft_setenv(const char *name, const char *value, \
+	char ***env, int overwrite);
 
 //var.c
-int		vartab_set(char*** tab, char* str);
-int		vartab_unset(char*** tab, char* str);
-int		vartab_keypos(char** tab, char* str);
-int		vartab_strpos(char** tab, char* str);
-int		key_isvalid(char* str);
-int		var_set(t_shell* shell, char** cmd);
+int		vartab_set(char ***tab, char *str);
+int		vartab_unset(char ***tab, char *str);
+int		vartab_keypos(char **tab, char *str);
+int		vartab_strpos(char **tab, char *str);
+int		key_isvalid(char *str);
+int		var_set(t_shell *shell, char **cmd);
 
 #endif
