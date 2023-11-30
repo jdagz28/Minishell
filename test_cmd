@@ -106,8 +106,6 @@ echo "quotes ->'"
 echo "quotes -> ' "
 echo 'quotes ->"'
 echo 'quotes -> " '
-echo "> >> < * ? [ ] | ; [ ] || && ( ) & # $ \ <<"
-echo '> >> < * ? [ ] | ; [ ] || && ( ) & # $ \ <<'
 echo "exit_code ->$? user ->$USER home -> $HOME"
 echo 'exit_code ->$? user ->$USER home -> $HOME'
 echo "$"

@@ -6,7 +6,7 @@
 /*   By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/27 00:23:51 by jdagoy            #+#    #+#             */
-/*   Updated: 2023/11/29 23:28:29 by jdagoy           ###   ########.fr       */
+/*   Updated: 2023/11/30 13:12:10 by jdagoy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,11 +22,37 @@ bool	ft_strncmp_twice(const char* s1, const char* s2) // == ft_strncmp(str1, str
 	return (false);
 }
 
+static int execute_builtin_cont(t_simple_cmd command, t_shell *shell)
+{
+	int	status;
+
+	status = -1;
+	if (ft_strncmp_twice((const char*)command.argv[0], "echo"))
+	{
+		status = echo(command.argv, command.fd_output);
+	}
+	if (ft_strncmp_twice((const char*)command.argv[0], "pwd"))
+	{
+		status = pwd(command.argv, command.fd_output);
+	}
+	if (ft_strncmp_twice((const char*)command.argv[0], "export"))
+		status = export(shell, command.argv[1]);
+	if (ft_strncmp_twice((const char*)command.argv[0], "unset"))
+		status = unset(shell, command.argv[1]);
+	if (ft_strncmp_twice((const char*)command.argv[0], "exit"))
+		status = builtin_exit(command.argv, shell);
+	if (ft_strchr((const char *)command.argv[0], '='))
+		status = var_set(shell, command.argv);
+	return (status);
+}
+
 int	execute_builtin(t_simple_cmd command, t_shell* shell)
 {
 	int	status;
 
 	status = -1;
+	if (*is_piped() == true)
+		close(command.fd_input);
 	if (ft_strncmp_twice((const char*)command.argv[0], "env"))
 	{
 		strtab_write(shell->env, '\n', command.fd_output);
@@ -40,18 +66,7 @@ int	execute_builtin(t_simple_cmd command, t_shell* shell)
 		if (shell->pwd.root == NULL)
 			return (EXIT_FAILURE);
 	}
-	if (ft_strncmp_twice((const char*)command.argv[0], "echo"))
-		status = echo(command.argv, command.fd_output);
-	if (ft_strncmp_twice((const char*)command.argv[0], "pwd"))
-		status = pwd(command.argv, command.fd_output);
-	if (ft_strncmp_twice((const char*)command.argv[0], "export"))
-		status = export(shell, command.argv[1]);
-	if (ft_strncmp_twice((const char*)command.argv[0], "unset"))
-		status = unset(shell, command.argv[1]);
-	if (ft_strncmp_twice((const char*)command.argv[0], "exit"))
-		status = builtin_exit(command.argv, shell);
-	if (ft_strchr((const char *)command.argv[0], '='))
-		status = var_set(shell, command.argv);
+	status = execute_builtin_cont(command, shell);
 	if (status != EXIT_SUCCESS)
 		return(EXIT_FAILURE);
 	return (status);

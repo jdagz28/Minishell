@@ -15,7 +15,7 @@ set fp [open $infile r]
 
 # Spawn minishell
 spawn $minishell
-sleep 2
+sleep 1
 
 # Log all output to a file
 log_file -a $outfile
