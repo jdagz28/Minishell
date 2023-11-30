@@ -1,30 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   strtab_addreplace.c                                :+:      :+:    :+:   */
+/*   strtab_add.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+        */
+/*   By: tbarbe <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/20 02:26:35 by jdagoy            #+#    #+#             */
-/*   Updated: 2023/11/20 10:51:40 by jdagoy           ###   ########.fr       */
+/*   Updated: 2023/11/30 14:45:11 by tbarbe           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 #include "environment.h"
 
-int	strtab_add(char*** tab, char* str)
+int	strtab_add(char ***tab, char *str)
 {
-	char** res;
+	char	**res;
 	int		len;
 
 	if (!tab || !str)
 		return (EXIT_FAILURE);
 	len = strtab_len(*tab);
-	res = malloc(sizeof(char*) * (len + 2));
+	res = malloc(sizeof(char *) * (len + 2));
 	if (!res)
 		return (EXIT_FAILURE);
-	ft_memcpy(res, *tab, sizeof(char*) * len);
+	ft_memcpy(res, *tab, sizeof(char *) * len);
 	res[len] = str;
 	res[len + 1] = NULL;
 	if (*tab)

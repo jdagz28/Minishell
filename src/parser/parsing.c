@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jdagoy <jdagoy@student.42.fr>              +#+  +:+       +#+        */
+/*   By: tbarbe <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 13:54:17 by jdagoy            #+#    #+#             */
-/*   Updated: 2023/11/30 09:28:19 by jdagoy           ###   ########.fr       */
+/*   Updated: 2023/11/30 14:48:57 by tbarbe           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 #include "expansion.h"
 
-static void	parse_error(t_token* tokens, int error)
+static void	parse_error(t_token *tokens, int error)
 {
 	if (error == 1)
 	{
@@ -28,8 +28,8 @@ static void	parse_error(t_token* tokens, int error)
 
 t_node	*parse(char *line, t_shell *shell)
 {
-	t_token* tokens;
-	t_node* ast;
+	t_token	*tokens;
+	t_node	*ast;
 
 	if (!line)
 		return (NULL);

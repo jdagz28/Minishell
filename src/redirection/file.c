@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   file.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jdagoy <jdagoy@student.42.fr>              +#+  +:+       +#+        */
+/*   By: tbarbe <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/11 16:43:09 by tbarbe            #+#    #+#             */
-/*   Updated: 2023/11/26 14:55:43 by jdagoy           ###   ########.fr       */
+/*   Updated: 2023/11/30 14:26:12 by tbarbe           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 #include "environment.h"
 
-static int check_access(char* path, char mode)
+static int	check_access(char *path, char mode)
 {
 	if (ft_strlen(path) == 0)
 	{
@@ -27,9 +27,9 @@ static int check_access(char* path, char mode)
 	return (EXIT_SUCCESS);
 }
 
-int open_file(char* path, char mode)
+int	open_file(char *path, char mode)
 {
-	int fd;
+	int	fd;
 
 	fd = -1;
 	if (check_access(path, mode))
@@ -40,5 +40,5 @@ int open_file(char* path, char mode)
 		fd = open(path, O_WRONLY | O_CREAT | O_TRUNC, 0664);
 	else if (mode == 'a')
 		fd = open(path, O_WRONLY | O_CREAT | O_APPEND, 0664);
-	return(fd);
+	return (fd);
 }

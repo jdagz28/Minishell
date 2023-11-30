@@ -6,7 +6,7 @@
 #    By: tbarbe <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/10/07 15:33:53 by tbarbe            #+#    #+#              #
-#    Updated: 2023/11/30 11:44:22 by tbarbe           ###   ########.fr        #
+#    Updated: 2023/11/30 14:34:24 by tbarbe           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -95,6 +95,7 @@ PARSER_SRCS			=	clear_ast.c\
 							parsing.c
 
 REDIRECT_SRCS			=	redirect.c\
+							redirect_utils.c\
 							file.c\
 							here_doc.c
 

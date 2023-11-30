@@ -3,23 +3,23 @@
 /*                                                        :::      ::::::::   */
 /*   strtab_free.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+        */
+/*   By: tbarbe <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/20 02:27:02 by jdagoy            #+#    #+#             */
-/*   Updated: 2023/11/20 10:51:53 by jdagoy           ###   ########.fr       */
+/*   Updated: 2023/11/30 14:45:33 by tbarbe           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 #include "environment.h"
 
-void	strtab_free(char** tab)
+void	strtab_free(char **tab)
 {
 	int	i;
 	int	len;
 
 	if (!tab)
-		return;
+		return ;
 	len = strtab_len(tab);
 	i = 0;
 	while (i < len)
@@ -31,16 +31,16 @@ void	strtab_free(char** tab)
 	free(tab);
 }
 
-void	strtab_freeend(char** tab, int start)
+void	strtab_freeend(char **tab, int start)
 {
 	int	i;
 	int	len;
 
 	if (!tab)
-		return;
+		return ;
 	len = strtab_len(tab);
 	if (start >= len)
-		return;
+		return ;
 	i = start;
 	while (i < len)
 	{

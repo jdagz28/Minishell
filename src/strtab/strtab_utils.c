@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   strtab_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+        */
+/*   By: tbarbe <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/11 16:43:09 by tbarbe            #+#    #+#             */
-/*   Updated: 2023/11/20 10:52:09 by jdagoy           ###   ########.fr       */
+/*   Updated: 2023/11/30 14:47:46 by tbarbe           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 #include "environment.h"
 
-int	strtab_beginwith(char** tab, char* str)
+int	strtab_beginwith(char **tab, char *str)
 {
 	int	i;
 	int	len;
@@ -32,12 +32,12 @@ int	strtab_beginwith(char** tab, char* str)
 	return (-1);
 }
 
-void	strtab_print(char** tab, char ces)
+void	strtab_print(char **tab, char ces)
 {
 	int	i;
 
 	if (!tab)
-		return;
+		return ;
 	i = 0;
 	while (tab[i])
 	{
@@ -46,12 +46,12 @@ void	strtab_print(char** tab, char ces)
 	}
 }
 
-void	strtab_write(char** tab, char ces, int fd)
+void	strtab_write(char **tab, char ces, int fd)
 {
 	int	i;
 
 	if (!tab)
-		return;
+		return ;
 	i = 0;
 	while (tab[i])
 	{
@@ -61,7 +61,7 @@ void	strtab_write(char** tab, char ces, int fd)
 	}
 }
 
-int	strtab_len(char** tab)
+int	strtab_len(char **tab)
 {
 	int	i;
 
@@ -73,16 +73,16 @@ int	strtab_len(char** tab)
 	return (i);
 }
 
-char** strtab_cpy(char** tab)
+char	**strtab_cpy(char **tab)
 {
-	char** res;
+	char	**res;
 	int		i;
 	int		len;
 
 	len = strtab_len(tab);
 	if (len == 0)
 		return (NULL);
-	res = malloc(sizeof(char**) * (len + 1));
+	res = malloc(sizeof(char **) * (len + 1));
 	if (!res)
 		return (NULL);
 	i = 0;

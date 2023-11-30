@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   user.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jdagoy <jdagoy@student.42.fr>              +#+  +:+       +#+        */
+/*   By: tbarbe <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/11 16:43:09 by tbarbe            #+#    #+#             */
-/*   Updated: 2023/11/27 09:24:42 by jdagoy           ###   ########.fr       */
+/*   Updated: 2023/11/30 14:37:50 by tbarbe           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,6 @@ void	user_clear(t_user *user)
 		free(user->machinename);
 	if (user->lastinput)
 		free(user->lastinput);
-	// rl_clear_history();
 }
 
 int	user_setlastinput(t_user *user, char *str)
