@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expand_vars_heredoc.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+        */
+/*   By: tbarbe <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 14:02:21 by jdagoy            #+#    #+#             */
-/*   Updated: 2023/11/28 15:02:48 by jdagoy           ###   ########.fr       */
+/*   Updated: 2023/11/30 11:38:30 by tbarbe           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,7 @@ void	expand_vars_heredoc(char **argv, t_shell *shell)
 	int		i;
 	char	*expanded_arg;
 
-	while (*argv)
-	{
+	
 		i = 0;
 		expanded_arg = ft_strdup(*argv);
 		while (i < (int)ft_strlen(expanded_arg))
@@ -48,7 +47,6 @@ void	expand_vars_heredoc(char **argv, t_shell *shell)
 			else
 				i++;
 		}
+		free(*argv);
 		*argv = expanded_arg;
-		argv++;
-	}
 }
