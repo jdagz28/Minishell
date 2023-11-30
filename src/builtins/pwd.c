@@ -6,7 +6,7 @@
 /*   By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/20 03:02:35 by jdagoy            #+#    #+#             */
-/*   Updated: 2023/11/20 10:51:04 by jdagoy           ###   ########.fr       */
+/*   Updated: 2023/11/30 14:46:22 by jdagoy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include "builtins.h"
 #include "environment.h"
 
-int	pwd(char** argv, int fd)
+int	pwd(char **argv, int fd)
 {
 	char	pwd[PATH_MAX];
 	int		count;

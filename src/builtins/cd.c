@@ -6,7 +6,7 @@
 /*   By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/29 02:08:41 by jdagoy            #+#    #+#             */
-/*   Updated: 2023/11/29 23:24:58 by jdagoy           ###   ########.fr       */
+/*   Updated: 2023/11/30 15:19:25 by jdagoy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,4 +103,3 @@ int	cd(char **argv, char **env)
 		return (EXIT_FAILURE);
 	return (EXIT_SUCCESS);
 }
-

@@ -1,52 +1,52 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   buitins_utils.c                                    :+:      :+:    :+:   */
+/*   vartab_pos.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/11 16:43:09 by tbarbe            #+#    #+#             */
-/*   Updated: 2023/11/20 11:01:25 by jdagoy           ###   ########.fr       */
+/*   Updated: 2023/11/30 14:49:43 by jdagoy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "builtins.h"
 
-static int key_cmp(char* line, char* needle)
+static int	key_cmp(char *line, char *needle)
 {
-	size_t len;
+	size_t	len;
 
 	if (!line || !needle)
-		return(EXIT_FAILURE);
+		return (EXIT_FAILURE);
 	len = ft_strlen(needle);
 	if (ft_strncmp(line, needle, len) != 0)
 		return (EXIT_FAILURE);
 	if (ft_strlen(line) <= len)
 		return (EXIT_FAILURE);
 	if (line[len] != '=')
-		return(EXIT_FAILURE);
-	return(EXIT_SUCCESS);
+		return (EXIT_FAILURE);
+	return (EXIT_SUCCESS);
 }
 
-int	vartab_keypos(char** tab, char* str)
+int	vartab_keypos(char **tab, char *str)
 {
 	int	i;
 
 	if (!tab)
-		return(-1);
+		return (-1);
 	i = 0;
 	while (tab[i])
 	{
 		if (key_cmp(tab[i], str) == 0)
-			return(i);
+			return (i);
 		i++;
 	}
 	return (-1);
 }
 
-int	vartab_strpos(char** tab, char* str)
+int	vartab_strpos(char **tab, char *str)
 {
-	char* sep;
+	char	*sep;
 	int		len;
 	int		i;
 

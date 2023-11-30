@@ -6,7 +6,7 @@
 /*   By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/20 20:11:54 by jdagoy            #+#    #+#             */
-/*   Updated: 2023/11/24 00:10:46 by jdagoy           ###   ########.fr       */
+/*   Updated: 2023/11/30 14:42:18 by jdagoy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int	update_pwd_error(char *new_pwd)
 int	cd_error(int error, char *str)
 {
 	if (error == 0)
-	{	
+	{
 		ft_putstr_fd("minishell: ", STDERR_FILENO);
 		ft_putstr_fd("cd: too many arguments\n", STDERR_FILENO);
 	}

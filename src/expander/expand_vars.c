@@ -6,7 +6,7 @@
 /*   By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 22:58:02 by jdagoy            #+#    #+#             */
-/*   Updated: 2023/11/28 14:02:10 by jdagoy           ###   ########.fr       */
+/*   Updated: 2023/11/30 15:18:34 by jdagoy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,10 @@
 #include "expansion.h"
 #include "strtab.h"
 
-static bool	expand_singlevar(t_expandvar* p, int* j, t_shell* shell)
+static bool	expand_singlevar(t_expandvar *p, int *j, t_shell *shell)
 {
-	char* var_name;
-	char* var_value;
+	char	*var_name;
+	char	*var_value;
 
 	get_var_name_value(&p->cmd->argv[p->i][*j], &var_name, &var_value, shell);
 	if (p->dou_quotes == false && var_value != NULL && *var_value != '\0' \
@@ -43,7 +43,7 @@ static bool	expand_singlevar(t_expandvar* p, int* j, t_shell* shell)
 	return (true);
 }
 
-static void	update_command_arg(t_expandvar* params)
+static void	update_command_arg(t_expandvar *params)
 {
 	if (params->new_word)
 	{
@@ -54,15 +54,15 @@ static void	update_command_arg(t_expandvar* params)
 	}
 }
 
-static void	process_non_var(t_expandvar* params, char c)
+static void	process_non_var(t_expandvar *params, char c)
 {
 	change_quote_state(c, &(params->sin_quotes), &(params->dou_quotes));
 	append_char(&(params->new_word), c);
 }
 
-static bool	handle_dollar_sign(t_expandvar* params, t_shell* shell)
+static bool	handle_dollar_sign(t_expandvar *params, t_shell *shell)
 {
-	char* temp;
+	char	*temp;
 	int		original_j;
 
 	temp = &(params->cmd_argv[params->i][params->j]);
@@ -74,7 +74,7 @@ static bool	handle_dollar_sign(t_expandvar* params, t_shell* shell)
 				& params->cmd_argv[params->i], 0, params->j++, "$");
 		}
 		else if (*temp == '$' && (*(temp + 1) == '\0' || \
-			* (temp + 1) == '\'' || *(temp + 1) == '\"'))
+					*(temp + 1) == '\'' || *(temp + 1) == '\"'))
 		{
 			append_char(&(params->new_word), *temp);
 			params->j++;
@@ -88,7 +88,7 @@ static bool	handle_dollar_sign(t_expandvar* params, t_shell* shell)
 	return (true);
 }
 
-bool	expand_vars(t_simple_cmd* cmd, int const i, t_shell* shell)
+bool	expand_vars(t_simple_cmd *cmd, int const i, t_shell *shell)
 {
 	t_expandvar	p;
 

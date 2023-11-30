@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jdagoy <jdagoy@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/11 16:43:09 by tbarbe            #+#    #+#             */
-/*   Updated: 2023/11/26 14:52:44 by jdagoy           ###   ########.fr       */
+/*   Updated: 2023/11/30 14:46:09 by jdagoy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,13 @@
 #include "environment.h"
 #include "builtins.h"
 
-static char* define_str(char** tab, char* str)
+static int	invalid_key(char *str)
+{
+	print_error(str, "not a valid identifier");
+	return (EXIT_FAILURE);
+}
+
+static char	*define_str(char **tab, char *str)
 {
 	int		id;
 
@@ -24,20 +30,17 @@ static char* define_str(char** tab, char* str)
 	id = vartab_keypos(tab, str);
 	if (id != -1)
 		return (tab[id]);
-	return(str);
+	return (str);
 }
 
-int	export(t_shell* shell, char* str)
+int	export(t_shell *shell, char *str)
 {
 	int		id;
-	char* new;
+	char	*new;
 	int		err;
 
 	if (!key_isvalid(str))
-	{
-		print_error(str, "not a valid identifier");
-		return(EXIT_FAILURE);
-	}
+		return (invalid_key(str));
 	str = define_str(shell->var, str);
 	if (!str)
 		return (EXIT_FAILURE);

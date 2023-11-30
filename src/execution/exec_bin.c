@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_bin.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tbarbe <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/11 16:43:09 by tbarbe            #+#    #+#             */
-/*   Updated: 2023/11/30 13:53:34 by tbarbe           ###   ########.fr       */
+/*   Updated: 2023/11/30 15:20:25 by jdagoy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,9 @@
 #include "execution.h"
 #include "environment.h"
 
-
-static int	exec_bin_error(char* cmd, char** env)
+static int	exec_bin_error(char *cmd, char **env)
 {
-	char* pwd;
+	char	*pwd;
 	int		pwd_len;
 
 	pwd = ft_get_env_var(env, "PWD");
@@ -30,9 +29,9 @@ static int	exec_bin_error(char* cmd, char** env)
 	return (127);
 }
 
-static int exec_extend_bin(t_simple_cmd* cmd, char** env)
+static int	exec_extend_bin(t_simple_cmd *cmd, char **env)
 {
-	char* bin;
+	char	*bin;
 
 	if (access(cmd->argv[0], F_OK) == 0)
 		bin = ft_strdup(cmd->argv[0]);
@@ -42,10 +41,18 @@ static int exec_extend_bin(t_simple_cmd* cmd, char** env)
 		return (exec_bin_error(cmd->argv[0], env));
 	free(cmd->argv[0]);
 	cmd->argv[0] = bin;
-	return(EXIT_SUCCESS);
+	return (EXIT_SUCCESS);
 }
 
-int	exec_bin(t_simple_cmd* cmd, char** env)
+static int	exitval_exec_bin(int exit_val)
+{
+	if (*get_exit_value() == 131)
+		return (131);
+	else
+		return (exit_val);
+}
+
+int	exec_bin(t_simple_cmd *cmd, char **env)
 {
 	int		pid;
 	int		status;
@@ -55,7 +62,7 @@ int	exec_bin(t_simple_cmd* cmd, char** env)
 	signal_set(SIGQUIT, &write_quit);
 	err = exec_extend_bin(cmd, env);
 	if (err)
-		return(err);
+		return (err);
 	pid = fork();
 	if (pid == -1)
 		return (EXIT_FAILURE);
@@ -70,8 +77,5 @@ int	exec_bin(t_simple_cmd* cmd, char** env)
 	}
 	close_redirect(cmd);
 	waitpid(pid, &status, 0);
-	if(*get_exit_value() == 131)
-		return(131);
-	return (WEXITSTATUS(status));
+	return (exitval_exec_bin(WEXITSTATUS(status)));
 }
-

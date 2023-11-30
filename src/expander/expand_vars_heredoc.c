@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expand_vars_heredoc.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tbarbe <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 14:02:21 by jdagoy            #+#    #+#             */
-/*   Updated: 2023/11/30 11:38:30 by tbarbe           ###   ########.fr       */
+/*   Updated: 2023/11/30 15:20:36 by jdagoy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,25 +28,23 @@ static void	heredoc_singlevar(char	**expanded_arg, int *index, t_shell *shell)
 		free(var_value);
 }
 
-
 void	expand_vars_heredoc(char **argv, t_shell *shell)
 {
 	int		i;
 	char	*expanded_arg;
 
-	
-		i = 0;
-		expanded_arg = ft_strdup(*argv);
-		while (i < (int)ft_strlen(expanded_arg))
-		{
-			while (ft_isspace(expanded_arg[i]) || expanded_arg[i] == '\"' \
-						|| expanded_arg[i] == '\'')
-				i++;
-			if (expanded_arg[i] == '$')
-				heredoc_singlevar(&expanded_arg, &i, shell);
-			else
-				i++;
-		}
-		free(*argv);
-		*argv = expanded_arg;
+	i = 0;
+	expanded_arg = ft_strdup(*argv);
+	while (i < (int)ft_strlen(expanded_arg))
+	{
+		while (ft_isspace(expanded_arg[i]) || expanded_arg[i] == '\"' \
+				|| expanded_arg[i] == '\'')
+			i++;
+		if (expanded_arg[i] == '$')
+			heredoc_singlevar(&expanded_arg, &i, shell);
+		else
+			i++;
+	}
+	free(*argv);
+	*argv = expanded_arg;
 }
