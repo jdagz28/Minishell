@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+        */
+/*   By: tbarbe <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/11 16:43:09 by tbarbe            #+#    #+#             */
-/*   Updated: 2023/11/28 15:27:58 by jdagoy           ###   ########.fr       */
+/*   Updated: 2023/11/30 13:38:53 by tbarbe           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,10 +51,12 @@ void	set_exit_value(int exit_value);
 void	write_newline(void);
 void	prompt_interrupt(void);
 int		signal_set(int sig, void* f);
+void	exit_newline(void);
+void	write_quit(void);
 
 // redirection
 int redirect(t_node* node, t_shell *shell);
-char** read_here_doc(char* limiter);
+int get_here_doc(t_shell *shell, t_simple_cmd *cmd, char *limiter);
 int write_here_doc(char** tab, t_shell *shell);
 int open_file(char* path, char mode);
 void close_redirect(t_simple_cmd* cmd);

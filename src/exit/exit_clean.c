@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit_clean.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+        */
+/*   By: tbarbe <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/20 02:28:33 by jdagoy            #+#    #+#             */
-/*   Updated: 2023/11/27 23:57:08 by jdagoy           ###   ########.fr       */
+/*   Updated: 2023/11/30 11:24:00 by tbarbe           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	shell_clear(t_shell *shell)
 
 void	clean_exit(t_shell *data, int err)
 {
-	rl_clear_history();
+	clear_history();
 	shell_clear(data);
 	exit(err);
 }

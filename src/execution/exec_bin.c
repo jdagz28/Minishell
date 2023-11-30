@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_bin.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+        */
+/*   By: tbarbe <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/11 16:43:09 by tbarbe            #+#    #+#             */
-/*   Updated: 2023/11/28 00:07:32 by jdagoy           ###   ########.fr       */
+/*   Updated: 2023/11/30 13:53:34 by tbarbe           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ int	exec_bin(t_simple_cmd* cmd, char** env)
 	int		err;
 
 	signal_set(SIGINT, &write_newline);
+	signal_set(SIGQUIT, &write_quit);
 	err = exec_extend_bin(cmd, env);
 	if (err)
 		return(err);
@@ -60,6 +61,7 @@ int	exec_bin(t_simple_cmd* cmd, char** env)
 		return (EXIT_FAILURE);
 	if (pid == 0)
 	{
+		signal_set(SIGQUIT, SIG_DFL);
 		dup2(cmd->fd_input, STDIN_FILENO);
 		dup2(cmd->fd_output, STDOUT_FILENO);
 		close_redirect(cmd);
@@ -68,6 +70,8 @@ int	exec_bin(t_simple_cmd* cmd, char** env)
 	}
 	close_redirect(cmd);
 	waitpid(pid, &status, 0);
+	if(*get_exit_value() == 131)
+		return(131);
 	return (WEXITSTATUS(status));
 }
 

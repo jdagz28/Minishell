@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirect.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jdagoy <jdagoy@student.42.fr>              +#+  +:+       +#+        */
+/*   By: tbarbe <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/11 16:43:09 by tbarbe            #+#    #+#             */
-/*   Updated: 2023/11/30 09:55:25 by jdagoy           ###   ########.fr       */
+/*   Updated: 2023/11/30 12:42:00 by tbarbe           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,24 +26,20 @@ void close_redirect(t_simple_cmd* cmd)
 static void redirect_input(t_simple_cmd* cmd, char* type, \
 								char* dest, t_shell *shell)
 {
-	char** here_doc;
+	int err;
 	if (cmd->fd_input != -1 && cmd->fd_input != 0)
 		close(cmd->fd_input);
 	if (ft_strlen(type) == 2 && type[1] == '<')
 	{
 		if (cmd->fd_input != STDIN_FILENO)
 			close(cmd->fd_input);
-		here_doc = read_here_doc(dest);
-		if (here_doc)
-		{
-			cmd->fd_input = write_here_doc(here_doc, shell);
-			cmd->here_doc = true;
-			// strtab_free(here_doc);
-		}
+		err = get_here_doc(shell, cmd, dest);
+		set_exit_value(err);
+		cmd->here_doc = true;
 	}
 	else
 		cmd->fd_input = open_file(dest, 'r');
-	if (cmd->fd_input == -1)
+	if (cmd->fd_input == -1 && cmd->here_doc == 0)
 		print_error(dest, strerror(errno));
 }
 
