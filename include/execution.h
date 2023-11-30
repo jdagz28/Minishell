@@ -6,7 +6,7 @@
 /*   By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/20 09:09:39 by jdagoy            #+#    #+#             */
-/*   Updated: 2023/11/30 16:01:26 by jdagoy           ###   ########.fr       */
+/*   Updated: 2023/11/30 16:04:57 by jdagoy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,6 @@ void	child_process(int fd[2], t_shell *shell, t_node *node);
 void	parent_process(int fd[2], t_shell *shell, t_node *node, int *res);
 void	duplicate_restore_fds(int *original_stdin, \
 									int *original_stdout, int mode);
-void	end_parent(int pid, int *original_stdin, int *original_stdout);
+void	end_parent(int pid, int original_stdin, int original_stdout);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/20 00:36:23 by jdagoy            #+#    #+#             */
-/*   Updated: 2023/11/30 15:14:26 by jdagoy           ###   ########.fr       */
+/*   Updated: 2023/11/30 16:08:00 by jdagoy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ static int	exec_pipe(t_shell *shell, t_node *node)
 	int	original_stdin;
 	int	original_stdout;
 
-	set_is_piped(true);
+	duplicate_restore_fds(&original_stdin, &original_stdout, 0);
 	res = redirect(node, shell);
 	if (res || node->content.simple_cmd.fd_input == -1 \
 			|| node->content.simple_cmd.fd_output == -1)
@@ -40,7 +40,7 @@ static int	exec_pipe(t_shell *shell, t_node *node)
 		child_process(fd, shell, node);
 	else
 		parent_process(fd, shell, node, &res);
-	end_parent(pid, &original_stdin, &original_stdout);
+	end_parent(pid, original_stdin, original_stdout);
 	return (res);
 }
 
