@@ -6,7 +6,7 @@
 /*   By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/30 23:09:27 by jdagoy            #+#    #+#             */
-/*   Updated: 2023/11/24 10:25:58 by jdagoy           ###   ########.fr       */
+/*   Updated: 2023/11/30 15:34:36 by jdagoy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ t_token	*tokenizer(char *line)
 		if (check_whitespace(&line, line))
 			continue ;
 		else if (is_operator(line) || is_redirect(line) || is_word(line))
-		{	
+		{
 			if (is_operator(line))
 				current->next = operator_token(&line, line);
 			else if (is_redirect(line))

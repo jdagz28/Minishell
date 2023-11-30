@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   check_opred_tokens.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jdagoy <jdagoy@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/02 21:15:07 by jdagoy            #+#    #+#             */
-/*   Updated: 2023/11/30 09:35:09 by jdagoy           ###   ########.fr       */
+/*   Updated: 2023/11/30 15:34:31 by jdagoy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 #include "lexer_parsing.h"
 
-static bool	check_operatorsyntax_cont(t_token* token)
+static bool	check_operatorsyntax_cont(t_token *token)
 {
 	if (ft_strncmp(token->word, "(", 1) == 0)
 	{
@@ -27,7 +27,7 @@ static bool	check_operatorsyntax_cont(t_token* token)
 	return (true);
 }
 
-static bool	check_operatorsyntax(t_token* token)
+static bool	check_operatorsyntax(t_token *token)
 {
 	if (token->next->kind == TK_EOF)
 	{
@@ -60,7 +60,7 @@ static bool	check_operatorsyntax(t_token* token)
  * * check_redirectsyntax
  *  checks if redirect is valid, followed by expected tokens
 */
-static bool	check_redirectsyntax(t_token* token)
+static bool	check_redirectsyntax(t_token *token)
 {
 	if (token->next->kind == TK_EOF)
 	{
@@ -87,7 +87,7 @@ static bool	check_redirectsyntax(t_token* token)
 	return (true);
 }
 
-bool	check_tokens(t_token* tokens)
+bool	check_tokens(t_token *tokens)
 {
 	while (tokens != NULL)
 	{
