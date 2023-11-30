@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: tbarbe <marvin@42.fr>                      +#+  +:+       +#+         #
+#    By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/10/07 15:33:53 by tbarbe            #+#    #+#              #
-#    Updated: 2023/11/30 14:34:24 by tbarbe           ###   ########.fr        #
+#    Updated: 2023/11/30 16:02:24 by jdagoy           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -61,7 +61,8 @@ ENV_SRCS			=	env_getvar.c\
 
 EXECUTE_SRCS		=	exec_bin.c\
 							exec_bin_utils.c\
-							exec.c
+							exec.c\
+							exec_pipe_utils.c
 
 EXIT_SRCS			=	exit_clean.c\
 							exit_value.c
