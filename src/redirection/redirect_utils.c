@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirect_utils.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tbarbe <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/11 16:43:09 by tbarbe            #+#    #+#             */
-/*   Updated: 2023/11/30 14:50:01 by tbarbe           ###   ########.fr       */
+/*   Updated: 2023/11/30 15:31:58 by jdagoy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,11 +89,11 @@ int	open_redirections(t_simple_cmd *cmd, t_shell *shell)
 			if ((int)ft_strlen(cmd->argv[i + 1]) > 255)
 			{
 				print_error(cmd->argv[i + 1], "file name too long");
-				return (false);
+				return (EXIT_FAILURE);
 			}
 			if (redirect_one(cmd, 
 					cmd->argv[i], cmd->argv[i + 1], shell) == false)
-				return (false);
+				return (EXIT_FAILURE);
 			remove_redirect_argv(&cmd->argv[i]);
 		}
 		else
