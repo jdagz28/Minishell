@@ -6,7 +6,7 @@
 #    By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/10/07 15:33:53 by tbarbe            #+#    #+#              #
-#    Updated: 2023/11/30 16:03:59 by jdagoy           ###   ########.fr        #
+#    Updated: 2023/12/01 09:02:30 by jdagoy           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -218,7 +218,7 @@ re: fclean all
 only:		
 	@$(CC) $(OBJ_BUILTINS) $(OBJ_ENV) $(OBJ_EXECUTE) $(OBJ_EXIT) $(OBJ_EXPAND) \
 	$(OBJ_LEXER) $(OBJ_PARSER) $(OBJ_REDIRECT) $(OBJ_SHELL) $(OBJ_SIGNAL) $(OBJ_SRCS) $(OBJ_STRTAB) \
-	$(LIBFT) $(CFLAGS) $(INCLUDES) -o $(NAME)
+	$(LIBFT) $(CFLAGS) $(INCLUDES)  $(LIBRARIES)  -o $(NAME)
 	@echo "minishell done"
 
 .PHONY: all clean fclean re

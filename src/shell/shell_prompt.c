@@ -6,7 +6,7 @@
 /*   By: tbarbe <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/20 02:30:33 by jdagoy            #+#    #+#             */
-/*   Updated: 2023/11/30 14:50:50 by tbarbe           ###   ########.fr       */
+/*   Updated: 2023/11/30 17:06:36 by tbarbe           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static char	*shell_readline(t_shell *shell)
 		return (NULL);
 	signal_set(SIGINT, &prompt_interrupt);
 	line = readline(cat);
-	signal_set(SIGINT, &write_newline);
+	signal_set(SIGINT, SIG_IGN);
 	shell->err = *get_exit_value();
 	free(cat);
 	if (!line)
@@ -33,7 +33,8 @@ static char	*shell_readline(t_shell *shell)
 		write(1, "exit\n", 5);
 		exit(0);
 	}
-	user_setlastinput(&shell->user, line);
+	if (line)
+		user_setlastinput(&shell->user, line);
 	return (line);
 }
 
@@ -59,16 +60,11 @@ void	shell_prompt(t_shell *shell)
 	if (shell->inline_mode == false)
 		line = shell_readline(shell);
 	else
-	{
 		line = get_next_line(STDIN_FILENO);
-		if (line == NULL || ft_strallnonzero(line) == 0)
-			clean_exit(shell, EXIT_FAILURE);
-	}
-	if (line)
-	{
-		shell->ast = parse(line, shell);
-		free(line);
-	}
+	if (line == NULL || ft_strallnonzero(line) == 0)
+		clean_exit(shell, EXIT_FAILURE);
+	shell->ast = parse(line, shell);
+	free(line);
 	if (!shell->ast)
 		return ;
 	err = shell_exec(shell);

@@ -6,7 +6,7 @@
 /*   By: tbarbe <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/11 16:43:09 by tbarbe            #+#    #+#             */
-/*   Updated: 2023/11/30 14:43:48 by tbarbe           ###   ########.fr       */
+/*   Updated: 2023/11/30 17:07:00 by tbarbe           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,12 +32,7 @@ static void	read_here_doc(t_shell *shell, char *limiter, int fd)
 	{
 		line = readline("> ");
 		if (!line)
-		{
-			print_error("warning: here-document at line 1 \
-				delimited by end-of-file, wanted: ", limiter);
-			close(fd);
-			exit(EXIT_FAILURE);
-		}
+			exit(EXIT_SUCCESS);
 		if (ft_strncmp(line, limiter, len) == 0)
 		{
 			free(line);
