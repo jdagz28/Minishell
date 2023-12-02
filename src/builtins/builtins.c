@@ -6,7 +6,7 @@
 /*   By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/27 00:23:51 by jdagoy            #+#    #+#             */
-/*   Updated: 2023/11/30 14:42:07 by jdagoy           ###   ########.fr       */
+/*   Updated: 2023/12/02 20:35:51 by jdagoy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,8 @@ static int	execute_builtin_cont(t_simple_cmd command, t_shell *shell)
 		status = pwd(command.argv, command.fd_output);
 	}
 	if (ft_strncmp_twice((const char *)command.argv[0], "export"))
-		status = export(shell, command.argv[1]);
+		if (strtab_len(command.argv) == 2)
+			status = export(shell, command.argv[1]);
 	if (ft_strncmp_twice((const char *)command.argv[0], "unset"))
 		status = unset(shell, command.argv[1]);
 	if (ft_strncmp_twice((const char *)command.argv[0], "exit"))
@@ -50,7 +51,7 @@ int	execute_builtin(t_simple_cmd command, t_shell *shell)
 {
 	int	status;
 
-	status = -1;
+	status = execute_builtin_cont(command, shell);
 	if (*is_piped() == true)
 		close(command.fd_input);
 	if (ft_strncmp_twice((const char *)command.argv[0], "env"))
@@ -66,7 +67,6 @@ int	execute_builtin(t_simple_cmd command, t_shell *shell)
 		if (shell->pwd.root == NULL)
 			return (EXIT_FAILURE);
 	}
-	status = execute_builtin_cont(command, shell);
 	if (status != EXIT_SUCCESS)
 		return (EXIT_FAILURE);
 	return (status);
